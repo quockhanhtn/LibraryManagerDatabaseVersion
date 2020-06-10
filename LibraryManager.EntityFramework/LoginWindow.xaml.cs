@@ -10,26 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LibraryManager.MyUserControl
+namespace LibraryManager.EntityFramework
 {
     /// <summary>
-    /// Interaction logic for TitleBar.xaml
+    /// Interaction logic for LoginWindow.xaml
     /// </summary>
-    public partial class TitleBar : UserControl
+    public partial class LoginWindow : Window
     {
-        public TitleBar()
+        public LoginWindow()
         {
             InitializeComponent();
-            this.DataContext = new ViewModel.TitleBarViewModel();
-        }
-
-        public bool WindowMaximizeButton 
-        { 
-            get => btnWindowMaximize.IsEnabled;
-            set => btnWindowMaximize.IsEnabled = value;
         }
     }
 }
