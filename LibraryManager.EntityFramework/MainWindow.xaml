@@ -4,12 +4,185 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibraryManager.EntityFramework"
+        
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <materialDesign:Card Padding="32" Margin="16">
-            <TextBlock Style="{DynamicResource MaterialDesignTitleTextBlock}">My First Material Design App</TextBlock>
-        </materialDesign:Card>
-    </Grid>
+        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:uc="clr-namespace:LibraryManager.MyUserControl;assembly=LibraryManager.MyUserControl" 
+        
+        mc:Ignorable="d" Title="Library Hub" x:Name="mainWindow"
+        AllowsTransparency="True" ResizeMode="CanResizeWithGrip" WindowStyle="None"
+        Height="768" Width="1366" WindowStartupLocation="CenterScreen" 
+       >
+    <Window.Resources>
+        <Storyboard x:Key="OpenMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="gridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="60"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="300"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="CloseMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="gridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="300"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="60"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="btnOpenMenu">
+            <BeginStoryboard Storyboard="{StaticResource OpenMenu}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="btnCloseMenu">
+            <BeginStoryboard Storyboard="{StaticResource CloseMenu}"/>
+        </EventTrigger>
+    </Window.Triggers>
+    <Border BorderBrush="#001e51" BorderThickness="2">
+        <Grid>
+            <Grid.Resources>
+                <Style TargetType="TextBlock">
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                </Style>
+
+                <Style TargetType="materialDesign:PackIcon">
+                    <Setter Property="Height" Value="40"/>
+                    <Setter Property="Width" Value="40"/>
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="VerticalAlignment" Value="Center"/>
+                    <Setter Property="Foreground" Value="White"/>
+                </Style>
+            </Grid.Resources>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <!--Title-->
+            <uc:TitleBar Height="80" Background="#007acc" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2"></uc:TitleBar>
+
+            <Grid x:Name="gridMain" Background="DarkGray" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="1"/>
+
+            <!--Navigation-->
+            <Grid x:Name="gridMenu" Width="60" HorizontalAlignment="Left" Background="#001e51" Grid.RowSpan="2" Grid.Column="0">
+                <StackPanel>
+                    <Grid Height="80" RenderTransformOrigin="0.5,0.5">
+                        <Grid.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Grid.RenderTransform>
+
+                        <!--Button Menu-->
+                        <Button x:Name="btnOpenMenu" Height="60" Width="60" Margin="5" 
+                                HorizontalAlignment="Center" VerticalAlignment="Center" 
+                                Style="{StaticResource MaterialDesignFlatButton}" 
+                                Background="{x:Null}" BorderBrush="{x:Null}"
+                                Click="ButtonOpenMenu_Click">
+                            <materialDesign:PackIcon Kind="Menu" Foreground="White"/>
+                        </Button>
+
+                        <!--Button Hidden Menu-->
+                        <Button x:Name="btnCloseMenu" Visibility="Collapsed" Height="60" Width="auto" Margin="5" 
+                                HorizontalAlignment="Stretch" VerticalAlignment="Top"
+                                Style="{StaticResource MaterialDesignFlatButton}"
+                                Background="{x:Null}" BorderBrush="{x:Null}"
+                                Click="ButtonCloseMenu_Click">
+                            <materialDesign:PackIcon Kind="ArrowLeft"/>
+                        </Button>
+                    </Grid>
+
+                    <Grid Width="auto">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <Grid x:Name="gridCursor" Width="2" Background="White" Height="60" VerticalAlignment="Top"></Grid>
+
+                        <ListView x:Name="ListViewMenu" Grid.Column="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                            <!--<ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="Red" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter Property="Background" Value="Black" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </ListView.ItemContainerStyle>-->
+                            <ListView.Resources>
+                                <Style TargetType="TextBlock" >
+                                    <Setter Property="FontSize" Value="20"/>
+                                    <Setter Property="FontWeight" Value="Thin"/>
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Style>
+                                <Style TargetType="materialDesign:PackIcon">
+                                    <Setter Property="Width" Value="60" />
+                                    <Setter Property="Height" Value="40" />
+                                    <Setter Property="Margin" Value="-10 0 0 0"/>
+                                    <Setter Property="Foreground" Value="White"/>
+                                </Style>
+                            </ListView.Resources>
+
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding MenuSelectionChangedCommand}" CommandParameter="{Binding ElementName=mainWindow}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+
+                            <ListViewItem x:Name="Acount" Height="60">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Abc"/>
+                                    <TextBlock Text="Tên"/>
+                                </StackPanel>
+                            </ListViewItem>
+
+                            <ListViewItem x:Name="LibrarianManager" Height="60">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Library"/>
+                                    <TextBlock Text="Quản lý nhân viên"/>
+                                </StackPanel>
+                            </ListViewItem>
+
+                            <ListViewItem x:Name="BookManager" Height="60">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Book"/>
+                                    <TextBlock Text="Quản lý sách"/>
+                                </StackPanel>
+                            </ListViewItem>
+
+                            <ListViewItem x:Name="BookCategoryManager" Height="60">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Category"/>
+                                    <TextBlock Text="Quản lý chuyên mục sách"/>
+                                </StackPanel>
+                            </ListViewItem>
+
+                            <ListViewItem x:Name="MemberManager" Height="60">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="CardMembership"/>
+                                    <TextBlock Text="Member Manager"/>
+                                </StackPanel>
+                            </ListViewItem>
+
+                        </ListView>
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
 </Window>

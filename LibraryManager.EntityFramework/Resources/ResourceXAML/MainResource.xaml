@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-                    xmlns:local="clr-namespace:LibraryManager.EntityFramework.Resources.ResourceXAML"
                     xmlns:viewmodel="clr-namespace:LibraryManager.EntityFramework.ViewModel">
     <viewmodel:LoginWindowViewModel x:Key="LoginWindowVM"/>
 </ResourceDictionary>

@@ -6,23 +6,20 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        xmlns:uc="clr-namespace:LibraryManager.MyUserControl;assembly=LibraryManager.MyUserControl" x:Class="LibraryManager.EntityFramework.LoginWindow"
+        xmlns:uc="clr-namespace:LibraryManager.MyUserControl;assembly=LibraryManager.MyUserControl" 
+        x:Class="LibraryManager.EntityFramework.LoginWindow"
         mc:Ignorable="d" x:Name="loginWindow" DataContext="{StaticResource LoginWindowVM}"
         ResizeMode="NoResize" WindowStyle="None"
         AllowsTransparency="True" ShowInTaskbar="True"
         Title="LoginWindow" WindowStartupLocation="CenterScreen"
-        Height="502" Width="900">
-    <Border BorderBrush="#007acc" BorderThickness="2">
+        Height="504" Width="904">
+    <Border BorderBrush="#001e51" BorderThickness="2">
         <Grid>
             <Image Source="/Resources/LoginWindowBackground.jpg" />
             <uc:TitleBar WindowMaximizeButton="False" Background="Transparent" HorizontalAlignment="Stretch" Height="auto" Margin="0,0,0,0" VerticalAlignment="Top"/>
             <materialDesign:Card Width="420" Margin="25,25,451.8,25">
                 <Grid Margin="0">
                     <Grid.Resources>
-                        <Style TargetType="{x:Type FrameworkElement}">
-                            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-                        </Style>
-
                         <Style TargetType="materialDesign:PackIcon">
                             <Setter Property="Background" Value="{x:Null}"/>
                             <Setter Property="HorizontalAlignment" Value="Center"/>
@@ -30,40 +27,30 @@
                             <Setter Property="Height" Value="32"/>
                             <Setter Property="Width" Value="32"/>
                         </Style>
-
-                        <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignRaisedDarkButton}">
-                            <Setter Property="materialDesign:ButtonAssist.CornerRadius" Value="10"/>
-                            <Setter Property="Background" Value="#001e51"/>
-                            <Setter Property="VerticalAlignment" Value="Stretch"/>
-                            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-                            <Setter Property="Height" Value="60"/>
-                        </Style>
                     </Grid.Resources>
-                    <dragablz:TabablzControl x:Name="tabControl" FontSize="18" Margin="1 0 1 1.5" BorderBrush="Transparent" Background="White"
+                    <dragablz:TabablzControl x:Name="tabControl" FontSize="20" Margin="1 0 1 1.5" BorderBrush="Transparent" Background="White"
                                              Style="{StaticResource MaterialDesignTabablzControlStyle}">
                         
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction Command="{Binding TabControlChanged}"
-                                   CommandParameter="{Binding ElementName=tabControl}"/>
+                                <i:InvokeCommandAction Command="{Binding TabControlChanged}" CommandParameter="{Binding ElementName=loginWindow}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                         
+                        <!--Cho phép di chuyển tab ra ngoài-->
                         <dragablz:TabablzControl.InterTabController>
                             <dragablz:InterTabController />
                         </dragablz:TabablzControl.InterTabController>
-                        <TabItem Header="             LOG  IN             ">
+                        
+                        <!--Tab Log in-->
+                        <TabItem Header="           LOG  IN           ">
                             <Grid x:Name="gridLogin">
-                                <StackPanel Orientation="Vertical" Background="White" FocusVisualStyle="{x:Null}">
-                                    <Grid Margin="50 75 50 5">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="32"/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
-
+                                <StackPanel Margin="50 50 50 50" Background="White">
+                                    <!--User name input field-->
+                                    <DockPanel LastChildFill="True" Margin="0 0 0 20">
                                         <materialDesign:PackIcon Grid.Column="0" Kind="Person"/>
 
-                                        <TextBox Grid.Column="1" x:Name="tbxUsername" Margin="20 0 0 0" FocusVisualStyle="{x:Null}" Focusable="True"
+                                        <TextBox Grid.Column="1" x:Name="tbxUsername" Margin="20 0 0 0"
                                                  Foreground="#001e51" MaxLength="20" FontSize="20"
                                                  materialDesign:HintAssist.Foreground="#007acc" materialDesign:TextFieldAssist.UnderlineBrush="#007acc"
                                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
@@ -71,14 +58,10 @@
                                                 <TextBlock Text="Username" Margin="0 -8 0 0" FontSize="20"/>
                                             </materialDesign:HintAssist.Hint>
                                         </TextBox>
-                                    </Grid>
+                                    </DockPanel>
 
-                                    <Grid Margin="50 40 50 5">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="32"/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
-
+                                    <!--Password input field-->
+                                    <DockPanel LastChildFill="True" Margin="0 20 0 20">
                                         <materialDesign:PackIcon Grid.Column="0" Kind="Key"/>
 
                                         <!--Password mật khẩu-->
@@ -87,24 +70,50 @@
                                                      materialDesign:HintAssist.Foreground="#007acc" materialDesign:TextFieldAssist.UnderlineBrush="#007acc"
                                                      Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" >
                                             <materialDesign:HintAssist.Hint>
-                                                <TextBlock Text="Mật khẩu" Margin="0 -8 0 0" FontSize="20"/>
+                                                <TextBlock Text="Password" Margin="0 -8 0 0" FontSize="20"/>
                                             </materialDesign:HintAssist.Hint>
                                         </PasswordBox>
-                                    </Grid>
+                                    </DockPanel>
+                                    
+                                    <!---->
+                                    <TextBlock Text="Wrong username or password !" Foreground="#FE5969" FontSize="16" Margin="50 10 0 0"> </TextBlock>
 
-                                    <Button ToolTip="Đăng nhập" IsDefault="True" Margin="75 50 75 20" Height="50"
+                                    <!--Forgotten account-->
+                                    <TextBlock Margin="50 0 0 0" Text="Forgotten account ?" FontSize="16" Style="{StaticResource LinkTextBlock}"></TextBlock>
+                                    
+                                    <Button ToolTip="Đăng nhập" IsDefault="True" Margin="0 20 0 0" Height="50" Style="{StaticResource DarkBlueButton}"
                                             Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=loginWindow}">
                                         <TextBlock Text="LOG IN" FontSize="20" />
                                     </Button>
                                 </StackPanel>
                             </Grid>
                         </TabItem>
-                        <TabItem Header="             SIGN UP            ">
+                        
+                        <!--Tab Sign up-->
+                        <TabItem Header="           SIGN UP          ">
                             <Grid x:Name="gridSignUp">
-                                <GroupBox Background="White">
-                                </GroupBox>
+                                <StackPanel>
+                                    <Grid Margin="50 75 50 5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="32"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <materialDesign:PackIcon Grid.Column="0" Kind="Person"/>
+
+                                        <TextBox Grid.Column="1" x:Name="tbxFristName" Margin="20 0 0 0" FocusVisualStyle="{x:Null}" Focusable="True"
+                                                 Foreground="#001e51" MaxLength="20" FontSize="20"
+                                                 materialDesign:HintAssist.Foreground="#007acc" materialDesign:TextFieldAssist.UnderlineBrush="#007acc"
+                                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
+                                            <materialDesign:HintAssist.Hint>
+                                                <TextBlock Text="Username" Margin="0 -8 0 0" FontSize="20"/>
+                                            </materialDesign:HintAssist.Hint>
+                                        </TextBox>
+                                    </Grid>
+                                </StackPanel>
                             </Grid>
                         </TabItem>
+                        
                     </dragablz:TabablzControl>
                 </Grid>
             </materialDesign:Card>
