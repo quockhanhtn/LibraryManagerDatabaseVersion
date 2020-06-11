@@ -72,6 +72,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModel\LoginWindowViewModel.cs" />
     <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -91,6 +92,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Resources\ResourceXAML\MainResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -126,6 +131,10 @@
     <ProjectReference Include="..\LibraryManager.MyUserControl\LibraryManager.MyUserControl.csproj">
       <Project>{422CCC7E-CB54-4E76-9476-A58D452719EF}</Project>
       <Name>LibraryManager.MyUserControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\LibraryManager.Utility\LibraryManager.Utility.csproj">
+      <Project>{95a25502-4aa8-4411-aba2-a460f54e1efa}</Project>
+      <Name>LibraryManager.Utility</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
