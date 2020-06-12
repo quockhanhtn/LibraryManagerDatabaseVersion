@@ -17,13 +17,13 @@ namespace LibraryManager.MyUserControl.ViewModel
             #region Define Command
             MouseMoveWindowCommand = new RelayCommand<UserControl>((p) => { return p == null ? false : true; }, (p) =>
             {
-                Window window = GetWindowParent(p) as Window;
+                var window = FrameworkElementExtend.GetWindowParent(p) as Window;
                 if (window != null) { window.DragMove(); }
             });
 
             WindowMinimizeCommand = new RelayCommand<UserControl>((p) => { return p == null ? false : true; }, (p) =>
             {
-                Window window = GetWindowParent(p) as Window;
+                var window = FrameworkElementExtend.GetWindowParent(p) as Window;
                 if (window != null)
                 {
                     if (window.WindowState != WindowState.Minimized) { window.WindowState = WindowState.Minimized; }
@@ -35,7 +35,7 @@ namespace LibraryManager.MyUserControl.ViewModel
                 var iconWindowMaximize = p.FindName("iconWindowMaximize") as PackIcon;
                 var btnWindowMaximize = p.FindName("btnWindowMaximize") as Button;
 
-                Window window = GetWindowParent(p) as Window;
+                Window window = FrameworkElementExtend.GetWindowParent(p) as Window;
 
                 if (window != null)
                 {
@@ -56,7 +56,7 @@ namespace LibraryManager.MyUserControl.ViewModel
 
             WindowCloseCommand = new RelayCommand<UserControl>((p) => { return p == null ? false : true; }, (p) =>
             {
-                Window window = GetWindowParent(p) as Window;
+                Window window = FrameworkElementExtend.GetWindowParent(p) as Window;
                 if (window != null) { window.Close(); }
             });
             #endregion

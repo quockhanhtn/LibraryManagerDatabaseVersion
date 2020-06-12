@@ -9,15 +9,16 @@
         xmlns:uc="clr-namespace:LibraryManager.MyUserControl;assembly=LibraryManager.MyUserControl" 
         x:Class="LibraryManager.EntityFramework.LoginWindow"
         mc:Ignorable="d" x:Name="loginWindow" DataContext="{StaticResource LoginWindowVM}"
-        ResizeMode="NoResize" WindowStyle="None"
-        AllowsTransparency="True" ShowInTaskbar="True"
+        Style="{StaticResource ResizeWindowNoBoder}"
         Title="LoginWindow" WindowStartupLocation="CenterScreen"
-        Height="504" Width="904">
-    <Border BorderBrush="#001e51" BorderThickness="2">
-        <Grid>
-            <Image Source="/Resources/LoginWindowBackground.jpg" />
+        Height="504" Width="904" MinHeight="504" MinWidth="454" >
+    
+    <Border Style="{StaticResource WindowBoder}">
+        <uc:DragMoveGrid>
+            <Image Source="/Resources/LoginWindowBackground.jpg" Stretch="Fill" />
             <uc:TitleBar WindowMaximizeButton="False" Background="Transparent" HorizontalAlignment="Stretch" Height="auto" Margin="0,0,0,0" VerticalAlignment="Top"/>
-            <materialDesign:Card Width="420" Margin="25,25,451.8,25">
+            
+            <materialDesign:Card Width="420" Margin="25" HorizontalAlignment="Left">
                 <Grid Margin="0">
                     <Grid.Resources>
                         <Style TargetType="materialDesign:PackIcon">
@@ -44,8 +45,8 @@
                         
                         <!--Tab Log in-->
                         <TabItem Header="           LOG  IN           ">
-                            <Grid x:Name="gridLogin">
-                                <StackPanel Margin="50 50 50 50" Background="White">
+                            <Grid x:Name="gridLogin" HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <StackPanel Margin="50 50 50 50">
                                     <!--User name input field-->
                                     <DockPanel LastChildFill="True" Margin="0 0 0 20">
                                         <materialDesign:PackIcon Grid.Column="0" Kind="Person"/>
@@ -93,23 +94,6 @@
                         <TabItem Header="           SIGN UP          ">
                             <Grid x:Name="gridSignUp">
                                 <StackPanel>
-                                    <Grid Margin="50 75 50 5">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="32"/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
-
-                                        <materialDesign:PackIcon Grid.Column="0" Kind="Person"/>
-
-                                        <TextBox Grid.Column="1" x:Name="tbxFristName" Margin="20 0 0 0" FocusVisualStyle="{x:Null}" Focusable="True"
-                                                 Foreground="#001e51" MaxLength="20" FontSize="20"
-                                                 materialDesign:HintAssist.Foreground="#007acc" materialDesign:TextFieldAssist.UnderlineBrush="#007acc"
-                                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
-                                            <materialDesign:HintAssist.Hint>
-                                                <TextBlock Text="Username" Margin="0 -8 0 0" FontSize="20"/>
-                                            </materialDesign:HintAssist.Hint>
-                                        </TextBox>
-                                    </Grid>
                                 </StackPanel>
                             </Grid>
                         </TabItem>
@@ -117,6 +101,6 @@
                     </dragablz:TabablzControl>
                 </Grid>
             </materialDesign:Card>
-        </Grid>
+        </uc:DragMoveGrid>
     </Border>
 </Window>

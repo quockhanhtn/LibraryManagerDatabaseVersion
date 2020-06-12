@@ -1,8 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace LibraryManager.Utility
@@ -14,18 +12,6 @@ namespace LibraryManager.Utility
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        protected FrameworkElement GetWindowParent(UserControl p)
-        {
-            FrameworkElement parent = p;
-
-            while (parent.Parent != null)
-            {
-                parent = parent.Parent as FrameworkElement;
-            }
-
-            return parent;
         }
     }
     public class RelayCommand<T> : ICommand

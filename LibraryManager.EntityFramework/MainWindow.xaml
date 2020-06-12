@@ -11,7 +11,7 @@
         xmlns:uc="clr-namespace:LibraryManager.MyUserControl;assembly=LibraryManager.MyUserControl" 
         
         mc:Ignorable="d" Title="Library Hub" x:Name="mainWindow"
-        AllowsTransparency="True" ResizeMode="CanResizeWithGrip" WindowStyle="None"
+        Style="{StaticResource ResizeWindowNoBoder}"
         Height="768" Width="1366" WindowStartupLocation="CenterScreen" 
        >
     <Window.Resources>
@@ -37,7 +37,8 @@
             <BeginStoryboard Storyboard="{StaticResource CloseMenu}"/>
         </EventTrigger>
     </Window.Triggers>
-    <Border BorderBrush="#001e51" BorderThickness="2">
+    
+    <Border Style="{StaticResource WindowBoder}">
         <Grid>
             <Grid.Resources>
                 <Style TargetType="TextBlock">
