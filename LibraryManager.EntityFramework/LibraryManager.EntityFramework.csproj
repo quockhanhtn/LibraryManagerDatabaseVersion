@@ -72,6 +72,21 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="View.PageUC\PageAccountInfor.xaml.cs">
+      <DependentUpon>PageAccountInfor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View.PageUC\PageBookCategoryManager.xaml.cs">
+      <DependentUpon>PageBookCategoryManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View.PageUC\PageBookManager.xaml.cs">
+      <DependentUpon>PageBookManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View.PageUC\PageLibrarianManager.xaml.cs">
+      <DependentUpon>PageLibrarianManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View.PageUC\PageMemberManager.xaml.cs">
+      <DependentUpon>PageMemberManager.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\LoginWindowViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Page Include="LoginWindow.xaml">
@@ -98,6 +113,26 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Resources\ResourceXAML\MainResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View.PageUC\PageAccountInfor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View.PageUC\PageBookCategoryManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View.PageUC\PageBookManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View.PageUC\PageLibrarianManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View.PageUC\PageMemberManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

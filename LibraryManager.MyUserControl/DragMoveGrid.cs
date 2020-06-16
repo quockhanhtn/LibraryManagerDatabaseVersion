@@ -19,7 +19,10 @@ namespace LibraryManager.MyUserControl
         private void DragMoveGrid_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var window = FrameworkElementExtend.GetWindowParent(this) as Window;
-            if (window != null) { window.DragMove(); }
+            if (window != null) {
+                try { window.DragMove(); }
+                catch (Exception) { }
+            }
         }
     }
 }

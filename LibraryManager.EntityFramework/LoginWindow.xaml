@@ -8,6 +8,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:uc="clr-namespace:LibraryManager.MyUserControl;assembly=LibraryManager.MyUserControl" 
         x:Class="LibraryManager.EntityFramework.LoginWindow"
+        
         mc:Ignorable="d" x:Name="loginWindow" DataContext="{StaticResource LoginWindowVM}"
         Style="{StaticResource ResizeWindowNoBoder}"
         Title="LoginWindow" WindowStartupLocation="CenterScreen"
@@ -17,7 +18,7 @@
         <uc:DragMoveGrid>
             <Image Source="/Resources/LoginWindowBackground.jpg" Stretch="Fill" />
             <uc:TitleBar WindowMaximizeButton="False" Background="Transparent" HorizontalAlignment="Stretch" Height="auto" Margin="0,0,0,0" VerticalAlignment="Top"/>
-            
+
             <materialDesign:Card Width="420" Margin="25" HorizontalAlignment="Left">
                 <Grid Margin="0">
                     <Grid.Resources>
@@ -29,24 +30,24 @@
                             <Setter Property="Width" Value="32"/>
                         </Style>
                     </Grid.Resources>
-                    <dragablz:TabablzControl x:Name="tabControl" FontSize="20" Margin="1 0 1 1.5" BorderBrush="Transparent" Background="White"
+                    <dragablz:TabablzControl x:Name="tabControl" FontSize="18" Margin="1 0 1 1.5" BorderBrush="Transparent" Background="White"
                                              Style="{StaticResource MaterialDesignTabablzControlStyle}">
-                        
+
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <i:InvokeCommandAction Command="{Binding TabControlChanged}" CommandParameter="{Binding ElementName=loginWindow}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
-                        
+
                         <!--Cho phép di chuyển tab ra ngoài-->
-                        <dragablz:TabablzControl.InterTabController>
+                        <!--<dragablz:TabablzControl.InterTabController>
                             <dragablz:InterTabController />
-                        </dragablz:TabablzControl.InterTabController>
-                        
+                        </dragablz:TabablzControl.InterTabController>-->
+
                         <!--Tab Log in-->
-                        <TabItem Header="           LOG  IN           ">
-                            <Grid x:Name="gridLogin" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                <StackPanel Margin="50 50 50 50">
+                        <TabItem Header="          ĐĂNG NHẬP        ">
+                            <Grid x:Name="gridLogin" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                                <StackPanel Margin="50" VerticalAlignment="Center">
                                     <!--User name input field-->
                                     <DockPanel LastChildFill="True" Margin="0 0 0 20">
                                         <materialDesign:PackIcon Grid.Column="0" Kind="Person"/>
@@ -56,48 +57,99 @@
                                                  materialDesign:HintAssist.Foreground="#007acc" materialDesign:TextFieldAssist.UnderlineBrush="#007acc"
                                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
                                             <materialDesign:HintAssist.Hint>
-                                                <TextBlock Text="Username" Margin="0 -8 0 0" FontSize="20"/>
+                                                <TextBlock Text="Tên đăng nhập hoặc email" Margin="0 -8 0 0" FontSize="20"/>
                                             </materialDesign:HintAssist.Hint>
                                         </TextBox>
                                     </DockPanel>
 
                                     <!--Password input field-->
                                     <DockPanel LastChildFill="True" Margin="0 20 0 20">
-                                        <materialDesign:PackIcon Grid.Column="0" Kind="Key"/>
+                                        <materialDesign:PackIcon Grid.Column="0"  Kind="Key"/>
 
                                         <!--Password mật khẩu-->
-                                        <PasswordBox Grid.Column="1" x:Name="tbxPassWord"  Margin="20 0 0 0"
+                                        <PasswordBox Grid.Column="1" x:Name="tbxPassWord" Margin="20 0 0 0"
                                                      Foreground="#001e51" MaxLength="20" FontSize="20"
                                                      materialDesign:HintAssist.Foreground="#007acc" materialDesign:TextFieldAssist.UnderlineBrush="#007acc"
                                                      Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" >
                                             <materialDesign:HintAssist.Hint>
-                                                <TextBlock Text="Password" Margin="0 -8 0 0" FontSize="20"/>
+                                                <TextBlock Text="Mật khẩu" Margin="0 -8 0 0" FontSize="20"/>
                                             </materialDesign:HintAssist.Hint>
                                         </PasswordBox>
                                     </DockPanel>
-                                    
+
                                     <!---->
-                                    <TextBlock Text="Wrong username or password !" Foreground="#FE5969" FontSize="16" Margin="50 10 0 0"> </TextBlock>
+                                    <TextBlock Visibility="Collapsed" Text="Sai tên đăng nhập hoặc mật khẩu !" Foreground="#FE5969" FontSize="16" Margin="50 10 0 0"/>
 
                                     <!--Forgotten account-->
-                                    <TextBlock Margin="50 0 0 0" Text="Forgotten account ?" FontSize="16" Style="{StaticResource LinkTextBlock}"></TextBlock>
-                                    
+                                    <TextBlock Margin="50 0 0 0" Text="Quên mật khẩu ?" FontSize="16" Style="{StaticResource LinkTextBlock}"></TextBlock>
+
                                     <Button ToolTip="Đăng nhập" IsDefault="True" Margin="0 20 0 0" Height="50" Style="{StaticResource DarkBlueButton}"
                                             Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=loginWindow}">
-                                        <TextBlock Text="LOG IN" FontSize="20" />
+                                        <TextBlock Text="ĐĂNG NHẬP" FontSize="20" />
                                     </Button>
                                 </StackPanel>
                             </Grid>
                         </TabItem>
-                        
+
                         <!--Tab Sign up-->
-                        <TabItem Header="           SIGN UP          ">
-                            <Grid x:Name="gridSignUp">
-                                <StackPanel>
+                        <TabItem Header="           ĐĂNG KÝ           ">
+                            <Grid x:Name="gridSignUp" HorizontalAlignment="Stretch" VerticalAlignment="Center">
+                                <StackPanel Margin="50 0 50 0" VerticalAlignment="Center">
+                                    <!--User name input field-->
+                                    <DockPanel LastChildFill="True" Margin="0 0 0 20">
+                                        <materialDesign:PackIcon Grid.Column="0" Kind="Person"/>
+
+                                        <TextBox Grid.Column="1" x:Name="tbxFirstName" Margin="20 0 0 0"
+                                                 Foreground="#001e51" MaxLength="20" FontSize="20"
+                                                 materialDesign:HintAssist.Foreground="#007acc" materialDesign:TextFieldAssist.UnderlineBrush="#007acc"
+                                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
+                                            <materialDesign:HintAssist.Hint>
+                                                <TextBlock Text="Tên đăng nhập hoặc email" Margin="0 -8 0 0" FontSize="20"/>
+                                            </materialDesign:HintAssist.Hint>
+                                        </TextBox>
+                                    </DockPanel>
+
+                                    <!--Password input field-->
+                                    <DockPanel LastChildFill="True" Margin="0 20 0 20">
+                                        <materialDesign:PackIcon Grid.Column="0"  Kind="Key"/>
+
+                                        <!--Password mật khẩu-->
+                                        <PasswordBox Grid.Column="1" x:Name="tbxNewPassword" Margin="20 0 0 0"
+                                                     Foreground="#001e51" MaxLength="20" FontSize="20"
+                                                     materialDesign:HintAssist.Foreground="#007acc" materialDesign:TextFieldAssist.UnderlineBrush="#007acc"
+                                                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" >
+                                            <materialDesign:HintAssist.Hint>
+                                                <TextBlock Text="Mật khẩu" Margin="0 -8 0 0" FontSize="20"/>
+                                            </materialDesign:HintAssist.Hint>
+                                        </PasswordBox>
+                                    </DockPanel>
+
+                                    <!--Password input field-->
+                                    <DockPanel LastChildFill="True" Margin="0 20 0 20">
+                                        <materialDesign:PackIcon Grid.Column="0"  Kind="Key"/>
+
+                                        <!--Password mật khẩu-->
+                                        <PasswordBox Grid.Column="1" x:Name="tbxConfmPassword" Margin="20 0 0 0"
+                                                     Foreground="#001e51" MaxLength="20" FontSize="20"
+                                                     materialDesign:HintAssist.Foreground="#007acc" materialDesign:TextFieldAssist.UnderlineBrush="#007acc"
+                                                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" >
+                                            <materialDesign:HintAssist.Hint>
+                                                <TextBlock Text="Xác nhận mật khẩu" Margin="0 -8 0 0" FontSize="20"/>
+                                            </materialDesign:HintAssist.Hint>
+                                        </PasswordBox>
+                                    </DockPanel>
+
+                                    <!---->
+                                    <TextBlock Visibility="Visible" Text="Tài khoản đã tồn tại !" Foreground="#FE5969" FontSize="16" Margin="50 10 0 0"/>
+
+                                    <Button ToolTip="Đăng ký" IsDefault="True" Margin="0 20 0 0" Height="50" Style="{StaticResource DarkBlueButton}"
+                                            Command="{Binding SignUpCommand}" CommandParameter="{Binding ElementName=loginWindow}">
+                                        <TextBlock Text="TẠO TÀI KHOẢN" FontSize="20"/>
+                                    </Button>
                                 </StackPanel>
                             </Grid>
                         </TabItem>
-                        
+
                     </dragablz:TabablzControl>
                 </Grid>
             </materialDesign:Card>

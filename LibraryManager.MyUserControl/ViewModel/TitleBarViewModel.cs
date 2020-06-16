@@ -18,7 +18,10 @@ namespace LibraryManager.MyUserControl.ViewModel
             MouseMoveWindowCommand = new RelayCommand<UserControl>((p) => { return p == null ? false : true; }, (p) =>
             {
                 var window = FrameworkElementExtend.GetWindowParent(p) as Window;
-                if (window != null) { window.DragMove(); }
+                if (window != null) {
+                    try { window.DragMove(); }
+                    catch (System.Exception) { }
+                }
             });
 
             WindowMinimizeCommand = new RelayCommand<UserControl>((p) => { return p == null ? false : true; }, (p) =>
