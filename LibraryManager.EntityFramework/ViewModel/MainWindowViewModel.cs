@@ -23,7 +23,13 @@ namespace LibraryManager.EntityFramework.ViewModel
                 var listViewMenu = p.FindName("ListViewMenu") as ListView;
                 gridMain.Children.Clear();
 
+                //foreach (ListViewItem item in listViewMenu.Items)
+                //{
+                //    item.Background = new SolidColorBrush(Color.FromRgb(0, 30, 81));
+                //}
+
                 var listViewItem = (listViewMenu).SelectedItem as ListViewItem;
+                //listViewItem.Background = new SolidColorBrush(Color.FromRgb(0, 15, 40));
 
                 gridCursor.Margin = new Thickness(0, 60 * listViewMenu.SelectedIndex, 0, 0);
 
