@@ -85,7 +85,7 @@
                                 </Border>
                                 <ControlTemplate.Triggers>
                                     <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="Red" TargetName="Border" />
+                                        <Setter Property="Background" Value="#FF5969" TargetName="Border" />
                                     </Trigger>
                                 </ControlTemplate.Triggers>
                             </ControlTemplate>
@@ -96,6 +96,4 @@
         </Button>
 
     </StackPanel>
-
-    
 </UserControl>

@@ -11,8 +11,10 @@
         xmlns:uc="clr-namespace:LibraryManager.MyUserControl;assembly=LibraryManager.MyUserControl" 
         
         mc:Ignorable="d" Title="Library Hub" x:Name="mainWindow"
+        DataContext="{StaticResource MainWindowVM}"
         Style="{StaticResource ResizeWindowNoBoder}" WindowStartupLocation="CenterScreen" 
-        Height="768" Width="1366" MinHeight="600" MinWidth="1000">
+        Height="768" Width="1366" MinHeight="604" MinWidth="1004" >
+    
     <Window.Resources>
         <Storyboard x:Key="OpenMenu">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="gridMenu">
@@ -36,7 +38,14 @@
             <BeginStoryboard Storyboard="{StaticResource CloseMenu}"/>
         </EventTrigger>
     </Window.Triggers>
-    
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedWindow}"
+                                   CommandParameter="{Binding ElementName=mainWindow}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+
     <Border Style="{StaticResource WindowBoder}">
         <Grid>
             <Grid.Resources>
@@ -66,7 +75,7 @@
             </Grid.ColumnDefinitions>
 
             <!--Title-->
-            <uc:TitleBar Height="80" Background="#007acc" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2"></uc:TitleBar>
+            <uc:TitleBar Height="auto" Background="#007acc" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2"></uc:TitleBar>
 
             <Grid x:Name="gridMain" Background="DarkGray" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="1"/>
 
@@ -111,18 +120,6 @@
                         <Grid x:Name="gridCursor" Width="2" Background="White" Height="60" VerticalAlignment="Top"></Grid>
 
                         <ListView x:Name="ListViewMenu" Grid.Column="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                            <!--<ListView.ItemContainerStyle>
-                            <Style TargetType="{x:Type ListViewItem}">
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="Red" />
-                                    </Trigger>
-                                    <Trigger Property="IsSelected" Value="True">
-                                        <Setter Property="Background" Value="Black" />
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </ListView.ItemContainerStyle>-->
                             <ListView.Resources>
                                 <Style TargetType="TextBlock" >
                                     <Setter Property="FontSize" Value="20"/>
@@ -136,6 +133,9 @@
                                     <Setter Property="Margin" Value="-10 0 0 0"/>
                                     <Setter Property="Foreground" Value="White"/>
                                 </Style>
+                                <Style TargetType="ListViewItem">
+                                    <Setter Property="Height" Value="60" />
+                                </Style>
                             </ListView.Resources>
 
                             <i:Interaction.Triggers>
@@ -144,38 +144,51 @@
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
 
-                            <ListViewItem x:Name="Acount" Height="60">
-                                <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Kind="Abc"/>
-                                    <TextBlock Text="Tên"/>
-                                </StackPanel>
-                            </ListViewItem>
-
                             <ListViewItem x:Name="LibrarianManager" Height="60">
                                 <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Kind="Library"/>
-                                    <TextBlock Text="Quản lý nhân viên"/>
+                                    <materialDesign:PackIcon Kind="PersonBoxMultiple"/>
+                                    <TextBlock Text="Quản lý"/>
+                                    <TextBlock Text=" Nhân viên" FontWeight="SemiBold"/>
                                 </StackPanel>
                             </ListViewItem>
 
+                            <ListViewItem x:Name="MemberManager" Height="60">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="AccountGroup"/>
+                                    <TextBlock Text="Quản lý"/>
+                                    <TextBlock Text=" Thành viên" FontWeight="SemiBold"/>
+                                </StackPanel>
+                            </ListViewItem>
+                            
                             <ListViewItem x:Name="BookManager" Height="60">
                                 <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Kind="Book"/>
-                                    <TextBlock Text="Quản lý sách"/>
+                                    <materialDesign:PackIcon Kind="BookMultiple"/>
+                                    <TextBlock Text="Quản lý"/>
+                                    <TextBlock Text=" Sách" FontWeight="SemiBold"/>
+                                </StackPanel>
+                            </ListViewItem>
+
+                            <ListViewItem x:Name="PublisherManager" Height="60">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="ChartHome"/>
+                                    <TextBlock Text="Quản lý"/>
+                                    <TextBlock Text=" Nhà xuất bản" FontWeight="SemiBold"/>
                                 </StackPanel>
                             </ListViewItem>
 
                             <ListViewItem x:Name="BookCategoryManager" Height="60">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="Category"/>
-                                    <TextBlock Text="Quản lý chuyên mục sách"/>
+                                    <TextBlock Text="Quản lý"/>
+                                    <TextBlock Text=" Chuyên mục sách" FontWeight="SemiBold"/>
                                 </StackPanel>
                             </ListViewItem>
 
-                            <ListViewItem x:Name="MemberManager" Height="60">
+                            <ListViewItem x:Name="AuthorManager" Height="60">
                                 <StackPanel Orientation="Horizontal">
-                                    <materialDesign:PackIcon Kind="CardMembership"/>
-                                    <TextBlock Text="Member Manager"/>
+                                    <materialDesign:PackIcon Kind="FountainPenTip"/>
+                                    <TextBlock Text="Quản lý"/>
+                                    <TextBlock Text=" Tác giả" FontWeight="SemiBold"/>
                                 </StackPanel>
                             </ListViewItem>
 

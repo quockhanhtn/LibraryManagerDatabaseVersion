@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:LibraryManager.EntityFramework"
              xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
+             xmlns:a="clr-namespace:LibraryManager.MyUserControl;assembly=LibraryManager.MyUserControl"
              StartupUri="LoginWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
@@ -11,8 +12,9 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.DeepPurple.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
-                <ResourceDictionary Source="/Resources/ResourceXAML/MainResource.xaml"/>
-                <ResourceDictionary Source="/Resources/ResourceXAML/ControlStyle.xaml"/>
+                <ResourceDictionary Source="/ResourceXAML/MainResource.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/LibraryManager.MyUserControl;component/ResourceXAML/ControlStyle.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/LibraryManager.MyUserControl;component/ResourceXAML/Images.xaml"/>
                 <!--primary color-->
                 <ResourceDictionary>
                     <!--include your primary palette-->
@@ -30,7 +32,7 @@
                     <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="{StaticResource Primary900}"/>
                     <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="{StaticResource Primary900Foreground}"/>-->
 
-                    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="White"/>
+                    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#007acc"/>
                     <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#001e51"/>
                 </ResourceDictionary>
 

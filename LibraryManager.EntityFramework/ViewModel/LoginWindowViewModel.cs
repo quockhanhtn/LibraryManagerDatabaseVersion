@@ -1,10 +1,6 @@
 ﻿using Dragablz;
+using LibraryManager.EntityFramework.Model.DataAccessLayer;
 using LibraryManager.Utility;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -16,6 +12,7 @@ namespace LibraryManager.EntityFramework.ViewModel
         public ICommand TabControlChanged { get; set; }
         public ICommand LoginCommand { get; set; }
         public ICommand SignUpCommand { get; set; }
+
         public LoginWindowViewModel()
         {
             TabControlChanged = new RelayCommand<Window>((p) => { return p == null ? false : true; }, (p) =>
@@ -38,11 +35,35 @@ namespace LibraryManager.EntityFramework.ViewModel
 
             LoginCommand = new RelayCommand<Window>((p) => { return p == null ? false : true; }, (p) =>
             {
-                p.Hide();
-                MainWindow mainWindow = new MainWindow();
-                mainWindow.DataContext = new MainWindowViewModel();
-                mainWindow.Show();
-                p.Close();
+                var tbxUsername = p.FindName("tbxUsername") as TextBox;
+                var tbxPassWord = p.FindName("tbxPassWord") as PasswordBox;
+
+                var loginResult = 0;// DALAccount.Instance.Login(tbxUsername.Text, tbxPassWord.Password);
+
+                if (loginResult == -1)
+                {
+                    var tblLoginFail = p.FindName("tblLoginFail") as TextBlock;
+                    tblLoginFail.Visibility = Visibility.Visible;
+                    return;
+                }
+                else
+                {
+                    p.Hide();
+                    if (loginResult == 0)
+                    {
+                        MainWindow mainWindow = new MainWindow();
+                        mainWindow.Show();
+                    }
+                    else if (loginResult == 1)
+                    {
+                        MessageBox.Show("Librarian");
+                    }
+                    else if (loginResult == 2)
+                    {
+                        MessageBox.Show("Member");
+                    }
+                    p.Close();
+                }
             });
         }
     }

@@ -16,7 +16,8 @@
     
     <Border Style="{StaticResource WindowBoder}">
         <uc:DragMoveGrid>
-            <Image Source="/Resources/LoginWindowBackground.jpg" Stretch="Fill" />
+            
+            <Image Style="{StaticResource LoginWindowBackgroundImage}"/>
             <uc:TitleBar WindowMaximizeButton="False" Background="Transparent" HorizontalAlignment="Stretch" Height="auto" Margin="0,0,0,0" VerticalAlignment="Top"/>
 
             <materialDesign:Card Width="420" Margin="25" HorizontalAlignment="Left">
@@ -55,7 +56,7 @@
                                         <TextBox Grid.Column="1" x:Name="tbxUsername" Margin="20 0 0 0"
                                                  Foreground="#001e51" MaxLength="20" FontSize="20"
                                                  materialDesign:HintAssist.Foreground="#007acc" materialDesign:TextFieldAssist.UnderlineBrush="#007acc"
-                                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
+                                                 Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                                             <materialDesign:HintAssist.Hint>
                                                 <TextBlock Text="Tên đăng nhập hoặc email" Margin="0 -8 0 0" FontSize="20"/>
                                             </materialDesign:HintAssist.Hint>
@@ -78,7 +79,7 @@
                                     </DockPanel>
 
                                     <!---->
-                                    <TextBlock Visibility="Collapsed" Text="Sai tên đăng nhập hoặc mật khẩu !" Foreground="#FE5969" FontSize="16" Margin="50 10 0 0"/>
+                                    <TextBlock x:Name="tblLoginFail" Visibility="Collapsed" Text="Sai tên đăng nhập hoặc mật khẩu !" Foreground="#FE5969" FontSize="16" Margin="50 10 0 0"/>
 
                                     <!--Forgotten account-->
                                     <TextBlock Margin="50 0 0 0" Text="Quên mật khẩu ?" FontSize="16" Style="{StaticResource LinkTextBlock}"></TextBlock>

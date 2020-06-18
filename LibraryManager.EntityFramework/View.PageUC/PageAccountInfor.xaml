@@ -8,7 +8,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" 
              
-             d:DesignHeight="708" d:DesignWidth="1306"
+             d:DesignHeight="730" d:DesignWidth="1300"
              x:Name="pageAccountInfor" 
              Background="#fafafa">
 

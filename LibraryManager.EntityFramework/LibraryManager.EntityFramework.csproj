@@ -40,6 +40,12 @@
     <Reference Include="Dragablz, Version=0.0.3.203, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dragablz.0.0.3.203\lib\net45\Dragablz.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.2.6.1513, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.2.6\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -50,7 +56,12 @@
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
     </Reference>
@@ -72,8 +83,61 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Account.cs">
+      <DependentUpon>LibraryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Author.cs">
+      <DependentUpon>LibraryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Book.cs">
+      <DependentUpon>LibraryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BookCategory.cs">
+      <DependentUpon>LibraryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\BookItem.cs">
+      <DependentUpon>LibraryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Borrow.cs">
+      <DependentUpon>LibraryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\DataAccessLayer\DALAccount.cs" />
+    <Compile Include="Model\DataProvider.cs" />
+    <Compile Include="Model\Librarian.cs">
+      <DependentUpon>LibraryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\LibraryManager.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LibraryManager.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\LibraryManager.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LibraryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\LibraryManager.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LibraryManager.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Member.cs">
+      <DependentUpon>LibraryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\PayFineInfo.cs">
+      <DependentUpon>LibraryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Publisher.cs">
+      <DependentUpon>LibraryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ReturnBook.cs">
+      <DependentUpon>LibraryManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="View.PageUC\PageAccountInfor.xaml.cs">
       <DependentUpon>PageAccountInfor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View.PageUC\PageAuthorManager.xaml.cs">
+      <DependentUpon>PageAuthorManager.xaml</DependentUpon>
     </Compile>
     <Compile Include="View.PageUC\PageBookCategoryManager.xaml.cs">
       <DependentUpon>PageBookCategoryManager.xaml</DependentUpon>
@@ -87,8 +151,18 @@
     <Compile Include="View.PageUC\PageMemberManager.xaml.cs">
       <DependentUpon>PageMemberManager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View.PageUC\PagePublisherManager.xaml.cs">
+      <DependentUpon>PagePublisherManager.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\LoginWindowViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
+    <Compile Include="ViewModel\ViewModel.PageUC\PageAccountInforVM.cs" />
+    <Compile Include="ViewModel\ViewModel.PageUC\PageAuthorManagerVM.cs" />
+    <Compile Include="ViewModel\ViewModel.PageUC\PageBookCategoryManagerVM.cs" />
+    <Compile Include="ViewModel\ViewModel.PageUC\PageBookManagerVM.cs" />
+    <Compile Include="ViewModel\ViewModel.PageUC\PageLibrarianManagerVM.cs" />
+    <Compile Include="ViewModel\ViewModel.PageUC\PageMemberManagerVM.cs" />
+    <Compile Include="ViewModel\ViewModel.PageUC\PagePublisherManagerVM.cs" />
     <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -108,15 +182,15 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Resources\ResourceXAML\ControlStyle.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Resources\ResourceXAML\MainResource.xaml">
+    <Page Include="ResourceXAML\MainResource.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View.PageUC\PageAccountInfor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View.PageUC\PageAuthorManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -133,6 +207,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View.PageUC\PageMemberManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View.PageUC\PagePublisherManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -155,6 +233,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EntityDeploy Include="Model\LibraryManager.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LibraryManager.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model\LibraryManager.edmx.diagram">
+      <DependentUpon>LibraryManager.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -165,9 +250,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\LoginWindowBackground.jpg" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\LibraryManager.MyUserControl\LibraryManager.MyUserControl.csproj">
       <Project>{422CCC7E-CB54-4E76-9476-A58D452719EF}</Project>
       <Name>LibraryManager.MyUserControl</Name>
@@ -176,6 +258,21 @@
       <Project>{95a25502-4aa8-4411-aba2-a460f54e1efa}</Project>
       <Name>LibraryManager.Utility</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model\LibraryManager.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>LibraryManager.Context.cs</LastGenOutput>
+      <DependentUpon>LibraryManager.edmx</DependentUpon>
+    </Content>
+    <Content Include="Model\LibraryManager.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>LibraryManager.edmx</DependentUpon>
+      <LastGenOutput>LibraryManager.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
