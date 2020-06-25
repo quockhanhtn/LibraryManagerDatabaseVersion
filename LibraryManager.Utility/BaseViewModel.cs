@@ -7,13 +7,13 @@ namespace LibraryManager.Utility
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
+
     public class RelayCommand<T> : ICommand
     {
         private readonly Predicate<T> _canExecute;

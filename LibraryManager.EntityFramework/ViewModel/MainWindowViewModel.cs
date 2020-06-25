@@ -1,5 +1,5 @@
 ﻿using LibraryManager.EntityFramework.View.PageUC;
-using LibraryManager.EntityFramework.ViewModel.ViewModel.PageUC;
+using LibraryManager.EntityFramework.ViewModel.PageUC;
 using LibraryManager.Utility;
 using System;
 using System.Collections.Generic;
@@ -69,7 +69,7 @@ namespace LibraryManager.EntityFramework.ViewModel
 
         void InitPage()
         {
-            this.PageLibrarianManager = new PageLibrarianManager() { DataContext = new PageLibrarianManagerVM() };
+            this.PageLibrarianManager = new PageLibrarianManager();// { DataContext = new PageLibrarianManagerVM() };
             this.PageMemberManager = new PageMemberManager() { DataContext = new PageMemberManagerVM() };
             this.PageBookManager = new PageBookManager() { DataContext = new PageBookManagerVM() };
             this.PagePublisherManager = new PagePublisherManager() { DataContext = new PagePublisherManagerVM() };

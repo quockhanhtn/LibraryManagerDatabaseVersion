@@ -7,12 +7,10 @@ using System.Threading.Tasks;
 
 namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 {
-    public class DALAccount
+    public class AccountDAL
     {
-        private static DALAccount instance;
-
-        public static DALAccount Instance { get => (instance == null) ? new DALAccount() : instance; }
-        private DALAccount() { }
+        public static AccountDAL Instance { get => (instance == null) ? new AccountDAL() : instance; }
+        private AccountDAL() { }
 
         /// <summary>
         /// Login
@@ -26,12 +24,13 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 
             username = username.Trim();
             password = password.Trim();
-            string passwordEncode = Utility.PasswordEncode.Base64ThenMD5(password);
+            string passwordEncode = Utility.PasswordEncoder.Base64ThenMD5(password);
 
             var account = DataProvider.Instance.Database.Accounts.Where(a => a.Username == username && a.Password == passwordEncode).Count();
             if (account <= 0) { return -1; }
 
             return DataProvider.Instance.Database.Accounts.ToList().Find(a => a.Username == username).AccountType;
         }
+        private static AccountDAL instance;
     }
 }

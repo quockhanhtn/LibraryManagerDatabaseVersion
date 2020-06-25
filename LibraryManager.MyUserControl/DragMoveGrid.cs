@@ -9,6 +9,9 @@ using System.Windows.Controls;
 
 namespace LibraryManager.MyUserControl
 {
+    /// <summary>
+    /// Gird có thể di chuyển window chứa nó bằng kéo thả chuột
+    /// </summary>
     public class DragMoveGrid : Grid
     {
         public DragMoveGrid()

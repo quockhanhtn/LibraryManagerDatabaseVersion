@@ -101,8 +101,13 @@
     <Compile Include="Model\Borrow.cs">
       <DependentUpon>LibraryManager.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\DataAccessLayer\DALAccount.cs" />
+    <Compile Include="Model\DataAccessLayer\AccountDAL.cs" />
+    <Compile Include="Model\DataAccessLayer\LibrarianDAL.cs" />
+    <Compile Include="Model\DataAccessLayer\MemberDAL.cs" />
     <Compile Include="Model\DataProvider.cs" />
+    <Compile Include="Model\DataTransferObject\BookDTO.cs" />
+    <Compile Include="Model\DataTransferObject\LibrarianDTO.cs" />
+    <Compile Include="Model\FillterInfor.cs" />
     <Compile Include="Model\Librarian.cs">
       <DependentUpon>LibraryManager.tt</DependentUpon>
     </Compile>
@@ -133,6 +138,9 @@
     <Compile Include="Model\ReturnBook.cs">
       <DependentUpon>LibraryManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="View.AddWindow\AddLibrarianWindow.xaml.cs">
+      <DependentUpon>AddLibrarianWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View.PageUC\PageAccountInfor.xaml.cs">
       <DependentUpon>PageAccountInfor.xaml</DependentUpon>
     </Compile>
@@ -156,13 +164,14 @@
     </Compile>
     <Compile Include="ViewModel\LoginWindowViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
-    <Compile Include="ViewModel\ViewModel.PageUC\PageAccountInforVM.cs" />
-    <Compile Include="ViewModel\ViewModel.PageUC\PageAuthorManagerVM.cs" />
-    <Compile Include="ViewModel\ViewModel.PageUC\PageBookCategoryManagerVM.cs" />
-    <Compile Include="ViewModel\ViewModel.PageUC\PageBookManagerVM.cs" />
-    <Compile Include="ViewModel\ViewModel.PageUC\PageLibrarianManagerVM.cs" />
-    <Compile Include="ViewModel\ViewModel.PageUC\PageMemberManagerVM.cs" />
-    <Compile Include="ViewModel\ViewModel.PageUC\PagePublisherManagerVM.cs" />
+    <Compile Include="ViewModel\AddWindow\AddLibrarianWindowVM.cs" />
+    <Compile Include="ViewModel\PageUC\PageAccountInforVM.cs" />
+    <Compile Include="ViewModel\PageUC\PageAuthorManagerVM.cs" />
+    <Compile Include="ViewModel\PageUC\PageBookCategoryManagerVM.cs" />
+    <Compile Include="ViewModel\PageUC\PageBookManagerVM.cs" />
+    <Compile Include="ViewModel\PageUC\PageLibrarianManagerVM.cs" />
+    <Compile Include="ViewModel\PageUC\PageMemberManagerVM.cs" />
+    <Compile Include="ViewModel\PageUC\PagePublisherManagerVM.cs" />
     <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -183,6 +192,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ResourceXAML\MainResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View.AddWindow\AddLibrarianWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

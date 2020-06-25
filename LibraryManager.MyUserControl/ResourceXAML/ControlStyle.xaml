@@ -24,7 +24,7 @@
 
     <!--MaterialDesignPageCard-->
     <Style TargetType="materialDesign:Card" x:Key="MaterialDesignPageCard">
-        <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth3" />
+        <Setter Property="materialDesign:ShadowAssist.ShadowDepth" Value="Depth1" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Margin" Value="10" />
         <Setter Property="VerticalAlignment" Value="Stretch" />
@@ -57,17 +57,18 @@
     <Style TargetType="TextBlock" x:Key="TitleTextBlock">
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontSize" Value="24" />
         <Setter Property="FontWeight" Value="DemiBold" />
         <Setter Property="Foreground" Value="#001e51" />
         <Setter Property="Visibility" Value="Visible" />
+        <Setter Property="Margin" Value="0 10" />
     </Style>
 
     <!--WarningTextBlock-->
     <Style TargetType="TextBlock" x:Key="WarningTextBlock">
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="VerticalAlignment" Value="Top" />
-        <Setter Property="Visibility" Value="Visible"/>
+        <Setter Property="Visibility" Value="Hidden"/>
         <Setter Property="Foreground" Value="#ff5969"/>
         <Setter Property="Margin" Value="20 0" />
     </Style>

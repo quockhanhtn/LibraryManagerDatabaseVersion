@@ -5,9 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraryManager.EntityFramework.ViewModel.ViewModel.PageUC
+namespace LibraryManager.EntityFramework.ViewModel.PageUC
 {
-    public class PageAuthorManagerVM : BaseViewModel
+    public class PageAccountInforVM : BaseViewModel
     {
+        public PageAccountInforVM()
+        {
+        }
     }
 }

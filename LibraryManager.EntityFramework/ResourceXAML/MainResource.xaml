@@ -1,7 +1,15 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:sys="clr-namespace:System;assembly=mscorlib"
-                    xmlns:viewmodel="clr-namespace:LibraryManager.EntityFramework.ViewModel">
+                    xmlns:viewmodel="clr-namespace:LibraryManager.EntityFramework.ViewModel"
+                    xmlns:viewmodel_pageuc="clr-namespace:LibraryManager.EntityFramework.ViewModel.PageUC"
+                    xmlns:viewmodel_addwindow="clr-namespace:LibraryManager.EntityFramework.ViewModel.AddWindow" >
+    
     <viewmodel:LoginWindowViewModel x:Key="LoginWindowVM"/>
     <viewmodel:MainWindowViewModel x:Key="MainWindowVM"/>
+    
+    <viewmodel_pageuc:PageLibrarianManagerVM x:Key="PageLibrarianManagerVM"/>
+    
+    <viewmodel_addwindow:AddLibrarianWindowVM x:Key="AddLibrarianWindowVM"/>
+    
 </ResourceDictionary>
