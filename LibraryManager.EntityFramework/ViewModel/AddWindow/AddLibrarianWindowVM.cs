@@ -15,9 +15,26 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
 {
     public class AddLibrarianWindowVM : BaseViewModel
     {
+        /// <summary>
+        /// if (Result == "") -> Not add new librarian
+        /// else Result = new Librarian().FullName
+        /// </summary>
+        public string Result
+        {
+            get
+            {
+                var resultCopy = result;
+                result = "";
+                return resultCopy;
+            }
+            set => result = value;
+        }
+        
         public ICommand OKCommand { get; set; }
         public ICommand RetypeCommand { get; set; }
         public ICommand CancelCommand { get; set; }
+        
+
         public AddLibrarianWindowVM()
         {
             OKCommand = new RelayCommand<Window>((p) => { return !(p == null); }, (p) =>
@@ -126,10 +143,12 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
                     Address = tbxAddress.Text,
                     Email = tbxEmail.Text,
                     PhoneNumber = tbxPhone.Text,
-                    Salary = StringHelper.ToDecimal(tbxSalary.Text)
+                    Salary = StringHelper.ToDecimal(tbxSalary.Text),
+                    Status = true
                 };
 
                 LibrarianDAL.Instance.Add(newLibrarian);
+                Result = newLibrarian.FullName;
                 p.Close();
             });
 
@@ -154,5 +173,7 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
 
             CancelCommand = new RelayCommand<Window>((p) => { return !(p == null); }, (p) => { p.Close(); });
         }
+
+        private string result = "";
     }
 }

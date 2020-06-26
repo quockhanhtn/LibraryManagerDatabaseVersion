@@ -9,6 +9,7 @@ namespace LibraryManager.EntityFramework.Model.DataTransferObject
 {
     public class LibrarianDTO : Librarian
     {
+        public string FullName { get { return this.LastName + " " + this.FirstName; } }
         public string Note { get { return (this.Status == true) ? "Đang làm" : "Đã nghỉ"; } }
         public LibrarianDTO() : base() { }
 

@@ -30,7 +30,7 @@
             <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
 
-        <!-- List nhân viên thư viện-->
+        <!-- List tác giả-->
         <materialDesign:Card Grid.Column="0" Style="{StaticResource MaterialDesignPageCard}" Margin="5 5 2.5 5">
             <Grid>
                 <Grid.RowDefinitions>
@@ -47,36 +47,39 @@
                     </Grid>
                 </Grid>
 
-                <!-- Search-->
+                <!-- Search -->
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
-                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition Width="150"/>
                     </Grid.ColumnDefinitions>
 
+                    <TextBox x:Name="tbxSearch" Style="{StaticResource MyTextBox}" Grid.Column="0" Margin="10 0"
+                             materialDesign:HintAssist.Hint="Tìm kiếm" >
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:InvokeCommandAction Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=tbxSearch}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+
+                    <Button Grid.Column="1" Style="{StaticResource MaterialDesignIconButton}" ToolTip="Trợ giúp tìm kiếm">
+                        <materialDesign:PackIcon Kind="Help" />
+                    </Button>
+
                     <!-- Filter theo loại nhân viên-->
-                    <Grid Grid.Column="0">
-                        <ComboBox x:Name="cmbStatusFillter" materialDesign:HintAssist.Hint="Trạng thái"  
-                                  Margin="20 10" FontSize="18" materialDesign:HintAssist.HintOpacity=".26" SelectedIndex="1">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="SelectionChanged">
-                                    <i:InvokeCommandAction Command="{Binding FilterByStatusCommand}" CommandParameter="{Binding ElementName=cmbStatusFillter, Path=SelectedValue}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                            <ComboBox.ItemsSource>
-                                <x:Array Type="sys:String">
-                                    <sys:String>Tất cả</sys:String>
-                                    <sys:String>Đang làm</sys:String>
-                                    <sys:String>Đã nghỉ</sys:String>
-                                </x:Array>
-                            </ComboBox.ItemsSource>
-                        </ComboBox>
-                    </Grid>
-
-                    <!-- Xuất excel-->
-                    <Grid Grid.Column="1">
-
-                    </Grid>
+                    <ComboBox Grid.Column="2" x:Name="cmbStatusFillter" materialDesign:HintAssist.Hint="Trạng thái"
+                              Margin="10" FontSize="18" materialDesign:HintAssist.HintOpacity=".26" SelectedIndex="1">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding FilterByStatusCommand}" CommandParameter="{Binding ElementName=cmbStatusFillter, Path=SelectedValue}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                        <ComboBoxItem>Tất cả</ComboBoxItem>
+                        <ComboBoxItem>Đang làm</ComboBoxItem>
+                        <ComboBoxItem>Đã nghỉ</ComboBoxItem>
+                    </ComboBox>
                 </Grid>
 
                 <!-- List nhân viên thư viện-->
@@ -222,7 +225,7 @@
                     </Grid.ColumnDefinitions>
                     
                     <!---Button Thêm nhân viên mới-->
-                    <Button Grid.Column="2" ToolTip="Thêm nhân viên mới" Command="{Binding AddLibrarianCommand}" Margin="10">
+                    <Button Grid.Column="2" Margin="10" ToolTip="Thêm nhân viên mới" Command="{Binding AddLibrarianCommand}" CommandParameter="{Binding ElementName=pageLibrarianManager}">
 
                         <DockPanel LastChildFill="True" Margin="0" HorizontalAlignment="Right">
                             <materialDesign:PackIcon Kind="AccountAdd" Grid.Column="0"/>
@@ -363,5 +366,8 @@
                 </Grid>
             </Grid>
         </materialDesign:Card>
+
+        <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="mySnackbar" />
     </Grid>
+    
 </UserControl>

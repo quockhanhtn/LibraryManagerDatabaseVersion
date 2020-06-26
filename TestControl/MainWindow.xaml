@@ -9,30 +9,62 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <ListView ItemsSource="{Binding Items1}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Code}" Header="Code" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Description}" Header="Description" />
-                </GridView>
-            </ListView.View>
-        </ListView>
-
-        <Button Height="30" Width="200" Content="Smaple text" Foreground="Black">
-            <Button.Template>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <ContentPresenter HorizontalAlignment="Left"  Grid.Column="0"
-                                          VerticalAlignment="Center"/>
-                        <Canvas Background="AliceBlue" Grid.Column="1" />
-                    </Grid>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
+        <StackPanel Orientation="Horizontal">
+            <CheckBox Name="PopupEnabled" IsChecked="True"> Enable Popup </CheckBox>
+            <materialDesign:PopupBox StaysOpen="True"
+                                     IsEnabled="{Binding IsChecked, ElementName=PopupEnabled}">
+                <Grid Width="300" Margin="8,8,8,8">
+                    <Grid.Resources>
+                        <Style TargetType="CheckBox" BasedOn="{StaticResource MaterialDesignCheckBox}">
+                            <Setter Property="Margin" Value="8,8,10,8" />
+                        </Style>
+                        <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+                            <Setter Property="materialDesign:HintAssist.IsFloating" Value="True" />
+                            <Setter Property="Margin" Value="8,8,8,8" />
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="OPTIONS" Grid.Column="0" Grid.Row="0" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Margin="8,8,8,16"/>
+                    <TextBox Grid.Column="0" Grid.Row="1" materialDesign:HintAssist.Hint="Setting 1" Text="200" />
+                    <TextBox Grid.Column="0" Grid.Row="2" materialDesign:HintAssist.Hint="Setting 2" Text="400" />
+                    <TextBox Grid.Column="0" Grid.Row="3" materialDesign:HintAssist.Hint="Setting 3" Text="600" />
+                    <CheckBox Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" />
+                    <CheckBox Grid.Column="1" Grid.Row="2" IsChecked="True" VerticalAlignment="Bottom" />
+                    <CheckBox Grid.Column="1" Grid.Row="3" VerticalAlignment="Bottom" />
+                    <ComboBox Grid.Column="0" Grid.Row="4" materialDesign:HintAssist.Hint="Setting 4" materialDesign:HintAssist.IsFloating="True" MaxDropDownHeight="200" Margin="8 8 8 8">
+                        <ComboBoxItem> 25% </ComboBoxItem>
+                        <ComboBoxItem> 50% </ComboBoxItem>
+                        <ComboBoxItem> 75% </ComboBoxItem>
+                        <ComboBoxItem> 100% </ComboBoxItem>
+                        <ComboBoxItem> 150% </ComboBoxItem>
+                        <ComboBoxItem> 200% </ComboBoxItem>
+                        <ComboBoxItem> 250% </ComboBoxItem>
+                        <ComboBoxItem> 501% </ComboBoxItem>
+                    </ComboBox>
+                    <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                        <Button Content="_Save" Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}" />
+                        <Button Content="_Cancel" Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}">
+                            <Button.Style>
+                                <Style  TargetType="Button">
+                                    <Setter Property="Foreground" Value="Red" />
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </materialDesign:PopupBox>
+        </StackPanel>
+        <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="SnackbarThree" />
     </Grid>
 </Window>

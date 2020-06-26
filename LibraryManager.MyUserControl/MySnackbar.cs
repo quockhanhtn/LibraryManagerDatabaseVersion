@@ -6,6 +6,14 @@ namespace LibraryManager.MyUserControl
 {
     public class MySnackbar : Snackbar
     {
+        public static void Show(string content, int timeToShow)
+        {
+            MySnackbar mySnackbar = new MySnackbar();
+            mySnackbar.Message = new SnackbarMessage();
+            mySnackbar.ShowTime = timeToShow;
+            mySnackbar.MessageQueue.Enqueue("HELlo");
+        }
+
         public bool ShowAlways { get; set; }
         /// <summary>
         /// Time to show snackbar on screen if ShowAlways = false
