@@ -234,7 +234,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 ReloadList();
             });
 
-            StatusChangeCommand = new RelayCommand<string>((p) => { return BookCategorySelected != null; }, (p) =>
+            StatusChangeCommand = new RelayCommand<object>((p) => { return BookCategorySelected != null; }, (p) =>
             {
                 BookCategoryDAL.Instance.ChangeStatus(BookCategorySelected.Id);
                 ReloadList();

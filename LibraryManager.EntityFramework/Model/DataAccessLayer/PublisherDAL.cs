@@ -43,8 +43,8 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 
         public void Add(PublisherDTO newPublisher)
         {
-            var newLib = newPublisher.GetBaseModel();
-            DataProvider.Instance.SaveEntity(newLib, EntityState.Added);
+            var newPub = newPublisher.GetBaseModel();
+            DataProvider.Instance.SaveEntity(newPub, EntityState.Added, true);
         }
 
         public void Update(PublisherDTO publisher)
@@ -59,7 +59,7 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
                 publisherUpdate.Address = publisher.Address;
             }
 
-            DataProvider.Instance.SaveEntity(publisherUpdate, EntityState.Modified);
+            DataProvider.Instance.SaveEntity(publisherUpdate, EntityState.Modified, true);
         }
 
         public void ChangeStatus(int idPublisher)
@@ -71,7 +71,18 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
                 publisherUpdate.Status = (publisherUpdate.Status == true) ? false : true;
             }
 
-            DataProvider.Instance.SaveEntity(publisherUpdate, EntityState.Modified);
+            DataProvider.Instance.SaveEntity(publisherUpdate, EntityState.Modified, true);
+        }
+
+        public void Delete(int idPublisher)
+        {
+            var publisherDelete = DataProvider.Instance.Database.Publishers.Where(x => x.Id == idPublisher).SingleOrDefault();
+
+            if (publisherDelete != null)
+            {
+                DataProvider.Instance.Database.Publishers.Remove(publisherDelete);
+                DataProvider.Instance.Database.SaveChanges();
+            }
         }
 
         private static PublisherDAL instance;

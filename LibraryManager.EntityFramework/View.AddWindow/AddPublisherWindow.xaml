@@ -35,8 +35,8 @@
                     </StackPanel.Resources>
 
                     <!---Tên NXB-->
-                    <TextBox MaxLength="100" materialDesign:HintAssist.Hint="Tên NXB" x:Name="tbxFirstName"/>
-                    <TextBlock Text="Tên không được để trống" x:Name="tblFirstNameWarning"/>
+                    <TextBox MaxLength="100" materialDesign:HintAssist.Hint="Tên NXB" x:Name="tbxName"/>
+                    <TextBlock Text="Tên không được để trống" x:Name="tblNameWarning"/>
 
                     <!---Số điện thoại-->
                     <TextBox MaxLength="15" materialDesign:HintAssist.Hint="Điện thoại" x:Name="tbxPhone"/>
@@ -51,14 +51,12 @@
 
                     <!--Website-->
                     <TextBox MaxLength="40" materialDesign:HintAssist.Hint="Trang web" x:Name="tbxWebsite"/>
-
                 </StackPanel>
             </ScrollViewer>
 
             <!--Button-->
             <Grid Grid.Row="2" Margin="10 5">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
@@ -72,12 +70,8 @@
 
                 <!---Button OK-->
                 <Button Grid.Column="0" IsDefault="True" Content="THÊM" Command="{Binding OKCommand}" CommandParameter="{Binding ElementName=addPublisherWindow}"/>
-
-                <!-- Button Nhập lại-->
-                <Button Grid.Column="1" Content="NHẬP LẠI" Command="{Binding RetypeCommand}" CommandParameter="{Binding ElementName=addPublisherWindow}" />
-
                 <!---Button Cancel-->
-                <Button Grid.Column="2" IsCancel="True" Content="HỦY" Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=addPublisherWindow}"/>
+                <Button Grid.Column="1" IsCancel="True" Content="HỦY" Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=addPublisherWindow}"/>
             </Grid>
         </Grid>
     </Border>

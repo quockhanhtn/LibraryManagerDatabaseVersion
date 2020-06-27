@@ -13,7 +13,7 @@
         mc:Ignorable="d" Title="Library Hub" x:Name="mainWindow"
         DataContext="{StaticResource MainWindowVM}"
         Style="{StaticResource ResizeWindowNoBoder}" WindowStartupLocation="CenterScreen" 
-        Height="768" Width="1366" MinHeight="604" MinWidth="1004" >
+        Height="768" Width="1366" MinHeight="500" MinWidth="1004" >
     
     <Window.Resources>
         <Storyboard x:Key="OpenMenu">

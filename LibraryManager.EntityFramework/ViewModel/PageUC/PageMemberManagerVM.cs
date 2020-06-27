@@ -360,7 +360,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
 
             EmailToCommand = new RelayCommand<object>((p) => { return MemberSelected != null; }, (p) => { });
 
-            StatusChangeCommand = new RelayCommand<string>((p) => { return MemberSelected != null; }, (p) =>
+            StatusChangeCommand = new RelayCommand<object>((p) => { return MemberSelected != null; }, (p) =>
             {
                 MemberDAL.Instance.ChangeStatus(MemberSelected.Id);
                 ReloadList();

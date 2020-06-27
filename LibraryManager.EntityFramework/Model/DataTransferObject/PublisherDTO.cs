@@ -8,6 +8,7 @@ namespace LibraryManager.EntityFramework.Model.DataTransferObject
 {
     public class PublisherDTO : View_Publisher
     {
+        public string Note { get { return (this.Status != true) ? "Đã ẩn" : ""; } }
         public PublisherDTO() : base() { }
 
         public PublisherDTO(View_Publisher publisherRaw) : base()
@@ -19,6 +20,7 @@ namespace LibraryManager.EntityFramework.Model.DataTransferObject
             this.Email = publisherRaw.Email;
             this.Website = publisherRaw.Website;
             this.NumberOfBook = publisherRaw.NumberOfBook;
+            this.Status = publisherRaw.Status;
         }
 
         public Publisher GetBaseModel()
@@ -29,7 +31,8 @@ namespace LibraryManager.EntityFramework.Model.DataTransferObject
                 PhoneNumber = this.PhoneNumber,
                 Address = this.Address,
                 Email = this.Email,
-                Website = this.Website
+                Website = this.Website,
+                Status = this.Status
             };
         }
     }

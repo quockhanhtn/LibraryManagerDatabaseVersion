@@ -377,7 +377,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
 
             EmailToCommand = new RelayCommand<object>((p) => { return LibrarianSelected != null; }, (p) => { });
 
-            StatusChangeCommand = new RelayCommand<string>((p) => { return LibrarianSelected != null; }, (p) =>
+            StatusChangeCommand = new RelayCommand<object>((p) => { return LibrarianSelected != null; }, (p) =>
             {
                 LibrarianDAL.Instance.ChangeStatus(LibrarianSelected.Id);
                 ReloadList();

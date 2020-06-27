@@ -62,6 +62,7 @@
         <Setter Property="Foreground" Value="#001e51" />
         <Setter Property="Visibility" Value="Visible" />
         <Setter Property="Margin" Value="0 10" />
+        <Setter Property="TextAlignment" Value="Center" />
     </Style>
 
     <!--WarningTextBlock-->
