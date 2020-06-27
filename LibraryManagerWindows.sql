@@ -492,11 +492,6 @@ INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000025', 15)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000025', 20)
 GO
 
-
---SELECT B.Id, B.Title, BC.Name, P.Name, A.NickName AS [Tác giả], B.Price, B.PageNumber, B.Size
---FROM dbo.Book AS B, dbo.BookAuthor AS BA, dbo.BookCategory AS BC, dbo.Publisher AS P, dbo.Author AS A
---WHERE B.PublisherId = P.Id AND B.BookCategoryId = BC.Id AND B.Id = BA.BookId AND A.Id = BA.AuthorId
-
 --SELECT * FROM dbo.Book, dbo.BookItem
 --WHERE Id = BookId
 --SELECT * FROM dbo.Account
@@ -537,3 +532,10 @@ GO
 
 SELECT * FROM dbo.View_Author
 
+SELECT * FROM dbo.Book
+
+SELECT * FROM dbo.BookItem
+
+SELECT B.Id, B.Title, BC.Name, P.Name, A.NickName AS [Tác giả], B.Price, B.PageNumber, B.Size, BI.Number
+FROM dbo.Book AS B, dbo.BookAuthor AS BA, dbo.BookCategory AS BC, dbo.Publisher AS P, dbo.Author AS A, dbo.BookItem AS BI
+WHERE B.PublisherId = P.Id AND B.BookCategoryId = BC.Id AND B.Id = BA.BookId AND A.Id = BA.AuthorId AND B.Id = BI.BookId

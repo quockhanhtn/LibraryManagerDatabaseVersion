@@ -173,6 +173,9 @@
     <Compile Include="View.AddWindow\AddBookCategoryWindow.xaml.cs">
       <DependentUpon>AddBookCategoryWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View.AddWindow\AddBookWindow.xaml.cs">
+      <DependentUpon>AddBookWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View.AddWindow\AddLibrarianWindow.xaml.cs">
       <DependentUpon>AddLibrarianWindow.xaml</DependentUpon>
     </Compile>
@@ -208,6 +211,7 @@
     </Compile>
     <Compile Include="ViewModel\AddWindow\AddAuthorWindowVM.cs" />
     <Compile Include="ViewModel\AddWindow\AddBookCategoryWindowVM.cs" />
+    <Compile Include="ViewModel\AddWindow\AddBookWindowVM.cs" />
     <Compile Include="ViewModel\AddWindow\AddMemberWindowVM.cs" />
     <Compile Include="ViewModel\AddWindow\AddPublisherWindowVM.cs" />
     <Compile Include="ViewModel\LibrarianWindowViewModel.cs" />
@@ -254,6 +258,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View.AddWindow\AddBookCategoryWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View.AddWindow\AddBookWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

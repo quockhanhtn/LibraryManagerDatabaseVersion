@@ -1,7 +1,6 @@
-﻿<Window x:Class="LibraryManager.EntityFramework.View.AddWindow.AddLibrarianWindow"
+﻿<Window x:Class="LibraryManager.EntityFramework.View.AddWindow.AddBookWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LibraryManager.EntityFramework.View.AddWindow"
@@ -11,9 +10,8 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:uc="clr-namespace:LibraryManager.MyUserControl;assembly=LibraryManager.MyUserControl" 
         
-        mc:Ignorable="d" x:Name="addLibrarianWindow"
-        
-        Title="AddLibrarianWindow" DataContext="{StaticResource AddLibrarianWindowVM}"
+        mc:Ignorable="d" x:Name="addBookWindow"
+        Title="AddBookWindow" 
         Style="{StaticResource ResizeWindowNoBoder}" WindowStartupLocation="CenterScreen" 
         Height="620" Width="400">
 
@@ -26,7 +24,7 @@
             </Grid.RowDefinitions>
 
             <!--Title-->
-            <uc:TitleBar Tag="Thêm nhân viên mới" Height="auto" Background="#007acc" Grid.Row="0"></uc:TitleBar>
+            <uc:TitleBar Tag="Thêm sách mới" Height="auto" Background="#007acc" Grid.Row="0"></uc:TitleBar>
 
             <!---Thông tin nhân viên-->
             <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
@@ -36,9 +34,9 @@
                         <Style TargetType="TextBlock" BasedOn="{StaticResource WarningTextBlock}"/>
                     </StackPanel.Resources>
 
-                    <!---Họ-->
-                    <TextBox MaxLength="20" materialDesign:HintAssist.Hint="Họ và tên đệm" x:Name="tbxLastName"/>
-                    <TextBlock Text="Họ không được để trống" x:Name="tblLastNameWarning"/>
+                    <!---Tên sách-->
+                    <TextBox MaxLength="100" materialDesign:HintAssist.Hint="Tựa sách" x:Name="tbxTitle"/>
+                    <TextBlock Text="Tựa sách không được để trống" x:Name="tblTitleWarning"/>
 
                     <!---Tên-->
                     <TextBox MaxLength="10" materialDesign:HintAssist.Hint="Tên" x:Name="tbxFirstName"/>
@@ -53,22 +51,26 @@
 
                         <!---Giới tính-->
                         <StackPanel Grid.Column="0">
-                            <ComboBox materialDesign:HintAssist.Hint="Giới tính" x:Name="cmbSex" SelectedIndex="0" Style="{StaticResource MyComboBox}" Margin="20 0 5 0">
-                                <ComboBox.ItemsSource>
-                                    <x:Array Type="sys:String">
-                                        <sys:String>Nam</sys:String>
-                                        <sys:String>Nữ</sys:String>
-                                        <sys:String>Khác</sys:String>
-                                    </x:Array>
-                                </ComboBox.ItemsSource>
+                            <ComboBox materialDesign:HintAssist.Hint="Giới tính" x:Name="cmbSex" SelectedIndex="0"
+                                      Style="{StaticResource InfoComboBox}" Margin="20 0 5 0">
                             </ComboBox>
                             <TextBlock Text="Chọn giới tính" x:Name="tblSexWarning"/>
                         </StackPanel>
 
                         <!---Ngày sinh-->
                         <StackPanel Grid.Column="1">
-                            <DatePicker materialDesign:HintAssist.Hint="Ngày sinh" x:Name="dtpkBirthday" SelectedDate="1/1/1990"
-                                        Style="{StaticResource MyDatePicker}" Margin="5 0 20 0"/>
+                            <uc:YearPicker  materialDesign:HintAssist.Hint="Năm xuất bản"  Style="{StaticResource InfoComboBox}" Margin="5 0 20 0">
+                                <ComboBox.ItemContainerStyle>
+                                    <Style TargetType="ComboBoxItem">
+                                        <Setter Property="Foreground" Value="Pink" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Path=Sex}" Value="Male">
+                                                <Setter Property="Foreground" Value="Blue" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </ComboBox.ItemContainerStyle>
+                            </uc:YearPicker>
                             <TextBlock Text="Chọn ngày sinh" x:Name="tblBirthdayWarning"/>
                         </StackPanel>
                     </Grid>
@@ -112,13 +114,13 @@
                 </Grid.Resources>
 
                 <!---Button OK-->
-                <Button Grid.Column="0" IsDefault="True" Content="THÊM" Command="{Binding OKCommand}" CommandParameter="{Binding ElementName=addLibrarianWindow}"/>
+                <Button Grid.Column="0" IsDefault="True" Content="THÊM" Command="{Binding OKCommand}" CommandParameter="{Binding ElementName=addBookWindow}"/>
 
                 <!-- Button Nhập lại-->
-                <Button Grid.Column="1" Content="NHẬP LẠI" Command="{Binding RetypeCommand}" CommandParameter="{Binding ElementName=addLibrarianWindow}" />
+                <Button Grid.Column="1" Content="NHẬP LẠI" Command="{Binding RetypeCommand}" CommandParameter="{Binding ElementName=addBookWindow}" />
 
                 <!---Button Cancel-->
-                <Button Grid.Column="2" IsCancel="True" Content="HỦY" Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=addLibrarianWindow}"/>
+                <Button Grid.Column="2" IsCancel="True" Content="HỦY" Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=addBookWindow}"/>
             </Grid>
         </Grid>
     </Border>

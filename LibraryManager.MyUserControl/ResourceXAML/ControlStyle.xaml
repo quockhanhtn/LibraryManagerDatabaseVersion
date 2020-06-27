@@ -37,6 +37,17 @@
         <Setter Property="materialDesign:HintAssist.HintOpacity" Value=".26" />
         <Setter Property="Margin" Value="20 0"/>
         <Setter Property="FontSize" Value="15"/>
+        <Setter Property="IsReadOnly" Value="True" />
+    </Style>
+
+    <!--InfoComboBox-->
+    <Style TargetType="ComboBox" x:Key="InfoComboBox" BasedOn="{StaticResource MaterialDesignFloatingHintComboBox}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="materialDesign:HintAssist.HintOpacity" Value=".26" />
+        <Setter Property="Margin" Value="20 0"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="IsEditable" Value="True" />
+        <Setter Property="Foreground" Value="Black" />
     </Style>
 
     <!--MyDatePicker-->
