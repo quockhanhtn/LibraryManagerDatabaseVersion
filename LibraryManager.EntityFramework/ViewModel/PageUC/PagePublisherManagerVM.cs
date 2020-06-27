@@ -9,5 +9,8 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
 {
     public class PagePublisherManagerVM : BaseViewModel
     {
+        public PagePublisherManagerVM()
+        {
+        }
     }
 }

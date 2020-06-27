@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace LibraryManager.EntityFramework.Model.DataTransferObject
 {
-    public class BookCategoryDTO : BookCategoryView
+    public class BookCategoryDTO : View_BookCategory
     {
         public string Note { get { return (this.Status != true) ? "Đã ẩn" : ""; } }
         public BookCategoryDTO() : base() { }
-        public BookCategoryDTO(BookCategoryView bookCategoryView) : base()
+        public BookCategoryDTO(View_BookCategory bookCategoryView) : base()
         {
             this.Id = bookCategoryView.Id;
             this.Name = bookCategoryView.Name;

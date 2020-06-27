@@ -15,18 +15,18 @@ namespace LibraryManager.EntityFramework.Model
 using System;
     using System.Collections.Generic;
     
-public partial class ReturnBook
+public partial class View_BookCategory
 {
 
     public int Id { get; set; }
 
-    public int BorrowId { get; set; }
+    public string Name { get; set; }
 
-    public System.DateTime ReturnDate { get; set; }
+    public Nullable<int> LimitDays { get; set; }
 
+    public Nullable<int> NumberOfBook { get; set; }
 
-
-    public virtual Borrow Borrow { get; set; }
+    public Nullable<bool> Status { get; set; }
 
 }
 

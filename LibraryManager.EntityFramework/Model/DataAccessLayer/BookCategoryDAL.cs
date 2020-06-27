@@ -16,7 +16,7 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 
         public ObservableCollection<BookCategoryDTO> GetList()
         {
-            var listRaw = DataProvider.Instance.Database.BookCategoryViews.ToList();
+            var listRaw = DataProvider.Instance.Database.View_BookCategory.ToList();
             var listBookCategoryDTO = new ObservableCollection<BookCategoryDTO>();
 
             foreach (var bookCategory in listRaw) { listBookCategoryDTO.Add(new BookCategoryDTO(bookCategory)); }
@@ -26,7 +26,7 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 
         public ObservableCollection<BookCategoryDTO> GetList(bool status)
         {
-            var listRaw = DataProvider.Instance.Database.BookCategoryViews.Where(x => x.Status == status).ToList();
+            var listRaw = DataProvider.Instance.Database.View_BookCategory.Where(x => x.Status == status).ToList();
             var listBookCategoryDTO = new ObservableCollection<BookCategoryDTO>();
 
             foreach (var bookCategory in listRaw) { listBookCategoryDTO.Add(new BookCategoryDTO(bookCategory)); }

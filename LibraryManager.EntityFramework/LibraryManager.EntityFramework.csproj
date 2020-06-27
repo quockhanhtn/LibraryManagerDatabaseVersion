@@ -103,9 +103,6 @@
     <Compile Include="Model\BookCategory.cs">
       <DependentUpon>LibraryManager.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\BookCategoryView.cs">
-      <DependentUpon>LibraryManager.tt</DependentUpon>
-    </Compile>
     <Compile Include="Model\BookItem.cs">
       <DependentUpon>LibraryManager.tt</DependentUpon>
     </Compile>
@@ -116,12 +113,13 @@
     <Compile Include="Model\DataAccessLayer\BookCategoryDAL.cs" />
     <Compile Include="Model\DataAccessLayer\LibrarianDAL.cs" />
     <Compile Include="Model\DataAccessLayer\MemberDAL.cs" />
+    <Compile Include="Model\DataAccessLayer\PublisherDAL.cs" />
     <Compile Include="Model\DataProvider.cs" />
     <Compile Include="Model\DataTransferObject\BookCategoryDTO.cs" />
     <Compile Include="Model\DataTransferObject\BookDTO.cs" />
     <Compile Include="Model\DataTransferObject\LibrarianDTO.cs" />
     <Compile Include="Model\DataTransferObject\MemberDTO.cs" />
-    <Compile Include="Model\FillterInfor.cs" />
+    <Compile Include="Model\DataTransferObject\PublisherDTO.cs" />
     <Compile Include="Model\Librarian.cs">
       <DependentUpon>LibraryManager.tt</DependentUpon>
     </Compile>
@@ -152,6 +150,12 @@
     <Compile Include="Model\ReturnBook.cs">
       <DependentUpon>LibraryManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\View_BookCategory.cs">
+      <DependentUpon>LibraryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_PublisherView.cs">
+      <DependentUpon>LibraryManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="View.AddWindow\AddBookCategoryWindow.xaml.cs">
       <DependentUpon>AddBookCategoryWindow.xaml</DependentUpon>
     </Compile>
@@ -160,6 +164,9 @@
     </Compile>
     <Compile Include="View.AddWindow\AddMemberWindow.xaml.cs">
       <DependentUpon>AddMemberWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View.AddWindow\AddPublisherWindow.xaml.cs">
+      <DependentUpon>AddPublisherWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View.PageUC\PageAccountInfor.xaml.cs">
       <DependentUpon>PageAccountInfor.xaml</DependentUpon>
@@ -184,6 +191,7 @@
     </Compile>
     <Compile Include="ViewModel\AddWindow\AddBookCategoryWindowVM.cs" />
     <Compile Include="ViewModel\AddWindow\AddMemberWindowVM.cs" />
+    <Compile Include="ViewModel\AddWindow\AddPublisherWindowVM.cs" />
     <Compile Include="ViewModel\LoginWindowViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\AddWindow\AddLibrarianWindowVM.cs" />
@@ -226,6 +234,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View.AddWindow\AddMemberWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View.AddWindow\AddPublisherWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
