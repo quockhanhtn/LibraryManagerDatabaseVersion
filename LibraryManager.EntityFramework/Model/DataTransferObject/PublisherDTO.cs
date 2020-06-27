@@ -6,26 +6,31 @@ using System.Threading.Tasks;
 
 namespace LibraryManager.EntityFramework.Model.DataTransferObject
 {
-	//public class PublisherDTO : PublisherView
-	//{
-	//	public PublisherDTO() : base() { }
+    public class PublisherDTO : View_Publisher
+    {
+        public PublisherDTO() : base() { }
 
-	//	public PublisherDTO(PublisherView publisherRaw) : base()
-	//	{
-	//		this.Id = publisherRaw.Id;
-	//		this.Name = publisherRaw.Name;
-	//		this.PhoneNumber = publisherRaw.PhoneNumber;
-	//		this.Address = publisherRaw.Address;
-	//		this.Email = publisherRaw.Email;
-	//		this.Website = publisherRaw.Website;
-	//		this.NumberOfBook = publisherRaw.NumberOfBook;
-	//	}
+        public PublisherDTO(View_Publisher publisherRaw) : base()
+        {
+            this.Id = publisherRaw.Id;
+            this.Name = publisherRaw.Name;
+            this.PhoneNumber = publisherRaw.PhoneNumber;
+            this.Address = publisherRaw.Address;
+            this.Email = publisherRaw.Email;
+            this.Website = publisherRaw.Website;
+            this.NumberOfBook = publisherRaw.NumberOfBook;
+        }
 
-	//	public PublisherView GetBaseModel()
-	//	{
-	//		return new PublisherView()
-	//		{
-	//		};
-	//	}
-	//}
+        public Publisher GetBaseModel()
+        {
+            return new Publisher()
+            {
+                Name = this.Name,
+                PhoneNumber = this.PhoneNumber,
+                Address = this.Address,
+                Email = this.Email,
+                Website = this.Website
+            };
+        }
+    }
 }

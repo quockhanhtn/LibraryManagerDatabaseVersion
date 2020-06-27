@@ -132,7 +132,6 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                     ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
                     using (var excelPackage = new ExcelPackage())
                     {
-                        
                         ExcelHelper.SetExcelPackageInfo(excelPackage, "Library Manger", "Danh sách nhân viên thư viện", new List<string>() { "List Librarian Sheet" });
 
                         // lấy sheet vừa add ra để thao tác

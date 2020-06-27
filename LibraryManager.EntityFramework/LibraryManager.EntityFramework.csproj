@@ -153,7 +153,7 @@
     <Compile Include="Model\View_BookCategory.cs">
       <DependentUpon>LibraryManager.tt</DependentUpon>
     </Compile>
-    <Compile Include="Model\View_PublisherView.cs">
+    <Compile Include="Model\View_Publisher.cs">
       <DependentUpon>LibraryManager.tt</DependentUpon>
     </Compile>
     <Compile Include="View.AddWindow\AddBookCategoryWindow.xaml.cs">

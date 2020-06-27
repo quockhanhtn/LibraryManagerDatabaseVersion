@@ -56,7 +56,7 @@ public partial class LibraryManagerEntities : DbContext
 
     public virtual DbSet<View_BookCategory> View_BookCategory { get; set; }
 
-    public virtual DbSet<View_PublisherView> View_PublisherView { get; set; }
+    public virtual DbSet<View_Publisher> View_Publisher { get; set; }
 
 }
 

@@ -15,7 +15,7 @@ namespace LibraryManager.EntityFramework.Model
 using System;
     using System.Collections.Generic;
     
-public partial class View_PublisherView
+public partial class View_Publisher
 {
 
     public int Id { get; set; }
@@ -31,6 +31,8 @@ public partial class View_PublisherView
     public string Website { get; set; }
 
     public Nullable<int> NumberOfBook { get; set; }
+
+    public Nullable<bool> Status { get; set; }
 
 }
 

@@ -122,6 +122,7 @@
           <Property Name="Address" Type="nvarchar" MaxLength="100" />
           <Property Name="Email" Type="varchar" MaxLength="30" />
           <Property Name="Website" Type="varchar" MaxLength="40" />
+          <Property Name="Status" Type="bit" />
         </EntityType>
         <EntityType Name="ReturnBook">
           <Key>
@@ -144,8 +145,8 @@ warning 6002: The table/view 'LibraryManager.dbo.View_BookCategory' does not hav
           <Property Name="Status" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="View_PublisherView">
+warning 6002: The table/view 'LibraryManager.dbo.View_Publisher' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="View_Publisher">
           <Key>
             <PropertyRef Name="Id" />
             <PropertyRef Name="Name" />
@@ -157,8 +158,9 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
           <Property Name="Email" Type="varchar" MaxLength="30" />
           <Property Name="Website" Type="varchar" MaxLength="40" />
           <Property Name="NumberOfBook" Type="int" />
+          <Property Name="Status" Type="bit" />
         </EntityType>
-        <Association Name="FK__Book__BookCatego__37A5467C">
+        <Association Name="FK__Book__BookCatego__38996AB5">
           <End Role="BookCategory" Type="Self.BookCategory" Multiplicity="0..1" />
           <End Role="Book" Type="Self.Book" Multiplicity="*" />
           <ReferentialConstraint>
@@ -170,7 +172,7 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Book__Status__36B12243">
+        <Association Name="FK__Book__Status__37A5467C">
           <End Role="Publisher" Type="Self.Publisher" Multiplicity="1" />
           <End Role="Book" Type="Self.Book" Multiplicity="*" />
           <ReferentialConstraint>
@@ -182,7 +184,7 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BookAutho__Autho__3F466844">
+        <Association Name="FK__BookAutho__Autho__403A8C7D">
           <End Role="Author" Type="Self.Author" Multiplicity="1" />
           <End Role="BookAuthor" Type="Self.BookAuthor" Multiplicity="*" />
           <ReferentialConstraint>
@@ -194,7 +196,7 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BookAutho__BookI__3E52440B">
+        <Association Name="FK__BookAutho__BookI__3F466844">
           <End Role="Book" Type="Self.Book" Multiplicity="1" />
           <End Role="BookAuthor" Type="Self.BookAuthor" Multiplicity="*" />
           <ReferentialConstraint>
@@ -206,7 +208,7 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BookItem__Status__3B75D760">
+        <Association Name="FK__BookItem__Status__3C69FB99">
           <End Role="Book" Type="Self.Book" Multiplicity="1" />
           <End Role="BookItem" Type="Self.BookItem" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -218,7 +220,7 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Borrow__Libraria__44FF419A">
+        <Association Name="FK__Borrow__Libraria__45F365D3">
           <End Role="Librarian" Type="Self.Librarian" Multiplicity="1" />
           <End Role="Borrow" Type="Self.Borrow" Multiplicity="*" />
           <ReferentialConstraint>
@@ -230,7 +232,7 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Borrow__MemberId__440B1D61">
+        <Association Name="FK__Borrow__MemberId__44FF419A">
           <End Role="Member" Type="Self.Member" Multiplicity="1" />
           <End Role="Borrow" Type="Self.Borrow" Multiplicity="*" />
           <ReferentialConstraint>
@@ -242,7 +244,7 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Borrow__Status__4316F928">
+        <Association Name="FK__Borrow__Status__440B1D61">
           <End Role="Book" Type="Self.Book" Multiplicity="1" />
           <End Role="Borrow" Type="Self.Borrow" Multiplicity="*" />
           <ReferentialConstraint>
@@ -254,7 +256,7 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PayFineInf__Cash__4BAC3F29">
+        <Association Name="FK__PayFineInf__Cash__4CA06362">
           <End Role="Borrow" Type="Self.Borrow" Multiplicity="1" />
           <End Role="PayFineInfo" Type="Self.PayFineInfo" Multiplicity="*" />
           <ReferentialConstraint>
@@ -266,7 +268,7 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ReturnBoo__Retur__48CFD27E">
+        <Association Name="FK__ReturnBoo__Retur__49C3F6B7">
           <End Role="Borrow" Type="Self.Borrow" Multiplicity="1" />
           <End Role="ReturnBook" Type="Self.ReturnBook" Multiplicity="*" />
           <ReferentialConstraint>
@@ -300,54 +302,55 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
     [View_BookCategory].[Status] AS [Status]
     FROM [dbo].[View_BookCategory] AS [View_BookCategory]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="View_PublisherView" EntityType="Self.View_PublisherView" store:Type="Views" store:Schema="dbo">
+          <EntitySet Name="View_Publisher" EntityType="Self.View_Publisher" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
-    [View_PublisherView].[Id] AS [Id], 
-    [View_PublisherView].[Name] AS [Name], 
-    [View_PublisherView].[PhoneNumber] AS [PhoneNumber], 
-    [View_PublisherView].[Address] AS [Address], 
-    [View_PublisherView].[Email] AS [Email], 
-    [View_PublisherView].[Website] AS [Website], 
-    [View_PublisherView].[NumberOfBook] AS [NumberOfBook]
-    FROM [dbo].[View_PublisherView] AS [View_PublisherView]</DefiningQuery>
+    [View_Publisher].[Id] AS [Id], 
+    [View_Publisher].[Name] AS [Name], 
+    [View_Publisher].[PhoneNumber] AS [PhoneNumber], 
+    [View_Publisher].[Address] AS [Address], 
+    [View_Publisher].[Email] AS [Email], 
+    [View_Publisher].[Website] AS [Website], 
+    [View_Publisher].[NumberOfBook] AS [NumberOfBook], 
+    [View_Publisher].[Status] AS [Status]
+    FROM [dbo].[View_Publisher] AS [View_Publisher]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__Book__BookCatego__37A5467C" Association="Self.FK__Book__BookCatego__37A5467C">
+          <AssociationSet Name="FK__Book__BookCatego__38996AB5" Association="Self.FK__Book__BookCatego__38996AB5">
             <End Role="BookCategory" EntitySet="BookCategory" />
             <End Role="Book" EntitySet="Book" />
           </AssociationSet>
-          <AssociationSet Name="FK__Book__Status__36B12243" Association="Self.FK__Book__Status__36B12243">
+          <AssociationSet Name="FK__Book__Status__37A5467C" Association="Self.FK__Book__Status__37A5467C">
             <End Role="Publisher" EntitySet="Publisher" />
             <End Role="Book" EntitySet="Book" />
           </AssociationSet>
-          <AssociationSet Name="FK__BookAutho__Autho__3F466844" Association="Self.FK__BookAutho__Autho__3F466844">
+          <AssociationSet Name="FK__BookAutho__Autho__403A8C7D" Association="Self.FK__BookAutho__Autho__403A8C7D">
             <End Role="Author" EntitySet="Author" />
             <End Role="BookAuthor" EntitySet="BookAuthor" />
           </AssociationSet>
-          <AssociationSet Name="FK__BookAutho__BookI__3E52440B" Association="Self.FK__BookAutho__BookI__3E52440B">
+          <AssociationSet Name="FK__BookAutho__BookI__3F466844" Association="Self.FK__BookAutho__BookI__3F466844">
             <End Role="Book" EntitySet="Book" />
             <End Role="BookAuthor" EntitySet="BookAuthor" />
           </AssociationSet>
-          <AssociationSet Name="FK__BookItem__Status__3B75D760" Association="Self.FK__BookItem__Status__3B75D760">
+          <AssociationSet Name="FK__BookItem__Status__3C69FB99" Association="Self.FK__BookItem__Status__3C69FB99">
             <End Role="Book" EntitySet="Book" />
             <End Role="BookItem" EntitySet="BookItem" />
           </AssociationSet>
-          <AssociationSet Name="FK__Borrow__Libraria__44FF419A" Association="Self.FK__Borrow__Libraria__44FF419A">
+          <AssociationSet Name="FK__Borrow__Libraria__45F365D3" Association="Self.FK__Borrow__Libraria__45F365D3">
             <End Role="Librarian" EntitySet="Librarian" />
             <End Role="Borrow" EntitySet="Borrow" />
           </AssociationSet>
-          <AssociationSet Name="FK__Borrow__MemberId__440B1D61" Association="Self.FK__Borrow__MemberId__440B1D61">
+          <AssociationSet Name="FK__Borrow__MemberId__44FF419A" Association="Self.FK__Borrow__MemberId__44FF419A">
             <End Role="Member" EntitySet="Member" />
             <End Role="Borrow" EntitySet="Borrow" />
           </AssociationSet>
-          <AssociationSet Name="FK__Borrow__Status__4316F928" Association="Self.FK__Borrow__Status__4316F928">
+          <AssociationSet Name="FK__Borrow__Status__440B1D61" Association="Self.FK__Borrow__Status__440B1D61">
             <End Role="Book" EntitySet="Book" />
             <End Role="Borrow" EntitySet="Borrow" />
           </AssociationSet>
-          <AssociationSet Name="FK__PayFineInf__Cash__4BAC3F29" Association="Self.FK__PayFineInf__Cash__4BAC3F29">
+          <AssociationSet Name="FK__PayFineInf__Cash__4CA06362" Association="Self.FK__PayFineInf__Cash__4CA06362">
             <End Role="Borrow" EntitySet="Borrow" />
             <End Role="PayFineInfo" EntitySet="PayFineInfo" />
           </AssociationSet>
-          <AssociationSet Name="FK__ReturnBoo__Retur__48CFD27E" Association="Self.FK__ReturnBoo__Retur__48CFD27E">
+          <AssociationSet Name="FK__ReturnBoo__Retur__49C3F6B7" Association="Self.FK__ReturnBoo__Retur__49C3F6B7">
             <End Role="Borrow" EntitySet="Borrow" />
             <End Role="ReturnBook" EntitySet="ReturnBook" />
           </AssociationSet>
@@ -369,35 +372,36 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
           <EntitySet Name="Publishers" EntityType="LibraryManagerModel.Publisher" />
           <EntitySet Name="ReturnBooks" EntityType="LibraryManagerModel.ReturnBook" />
           <EntitySet Name="View_BookCategory" EntityType="LibraryManagerModel.View_BookCategory" />
-          <AssociationSet Name="FK__Book__BookCatego__37A5467C" Association="LibraryManagerModel.FK__Book__BookCatego__37A5467C">
+          <EntitySet Name="View_Publisher" EntityType="LibraryManagerModel.View_Publisher" />
+          <AssociationSet Name="FK__Book__BookCatego__38996AB5" Association="LibraryManagerModel.FK__Book__BookCatego__38996AB5">
             <End Role="BookCategory" EntitySet="BookCategories" />
             <End Role="Book" EntitySet="Books" />
           </AssociationSet>
-          <AssociationSet Name="FK__Book__Status__36B12243" Association="LibraryManagerModel.FK__Book__Status__36B12243">
+          <AssociationSet Name="FK__Book__Status__37A5467C" Association="LibraryManagerModel.FK__Book__Status__37A5467C">
             <End Role="Publisher" EntitySet="Publishers" />
             <End Role="Book" EntitySet="Books" />
           </AssociationSet>
-          <AssociationSet Name="FK__BookItem__Status__3B75D760" Association="LibraryManagerModel.FK__BookItem__Status__3B75D760">
+          <AssociationSet Name="FK__BookItem__Status__3C69FB99" Association="LibraryManagerModel.FK__BookItem__Status__3C69FB99">
             <End Role="Book" EntitySet="Books" />
             <End Role="BookItem" EntitySet="BookItems" />
           </AssociationSet>
-          <AssociationSet Name="FK__Borrow__Status__4316F928" Association="LibraryManagerModel.FK__Borrow__Status__4316F928">
+          <AssociationSet Name="FK__Borrow__Status__440B1D61" Association="LibraryManagerModel.FK__Borrow__Status__440B1D61">
             <End Role="Book" EntitySet="Books" />
             <End Role="Borrow" EntitySet="Borrows" />
           </AssociationSet>
-          <AssociationSet Name="FK__Borrow__Libraria__44FF419A" Association="LibraryManagerModel.FK__Borrow__Libraria__44FF419A">
+          <AssociationSet Name="FK__Borrow__Libraria__45F365D3" Association="LibraryManagerModel.FK__Borrow__Libraria__45F365D3">
             <End Role="Librarian" EntitySet="Librarians" />
             <End Role="Borrow" EntitySet="Borrows" />
           </AssociationSet>
-          <AssociationSet Name="FK__Borrow__MemberId__440B1D61" Association="LibraryManagerModel.FK__Borrow__MemberId__440B1D61">
+          <AssociationSet Name="FK__Borrow__MemberId__44FF419A" Association="LibraryManagerModel.FK__Borrow__MemberId__44FF419A">
             <End Role="Member" EntitySet="Members" />
             <End Role="Borrow" EntitySet="Borrows" />
           </AssociationSet>
-          <AssociationSet Name="FK__PayFineInf__Cash__4BAC3F29" Association="LibraryManagerModel.FK__PayFineInf__Cash__4BAC3F29">
+          <AssociationSet Name="FK__PayFineInf__Cash__4CA06362" Association="LibraryManagerModel.FK__PayFineInf__Cash__4CA06362">
             <End Role="Borrow" EntitySet="Borrows" />
             <End Role="PayFineInfo" EntitySet="PayFineInfoes" />
           </AssociationSet>
-          <AssociationSet Name="FK__ReturnBoo__Retur__48CFD27E" Association="LibraryManagerModel.FK__ReturnBoo__Retur__48CFD27E">
+          <AssociationSet Name="FK__ReturnBoo__Retur__49C3F6B7" Association="LibraryManagerModel.FK__ReturnBoo__Retur__49C3F6B7">
             <End Role="Borrow" EntitySet="Borrows" />
             <End Role="ReturnBook" EntitySet="ReturnBooks" />
           </AssociationSet>
@@ -405,7 +409,6 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
             <End Role="Author" EntitySet="Authors" />
             <End Role="Book" EntitySet="Books" />
           </AssociationSet>
-          <EntitySet Name="View_PublisherView" EntityType="LibraryManagerModel.View_PublisherView" />
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -437,10 +440,10 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
           <Property Name="Size" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
           <Property Name="Price" Type="Decimal" Precision="19" Scale="0" />
           <Property Name="Status" Type="Boolean" />
-          <NavigationProperty Name="BookCategory" Relationship="LibraryManagerModel.FK__Book__BookCatego__37A5467C" FromRole="Book" ToRole="BookCategory" />
-          <NavigationProperty Name="Publisher" Relationship="LibraryManagerModel.FK__Book__Status__36B12243" FromRole="Book" ToRole="Publisher" />
-          <NavigationProperty Name="BookItem" Relationship="LibraryManagerModel.FK__BookItem__Status__3B75D760" FromRole="Book" ToRole="BookItem" />
-          <NavigationProperty Name="Borrows" Relationship="LibraryManagerModel.FK__Borrow__Status__4316F928" FromRole="Book" ToRole="Borrow" />
+          <NavigationProperty Name="BookCategory" Relationship="LibraryManagerModel.FK__Book__BookCatego__38996AB5" FromRole="Book" ToRole="BookCategory" />
+          <NavigationProperty Name="Publisher" Relationship="LibraryManagerModel.FK__Book__Status__37A5467C" FromRole="Book" ToRole="Publisher" />
+          <NavigationProperty Name="BookItem" Relationship="LibraryManagerModel.FK__BookItem__Status__3C69FB99" FromRole="Book" ToRole="BookItem" />
+          <NavigationProperty Name="Borrows" Relationship="LibraryManagerModel.FK__Borrow__Status__440B1D61" FromRole="Book" ToRole="Borrow" />
           <NavigationProperty Name="Authors" Relationship="LibraryManagerModel.BookAuthor" FromRole="Book" ToRole="Author" />
         </EntityType>
         <EntityType Name="BookCategory">
@@ -451,7 +454,7 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="LimitDays" Type="Int32" />
           <Property Name="Status" Type="Boolean" />
-          <NavigationProperty Name="Books" Relationship="LibraryManagerModel.FK__Book__BookCatego__37A5467C" FromRole="BookCategory" ToRole="Book" />
+          <NavigationProperty Name="Books" Relationship="LibraryManagerModel.FK__Book__BookCatego__38996AB5" FromRole="BookCategory" ToRole="Book" />
         </EntityType>
         <EntityType Name="BookItem">
           <Key>
@@ -460,7 +463,7 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
           <Property Name="BookId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="Number" Type="Int32" />
           <Property Name="Status" Type="Boolean" />
-          <NavigationProperty Name="Book" Relationship="LibraryManagerModel.FK__BookItem__Status__3B75D760" FromRole="BookItem" ToRole="Book" />
+          <NavigationProperty Name="Book" Relationship="LibraryManagerModel.FK__BookItem__Status__3C69FB99" FromRole="BookItem" ToRole="Book" />
         </EntityType>
         <EntityType Name="Borrow">
           <Key>
@@ -472,11 +475,11 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
           <Property Name="LibrarianId" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
           <Property Name="BorrowDate" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="Status" Type="Boolean" />
-          <NavigationProperty Name="Book" Relationship="LibraryManagerModel.FK__Borrow__Status__4316F928" FromRole="Borrow" ToRole="Book" />
-          <NavigationProperty Name="Librarian" Relationship="LibraryManagerModel.FK__Borrow__Libraria__44FF419A" FromRole="Borrow" ToRole="Librarian" />
-          <NavigationProperty Name="Member" Relationship="LibraryManagerModel.FK__Borrow__MemberId__440B1D61" FromRole="Borrow" ToRole="Member" />
-          <NavigationProperty Name="PayFineInfoes" Relationship="LibraryManagerModel.FK__PayFineInf__Cash__4BAC3F29" FromRole="Borrow" ToRole="PayFineInfo" />
-          <NavigationProperty Name="ReturnBooks" Relationship="LibraryManagerModel.FK__ReturnBoo__Retur__48CFD27E" FromRole="Borrow" ToRole="ReturnBook" />
+          <NavigationProperty Name="Book" Relationship="LibraryManagerModel.FK__Borrow__Status__440B1D61" FromRole="Borrow" ToRole="Book" />
+          <NavigationProperty Name="Librarian" Relationship="LibraryManagerModel.FK__Borrow__Libraria__45F365D3" FromRole="Borrow" ToRole="Librarian" />
+          <NavigationProperty Name="Member" Relationship="LibraryManagerModel.FK__Borrow__MemberId__44FF419A" FromRole="Borrow" ToRole="Member" />
+          <NavigationProperty Name="PayFineInfoes" Relationship="LibraryManagerModel.FK__PayFineInf__Cash__4CA06362" FromRole="Borrow" ToRole="PayFineInfo" />
+          <NavigationProperty Name="ReturnBooks" Relationship="LibraryManagerModel.FK__ReturnBoo__Retur__49C3F6B7" FromRole="Borrow" ToRole="ReturnBook" />
         </EntityType>
         <EntityType Name="Librarian">
           <Key>
@@ -494,7 +497,7 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
           <Property Name="StartDate" Type="DateTime" Precision="0" />
           <Property Name="Salary" Type="Decimal" Precision="19" Scale="0" />
           <Property Name="Status" Type="Boolean" />
-          <NavigationProperty Name="Borrows" Relationship="LibraryManagerModel.FK__Borrow__Libraria__44FF419A" FromRole="Librarian" ToRole="Borrow" />
+          <NavigationProperty Name="Borrows" Relationship="LibraryManagerModel.FK__Borrow__Libraria__45F365D3" FromRole="Librarian" ToRole="Borrow" />
         </EntityType>
         <EntityType Name="Member">
           <Key>
@@ -511,7 +514,7 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
           <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="RegisterDate" Type="DateTime" Precision="0" />
           <Property Name="Status" Type="Boolean" />
-          <NavigationProperty Name="Borrows" Relationship="LibraryManagerModel.FK__Borrow__MemberId__440B1D61" FromRole="Member" ToRole="Borrow" />
+          <NavigationProperty Name="Borrows" Relationship="LibraryManagerModel.FK__Borrow__MemberId__44FF419A" FromRole="Member" ToRole="Borrow" />
         </EntityType>
         <EntityType Name="PayFineInfo">
           <Key>
@@ -520,7 +523,7 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BorrowId" Type="Int32" Nullable="false" />
           <Property Name="Cash" Type="Decimal" Nullable="false" Precision="19" Scale="0" />
-          <NavigationProperty Name="Borrow" Relationship="LibraryManagerModel.FK__PayFineInf__Cash__4BAC3F29" FromRole="PayFineInfo" ToRole="Borrow" />
+          <NavigationProperty Name="Borrow" Relationship="LibraryManagerModel.FK__PayFineInf__Cash__4CA06362" FromRole="PayFineInfo" ToRole="Borrow" />
         </EntityType>
         <EntityType Name="Publisher">
           <Key>
@@ -532,7 +535,8 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
           <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="Website" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Books" Relationship="LibraryManagerModel.FK__Book__Status__36B12243" FromRole="Publisher" ToRole="Book" />
+          <Property Name="Status" Type="Boolean" />
+          <NavigationProperty Name="Books" Relationship="LibraryManagerModel.FK__Book__Status__37A5467C" FromRole="Publisher" ToRole="Book" />
         </EntityType>
         <EntityType Name="ReturnBook">
           <Key>
@@ -541,7 +545,7 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BorrowId" Type="Int32" Nullable="false" />
           <Property Name="ReturnDate" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Borrow" Relationship="LibraryManagerModel.FK__ReturnBoo__Retur__48CFD27E" FromRole="ReturnBook" ToRole="Borrow" />
+          <NavigationProperty Name="Borrow" Relationship="LibraryManagerModel.FK__ReturnBoo__Retur__49C3F6B7" FromRole="ReturnBook" ToRole="Borrow" />
         </EntityType>
         <EntityType Name="View_BookCategory">
           <Key>
@@ -553,7 +557,21 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
           <Property Name="NumberOfBook" Type="Int32" />
           <Property Name="Status" Type="Boolean" />
         </EntityType>
-        <Association Name="FK__Book__BookCatego__37A5467C">
+        <EntityType Name="View_Publisher">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Name" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Website" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="NumberOfBook" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <Association Name="FK__Book__BookCatego__38996AB5">
           <End Type="LibraryManagerModel.BookCategory" Role="BookCategory" Multiplicity="0..1" />
           <End Type="LibraryManagerModel.Book" Role="Book" Multiplicity="*" />
           <ReferentialConstraint>
@@ -565,7 +583,7 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Book__Status__36B12243">
+        <Association Name="FK__Book__Status__37A5467C">
           <End Type="LibraryManagerModel.Publisher" Role="Publisher" Multiplicity="1" />
           <End Type="LibraryManagerModel.Book" Role="Book" Multiplicity="*" />
           <ReferentialConstraint>
@@ -577,7 +595,7 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__BookItem__Status__3B75D760">
+        <Association Name="FK__BookItem__Status__3C69FB99">
           <End Type="LibraryManagerModel.Book" Role="Book" Multiplicity="1" />
           <End Type="LibraryManagerModel.BookItem" Role="BookItem" Multiplicity="0..1" />
           <ReferentialConstraint>
@@ -589,7 +607,7 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Borrow__Status__4316F928">
+        <Association Name="FK__Borrow__Status__440B1D61">
           <End Type="LibraryManagerModel.Book" Role="Book" Multiplicity="1" />
           <End Type="LibraryManagerModel.Borrow" Role="Borrow" Multiplicity="*" />
           <ReferentialConstraint>
@@ -601,7 +619,7 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Borrow__Libraria__44FF419A">
+        <Association Name="FK__Borrow__Libraria__45F365D3">
           <End Type="LibraryManagerModel.Librarian" Role="Librarian" Multiplicity="1" />
           <End Type="LibraryManagerModel.Borrow" Role="Borrow" Multiplicity="*" />
           <ReferentialConstraint>
@@ -613,7 +631,7 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Borrow__MemberId__440B1D61">
+        <Association Name="FK__Borrow__MemberId__44FF419A">
           <End Type="LibraryManagerModel.Member" Role="Member" Multiplicity="1" />
           <End Type="LibraryManagerModel.Borrow" Role="Borrow" Multiplicity="*" />
           <ReferentialConstraint>
@@ -625,7 +643,7 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__PayFineInf__Cash__4BAC3F29">
+        <Association Name="FK__PayFineInf__Cash__4CA06362">
           <End Type="LibraryManagerModel.Borrow" Role="Borrow" Multiplicity="1" />
           <End Type="LibraryManagerModel.PayFineInfo" Role="PayFineInfo" Multiplicity="*" />
           <ReferentialConstraint>
@@ -637,7 +655,7 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ReturnBoo__Retur__48CFD27E">
+        <Association Name="FK__ReturnBoo__Retur__49C3F6B7">
           <End Type="LibraryManagerModel.Borrow" Role="Borrow" Multiplicity="1" />
           <End Type="LibraryManagerModel.ReturnBook" Role="ReturnBook" Multiplicity="*" />
           <ReferentialConstraint>
@@ -653,20 +671,7 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
           <End Type="LibraryManagerModel.Author" Role="Author" Multiplicity="*" />
           <End Type="LibraryManagerModel.Book" Role="Book" Multiplicity="*" />
         </Association>
-        <EntityType Name="View_PublisherView">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="Name" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Website" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="NumberOfBook" Type="Int32" />
-        </EntityType>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -783,6 +788,7 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
           <EntitySetMapping Name="Publishers">
             <EntityTypeMapping TypeName="LibraryManagerModel.Publisher">
               <MappingFragment StoreEntitySet="Publisher">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Website" ColumnName="Website" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
@@ -812,17 +818,10 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <AssociationSetMapping Name="BookAuthor" TypeName="LibraryManagerModel.BookAuthor" StoreEntitySet="BookAuthor">
-            <EndProperty Name="Book">
-              <ScalarProperty Name="Id" ColumnName="BookId" />
-            </EndProperty>
-            <EndProperty Name="Author">
-              <ScalarProperty Name="Id" ColumnName="AuthorId" />
-            </EndProperty>
-          </AssociationSetMapping>
-          <EntitySetMapping Name="View_PublisherView">
-            <EntityTypeMapping TypeName="LibraryManagerModel.View_PublisherView">
-              <MappingFragment StoreEntitySet="View_PublisherView">
+          <EntitySetMapping Name="View_Publisher">
+            <EntityTypeMapping TypeName="LibraryManagerModel.View_Publisher">
+              <MappingFragment StoreEntitySet="View_Publisher">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="NumberOfBook" ColumnName="NumberOfBook" />
                 <ScalarProperty Name="Website" ColumnName="Website" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
@@ -833,6 +832,14 @@ warning 6002: The table/view 'LibraryManager.dbo.View_PublisherView' does not ha
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <AssociationSetMapping Name="BookAuthor" TypeName="LibraryManagerModel.BookAuthor" StoreEntitySet="BookAuthor">
+            <EndProperty Name="Book">
+              <ScalarProperty Name="Id" ColumnName="BookId" />
+            </EndProperty>
+            <EndProperty Name="Author">
+              <ScalarProperty Name="Id" ColumnName="AuthorId" />
+            </EndProperty>
+          </AssociationSetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

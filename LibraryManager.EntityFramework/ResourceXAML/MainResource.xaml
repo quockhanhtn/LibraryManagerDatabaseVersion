@@ -17,6 +17,6 @@
     <viewmodel_addwindow:AddBookCategoryWindowVM x:Key="AddBookCategoryWindowVM"/>
     <viewmodel_addwindow:AddLibrarianWindowVM x:Key="AddLibrarianWindowVM"/>
     <viewmodel_addwindow:AddMemberWindowVM x:Key="AddMemberWindowVM"/>
-    <!--<viewmodel_addwindow:AddPublisherWindowVM x:Key="AddPublisherWindowVM"/>-->
+    <viewmodel_addwindow:AddPublisherWindowVM x:Key="AddPublisherWindowVM"/>
 
 </ResourceDictionary>
