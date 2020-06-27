@@ -193,6 +193,13 @@
                                 </StackPanel>
                             </ListViewItem>
 
+                            <ListViewItem x:Name="AboutSoftware" Height="60" ToolTip="Quản lý tác giả">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="AboutCircle"/>
+                                    <TextBlock Text="Thông tin"/>
+                                    <TextBlock Text=" Phần mềm" FontWeight="SemiBold"/>
+                                </StackPanel>
+                            </ListViewItem>
                         </ListView>
                     </Grid>
                 </StackPanel>

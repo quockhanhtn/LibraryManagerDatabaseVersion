@@ -24,6 +24,7 @@ namespace LibraryManager.EntityFramework.ViewModel
         public UserControl PagePublisherManager { get; set; }
         public UserControl PageBookCategoryManager { get; set; }
         public UserControl PageAuthorManager { get; set; }
+        public UserControl PageAboutSoftware { get; set; }
 
         public MainWindowViewModel()
         {
@@ -56,6 +57,9 @@ namespace LibraryManager.EntityFramework.ViewModel
                     case "AuthorManager":
                         GridMain.Children.Add(this.PageAuthorManager);
                         break;
+                    case "AboutSoftware":
+                        GridMain.Children.Add(this.PageAboutSoftware);
+                        break;
                 }
             });
 
@@ -75,6 +79,7 @@ namespace LibraryManager.EntityFramework.ViewModel
             this.PagePublisherManager = new PagePublisherManager() { DataContext = new PagePublisherManagerVM() };
             this.PageBookCategoryManager = new PageBookCategoryManager() { DataContext = new PageBookCategoryManagerVM() };
             this.PageAuthorManager = new PageAuthorManager() { DataContext = new PageAuthorManagerVM() };
+            this.PageAboutSoftware = new PageAboutSoftware();
         }
     }
 }

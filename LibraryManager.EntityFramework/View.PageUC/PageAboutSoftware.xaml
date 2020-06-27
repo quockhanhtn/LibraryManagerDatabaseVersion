@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="LibraryManager.EntityFramework.View.PageUC.PageAboutSoftware"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:LibraryManager.EntityFramework.View.PageUC"
+             
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:uc="clr-namespace:LibraryManager.MyUserControl;assembly=LibraryManager.MyUserControl" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             
+             mc:Ignorable="d" x:Name="pageLibrarianManager" DataContext="{StaticResource PageAboutSoftwareVM}"
+             d:DesignHeight="734" d:DesignWidth="1300" Background="#fafafa">
+    <Grid>
+        <Grid.Resources>
+            <Style TargetType="TextBlock" BasedOn="{StaticResource TitleTextBlock}"/>
+        </Grid.Resources>
+        <materialDesign:Card Grid.Column="0" Style="{StaticResource MaterialDesignPageCard}" Margin="5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0">
+                <TextBlock Text="PHẦN MỀM QUẢN LÝ THƯ VIỆN" FontSize="30" Margin="0 30 0 0"/>
+                <TextBlock Text="Library manager version 2.0" Margin="0"/>
+                    <TextBlock FontSize="18" Text="© 2020 Lâm Quốc Khánh, Hồ Huy Hoàng" Margin="0"/>
+                </StackPanel>
+
+            </Grid>
+        </materialDesign:Card>
+        <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="mySnackbar" />
+    </Grid>
+</UserControl>

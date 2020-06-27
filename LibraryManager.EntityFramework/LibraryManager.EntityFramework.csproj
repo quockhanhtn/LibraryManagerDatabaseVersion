@@ -171,6 +171,9 @@
     <Compile Include="View.AddWindow\AddPublisherWindow.xaml.cs">
       <DependentUpon>AddPublisherWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View.PageUC\PageAboutSoftware.xaml.cs">
+      <DependentUpon>PageAboutSoftware.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View.PageUC\PageAccountInfor.xaml.cs">
       <DependentUpon>PageAccountInfor.xaml</DependentUpon>
     </Compile>
@@ -199,6 +202,7 @@
     <Compile Include="ViewModel\LoginWindowViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\AddWindow\AddLibrarianWindowVM.cs" />
+    <Compile Include="ViewModel\PageUC\PageAboutSoftwareVM.cs" />
     <Compile Include="ViewModel\PageUC\PageAccountInforVM.cs" />
     <Compile Include="ViewModel\PageUC\PageAuthorManagerVM.cs" />
     <Compile Include="ViewModel\PageUC\PageBookCategoryManagerVM.cs" />
@@ -246,6 +250,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View.AddWindow\AddPublisherWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View.PageUC\PageAboutSoftware.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
