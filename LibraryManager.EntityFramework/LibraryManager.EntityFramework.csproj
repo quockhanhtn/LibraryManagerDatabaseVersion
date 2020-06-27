@@ -113,11 +113,13 @@
       <DependentUpon>LibraryManager.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\DataAccessLayer\AccountDAL.cs" />
+    <Compile Include="Model\DataAccessLayer\AuthorDAL.cs" />
     <Compile Include="Model\DataAccessLayer\BookCategoryDAL.cs" />
     <Compile Include="Model\DataAccessLayer\LibrarianDAL.cs" />
     <Compile Include="Model\DataAccessLayer\MemberDAL.cs" />
     <Compile Include="Model\DataAccessLayer\PublisherDAL.cs" />
     <Compile Include="Model\DataProvider.cs" />
+    <Compile Include="Model\DataTransferObject\AuthorDTO.cs" />
     <Compile Include="Model\DataTransferObject\BookCategoryDTO.cs" />
     <Compile Include="Model\DataTransferObject\BookDTO.cs" />
     <Compile Include="Model\DataTransferObject\LibrarianDTO.cs" />
@@ -153,11 +155,20 @@
     <Compile Include="Model\ReturnBook.cs">
       <DependentUpon>LibraryManager.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\View_Author.cs">
+      <DependentUpon>LibraryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_AuthorNoBook.cs">
+      <DependentUpon>LibraryManager.tt</DependentUpon>
+    </Compile>
     <Compile Include="Model\View_BookCategory.cs">
       <DependentUpon>LibraryManager.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\View_Publisher.cs">
       <DependentUpon>LibraryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="View.AddWindow\AddAuthorWindow.xaml.cs">
+      <DependentUpon>AddAuthorWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View.AddWindow\AddBookCategoryWindow.xaml.cs">
       <DependentUpon>AddBookCategoryWindow.xaml</DependentUpon>
@@ -195,6 +206,7 @@
     <Compile Include="View.PageUC\PagePublisherManager.xaml.cs">
       <DependentUpon>PagePublisherManager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AddWindow\AddAuthorWindowVM.cs" />
     <Compile Include="ViewModel\AddWindow\AddBookCategoryWindowVM.cs" />
     <Compile Include="ViewModel\AddWindow\AddMemberWindowVM.cs" />
     <Compile Include="ViewModel\AddWindow\AddPublisherWindowVM.cs" />
@@ -234,6 +246,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ResourceXAML\MainResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View.AddWindow\AddAuthorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

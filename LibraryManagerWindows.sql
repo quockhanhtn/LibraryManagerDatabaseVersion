@@ -56,7 +56,8 @@ GO
 CREATE TABLE dbo.Author
 (
 	Id int IDENTITY(1,1) PRIMARY KEY,
-	NickName NVARCHAR(30) NULL
+	NickName NVARCHAR(40) NULL,
+	Status BIT DEFAULT 1 NULL,
 )
 GO 
 
@@ -502,7 +503,7 @@ GO
 --SELECT * FROM	dbo.Publisher
 --SELECT * FROM dbo.Author
 
---CREATE VIEW [dbo].[AuthorView] AS
+--CREATE VIEW [dbo].[View_Author] AS
 --SELECT DT1.AuthorId, DT1.NickName, DT2.NumberOfBook, DT1.BookId, DT1.BookTitle FROM
 --	(SELECT A.Id AS [AuthorId], A.NickName, B.Id AS [BookId], B.Title AS [BookTitle] 
 --	 FROM dbo.Author AS A INNER JOIN dbo.BookAuthor AS BA ON BA.AuthorId = A.Id
@@ -510,17 +511,17 @@ GO
 --	INNER JOIN
 --	(SELECT AuthorId, COUNT(BookId) AS [NumberOfBook] FROM dbo.BookAuthor GROUP BY AuthorId) AS DT2
 --	 ON DT2.AuthorId = DT1.AuthorId
+--GO
 
+CREATE VIEW [dbo].[View_Author] AS
+	SELECT A.Id AS [AuthorId], A.NickName, B.Id AS [BookId], B.Title AS [BookTitle], A.Status
+	FROM dbo.Author AS A INNER JOIN dbo.BookAuthor AS BA ON BA.AuthorId = A.Id
+	INNER JOIN dbo.Book AS B ON B.Id = BA.BookId
+GO
 
---SELECT * FROM [AuthorView]
-
-
-
---SELECT * FROM BookCategoryView
-
---SELECT * FROM dbo.BookCategory
-
---SELECT * FROM dbo.Publisher
+CREATE VIEW [dbo].[View_AuthorNoBook] AS
+	SELECT Id AS [AuthorId], NickName, Status FROM dbo.Author WHERE dbo.Author.Id NOT IN ( SELECT AuthorID FROM View_Author)
+GO
 
 CREATE VIEW [dbo].[View_BookCategory] AS
 	SELECT BC.Id, BC.Name, BC.LimitDays, COUNT(dbo.Book.Id) AS [NumberOfBook], BC.Status 
@@ -534,4 +535,5 @@ CREATE VIEW [dbo].[View_Publisher] AS
 	GROUP BY P.Id, P.Name, P.PhoneNumber, P.Address, P.Email, P.Website, P.Status
 GO
 
-SELECT * FROM dbo.View_Publisher
+SELECT * FROM dbo.View_Author
+

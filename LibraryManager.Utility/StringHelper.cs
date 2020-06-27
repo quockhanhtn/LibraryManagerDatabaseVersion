@@ -40,6 +40,7 @@ namespace LibraryManager.Utility
             }
 
             //Xóa khoảng trắng thừa
+            str = str.Trim();
             while (str.IndexOf("  ") != -1)
             {
                 str = str.Replace("  ", " ");

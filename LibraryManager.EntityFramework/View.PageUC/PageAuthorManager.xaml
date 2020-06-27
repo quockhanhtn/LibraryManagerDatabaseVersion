@@ -6,197 +6,101 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LibraryManager.EntityFramework.View.PageUC"
              
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:uc="clr-namespace:LibraryManager.MyUserControl;assembly=LibraryManager.MyUserControl" 
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              
-             mc:Ignorable="d" x:Name="pageAuthorManager" DataContext="{StaticResource PageLibrarianManagerVM}"
+             mc:Ignorable="d" x:Name="pageAuthorManager" DataContext="{StaticResource PageAuthorManagerVM}"
              d:DesignHeight="734" d:DesignWidth="1300" Background="#fafafa">
     <Grid>
         <Grid.Resources>
             <Style TargetType="Button" BasedOn="{StaticResource DarkBlueButton}">
+                <Setter Property="FontSize" Value="18"/>
                 <Setter Property="Margin" Value="5 5"/>
             </Style>
 
             <Style TargetType="materialDesign:PackIcon">
                 <Setter Property="Height" Value="30"/>
                 <Setter Property="Width" Value="30"/>
-                <Setter Property="Margin" Value="0 0 10 0"/>
+                <Setter Property="Margin" Value="10 0"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
             </Style>
         </Grid.Resources>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="6*" />
+            <ColumnDefinition Width="4*"/>
         </Grid.ColumnDefinitions>
 
-        <!-- List nhân viên thư viện-->
-        <materialDesign:Card Grid.Column="0" Style="{StaticResource MaterialDesignPageCard}" Margin="5 5 2.5 5">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition/>
-                    <RowDefinition Height="70"/>
-                </Grid.RowDefinitions>
+        <!-- List chuyên mục sách-->
+        <Grid Grid.Column="0">
+            <materialDesign:Card Style="{StaticResource MaterialDesignPageCard}" Margin="5 5 2.5 5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="70"/>
+                    </Grid.RowDefinitions>
 
-                <!-- DANH SÁCH NHÂN VIÊN-->
-                <Grid Grid.Row="0">
-                    <Grid Grid.Row="0">
-                        <TextBlock Text="DANH SÁCH NHÂN VIÊN" Style="{StaticResource TitleTextBlock}" />
-                    </Grid>
-                </Grid>
+                    <!-- CÁC CHUYÊN MỤC SÁCH-->
+                    <TextBlock Grid.Row="0" Text="DANH SÁCH TÁC GIẢ" Style="{StaticResource TitleTextBlock}"/>
 
-                <!-- Search-->
-                <Grid Grid.Row="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="auto"/>
-                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Row=" 1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <DockPanel Grid.Column="1" Margin="5 0" LastChildFill="True">
+                            <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                                          ToolTip="Hiển thị các chuyên mục đã xóa" VerticalAlignment="Bottom"
+                                          IsChecked="{Binding IsShowHiddenAuthor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                            <TextBlock Text="Hiển thị các tác giả đã ẩn" Foreground="Black" FontWeight="Normal" FontSize="16" Margin="10 0" VerticalAlignment="Bottom"/>
+                        </DockPanel>
 
-                    <!-- Filter theo loại nhân viên-->
-                    <Grid Grid.Column="0">
-                        <ComboBox x:Name="cmbStatusFillter" materialDesign:HintAssist.Hint="Trạng thái"  
-                                  Margin="20 10" FontSize="18" materialDesign:HintAssist.HintOpacity=".26" SelectedIndex="1">
+                        <TextBox Grid.Column="0" x:Name="tbxSearch" Style="{StaticResource MyTextBox}" Margin="10 0" FontSize="18"
+                             materialDesign:HintAssist.Hint="Tìm kiếm tác giả theo tên" >
                             <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="SelectionChanged">
-                                    <i:InvokeCommandAction Command="{Binding FilterByStatusCommand}" CommandParameter="{Binding ElementName=cmbStatusFillter, Path=SelectedValue}"/>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=tbxSearch}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
-                            <ComboBox.ItemsSource>
-                                <x:Array Type="sys:String">
-                                    <sys:String>Tất cả</sys:String>
-                                    <sys:String>Đang làm</sys:String>
-                                    <sys:String>Đã nghỉ</sys:String>
-                                </x:Array>
-                            </ComboBox.ItemsSource>
-                        </ComboBox>
+                        </TextBox>
                     </Grid>
 
-                    <!-- Xuất excel-->
-                    <Grid Grid.Column="1">
-
-                    </Grid>
-                </Grid>
-
-                <!-- List nhân viên thư viện-->
-                <Grid Grid.Row="2">
-                    <ScrollViewer ScrollViewer.CanContentScroll="True"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                        <ListView ItemsSource="{Binding ListLibrarian, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
-                                      VerticalAlignment="Stretch" 
-                                      HorizontalAlignment="Stretch"
-                                      Foreground="Black"
-                                      SelectedItem="{Binding LibrarianSelected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-
-                            <!--<ListView.Template>
-                                <ControlTemplate>
-                                     -->
-                            <!--Empty template to allow ScrollViewer to capture mouse scroll-->
-                            <!-- 
-                                    <ItemsPresenter />
-                                </ControlTemplate>
-                            </ListView.Template>-->
-
-                            <ListView.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="Email" Command="{Binding EmailToCommand}"/>
-                                    <MenuItem Header="Thôi việc" Command="{Binding StatusChangeCommand}" CommandParameter="True"/>
-                                    <MenuItem Header="Làm lại" Command="{Binding StatusChangeCommand}" CommandParameter="False"/>
-                                </ContextMenu>
-                            </ListView.ContextMenu>
-
+                    <!-- List CHUYÊN MỤC SÁCH-->
+                    <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                        <ListView Margin="20" ItemsSource="{Binding ListAuthor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Foreground="Black"
+                                  SelectedItem="{Binding AuthorSelected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
-                                    <i:InvokeCommandAction Command="{Binding LibrarianSelectedChanged}" CommandParameter="{Binding ElementName=pageLibrarianManager}"/>
+                                    <i:InvokeCommandAction Command="{Binding AuthorSelectedChanged}" CommandParameter="{Binding ElementName=pageAuthorManager}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
-
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Header="Mã">
+                                    <GridViewColumn Header="Mã tác giả">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Foreground="Black" Text="{Binding Id}"></TextBlock>
+                                                <TextBlock Foreground="Black" Text="{Binding AuthorId}"></TextBlock>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
 
-                                    <GridViewColumn Header="Họ">
+                                    <GridViewColumn Header="Tên tác giả">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Foreground="Black" Text="{Binding LastName}"></TextBlock>
+                                                <TextBlock Foreground="Black" Text="{Binding NickName}"></TextBlock>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
 
-                                    <GridViewColumn Header="Tên">
+                                    <GridViewColumn Header="Số lượng sách">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Foreground="Black" Text="{Binding FirstName}"></TextBlock>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-
-                                    <GridViewColumn Header="Giới tính">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Foreground="Black" Text="{Binding Sex}"></TextBlock>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-
-                                    <GridViewColumn Header="Ngày sinh">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Foreground="Black" Text="{Binding Birthday, StringFormat='dd/MM/yyyy'}"></TextBlock>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-
-                                    <GridViewColumn Header="CCCD">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Foreground="Black" Text="{Binding SSN}"></TextBlock>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-
-                                    <GridViewColumn Header="Địa chỉ">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Foreground="Black" Text="{Binding Address}"></TextBlock>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-
-                                    <GridViewColumn Header="Email">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Foreground="Blue" Text="{Binding Email}" TextDecorations="Underline" Cursor="Hand"></TextBlock>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-
-                                    <GridViewColumn Header="Điện thoại">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Foreground="Black" Text="{Binding PhoneNumber}"></TextBlock>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-
-                                    <GridViewColumn Header="Ngày tham gia">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Foreground="Black" Text="{Binding StartDate, StringFormat='dd/MM/yyyy'}"></TextBlock>
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-
-                                    <GridViewColumn Header="Mức lương">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBlock Foreground="Black" Text="{Binding Salary}"></TextBlock>
+                                                <TextBlock Foreground="Black" Text="{Binding NumberOfBook}"></TextBlock>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -208,160 +112,120 @@
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
+
                                 </GridView>
                             </ListView.View>
                         </ListView>
                     </ScrollViewer>
-                </Grid>
 
-                <Grid Grid.Row="3">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-
-                    <!---Button Thêm nhân viên mới-->
-                    <Button Grid.Column="2" ToolTip="Thêm nhân viên mới" Command="{Binding AddLibrarianCommand}" Margin="10">
-
-                        <DockPanel LastChildFill="True" Margin="0" HorizontalAlignment="Right">
-                            <materialDesign:PackIcon Kind="AccountAdd" Grid.Column="0"/>
-                            <TextBlock Text="THÊM" HorizontalAlignment="Stretch" VerticalAlignment="Center"></TextBlock>
-                        </DockPanel>
-                    </Button>
-
-                    <Button Grid.Column="1" Command="{Binding ExportToExcelCommand}" Margin="10"
-                        ToolTip="Xuất danh sách nhân viên thư viện ra file Excel">
-                        <DockPanel LastChildFill="True" Margin="0" HorizontalAlignment="Stretch">
-                            <materialDesign:PackIcon Kind="FileExcel" Grid.Column="0"/>
-                            <TextBlock Text="XUẤT FILE EXCEL" HorizontalAlignment="Stretch" VerticalAlignment="Center"></TextBlock>
-                        </DockPanel>
-                    </Button>
-                </Grid>
-            </Grid>
-        </materialDesign:Card>
-
-        <materialDesign:Card Grid.Column="1" Style="{StaticResource MaterialDesignPageCard}" Margin="2.5 5 5 5">
-            <Grid >
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition />
-                    <RowDefinition Height="70"/>
-                </Grid.RowDefinitions>
-
-                <!---Tiêu đề "THÔNG TIN NHÂN VIÊN"-->
-                <TextBlock Grid.Row="0" Text="THÔNG TIN NHÂN VIÊN" Style="{StaticResource TitleTextBlock}"/>
-
-                <!---Thông tin nhân viên-->
-                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
-                    <StackPanel>
-                        <StackPanel.Resources>
-                            <Style TargetType="TextBox" BasedOn="{StaticResource MyTextBox}"/>
-                            <Style TargetType="TextBlock" BasedOn="{StaticResource WarningTextBlock}"/>
-                        </StackPanel.Resources>
-                        <!---Mã nhân viên-->
-                        <TextBox Grid.Column="0" materialDesign:HintAssist.Hint="Mã" x:Name="tbxId" IsReadOnly="True"
-                                 Text="{Binding LibrarianSelected.Id, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-
-                        <!---Họ-->
-                        <TextBox materialDesign:HintAssist.Hint="Họ và tên đệm" x:Name="tbxLastName"
-                                 Text="{Binding LibrarianSelected.LastName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                        <TextBlock Text="Họ không được để trống" x:Name="tblLastNameWarning"/>
-
-                        <!---Tên-->
-                        <TextBox materialDesign:HintAssist.Hint="Tên" x:Name="tbxFirstName"
-                                         Text="{Binding LibrarianSelected.FirstName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                        <TextBlock Text="Tên không được để trống" x:Name="tblFirstNameWarning"/>
-
-                        <!---Giới tính và ngày sinh-->
-                        <Grid>
+                    <Grid Grid.Row="3">
+                        <Grid Grid.Row="3">
                             <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
                                 <ColumnDefinition/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <!---Giới tính-->
-                            <StackPanel Grid.Column="0">
-                                <ComboBox materialDesign:HintAssist.Hint="Giới tính" x:Name="cmbSex" Style="{StaticResource MyComboBox}" Margin="20 0 5 0"
-                                          SelectedItem="{Binding LibrarianSelected.Sex, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}">
-                                    <ComboBox.ItemsSource>
-                                        <x:Array Type="sys:String">
-                                            <sys:String>Nam</sys:String>
-                                            <sys:String>Nữ</sys:String>
-                                            <sys:String>Khác</sys:String>
-                                        </x:Array>
-                                    </ComboBox.ItemsSource>
-                                </ComboBox>
-                                <TextBlock Text="Chọn giới tính" x:Name="tblSexWarning"/>
-                            </StackPanel>
+                            <!---Button Thêm nhân viên mới-->
+                            <Button Grid.Column="2" Margin="10" ToolTip="Thêm nhân viên mới" Command="{Binding AddCommand}" CommandParameter="{Binding ElementName=pageAuthorManager}">
+                                <DockPanel LastChildFill="True" Margin="0" HorizontalAlignment="Right">
+                                    <materialDesign:PackIcon Kind="FountainPenTip" Grid.Column="0" Margin="-20 0 10 0"/>
+                                    <TextBlock Text="THÊM TÁC GIẢ MỚI" HorizontalAlignment="Stretch" VerticalAlignment="Center"></TextBlock>
+                                </DockPanel>
+                            </Button>
 
-                            <!---Ngày sinh-->
-                            <StackPanel Grid.Column="1">
-                                <DatePicker materialDesign:HintAssist.Hint="Ngày sinh" x:Name="dtpkBirthday" Style="{StaticResource MyDatePicker}" Margin="5 0 20 0"
-                                        SelectedDate="{Binding LibrarianSelected.Birthday, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                                <TextBlock Text="Chọn ngày sinh" x:Name="tblBirthdayWarning"/>
-                            </StackPanel>
+                            <Button Grid.Column="1" Command="{Binding ExportToExcelCommand}" Margin="10"
+                                    ToolTip="Xuất danh sách nhân viên thư viện ra file Excel">
+                                <DockPanel LastChildFill="True" Margin="0" HorizontalAlignment="Stretch">
+                                    <materialDesign:PackIcon Kind="FileExcel" Grid.Column="0"/>
+                                    <TextBlock Text="XUẤT FILE EXCEL" HorizontalAlignment="Stretch" VerticalAlignment="Center"></TextBlock>
+                                </DockPanel>
+                            </Button>
                         </Grid>
-
-                        <!--Căn cước công dân-->
-                        <TextBox materialDesign:HintAssist.Hint="Căn cước công dân" x:Name="tbxSSN"
-                                 Text="{Binding LibrarianSelected.SSN, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                        <TextBlock Text="Căn cước công dân sai định dạng" x:Name="tblSSNWarning"/>
-
-                        <!---Địa chỉ-->
-                        <TextBox materialDesign:HintAssist.Hint="Địa chỉ" x:Name="tbxAddress"
-                                 Text="{Binding LibrarianSelected.Address, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                        <TextBlock Text="Địa chỉ không được để trống" x:Name="tblAddressWarning"/>
-
-                        <!---Email-->
-                        <TextBox materialDesign:HintAssist.Hint="Email" x:Name="tbxEmail"
-                                 Text="{Binding LibrarianSelected.Email, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                        <TextBlock Text="Email sai định dạng" x:Name="tblEmailWarning"/>
-
-                        <!---Số điện thoại-->
-                        <TextBox materialDesign:HintAssist.Hint="Điện thoại" x:Name="tbxPhone"
-                                 Text="{Binding LibrarianSelected.PhoneNumber, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                        <TextBlock Text="Số điện thoại sai định dạng" x:Name="tblPhoneWarning"/>
-
-                        <!--Mức lương-->
-                        <TextBox materialDesign:HintAssist.Hint="Mức lương" x:Name="tbxSalary"
-                                 Text="{Binding LibrarianSelected.Salary, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                        <TextBlock Text="Mức lương sai dịnh dạng" x:Name="tblSalaryWarning"/>
-
-
-                        <!---Ngày tham gia-->
-                        <DatePicker materialDesign:HintAssist.Hint="Ngày bắt đầu làm việc" x:Name="dtpkStartDate" Style="{StaticResource MyDatePicker}"
-                                    SelectedDate="{Binding LibrarianSelected.StartDate, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                        <TextBlock Text="Chọn ngày tham gia" x:Name="tblStartDateWarning"/>
-                    </StackPanel>
-                </ScrollViewer>
-
-                <!--Button-->
-                <Grid Grid.Row="2" Margin="5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-
-                    <!---Button Cập nhật-->
-                    <Button Grid.Column="0" ToolTip="Cập nhật"
-                            Command="{Binding UpdateCommand}" CommandParameter="{Binding ElementName=pageLibrarianManager}">
-                        <DockPanel LastChildFill="True" Margin="0" HorizontalAlignment="Stretch">
-                            <materialDesign:PackIcon Kind="AccountEdit" HorizontalAlignment="Center"/>
-                            <TextBlock Text="CẬP NHẬT" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                        </DockPanel>
-                    </Button>
-
-                    <!---Button Thôi viêc-->
-                    <Button Grid.Column="1" ToolTip="Thôi việc" x:Name="btnBlock"
-                            Command="{Binding StatusChangeCommand}">
-                        <DockPanel LastChildFill="True" Margin="0" HorizontalAlignment="Stretch">
-                            <materialDesign:PackIcon Kind="AccountMinus" x:Name="icoBlock" HorizontalAlignment="Center"/>
-                            <TextBlock Text="THÔI VIỆC" x:Name="tblBlock" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                        </DockPanel>
-                    </Button>
+                    </Grid>
                 </Grid>
-            </Grid>
-        </materialDesign:Card>
+            </materialDesign:Card>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <materialDesign:Card Style="{StaticResource MaterialDesignPageCard}" Margin="2.5 5 5 5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="140"/>
+                    </Grid.RowDefinitions>
+
+                    <!---Tiêu đề "THÔNG TIN TG"-->
+                    <TextBlock Grid.Row="0" Text="THÔNG TIN TÁC GIẢ" Style="{StaticResource TitleTextBlock}">
+                    </TextBlock>
+
+                    <!---Thông tin TG-->
+                    <ScrollViewer Grid.Row="1" VerticalAlignment="Center" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+                        <StackPanel>
+                            <StackPanel.Resources>
+                                <Style TargetType="TextBox" BasedOn="{StaticResource MyTextBox}">
+                                    <Setter Property="Margin" Value="20 20" />
+                                    <Setter Property="FontSize" Value="18" />
+                                </Style>
+                                <Style TargetType="TextBlock" BasedOn="{StaticResource WarningTextBlock}">
+                                </Style>
+                            </StackPanel.Resources>
+
+                            <!---Mã CHUYÊN MỤC-->
+                            <TextBox materialDesign:HintAssist.Hint="Mã tác giả" IsReadOnly="True"
+                                     Text="{Binding AuthorSelected.AuthorId, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+
+                            <!---TÊn tác giả-->
+                            <TextBox materialDesign:HintAssist.Hint="Tên tác giả" x:Name="tbxNickName" MaxLength="40"
+                                     Text="{Binding AuthorSelected.NickName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                            <TextBlock Text="Tên chuyên mục không được để trống" x:Name="tblNickNameWarning"/>
+
+                            <!---Số lượng sách-->
+                            <TextBox materialDesign:HintAssist.Hint="Số lượng sách" IsReadOnly="True"
+                                     Text="{Binding AuthorSelected.NumberOfBook, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+
+                            <Expander Header="Các sách đã viết">
+                               <ListView Margin="30 0 20 0" ItemsSource="{Binding AuthorSelected.ListBook, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                          VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Foreground="Black">
+                                </ListView>
+                            </Expander>
+
+                        </StackPanel>
+                    </ScrollViewer>
+
+                    <!--Button-->
+                    <Grid Grid.Row="2" Margin="5">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <!---Button Cập nhật-->
+                        <Button Grid.ColumnSpan="2" Grid.Row="0" ToolTip="Cập nhật" Content="CẬP NHẬT"
+                                Command="{Binding UpdateCommand}" CommandParameter="{Binding ElementName=pageAuthorManager}">
+                        </Button>
+
+                        <!---Button Xóa-->
+                        <Button Grid.Column="0" Grid.Row="1" ToolTip="Ẩn chuyên mục" x:Name="btnStatusChange" Content="ẨN"
+                                Command="{Binding StatusChangeCommand}">
+                        </Button>
+
+                        <!---Button Xóa vĩnh viễn-->
+                        <Button Grid.Column="1" Grid.Row="1" ToolTip="Xóa vĩnh viễn" Content="XÓA"
+                                Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=pageAuthorManager}">
+                        </Button>
+                    </Grid>
+
+                </Grid>
+            </materialDesign:Card>
+        </Grid>
+
+        <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="mySnackbar" />
     </Grid>
 </UserControl>
+

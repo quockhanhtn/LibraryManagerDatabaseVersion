@@ -1,6 +1,8 @@
 ﻿using Dragablz;
+using LibraryManager.EntityFramework.Model;
 using LibraryManager.EntityFramework.Model.DataAccessLayer;
 using LibraryManager.Utility;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -15,7 +17,7 @@ namespace LibraryManager.EntityFramework.ViewModel
 
         public LoginWindowViewModel()
         {
-            TabControlChanged = new RelayCommand<Window>((p) => { return p == null ? false : true; }, (p) =>
+            TabControlChanged = new RelayCommand<Window>((p) => { return p != null; }, (p) =>
             {
                 var tabControl = p.FindName("tabControl") as TabablzControl;
                 var gridSignUp = p.FindName("gridSignUp") as Grid;
@@ -33,12 +35,12 @@ namespace LibraryManager.EntityFramework.ViewModel
                 }
             });
 
-            LoginCommand = new RelayCommand<Window>((p) => { return p == null ? false : true; }, (p) =>
+            LoginCommand = new RelayCommand<Window>((p) => { return p != null; }, (p) =>
             {
                 var tbxUsername = p.FindName("tbxUsername") as TextBox;
                 var tbxPassWord = p.FindName("tbxPassWord") as PasswordBox;
 
-                var (loginResult, idPerson) = AccountDAL.Instance.Login(tbxUsername.Text, tbxPassWord.Password);
+                var (loginResult, idPerson) = (0,"");//AccountDAL.Instance.Login(tbxUsername.Text, tbxPassWord.Password);
 
                 if (loginResult == -1)
                 {
