@@ -92,6 +92,11 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
             //DataProvider.Instance.Database.Entry(librarianUpdate).State = EntityState.Detached;
         }
 
+        public Librarian GetLibrarian(string idLibrarian)
+        {
+            return DataProvider.Instance.Database.Librarians.Where(x => x.Id == idLibrarian).SingleOrDefault();
+        }
+
         private static LibrarianDAL instance;
     }
 }

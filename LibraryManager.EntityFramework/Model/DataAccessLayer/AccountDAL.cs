@@ -17,19 +17,20 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
         /// </summary>
         /// <param name="username"></param>
         /// <param name="password"></param>
-        /// <returns>-1 = login fail, 0 = admin, 1 = librarian, 2 = member</returns>
-        public int Login(string username, string password)
+        /// <returns>(-1,"") = login fail, (accountType, "PersonId") = login success</returns>
+        public (int, string) Login(string username, string password)
         {
-            if (username == "" || password == "") { return -1; }
+            if (username == "" || password == "") { return (-1, ""); }
 
             username = username.Trim();
             password = password.Trim();
             string passwordEncode = Utility.PasswordEncoder.Base64ThenMD5(password);
 
             var account = DataProvider.Instance.Database.Accounts.Where(a => a.Username == username && a.Password == passwordEncode).Count();
-            if (account <= 0) { return -1; }
+            if (account <= 0) { return (-1,""); }
 
-            return DataProvider.Instance.Database.Accounts.ToList().Find(a => a.Username == username).AccountType;
+            return (DataProvider.Instance.Database.Accounts.ToList().Find(a => a.Username == username).AccountType,
+                DataProvider.Instance.Database.Accounts.ToList().Find(a => a.Username == username).PersonId);
         }
         private static AccountDAL instance;
     }

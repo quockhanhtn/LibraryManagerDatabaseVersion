@@ -91,6 +91,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="LibrarianWindow.xaml.cs">
+      <DependentUpon>LibrarianWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model\Account.cs">
       <DependentUpon>LibraryManager.tt</DependentUpon>
     </Compile>
@@ -192,6 +195,7 @@
     <Compile Include="ViewModel\AddWindow\AddBookCategoryWindowVM.cs" />
     <Compile Include="ViewModel\AddWindow\AddMemberWindowVM.cs" />
     <Compile Include="ViewModel\AddWindow\AddPublisherWindowVM.cs" />
+    <Compile Include="ViewModel\LibrarianWindowViewModel.cs" />
     <Compile Include="ViewModel\LoginWindowViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\AddWindow\AddLibrarianWindowVM.cs" />
@@ -202,6 +206,10 @@
     <Compile Include="ViewModel\PageUC\PageLibrarianManagerVM.cs" />
     <Compile Include="ViewModel\PageUC\PageMemberManagerVM.cs" />
     <Compile Include="ViewModel\PageUC\PagePublisherManagerVM.cs" />
+    <Page Include="LibrarianWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -38,7 +38,7 @@ namespace LibraryManager.EntityFramework.ViewModel
                 var tbxUsername = p.FindName("tbxUsername") as TextBox;
                 var tbxPassWord = p.FindName("tbxPassWord") as PasswordBox;
 
-                var loginResult = 0;// DALAccount.Instance.Login(tbxUsername.Text, tbxPassWord.Password);
+                var (loginResult, idPerson) = AccountDAL.Instance.Login(tbxUsername.Text, tbxPassWord.Password);
 
                 if (loginResult == -1)
                 {
@@ -56,7 +56,8 @@ namespace LibraryManager.EntityFramework.ViewModel
                     }
                     else if (loginResult == 1)
                     {
-                        MessageBox.Show("Librarian");
+                        LibrarianWindow librarianWindow = new LibrarianWindow() { DataContext = new LibrarianWindowViewModel(idPerson) };
+                        librarianWindow.Show();
                     }
                     else if (loginResult == 2)
                     {
