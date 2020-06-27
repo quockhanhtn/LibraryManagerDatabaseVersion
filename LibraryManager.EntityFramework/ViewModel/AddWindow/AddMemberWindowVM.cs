@@ -13,11 +13,11 @@ using System.Windows.Input;
 
 namespace LibraryManager.EntityFramework.ViewModel.AddWindow
 {
-    public class AddLibrarianWindowVM : BaseViewModel
+    class AddMemberWindowVM : BaseViewModel
     {
         /// <summary>
         /// if (Result == "") -> Not add new librarian
-        /// else Result = new Librarian().FullName
+        /// else Result = new Member().FullName
         /// </summary>
         public string Result
         {
@@ -29,12 +29,12 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
             }
             set => result = value;
         }
-        
+
         public ICommand OKCommand { get; set; }
         public ICommand RetypeCommand { get; set; }
         public ICommand CancelCommand { get; set; }
-        
-        public AddLibrarianWindowVM()
+
+        public AddMemberWindowVM()
         {
             OKCommand = new RelayCommand<Window>((p) => { return !(p == null); }, (p) =>
             {
@@ -46,7 +46,6 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
                 var tbxAddress = p.FindName("tbxAddress") as TextBox;
                 var tbxEmail = p.FindName("tbxEmail") as TextBox;
                 var tbxPhone = p.FindName("tbxPhone") as TextBox;
-                var tbxSalary = p.FindName("tbxSalary") as TextBox;
 
                 var tblLastNameWarning = p.FindName("tblLastNameWarning") as TextBlock;
                 var tblFirstNameWarning = p.FindName("tblFirstNameWarning") as TextBlock;
@@ -56,7 +55,6 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
                 var tblAddressWarning = p.FindName("tblAddressWarning") as TextBlock;
                 var tblEmailWarning = p.FindName("tblEmailWarning") as TextBlock;
                 var tblPhoneWarning = p.FindName("tblPhoneWarning") as TextBlock;
-                var tblSalaryWarning = p.FindName("tblSalaryWarning") as TextBlock;
 
                 if (tbxLastName.Text == "")
                 {
@@ -122,16 +120,7 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
                 }
                 else { tblPhoneWarning.Visibility = Visibility.Hidden; }
 
-                if (StringHelper.ToDecimal(tbxSalary.Text) == 0)
-                {
-                    tblSalaryWarning.Visibility = Visibility.Visible;
-                    tbxSalary.Focus();
-                    return;
-                }
-                else { tblSalaryWarning.Visibility = Visibility.Hidden; }
-
-
-                var newLibrarian = new LibrarianDTO()
+                var newMember = new MemberDTO()
                 {
                     Id = "",
                     LastName = StringHelper.CapitalizeEachWord(tbxLastName.Text),
@@ -142,13 +131,12 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
                     Address = tbxAddress.Text,
                     Email = tbxEmail.Text,
                     PhoneNumber = tbxPhone.Text,
-                    Salary = StringHelper.ToDecimal(tbxSalary.Text),
-                    StartDate = DateTime.Now,
+                    RegisterDate = DateTime.Now,
                     Status = true
                 };
 
-                LibrarianDAL.Instance.Add(newLibrarian);
-                Result = newLibrarian.FullName;
+                MemberDAL.Instance.Add(newMember);
+                Result = newMember.FullName;
                 p.Close();
             });
 

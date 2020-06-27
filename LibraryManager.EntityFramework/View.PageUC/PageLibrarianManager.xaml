@@ -41,11 +41,7 @@
                 </Grid.RowDefinitions>
 
                 <!-- DANH SÁCH NHÂN VIÊN-->
-                <Grid Grid.Row="0">
-                    <Grid Grid.Row="0">
-                        <TextBlock Text="DANH SÁCH NHÂN VIÊN" Style="{StaticResource TitleTextBlock}" />
-                    </Grid>
-                </Grid>
+                <TextBlock Grid.Row="0" Text="DANH SÁCH NHÂN VIÊN" Style="{StaticResource TitleTextBlock}" />
 
                 <!-- Search -->
                 <Grid Grid.Row="1">
@@ -223,9 +219,9 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    
+
                     <!---Button Thêm nhân viên mới-->
-                    <Button Grid.Column="2" Margin="10" ToolTip="Thêm nhân viên mới" Command="{Binding AddLibrarianCommand}" CommandParameter="{Binding ElementName=pageLibrarianManager}">
+                    <Button Grid.Column="2" Margin="10" ToolTip="Thêm nhân viên mới" Command="{Binding AddCommand}" CommandParameter="{Binding ElementName=pageLibrarianManager}">
 
                         <DockPanel LastChildFill="True" Margin="0" HorizontalAlignment="Right">
                             <materialDesign:PackIcon Kind="AccountAdd" Grid.Column="0"/>
@@ -267,13 +263,13 @@
                                  Text="{Binding LibrarianSelected.Id, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
 
                         <!---Họ-->
-                        <TextBox materialDesign:HintAssist.Hint="Họ và tên đệm" x:Name="tbxLastName"
+                        <TextBox materialDesign:HintAssist.Hint="Họ và tên đệm" x:Name="tbxLastName" MaxLength="20"
                                  Text="{Binding LibrarianSelected.LastName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                         <TextBlock Text="Họ không được để trống" x:Name="tblLastNameWarning"/>
 
                         <!---Tên-->
-                        <TextBox materialDesign:HintAssist.Hint="Tên" x:Name="tbxFirstName"
-                                         Text="{Binding LibrarianSelected.FirstName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                        <TextBox materialDesign:HintAssist.Hint="Tên" x:Name="tbxFirstName" MaxLength="10"
+                                 Text="{Binding LibrarianSelected.FirstName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                         <TextBlock Text="Tên không được để trống" x:Name="tblFirstNameWarning"/>
 
                         <!---Giới tính và ngày sinh-->
@@ -307,27 +303,27 @@
                         </Grid>
 
                         <!--Căn cước công dân-->
-                        <TextBox materialDesign:HintAssist.Hint="Căn cước công dân" x:Name="tbxSSN"
+                        <TextBox materialDesign:HintAssist.Hint="Căn cước công dân" x:Name="tbxSSN" MaxLength="12"
                                  Text="{Binding LibrarianSelected.SSN, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                         <TextBlock Text="Căn cước công dân sai định dạng" x:Name="tblSSNWarning"/>
 
                         <!---Địa chỉ-->
-                        <TextBox materialDesign:HintAssist.Hint="Địa chỉ" x:Name="tbxAddress"
+                        <TextBox materialDesign:HintAssist.Hint="Địa chỉ" x:Name="tbxAddress" MaxLength="100"
                                  Text="{Binding LibrarianSelected.Address, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                         <TextBlock Text="Địa chỉ không được để trống" x:Name="tblAddressWarning"/>
 
                         <!---Email-->
-                        <TextBox materialDesign:HintAssist.Hint="Email" x:Name="tbxEmail"
+                        <TextBox materialDesign:HintAssist.Hint="Email" x:Name="tbxEmail" MaxLength="30"
                                  Text="{Binding LibrarianSelected.Email, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                         <TextBlock Text="Email sai định dạng" x:Name="tblEmailWarning"/>
 
                         <!---Số điện thoại-->
-                        <TextBox materialDesign:HintAssist.Hint="Điện thoại" x:Name="tbxPhone"
+                        <TextBox materialDesign:HintAssist.Hint="Điện thoại" x:Name="tbxPhone" MaxLength="15"
                                  Text="{Binding LibrarianSelected.PhoneNumber, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                         <TextBlock Text="Số điện thoại sai định dạng" x:Name="tblPhoneWarning"/>
 
                         <!--Mức lương-->
-                        <TextBox materialDesign:HintAssist.Hint="Mức lương" x:Name="tbxSalary"
+                        <TextBox materialDesign:HintAssist.Hint="Mức lương" x:Name="tbxSalary" MaxLength="12"
                                  Text="{Binding LibrarianSelected.Salary, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                         <TextBlock Text="Mức lương sai dịnh dạng" x:Name="tblSalaryWarning"/>
 
@@ -347,21 +343,21 @@
                     </Grid.ColumnDefinitions>
 
                     <!---Button Cập nhật-->
-                    <Button Grid.Column="0" ToolTip="Cập nhật"
+                    <Button Grid.Column="0" ToolTip="Cập nhật" Content="CẬP NHẬT"
                             Command="{Binding UpdateCommand}" CommandParameter="{Binding ElementName=pageLibrarianManager}">
-                        <DockPanel LastChildFill="True" Margin="0" HorizontalAlignment="Stretch">
+                        <!--<DockPanel LastChildFill="True" Margin="0" HorizontalAlignment="Stretch">
                             <materialDesign:PackIcon Kind="AccountEdit" HorizontalAlignment="Center"/>
                             <TextBlock Text="CẬP NHẬT" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                        </DockPanel>
+                        </DockPanel>-->
                     </Button>
 
                     <!---Button Thôi viêc-->
-                    <Button Grid.Column="1" ToolTip="Thôi việc" x:Name="btnBlock"
+                    <Button Grid.Column="1" ToolTip="Thôi việc" x:Name="btnStatusChange" Content="THÔI VIỆC"
                             Command="{Binding StatusChangeCommand}">
-                        <DockPanel LastChildFill="True" Margin="0" HorizontalAlignment="Stretch">
-                            <materialDesign:PackIcon Kind="AccountMinus" x:Name="icoBlock" HorizontalAlignment="Center"/>
-                            <TextBlock Text="THÔI VIỆC" x:Name="tblBlock" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                        </DockPanel>
+                        <!--<DockPanel LastChildFill="True" Margin="0" HorizontalAlignment="Stretch">
+                            <materialDesign:PackIcon Kind="AccountMinus" x:Name="icoStatusChange" HorizontalAlignment="Center"/>
+                            <TextBlock Text="THÔI VIỆC" x:Name="tblStatusChange" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        </DockPanel>-->
                     </Button>
                 </Grid>
             </Grid>
@@ -369,5 +365,4 @@
 
         <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="mySnackbar" />
     </Grid>
-    
 </UserControl>

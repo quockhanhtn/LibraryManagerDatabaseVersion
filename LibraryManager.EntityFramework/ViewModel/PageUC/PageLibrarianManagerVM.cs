@@ -28,17 +28,18 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
         public LibrarianDTO LibrarianSelected { get => librarianSelected; set { librarianSelected = value; OnPropertyChanged(); } }
         public ICommand SearchCommand { get; set; }
         public ICommand FilterByStatusCommand { get; set; }
+        public ICommand LibrarianSelectedChanged { get; set; }
         public ICommand ExportToExcelCommand { get; set; }
-        public ICommand AddLibrarianCommand { get; set; }
+        public ICommand AddCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
         public ICommand EmailToCommand { get; set; }
         public ICommand StatusChangeCommand { get; set; }
 
         public PageLibrarianManagerVM()
         {
-            ListLibrarian = LibrarianDAL.Instance.GetListByFillter(true);
+            ReloadList();
 
-            SearchCommand = new RelayCommand<TextBox>((p) => { return !(p == null); }, (p) =>
+            SearchCommand = new RelayCommand<TextBox>((p) => { return p != null; }, (p) =>
             {
                 if (p.Text == "" || p.Text == " ")
                 {
@@ -77,11 +78,32 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 }
                 else if (p.Content.ToString() == "Đang làm")
                 {
-                    ListLibrarian = LibrarianDAL.Instance.GetListByFillter(true);
+                    ListLibrarian = LibrarianDAL.Instance.GetList(true);
                 }
                 else
                 {
-                    ListLibrarian = LibrarianDAL.Instance.GetListByFillter(false);
+                    ListLibrarian = LibrarianDAL.Instance.GetList(false);
+                }
+            });
+
+            LibrarianSelectedChanged = new RelayCommand<UserControl>((p) => { return p != null && LibrarianSelected != null; }, (p) =>
+            {
+                var btnStatusChange = p.FindName("btnStatusChange") as Button;
+                //var tblStatusChange = p.FindName("tblStatusChange") as TextBlock;
+                //var icoStatusChange = p.FindName("icoStatusChange") as PackIcon;
+                if (LibrarianSelected.Status == true)
+                {
+                    //tblStatusChange.Text = "THÔI VIỆC";
+                    //icoStatusChange.Kind = PackIconKind.BlockHelper;
+                    btnStatusChange.Content = "THÔI VIỆC";
+                    btnStatusChange.ToolTip = "Nhân viên " + LibrarianSelected.FullName + " nghỉ việc";
+                }
+                else
+                {
+                    //tblStatusChange.Text = "ĐI LÀM LẠI";
+                    //icoStatusChange.Kind = PackIconKind.Restore;
+                    btnStatusChange.Content = "ĐI LÀM LẠI";
+                    btnStatusChange.ToolTip = "Nhân viên " + LibrarianSelected.FullName + " làm viêc lại";
                 }
             });
 
@@ -120,10 +142,10 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                         ExcelHelper.SetSheetInfo(worksheet, "List Librarian Sheet");
 
                         // set column width
-                        ExcelHelper.SetColumWidth(worksheet, new int[] { 10, 20, 10, 15, 10, 18, 45, 35, 18, 18, 12 });
+                        ExcelHelper.SetColumWidth(worksheet, new int[] { 10, 20, 10, 15, 10, 18, 45, 35, 18, 18, 14, 12 });
 
                         // Tạo danh sách các column header
-                        string[] arrColumnHeader = { "Mã số", "Họ", "Tên", "Ngày sinh", "Giới tính", "CCCD", "Địa chỉ", "Email", "Số điện thoại", "Ngày làm việc", "Ghi chú" };
+                        string[] arrColumnHeader = { "Mã số", "Họ", "Tên", "Ngày sinh", "Giới tính", "CCCD", "Địa chỉ", "Email", "Số điện thoại", "Ngày làm việc", "Mức lương", "Ghi chú" };
 
                         // lấy ra số lượng cột cần dùng dựa vào số lượng header
                         var countColHeader = arrColumnHeader.Count();
@@ -197,6 +219,9 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                             worksheet.Cells[rowIndex, colIndex++].Value = item.StartDate.Value.Date.ToShortDateString();
 
                             ExcelHelper.FormatCellBorder(worksheet, rowIndex, colIndex);
+                            worksheet.Cells[rowIndex, colIndex++].Value = item.Salary;
+
+                            ExcelHelper.FormatCellBorder(worksheet, rowIndex, colIndex);
                             worksheet.Cells[rowIndex, colIndex++].Value = item.Note;
                         }
 
@@ -215,7 +240,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 }
             });
 
-            AddLibrarianCommand = new RelayCommand<UserControl>((p) => { return !(p == null); }, (p) =>
+            AddCommand = new RelayCommand<UserControl>((p) => { return p != null; }, (p) =>
             {
                 var addLibrarianWindow = new AddLibrarianWindow();
                 addLibrarianWindow.ShowDialog();
@@ -225,15 +250,12 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 if (newLibrarianName != "")
                 {
                     mySnackbar.MessageQueue.Enqueue("Thêm nhân viên \"" + newLibrarianName + "\" thành công");
-                    ListLibrarian = LibrarianDAL.Instance.GetList();
+                    ReloadList();
                 }
-                else
-                {
-                    mySnackbar.MessageQueue.Enqueue("Không có nhân viên được thêm");
-                }
+                else { mySnackbar.MessageQueue.Enqueue("Không có thay đổi"); }
             });
 
-            UpdateCommand = new RelayCommand<UserControl>((p) => { return !(p == null); }, (p) =>
+            UpdateCommand = new RelayCommand<UserControl>((p) => { return p != null && LibrarianSelected != null; }, (p) =>
             {
                 var tbxLastName = p.FindName("tbxLastName") as TextBox;
                 var tbxFirstName = p.FindName("tbxFirstName") as TextBox;
@@ -244,6 +266,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 var tbxEmail = p.FindName("tbxEmail") as TextBox;
                 var tbxPhone = p.FindName("tbxPhone") as TextBox;
                 var tbxSalary = p.FindName("tbxSalary") as TextBox;
+                var dtpkStartDate = p.FindName("dtpkStartDate") as DatePicker;
 
                 var tblLastNameWarning = p.FindName("tblLastNameWarning") as TextBlock;
                 var tblFirstNameWarning = p.FindName("tblFirstNameWarning") as TextBlock;
@@ -254,6 +277,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 var tblEmailWarning = p.FindName("tblEmailWarning") as TextBlock;
                 var tblPhoneWarning = p.FindName("tblPhoneWarning") as TextBlock;
                 var tblSalaryWarning = p.FindName("tblSalaryWarning") as TextBlock;
+                var tblStartDateWarning = p.FindName("tblStartDateWarning") as TextBlock;
 
                 if (tbxLastName.Text == "")
                 {
@@ -327,6 +351,14 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 }
                 else { tblSalaryWarning.Visibility = Visibility.Hidden; }
 
+                if (dtpkStartDate.SelectedDate == null)
+                {
+                    tblStartDateWarning.Visibility = Visibility.Visible;
+                    dtpkStartDate.Focus();
+                    return;
+                }
+                else { tblStartDateWarning.Visibility = Visibility.Hidden; }
+
 
                 LibrarianSelected.LastName = StringHelper.CapitalizeEachWord(tbxLastName.Text);
                 LibrarianSelected.FirstName = StringHelper.CapitalizeEachWord(tbxFirstName.Text);
@@ -337,23 +369,26 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 LibrarianSelected.Email = tbxEmail.Text;
                 LibrarianSelected.PhoneNumber = tbxPhone.Text;
                 LibrarianSelected.Salary = StringHelper.ToDecimal(tbxSalary.Text);
+                LibrarianSelected.StartDate = dtpkStartDate.SelectedDate;
 
                 LibrarianDAL.Instance.Update(LibrarianSelected);
-                OnPropertyChanged();
+                var mySnackbar = p.FindName("mySnackbar") as Snackbar;
+                mySnackbar.MessageQueue.Enqueue("Cập nhật thông tin nhân viên \"" + LibrarianSelected.FullName + "\" thành công");
+                ReloadList();
             });
 
-            EmailToCommand = new RelayCommand<object>((p) => { return true; }, (p) => { });
+            EmailToCommand = new RelayCommand<object>((p) => { return LibrarianSelected != null; }, (p) => { });
 
-            StatusChangeCommand = new RelayCommand<string>((p) =>
+            StatusChangeCommand = new RelayCommand<string>((p) => { return LibrarianSelected != null; }, (p) =>
             {
-                bool canExcute = false;
-                if (p == "True" && LibrarianSelected.Status == true) { canExcute = true; }
-                else if (p == "False" && LibrarianSelected.Status == false) { canExcute = true; }
-                return canExcute;
-            }, (p) =>
-            {
-                LibrarianSelected.Status = !LibrarianSelected.Status;
+                LibrarianDAL.Instance.ChangeStatus(LibrarianSelected.Id);
+                ReloadList();
             });
+        }
+
+        private void ReloadList()
+        {
+            ListLibrarian = LibrarianDAL.Instance.GetList(true);
         }
 
         private ObservableCollection<LibrarianDTO> listLibrarian;

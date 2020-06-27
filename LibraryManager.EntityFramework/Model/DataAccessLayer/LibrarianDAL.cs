@@ -10,12 +10,13 @@ using System.Threading.Tasks;
 
 namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 {
-
+    /// <summary>
+    /// Class Data Access Layer for Librarian
+    /// </summary>
     public class LibrarianDAL
     {
         public static LibrarianDAL Instance { get => (instance == null) ? new LibrarianDAL() : instance; }
         private LibrarianDAL() { }
-
         public ObservableCollection<LibrarianDTO> GetList()
         {
             var listRaw = DataProvider.Instance.Database.Librarians.ToList();
@@ -28,7 +29,7 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 
             return listLibrarianDTO;
         }
-        public ObservableCollection<LibrarianDTO> GetListByFillter(bool status)
+        public ObservableCollection<LibrarianDTO> GetList(bool status)
         {
             var listRaw = DataProvider.Instance.Database.Librarians.Where(x => x.Status == status).ToList();
             var listLibrarianDTO = new ObservableCollection<LibrarianDTO>();
@@ -40,7 +41,7 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 
             return listLibrarianDTO;
         }
-
+        
         public void Add(LibrarianDTO newLibrarian)
         {
             var newLib = newLibrarian.GetBaseModel();
@@ -62,7 +63,22 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
                 librarianUpdate.Address = librarian.Address;
                 librarianUpdate.Email = librarian.Email;
                 librarianUpdate.PhoneNumber = librarian.PhoneNumber;
+                librarianUpdate.StartDate = librarian.StartDate;
                 librarianUpdate.Salary = librarian.Salary;
+            }
+
+            DataProvider.Instance.Database.Entry(librarianUpdate).State = EntityState.Modified;
+            DataProvider.Instance.Database.SaveChanges();
+            DataProvider.Instance.Database.Entry(librarianUpdate).State = EntityState.Detached;
+        }
+
+        public void ChangeStatus(string idLibrarian)
+        {
+            var librarianUpdate = DataProvider.Instance.Database.Librarians.Where(x => x.Id == idLibrarian).SingleOrDefault();
+
+            if (librarianUpdate != null)
+            {
+                librarianUpdate.Status = (librarianUpdate.Status == true) ? false : true;
             }
 
             DataProvider.Instance.Database.Entry(librarianUpdate).State = EntityState.Modified;
@@ -72,5 +88,4 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 
         private static LibrarianDAL instance;
     }
-    
 }

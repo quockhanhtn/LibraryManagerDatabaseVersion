@@ -115,6 +115,7 @@
     <Compile Include="Model\DataProvider.cs" />
     <Compile Include="Model\DataTransferObject\BookDTO.cs" />
     <Compile Include="Model\DataTransferObject\LibrarianDTO.cs" />
+    <Compile Include="Model\DataTransferObject\MemberDTO.cs" />
     <Compile Include="Model\FillterInfor.cs" />
     <Compile Include="Model\Librarian.cs">
       <DependentUpon>LibraryManager.tt</DependentUpon>
@@ -149,6 +150,9 @@
     <Compile Include="View.AddWindow\AddLibrarianWindow.xaml.cs">
       <DependentUpon>AddLibrarianWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View.AddWindow\AddMemberWindow.xaml.cs">
+      <DependentUpon>AddMemberWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View.PageUC\PageAccountInfor.xaml.cs">
       <DependentUpon>PageAccountInfor.xaml</DependentUpon>
     </Compile>
@@ -170,6 +174,7 @@
     <Compile Include="View.PageUC\PagePublisherManager.xaml.cs">
       <DependentUpon>PagePublisherManager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\AddWindow\AddMemberWindowVM.cs" />
     <Compile Include="ViewModel\LoginWindowViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\AddWindow\AddLibrarianWindowVM.cs" />
@@ -204,6 +209,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View.AddWindow\AddLibrarianWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View.AddWindow\AddMemberWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

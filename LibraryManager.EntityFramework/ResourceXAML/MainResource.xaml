@@ -9,8 +9,10 @@
     <viewmodel:MainWindowViewModel x:Key="MainWindowVM"/>
     
     <viewmodel_pageuc:PageLibrarianManagerVM x:Key="PageLibrarianManagerVM"/>
+    <viewmodel_pageuc:PageMemberManagerVM x:Key="PageMemberManagerVM"/>
     <viewmodel_pageuc:PageAuthorManagerVM x:Key="PageAuthorManagerVM"/>
 
     <viewmodel_addwindow:AddLibrarianWindowVM x:Key="AddLibrarianWindowVM"/>
-    
+    <viewmodel_addwindow:AddMemberWindowVM x:Key="AddMemberWindowVM"/>
+
 </ResourceDictionary>
