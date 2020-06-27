@@ -69,6 +69,14 @@ namespace LibraryManager.Utility
             decimal.TryParse(str, out result);
             return result;
         }
+
+        public static int ToInt(string str)
+        {
+            int result = 0;
+            int.TryParse(str, out result);
+            return result;
+        }
+
         public static int StringToInt(string str)
         {
             int intNumber;

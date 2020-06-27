@@ -36,5 +36,6 @@ namespace LibraryManager.EntityFramework.Model
         public virtual DbSet<PayFineInfo> PayFineInfoes { get; set; }
         public virtual DbSet<Publisher> Publishers { get; set; }
         public virtual DbSet<ReturnBook> ReturnBooks { get; set; }
+        public virtual DbSet<BookCategoryView> BookCategoryViews { get; set; }
     }
 }

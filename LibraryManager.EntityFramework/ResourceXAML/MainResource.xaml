@@ -7,11 +7,13 @@
     
     <viewmodel:LoginWindowViewModel x:Key="LoginWindowVM"/>
     <viewmodel:MainWindowViewModel x:Key="MainWindowVM"/>
-    
+
+    <viewmodel_pageuc:PageBookCategoryManagerVM x:Key="PageBookCategoryManagerVM"/>
     <viewmodel_pageuc:PageLibrarianManagerVM x:Key="PageLibrarianManagerVM"/>
     <viewmodel_pageuc:PageMemberManagerVM x:Key="PageMemberManagerVM"/>
     <viewmodel_pageuc:PageAuthorManagerVM x:Key="PageAuthorManagerVM"/>
 
+    <viewmodel_addwindow:AddBookCategoryWindowVM x:Key="AddBookCategoryWindowVM"/>
     <viewmodel_addwindow:AddLibrarianWindowVM x:Key="AddLibrarianWindowVM"/>
     <viewmodel_addwindow:AddMemberWindowVM x:Key="AddMemberWindowVM"/>
 

@@ -37,9 +37,7 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
         public void Add(MemberDTO newMember)
         {
             var newMem = newMember.GetBaseModel();
-            DataProvider.Instance.Database.Entry(newMem).State = EntityState.Added;
-            DataProvider.Instance.Database.SaveChanges();
-            DataProvider.Instance.Database.Entry(newMem).State = EntityState.Detached;
+            DataProvider.Instance.SaveEntity(newMem, EntityState.Added);
         }
 
         public void Update(MemberDTO member)
@@ -59,9 +57,7 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
                 memberUpdate.RegisterDate = member.RegisterDate;
             }
 
-            DataProvider.Instance.Database.Entry(memberUpdate).State = EntityState.Modified;
-            DataProvider.Instance.Database.SaveChanges();
-            DataProvider.Instance.Database.Entry(memberUpdate).State = EntityState.Detached;
+            DataProvider.Instance.SaveEntity(memberUpdate, EntityState.Modified);
         }
 
         public void ChangeStatus(string idMember)
@@ -72,10 +68,7 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
             {
                 memberUpdate.Status = (memberUpdate.Status == true) ? false : true;
             }
-
-            DataProvider.Instance.Database.Entry(memberUpdate).State = EntityState.Modified;
-            DataProvider.Instance.Database.SaveChanges();
-            DataProvider.Instance.Database.Entry(memberUpdate).State = EntityState.Detached;
+            DataProvider.Instance.SaveEntity(memberUpdate, EntityState.Modified);
         }
 
         private static MemberDAL instance;

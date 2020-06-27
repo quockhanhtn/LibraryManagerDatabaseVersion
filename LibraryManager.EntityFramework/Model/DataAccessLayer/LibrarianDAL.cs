@@ -45,9 +45,11 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
         public void Add(LibrarianDTO newLibrarian)
         {
             var newLib = newLibrarian.GetBaseModel();
-            DataProvider.Instance.Database.Entry(newLib).State = EntityState.Added;
-            DataProvider.Instance.Database.SaveChanges();
-            DataProvider.Instance.Database.Entry(newLib).State = EntityState.Detached;
+            DataProvider.Instance.SaveEntity(newLib, EntityState.Added);
+
+            //DataProvider.Instance.Database.Entry(newLib).State = EntityState.Added;
+            //DataProvider.Instance.Database.SaveChanges();
+            //DataProvider.Instance.Database.Entry(newLib).State = EntityState.Detached;
         }
 
         public void Update(LibrarianDTO librarian)
@@ -67,9 +69,11 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
                 librarianUpdate.Salary = librarian.Salary;
             }
 
-            DataProvider.Instance.Database.Entry(librarianUpdate).State = EntityState.Modified;
-            DataProvider.Instance.Database.SaveChanges();
-            DataProvider.Instance.Database.Entry(librarianUpdate).State = EntityState.Detached;
+            DataProvider.Instance.SaveEntity(librarianUpdate, EntityState.Modified);
+
+            //DataProvider.Instance.Database.Entry(librarianUpdate).State = EntityState.Modified;
+            //DataProvider.Instance.Database.SaveChanges();
+            //DataProvider.Instance.Database.Entry(librarianUpdate).State = EntityState.Detached;
         }
 
         public void ChangeStatus(string idLibrarian)
@@ -81,9 +85,11 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
                 librarianUpdate.Status = (librarianUpdate.Status == true) ? false : true;
             }
 
-            DataProvider.Instance.Database.Entry(librarianUpdate).State = EntityState.Modified;
-            DataProvider.Instance.Database.SaveChanges();
-            DataProvider.Instance.Database.Entry(librarianUpdate).State = EntityState.Detached;
+            DataProvider.Instance.SaveEntity(librarianUpdate, EntityState.Modified);
+
+            //DataProvider.Instance.Database.Entry(librarianUpdate).State = EntityState.Modified;
+            //DataProvider.Instance.Database.SaveChanges();
+            //DataProvider.Instance.Database.Entry(librarianUpdate).State = EntityState.Detached;
         }
 
         private static LibrarianDAL instance;

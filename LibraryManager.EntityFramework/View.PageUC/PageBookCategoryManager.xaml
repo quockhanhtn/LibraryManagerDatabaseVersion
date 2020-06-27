@@ -4,16 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:LibraryManager.EntityFramework.View.PageUC"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             mc:Ignorable="d"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:uc="clr-namespace:LibraryManager.MyUserControl;assembly=LibraryManager.MyUserControl" 
              
-             d:DesignHeight="708" d:DesignWidth="1306"
-             x:Name="pageBookCategoryManager" Background="#fafafa">
+             mc:Ignorable="d" x:Name="pageBookCategoryManager" DataContext="{StaticResource PageBookCategoryManagerVM}"
+             d:DesignHeight="734" d:DesignWidth="1300" Background="#fafafa">
     <Grid>
         <Grid.Resources>
             <Style TargetType="Button" BasedOn="{StaticResource DarkBlueButton}">
-                <Setter Property="FontSize" Value="25"/>
+                <Setter Property="FontSize" Value="18"/>
                 <Setter Property="Margin" Value="5 5"/>
             </Style>
 
@@ -27,40 +27,54 @@
         </Grid.Resources>
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="7*"/>
-            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition />
+            <ColumnDefinition Width="300"/>
         </Grid.ColumnDefinitions>
 
-        <!-- List nhân viên thư viện-->
+        <!-- List chuyên mục sách-->
         <Grid Grid.Column="0">
-            <materialDesign:Card Style="{StaticResource MaterialDesignPageCard}" Margin="10 10 5 10">
+            <materialDesign:Card Style="{StaticResource MaterialDesignPageCard}" Margin="5 5 2.5 5">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
                         <RowDefinition/>
+                        <RowDefinition Height="70"/>
                     </Grid.RowDefinitions>
 
                     <!-- CÁC CHUYÊN MỤC SÁCH-->
-                    <Grid Grid.Row="0">
-                        <Grid Grid.Row="0">
-                            <TextBlock Text="CÁC CHUYÊN MỤC SÁCH"
-                                       HorizontalAlignment="Center" VerticalAlignment="Center"
-                                       FontSize="30" FontWeight="DemiBold" Foreground="#001e51"
-                                       Margin="10 30 10 10" />
-                        </Grid>
+                    <TextBlock Grid.Row="0" Text="CÁC CHUYÊN MỤC SÁCH" Style="{StaticResource TitleTextBlock}"/>
+
+                    <Grid Grid.Row=" 1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="auto"/>
+                        </Grid.ColumnDefinitions>
+                        <DockPanel Grid.Column="1" Margin="5 0" LastChildFill="True">
+                            <ToggleButton Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                                          ToolTip="Hiển thị các chuyên mục đã xóa" VerticalAlignment="Bottom"
+                                          IsChecked="{Binding IsShowDeleteCategory, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
+                            <TextBlock Text="Hiển thị các chuyên mục đã ẩn" Foreground="Black" FontWeight="Normal" FontSize="16" Margin="10 0" VerticalAlignment="Bottom"/>
+                        </DockPanel>
+
+                        <TextBox Grid.Column="0" x:Name="tbxSearch" Style="{StaticResource MyTextBox}" Margin="10 0" FontSize="18"
+                             materialDesign:HintAssist.Hint="Tìm kiếm chuyên mục sách" >
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=tbxSearch}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
                     </Grid>
 
                     <!-- List CHUYÊN MỤC SÁCH-->
-                    <Grid Grid.Row="1">
-                        <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                    <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                             <ListView ItemsSource="{Binding ListBookCategory, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
-                                      VerticalAlignment="Stretch" 
-                                      HorizontalAlignment="Stretch"
-                                      Foreground="Black"
+                                      VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Foreground="Black"
                                       SelectedItem="{Binding BookCategorySelected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="SelectionChanged">
-                                        <i:InvokeCommandAction Command="{Binding LibrarianSelectedChanged}" CommandParameter="{Binding ElementName=librarianManagerUC}"/>
+                                    <i:InvokeCommandAction Command="{Binding BookCategorySelectedChanged}" CommandParameter="{Binding ElementName=pageBookCategoryManager}"/>
                                     </i:EventTrigger>
                                 </i:Interaction.Triggers>
                                 <ListView.View>
@@ -84,7 +98,7 @@
                                         <GridViewColumn Header="Số ngày cho mượn">
                                             <GridViewColumn.CellTemplate>
                                                 <DataTemplate>
-                                                    <TextBlock Foreground="Black" Text="{Binding BorrowTime}"></TextBlock>
+                                                    <TextBlock Foreground="Black" Text="{Binding LimitDays}"></TextBlock>
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
@@ -96,111 +110,124 @@
                                                 </DataTemplate>
                                             </GridViewColumn.CellTemplate>
                                         </GridViewColumn>
+                                        
+                                        <GridViewColumn Header="Ghi chú">
+                                            <GridViewColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <TextBlock Foreground="Black" Text="{Binding Note}"></TextBlock>
+                                                </DataTemplate>
+                                            </GridViewColumn.CellTemplate>
+                                        </GridViewColumn>
 
                                     </GridView>
                                 </ListView.View>
                             </ListView>
                         </ScrollViewer>
+
+                    <Grid Grid.Row="3">
+                        <Grid Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <!---Button Thêm nhân viên mới-->
+                            <Button Grid.Column="2" Margin="10" ToolTip="Thêm nhân viên mới" Command="{Binding AddCommand}" CommandParameter="{Binding ElementName=pageBookCategoryManager}">
+
+                                <DockPanel LastChildFill="True" Margin="0" HorizontalAlignment="Right">
+                                    <materialDesign:PackIcon Kind="BookCross" Grid.Column="0"/>
+                                    <TextBlock Text="THÊM" HorizontalAlignment="Stretch" VerticalAlignment="Center"></TextBlock>
+                                </DockPanel>
+                            </Button>
+
+                            <Button Grid.Column="1" Command="{Binding ExportToExcelCommand}" Margin="10"
+                                    ToolTip="Xuất danh sách nhân viên thư viện ra file Excel">
+                                <DockPanel LastChildFill="True" Margin="0" HorizontalAlignment="Stretch">
+                                    <materialDesign:PackIcon Kind="FileExcel" Grid.Column="0"/>
+                                    <TextBlock Text="XUẤT FILE EXCEL" HorizontalAlignment="Stretch" VerticalAlignment="Center"></TextBlock>
+                                </DockPanel>
+                            </Button>
+                        </Grid>
                     </Grid>
                 </Grid>
             </materialDesign:Card>
         </Grid>
 
         <Grid Grid.Column="1">
-            <materialDesign:Card Style="{StaticResource MaterialDesignPageCard}" Margin="5 10 10 10">
+            <materialDesign:Card Style="{StaticResource MaterialDesignPageCard}" Margin="2.5 5 5 5">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition  Height="auto"/>
-                        <RowDefinition />
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="140"/>
                     </Grid.RowDefinitions>
-
+                    
+                    <!---Tiêu đề "THÔNG TIN CHUYÊN MỤC SÁCH"-->
+                    <TextBlock Grid.Row="0" Text="CHUYÊN MỤC SÁCH"  Style="{StaticResource TitleTextBlock}"/>
+                    
                     <!---Thông tin CHUYÊN MỤC-->
-                    <StackPanel Grid.Row="0">
+                    <StackPanel Grid.Row="1" VerticalAlignment="Center">
                         <StackPanel.Resources>
-                            <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignFloatingHintTextBox}">
-                                <Setter Property="VerticalAlignment" Value="Center"/>
-                                <Setter Property="Margin" Value="20 10"/>
-                                <Setter Property="FontSize" Value="18"/>
+                            <Style TargetType="TextBox" BasedOn="{StaticResource MyTextBox}">
+                                <Setter Property="Margin" Value="20 20" />
+                                <Setter Property="FontSize" Value="18" />
                             </Style>
-                            <Style TargetType="TextBlock">
-                                <Setter Property="Visibility" Value="Hidden"/>
-                                <Setter Property="Foreground" Value="Red"/>
-                                <Setter Property="Margin" Value="20 -2" />
+                            <Style TargetType="TextBlock" BasedOn="{StaticResource WarningTextBlock}">
                             </Style>
                         </StackPanel.Resources>
-
-                        <!---Tiêu đề "THÔNG TIN CHUYÊN MỤC SÁCH"-->
-                        <TextBlock Text="CHUYÊN MỤC SÁCH" Visibility="Visible"
-                                       HorizontalAlignment="Center" VerticalAlignment="Center"
-                                       FontSize="30" FontWeight="DemiBold" Foreground="#001e51" 
-                                       Margin="10 30 10 80" />
-
+                        
                         <!---Mã CHUYÊN MỤC-->
                         <TextBox materialDesign:HintAssist.Hint="Mã chuyên mục" IsReadOnly="True"
-                                     Text="{Binding BookCategorySelected.Id, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                 Text="{Binding BookCategorySelected.Id, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
 
                         <!---TÊn chuyên mục-->
-                        <TextBox materialDesign:HintAssist.Hint="Tên chuyên mục" x:Name="tbxName"
-                                     Text="{Binding BookCategorySelected.Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-
+                        <TextBox materialDesign:HintAssist.Hint="Tên chuyên mục" x:Name="tbxName" MaxLength="50"
+                                 Text="{Binding BookCategorySelected.Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                         <TextBlock Text="Tên chuyên mục không được để trống" x:Name="tblNameWarning"/>
 
                         <!---Tên-->
-                        <TextBox materialDesign:HintAssist.Hint="Số ngày cho mượn" x:Name="tbxBorrowTime"
-                                     Text="{Binding BookCategorySelected.BorrowTime, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-
-                        <TextBlock Text="Vui lòng nhập số nguyên dương" x:Name="tblBorrowTimeWarning"/>
+                        <TextBox materialDesign:HintAssist.Hint="Số ngày cho mượn" x:Name="tbxLimitDays" MaxLength="10"
+                                 Text="{Binding BookCategorySelected.LimitDays, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                        <TextBlock Text="Vui lòng nhập số nguyên dương" x:Name="tblLimitDaysWarning"/>
 
                         <!---Số lượng sách-->
-                        <TextBox materialDesign:HintAssist.Hint="Số lượng sách" IsReadOnly="True" Margin="20 10 20 50"
-                                         Text="{Binding BookCategorySelected.NumberOfBook, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                        <TextBox materialDesign:HintAssist.Hint="Số lượng sách" IsReadOnly="True"
+                                 Text="{Binding BookCategorySelected.NumberOfBook, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
 
                     </StackPanel>
 
-                    <!--Button-->                    
-                    <Grid Grid.Row="1">
+                    <!--Button-->
+                    <Grid Grid.Row="2" Margin="5">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
-                            <RowDefinition/>
                         </Grid.RowDefinitions>
-
-                        <!---Button Thêm-->
-                        <Grid Grid.Column="0">
-                            <Button ToolTip="Thêm chuyên mục sách mới" 
-                                    Command="{Binding AddBookCategoryCommand}">
-                                <DockPanel LastChildFill="True">
-                                    <materialDesign:PackIcon Kind="PenAdd" HorizontalAlignment="Left"/>
-                                    <TextBlock Text="THÊM"></TextBlock>
-                                </DockPanel>
-                            </Button>
-                        </Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
 
                         <!---Button Cập nhật-->
-                        <Grid Grid.Row="1">
-                            <Button ToolTip="Cập nhật lại thông tin chuyên mục sách"
-                                    Command="{Binding UpdateBookCategoryCommand}"
-                                    CommandParameter="{Binding ElementName=pageBookCategoryManager}">
-                                <DockPanel LastChildFill="True">
-                                    <materialDesign:PackIcon Kind="Pen" HorizontalAlignment="Left"/>
-                                    <TextBlock Text="CẬP NHẬT"></TextBlock>
-                                </DockPanel>
-                            </Button>
-                        </Grid>
+                        <Button Grid.ColumnSpan="2" Grid.Row="0" ToolTip="Cập nhật" Content="CẬP NHẬT"
+                                Command="{Binding UpdateCommand}" CommandParameter="{Binding ElementName=pageBookCategoryManager}">
+                        </Button>
 
                         <!---Button Xóa-->
-                        <Button Grid.Row="2"
-                                ToolTip="Xóa chuyên mục sách"
-                                Command="{Binding RemoveBookCategoryCommand}">
-                            <DockPanel LastChildFill="True">
-                                <materialDesign:PackIcon Kind="PenRemove" HorizontalAlignment="Left" />
-                                <TextBlock Text="XÓA"></TextBlock>
-                            </DockPanel>
+                        <Button Grid.Column="0" Grid.Row="1" ToolTip="Ẩn chuyên mục" x:Name="btnStatusChange" Content="ẨN"
+                                Command="{Binding StatusChangeCommand}">
+                        </Button>
+                        
+                        <!---Button Xóa vĩnh viễn-->
+                        <Button Grid.Column="1" Grid.Row="1" ToolTip="Xóa vĩnh viễn" Content="XÓA"
+                                Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=pageBookCategoryManager}">
                         </Button>
                     </Grid>
 
                 </Grid>
             </materialDesign:Card>
         </Grid>
+
+        <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="mySnackbar" />
     </Grid>
 </UserControl>
