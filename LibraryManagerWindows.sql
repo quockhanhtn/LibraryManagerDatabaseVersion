@@ -68,7 +68,8 @@ CREATE TABLE dbo.Publisher
 	PhoneNumber VARCHAR(15) NULL,
 	Address NVARCHAR(100) NULL,
 	Email VARCHAR(30) NULL,
-	Website VARCHAR(40) NULL
+	Website VARCHAR(40) NULL,
+	Status BIT DEFAULT 1 NULL,
 )
 GO 
 
@@ -488,45 +489,49 @@ INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublisher, BookCategoryId, Pag
 VALUES ('', N'Đá Cuội Hay Kim Cương - Cùng Dale Carnegie Tiến Tới Thành Công', 8, 2018, 2, 248, '14.5 x 20.5', 73500)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000025', 15)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000025', 20)
+GO
+
+
+--SELECT B.Id, B.Title, BC.Name, P.Name, A.NickName AS [Tác giả], B.Price, B.PageNumber, B.Size
+--FROM dbo.Book AS B, dbo.BookAuthor AS BA, dbo.BookCategory AS BC, dbo.Publisher AS P, dbo.Author AS A
+--WHERE B.PublisherId = P.Id AND B.BookCategoryId = BC.Id AND B.Id = BA.BookId AND A.Id = BA.AuthorId
+
+--SELECT * FROM dbo.Book, dbo.BookItem
+--WHERE Id = BookId
+--SELECT * FROM dbo.Account
+--SELECT * FROM	dbo.Publisher
+--SELECT * FROM dbo.Author
+
+--CREATE VIEW [dbo].[AuthorView] AS
+--SELECT DT1.AuthorId, DT1.NickName, DT2.NumberOfBook, DT1.BookId, DT1.BookTitle FROM
+--	(SELECT A.Id AS [AuthorId], A.NickName, B.Id AS [BookId], B.Title AS [BookTitle] 
+--	 FROM dbo.Author AS A INNER JOIN dbo.BookAuthor AS BA ON BA.AuthorId = A.Id
+--	 INNER JOIN dbo.Book AS B ON B.Id = BA.BookId) AS DT1
+--	INNER JOIN
+--	(SELECT AuthorId, COUNT(BookId) AS [NumberOfBook] FROM dbo.BookAuthor GROUP BY AuthorId) AS DT2
+--	 ON DT2.AuthorId = DT1.AuthorId
+
+
+--SELECT * FROM [AuthorView]
 
 
 
-SELECT B.Id, B.Title, BC.Name, P.Name, A.NickName AS [Tác giả], B.Price, B.PageNumber, B.Size
-FROM dbo.Book AS B, dbo.BookAuthor AS BA, dbo.BookCategory AS BC, dbo.Publisher AS P, dbo.Author AS A
-WHERE B.PublisherId = P.Id AND B.BookCategoryId = BC.Id AND B.Id = BA.BookId AND A.Id = BA.AuthorId
+--SELECT * FROM BookCategoryView
 
-SELECT * FROM dbo.Book, dbo.BookItem
-WHERE Id = BookId
-SELECT * FROM dbo.Account
-SELECT * FROM	dbo.Publisher
-SELECT * FROM dbo.Author
+--SELECT * FROM dbo.BookCategory
 
-ALTER VIEW [dbo].[AuthorView] AS
-SELECT DT1.AuthorId, DT1.NickName, DT2.NumberOfBook, DT1.BookId, DT1.BookTitle FROM
-	(SELECT A.Id AS [AuthorId], A.NickName, B.Id AS [BookId], B.Title AS [BookTitle] 
-	 FROM dbo.Author AS A INNER JOIN dbo.BookAuthor AS BA ON BA.AuthorId = A.Id
-	 INNER JOIN dbo.Book AS B ON B.Id = BA.BookId) AS DT1
-	INNER JOIN
-	(SELECT AuthorId, COUNT(BookId) AS [NumberOfBook] FROM dbo.BookAuthor GROUP BY AuthorId) AS DT2
-	 ON DT2.AuthorId = DT1.AuthorId
+--SELECT * FROM dbo.Publisher
 
-
-SELECT * FROM [AuthorView]
-
-ALTER VIEW BookCategoryView AS
+CREATE VIEW [dbo].[View_BookCategory] AS
 	SELECT BC.Id, BC.Name, BC.LimitDays, COUNT(dbo.Book.Id) AS [NumberOfBook], BC.Status 
-	FROM dbo.BookCategory AS BC FULL OUTER JOIN dbo.Book ON Book.BookCategoryId = BC.Id 
+	FROM dbo.BookCategory AS BC Left JOIN dbo.Book ON Book.BookCategoryId = BC.Id 
 	GROUP BY BC.Id, BC.Name, BC.LimitDays, BC.Status
+GO
 
-SELECT * FROM BookCategoryView
+CREATE VIEW [dbo].[View_Publisher] AS
+	SELECT P.Id, P.Name, P.PhoneNumber, P.Address, P.Email, P.Website, COUNT(dbo.Book.Id) AS [NumberOfBook], P.Status
+	FROM dbo.Publisher AS P Left JOIN dbo.Book ON Book.PublisherId = P.Id
+	GROUP BY P.Id, P.Name, P.PhoneNumber, P.Address, P.Email, P.Website, P.Status
+GO
 
-SELECT * FROM dbo.BookCategory
-
-SELECT * FROM dbo.Publisher
-
-CREATE VIEW PublisherView AS
-	SELECT P.Id, P.Name, P.PhoneNumber, P.Address, P.Email, P.Website, COUNT(dbo.Book.Id) AS [NumberOfBook]
-	FROM dbo.Publisher AS P FULL OUTER JOIN dbo.Book ON Book.PublisherId = P.Id
-	GROUP BY P.Id, P.Name, P.PhoneNumber, P.Address, P.Email, P.Website 
-
-SELECT * FROM PublisherView
+SELECT * FROM dbo.View_Publisher
