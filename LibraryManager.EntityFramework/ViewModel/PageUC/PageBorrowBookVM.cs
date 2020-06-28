@@ -37,7 +37,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
             MemberBorrow = member;
             LibrarianBorrow = librarian;
             ListBook = BookDAL.Instance.GetList();
-            ListBookBorrow = MemberDAL.Instance.GetListBookBorrow(member.Id);
+            ListBookBorrow = BorrowDAL.Instance.GetList(member.Id);
 
             var newBorrowBook = new ObservableCollection<BorrowDTO>();
 
