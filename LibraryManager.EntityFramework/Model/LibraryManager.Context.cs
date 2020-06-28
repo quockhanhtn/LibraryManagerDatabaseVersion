@@ -54,13 +54,15 @@ public partial class LibraryManagerEntities : DbContext
 
     public virtual DbSet<ReturnBook> ReturnBooks { get; set; }
 
+    public virtual DbSet<View_Author> View_Author { get; set; }
+
+    public virtual DbSet<View_AuthorNoBook> View_AuthorNoBook { get; set; }
+
     public virtual DbSet<View_BookCategory> View_BookCategory { get; set; }
 
     public virtual DbSet<View_Publisher> View_Publisher { get; set; }
 
-    public virtual DbSet<View_Author> View_Author { get; set; }
-
-    public virtual DbSet<View_AuthorNoBook> View_AuthorNoBook { get; set; }
+    public virtual DbSet<View_Book> View_Book { get; set; }
 
 }
 

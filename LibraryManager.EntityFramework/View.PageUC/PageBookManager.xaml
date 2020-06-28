@@ -6,10 +6,12 @@
              xmlns:local="clr-namespace:LibraryManager.EntityFramework.View.PageUC"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             mc:Ignorable="d" 
+             xmlns:uc="clr-namespace:LibraryManager.MyUserControl;assembly=LibraryManager.MyUserControl"
              
-             d:DesignHeight="708" d:DesignWidth="1306"
-             x:Name="pageBookManager" Background="#fafafa">
+             DataContext="{StaticResource PageBookManagerVM}"
+             
+             mc:Ignorable="d" x:Name="pageBookManager" Background="#fafafa"
+             d:DesignHeight="734" d:DesignWidth="1300">
 
     <UserControl.Resources>
         <Style TargetType="Button" BasedOn="{StaticResource DarkBlueButton}">
@@ -25,11 +27,11 @@
         <Style TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Center"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="30"/>
+            <Setter Property="FontSize" Value="20"/>
         </Style>
     </UserControl.Resources>
 
-    <materialDesign:Card Style="{StaticResource MaterialDesignPageCard}">
+    <materialDesign:Card Style="{StaticResource MaterialDesignPageCard}" Margin="5">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="auto"/>
@@ -45,167 +47,154 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Button Command="{Binding BorrowBookButtonCommand}"
-                        CommandParameter="{Binding ElementName=pageBookManager}"
-                        ToolTip="Thực hiện cho mượn sách"
-                        Margin="10" Grid.Column="0">
+                <Button Grid.Column="0" ToolTip="Thực hiện cho mượn sách" Margin="10" 
+                        Command="{Binding BorrowBookCommand}" CommandParameter="{Binding ElementName=pageBookManager}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="ArrowLeftBoldCircle" />
                         <TextBlock Text="MƯỢN SÁCH" Margin="20 0"/>
                     </StackPanel>
                 </Button>
 
-                <Button ToolTip="Thực hiện nhận sách"
-                        Command="{Binding ReturnBookButtonCommand}"
-                        CommandParameter="{Binding ElementName=pageBookManager}"
-                        Margin="10" Grid.Column="1">
+                <Button Grid.Column="1" ToolTip="Thực hiện nhận sách" Margin="10"
+                        Command="{Binding ReturnBookCommand}" CommandParameter="{Binding ElementName=pageBookManager}">
                     <StackPanel Orientation="Horizontal">
                         <materialDesign:PackIcon Kind="ArrowRightBoldCircle"  />
                         <TextBlock Text="TRẢ SÁCH" Margin="20 0"/>
                     </StackPanel>
                 </Button>
-
             </Grid>
 
             <!-- Filter List -->
             <Grid Grid.Row="1" Margin="10 20">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="220"/>
+                    <ColumnDefinition Width="220"/>
                 </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-
-                    <materialDesign:PackIcon Kind="BookSearch" Height="36" Width="36" VerticalAlignment="Bottom" Grid.Column="0"/>
-
-                    <TextBox materialDesign:HintAssist.Hint="Tên sách"
-                             x:Name="tbxSearchBook"
-                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             VerticalAlignment="Center"
-                             FontSize="18"
-                             Grid.Column="1">
+                <DockPanel Margin="0 0 10 0" Grid.Column="0" LastChildFill="True">
+                    <materialDesign:PackIcon Kind="BookSearch" Height="36" Width="36" VerticalAlignment="Bottom" Margin="0 0 10 0"/>
+                    <TextBox x:Name="tbxSearch" materialDesign:HintAssist.Hint="Tìm theo tên sách hoặc tên tác giả"
+                             Style="{StaticResource MyTextBox}" FontSize="18" Margin="0" >
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="TextChanged">
-                                <i:InvokeCommandAction Command="{Binding TextboxSearchChangeCommand}" CommandParameter="{Binding ElementName=tbxSearchBook}"></i:InvokeCommandAction>
+                                <i:InvokeCommandAction Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=tbxSearch}"></i:InvokeCommandAction>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </TextBox>
-                </Grid>
-                <Grid Grid.Column="1">
-                    <ComboBox materialDesign:HintAssist.Hint="Loại sách"
-                              x:Name="cbxBookCategory"
-                              MinWidth="72"
-                              Margin="20 0"
-                              VerticalAlignment="Bottom"
-                              DisplayMemberPath="Name"
-                              FontSize="14"
-                              ItemsSource="{Binding ListBookCategory }"
-                              SelectedValue="{Binding BookCategorySelected}">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction Command="{Binding ChangeBookCategorySelectedCommand}" CommandParameter="{Binding ElementName=cbxBookCategory, Path=SelectedValue}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </ComboBox>
-                </Grid>
-                <Grid Grid.Column="2">
-                    <Button Command="{Binding ExportToExcelCommand}"
-                            Content="XUẤT FILE EXCEL"
-                            ToolTip="Xuất danh sách sách trong thư viện ra file Excel"
-                            FontSize="18">
-                    </Button>
-                </Grid>
+                </DockPanel>
+
+                <ComboBox Margin="10 0" Grid.Column="1" x:Name="cmbBookCategory" materialDesign:HintAssist.Hint="Chuyên mục sách"
+                          Style="{StaticResource InfoComboBox}" DisplayMemberPath="Name" FontSize="16" VerticalAlignment="Bottom"
+                          ItemsSource="{Binding ListBookCategory}" SelectedValue="{Binding BookCategorySelected}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding ChangeBookCategoryCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
+
+                <ComboBox Margin="10 0 20 0" Grid.Column="2" x:Name="cmbPublisher" materialDesign:HintAssist.Hint="Nhà xuất bản"
+                          Style="{StaticResource InfoComboBox}" DisplayMemberPath="Name" FontSize="16" VerticalAlignment="Bottom"
+                          ItemsSource="{Binding ListPublisher}" SelectedValue="{Binding PublisherSelected}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding ChangePublisherCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ComboBox>
             </Grid>
 
             <!-- List -->
-            <Grid Grid.Row="2">
-                <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                    <ListView ItemsSource="{Binding ListBookItem, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+            <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <ListView ItemsSource="{Binding ListBook, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                               VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                              SelectedItem="{Binding BookItemSelected, UpdateSourceTrigger=PropertyChanged}">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="Mã" Width="auto">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Foreground="Black" Text="{Binding IdBook}"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
+                              SelectedItem="{Binding BookSelected, UpdateSourceTrigger=PropertyChanged}">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Mã sách" Width="auto">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Foreground="Black" Text="{Binding Id}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
 
-                                <GridViewColumn Header="Tên sách" Width="300">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Foreground="Black" Text="{Binding Book.Name}"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
+                            <GridViewColumn Header="Tựa sách">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Foreground="Black" Text="{Binding Title}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
 
-                                <GridViewColumn Header="Loại" Width="200">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Foreground="Black" Text="{Binding Book.BookCategory}"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
+                            <GridViewColumn Header="Chuyên mục">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Foreground="Black" Text="{Binding BookCategory.Name}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
 
-                                <GridViewColumn Header="Tác giả" Width="150">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Foreground="Black" Text="{Binding Book.Author}"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
+                            <GridViewColumn Header="Nhà xuất bản">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Foreground="Black" Text="{Binding Publisher.Name}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
 
-                                <GridViewColumn Header="Nhà xuất bản" Width="200">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Foreground="Black" Text="{Binding Book.Publisher}"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
+                            <GridViewColumn Header="Năm">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Foreground="Black" Text="{Binding YearPublish}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
 
-                                <GridViewColumn Header="Năm XB" Width="100">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Foreground="Black" Text="{Binding Book.YearPublish}"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
+                            <GridViewColumn Header="Tác giả">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Foreground="Black" Text="{Binding AuthorNames}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
 
-                                <GridViewColumn Header="Giá"  Width="75">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Foreground="Black" Text="{Binding Book.Price}"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
+                            <GridViewColumn Header="Số trang">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Foreground="Black" Text="{Binding PageNumber}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
 
-                                <GridViewColumn Header="Tổng số" Width="80">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Foreground="Black" Text="{Binding Number}"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
+                            <GridViewColumn Header="Kích thước">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Foreground="Black" Text="{Binding Size}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
 
-                                <GridViewColumn Header="Còn lại" Width="80">
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <TextBlock Foreground="Black" Text="{Binding Counter}"/>
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </ScrollViewer>
-            </Grid>
+                            <GridViewColumn Header="Giá tiền">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Foreground="Black" Text="{Binding Price, StringFormat='{}{0:0,0} VNĐ'}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+
+                            <GridViewColumn Header="Tổng số sách">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Foreground="Black" Text="{Binding NumberOfBook}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
 
             <!--Button -->
             <Grid Grid.Row="3">
@@ -214,47 +203,51 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-                <Button Command="{Binding AddBookItemButtonCommand}"
-                        ToolTip="Nhập sách mới vào thư viện"
-                        Margin="10" Grid.Column="0">
-                    <StackPanel Orientation="Horizontal">
+                <Button Grid.Column="0" ToolTip="Nhập sách mới vào thư viện" Margin="10" 
+                        Command="{Binding AddCommand}">
+                    <DockPanel LastChildFill="True" Margin="0" HorizontalAlignment="Stretch">
                         <materialDesign:PackIcon Kind="ArrowTopBoldCircle" />
                         <TextBlock Text="NHẬP SÁCH" Margin="10 0"/>
-                    </StackPanel>
+                    </DockPanel>
                 </Button>
 
-                <Button ToolTip="Cập nhật lại thông tin sách"
-                        Command="{Binding UpdateBookItemButtonCommand}"
-                        Margin="10" Grid.Column="1">
-                    <StackPanel Orientation="Horizontal">
+                <Button Grid.Column="1" ToolTip="Cập nhật lại thông tin sách" Margin="10"
+                        Command="{Binding UpdateCommand}">
+                    <DockPanel LastChildFill="True" Margin="0" HorizontalAlignment="Stretch">
                         <materialDesign:PackIcon Kind="NewReleases"/>
                         <TextBlock Text="CẬP NHẬT" Margin="10 0"/>
-                    </StackPanel>
+                    </DockPanel>
                 </Button>
 
-                <Button ToolTip="Thực hiện xuất sách"
-                        Command="{Binding ExportBookItemButtonCommand}"
-                        CommandParameter="{Binding ElementName=pageBookManager}"
-                        Margin="10" Grid.Column="2">
-                    <StackPanel Orientation="Horizontal">
+                <Button Grid.Column="2" ToolTip="Thực hiện xuất sách" Margin="10"
+                        Command="{Binding RemoveCommand}">
+                    <DockPanel LastChildFill="True" Margin="0" HorizontalAlignment="Stretch">
                         <materialDesign:PackIcon Kind="ArrowBottomBoldCircle"/>
                         <TextBlock Text="XUẤT SÁCH" Margin="10 0"/>
-                    </StackPanel>
+                    </DockPanel>
                 </Button>
 
-                <Button ToolTip="Thống kê những người mượn sách"
-                        Command="{Binding StatisticBookItemButtonCommand}"
-                        CommandParameter="{Binding ElementName=pageBookManager}"
-                        Margin="10" Grid.Column="3">
-                    <StackPanel Orientation="Horizontal">
+                <Button Grid.Column="3" ToolTip="Thống kê những người mượn sách" Margin="10"
+                        Command="{Binding StatisticCommand}">
+                    <DockPanel LastChildFill="True" Margin="0" HorizontalAlignment="Stretch">
                         <materialDesign:PackIcon Kind="FileReport" />
                         <TextBlock Text="THỐNG KÊ" Margin="10 0"/>
-                    </StackPanel>
+                    </DockPanel>
                 </Button>
 
+                <Button Grid.Column="4" Command="{Binding ExportToExcelCommand}" Margin="10"
+                        ToolTip="Xuất danh sách sách trong thư viện ra file Excel">
+                    <DockPanel LastChildFill="True" Margin="0" HorizontalAlignment="Stretch">
+                        <materialDesign:PackIcon Kind="FileExcel" Grid.Column="0"/>
+                        <TextBlock Text="XUẤT FILE EXCEL" HorizontalAlignment="Stretch" VerticalAlignment="Center"></TextBlock>
+                    </DockPanel>
+                </Button>
             </Grid>
+            
+            <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="mySnackbar" />
         </Grid>
     </materialDesign:Card>
 </UserControl>

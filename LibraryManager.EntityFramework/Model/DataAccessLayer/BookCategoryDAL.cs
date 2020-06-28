@@ -13,7 +13,10 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
     {
         public static BookCategoryDAL Instance { get => (instance == null) ? new BookCategoryDAL() : instance; }
         private BookCategoryDAL() { }
-
+        public BookCategoryDTO GetBookCategory(int bookCategoryId)
+        {
+            return new BookCategoryDTO(DataProvider.Instance.Database.View_BookCategory.Where(x => x.Id == bookCategoryId).SingleOrDefault());
+        }
         public ObservableCollection<BookCategoryDTO> GetList()
         {
             var listRaw = DataProvider.Instance.Database.View_BookCategory.ToList();

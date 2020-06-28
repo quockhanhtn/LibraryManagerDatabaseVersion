@@ -35,7 +35,7 @@ public partial class Book
 
     public int PublisherId { get; set; }
 
-    public Nullable<int> YearPublisher { get; set; }
+    public Nullable<int> YearPublish { get; set; }
 
     public Nullable<int> BookCategoryId { get; set; }
 

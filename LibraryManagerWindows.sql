@@ -90,7 +90,7 @@ CREATE TABLE dbo.Book
 	Id VARCHAR(10) PRIMARY KEY,
 	Title NVARCHAR(100) NULL,
 	PublisherId INT NOT NULL,
-	YearPublisher INT NULL,
+	YearPublish INT NULL,
 	BookCategoryId INT NULL,
 	PageNumber INT NULL,
 	Size VARCHAR(11) NULL,
@@ -360,133 +360,133 @@ INSERT INTO dbo.BookCategory (Name, LimitDays) VALUES (N'Luyện thi ĐH-CĐ', 5
 INSERT INTO dbo.BookCategory (Name, LimitDays) VALUES (N'Khoa học - công nghệ', 30)		   --5
 INSERT INTO dbo.BookCategory (Name, LimitDays) VALUES (N'Tiếng Anh', 30)		   --6
 
-INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublisher, BookCategoryId, PageNumber, Size, Price)
+INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublish, BookCategoryId, PageNumber, Size, Price)
 VALUES ('', N'Vui Vẻ Không Quạu Nha', 1, 2020, 1, 280, '10 x 12', 53820)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000001', 20)
 INSERT INTO dbo.BookAuthor ( BookId, AuthorId) VALUES ('B000000001', 1)
 
-INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublisher, BookCategoryId, PageNumber, Size, Price)
+INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublish, BookCategoryId, PageNumber, Size, Price)
 VALUES ('', N'Cà Phê Cùng Tony', 2, 2017, 1, 268, '13 x 20', 63000)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000002', 20)
 INSERT INTO dbo.BookAuthor ( BookId, AuthorId) VALUES ('B000000002', 2)
 
-INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublisher, BookCategoryId, PageNumber, Size, Price)
+INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublish, BookCategoryId, PageNumber, Size, Price)
 VALUES ('', N'Trên Đường Băng', 2, 2017, 2, 308, '13 x 20', 64000)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000003', 15)
 INSERT INTO dbo.BookAuthor ( BookId, AuthorId) VALUES ('B000000003', 2)
 
-INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublisher, BookCategoryId, PageNumber, Size, Price)
+INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublish, BookCategoryId, PageNumber, Size, Price)
 VALUES ('', N'Nhà Giả Kim', 3, 2017, 3, 224, '13 x 20.5', 55200)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000004', 10)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000004', 3)
 
-INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublisher, BookCategoryId, PageNumber, Size, Price)
+INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublish, BookCategoryId, PageNumber, Size, Price)
 VALUES ('', N'Hảo Hán Nơi Trảng Cát', 3, 2017, 3, 380, '14.5 x 20.5', 75000)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000005', 10)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000005', 4)
 
-INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublisher, BookCategoryId, PageNumber, Size, Price)
+INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublish, BookCategoryId, PageNumber, Size, Price)
 VALUES ('', N'Quán Gió', 3, 2017, 3, 180, '14 x 20.5', 52800)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000006', 10)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000006', 5)
 
-INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublisher, BookCategoryId, PageNumber, Size, Price)
+INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublish, BookCategoryId, PageNumber, Size, Price)
 VALUES ('', N'GT Phát Triển Ứng Dụng Web', 4, 2019, 5, 340, '16 x 24', 168000)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000007', 10)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000007', 6)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000007', 7)
 
-INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublisher, BookCategoryId, PageNumber, Size, Price)
+INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublish, BookCategoryId, PageNumber, Size, Price)
 VALUES ('', N'Sử Dụng AM - GM Để Chứng Minh Bất Đẳng Thức', 4, 2019, 4, 256, '16 x 24', 60000)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000008', 10)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000008', 8)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000008', 9)
 
-INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublisher, BookCategoryId, PageNumber, Size, Price)
+INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublish, BookCategoryId, PageNumber, Size, Price)
 VALUES ('', N'VẺ ĐẸP BẤT ĐẲNG THỨC TRONG CÁC KÌ THI OLYMPIC TOÁN HỌC', 4, 2016, 4, 492, '16 x 24', 95000)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000009', 10)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000009', 8)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000009', 9)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000009', 10)
 
-INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublisher, BookCategoryId, PageNumber, Size, Price)
+INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublish, BookCategoryId, PageNumber, Size, Price)
 VALUES ('', N'Giải Thích Ngữ Pháp Tiếng Anh (Bài Tập & Đáp Án)', 5, 2019, 6, 200, '16 x 24', 112500)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000010', 15)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000010', 11)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000010', 12)
 
-INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublisher, BookCategoryId, PageNumber, Size, Price)
-VALUES ('', N'Giải Mã Trí Nhớ)', 5, 2019, 5, 102, '14.5 x 21', 98500)
+INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublish, BookCategoryId, PageNumber, Size, Price)
+VALUES ('', N'Giải Mã Trí Nhớ', 5, 2019, 5, 102, '14.5 x 21', 98500)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000011', 10)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000011', 13)
 
-INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublisher, BookCategoryId, PageNumber, Size, Price)
-VALUES ('', N'Cẩm Nang Tự Học Ielts)', 6, 2019, 6, 188, '16 x 24', 65000)
+INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublish, BookCategoryId, PageNumber, Size, Price)
+VALUES ('', N'Cẩm Nang Tự Học Ielts', 6, 2019, 6, 188, '16 x 24', 65000)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000012', 10)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000012', 14)
 
-INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublisher, BookCategoryId, PageNumber, Size, Price)
+INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublish, BookCategoryId, PageNumber, Size, Price)
 VALUES ('', N'Ngữ Pháp Tiếng Anh', 5, 2019, 6, 280, '13.5 x 20', 60000)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000013', 15)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000013', 11)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000013', 15)
 
-INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublisher, BookCategoryId, PageNumber, Size, Price)
+INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublish, BookCategoryId, PageNumber, Size, Price)
 VALUES ('', N'Little Stories – To Push You Forward', 5, 2018, 6, 192, '11.3 x 17.6', 50050)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000014', 5)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000014', 16)
 
-INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublisher, BookCategoryId, PageNumber, Size, Price)
+INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublish, BookCategoryId, PageNumber, Size, Price)
 VALUES ('', N'Little Stories - To Make You A Good Person', 5, 2018, 6, 192, '11.3 x 17.6', 50050)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000015', 5)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000015', 16)
 
-INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublisher, BookCategoryId, PageNumber, Size, Price)
+INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublish, BookCategoryId, PageNumber, Size, Price)
 VALUES ('', N'Little Stories - The Best Book For Your Leisure Time', 5, 2018, 6, 192, '11.3 x 17.6', 50050)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000016', 5)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000016', 17)
 
-INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublisher, BookCategoryId, PageNumber, Size, Price)
+INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublish, BookCategoryId, PageNumber, Size, Price)
 VALUES ('', N'Little Stories - To Get More Knowledge', 5, 2018, 6, 192, '11.3 x 17.6', 50050)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000017', 5)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000017', 17)
 
-INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublisher, BookCategoryId, PageNumber, Size, Price)
+INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublish, BookCategoryId, PageNumber, Size, Price)
 VALUES ('', N'Little Stories - To Have A Nice Day', 5, 2018, 6, 192, '11.3 x 17.6', 50050)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000018', 5)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000018', 16)
 
-INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublisher, BookCategoryId, PageNumber, Size, Price)
+INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublish, BookCategoryId, PageNumber, Size, Price)
 VALUES ('', N'Little Stories - To Share With Your Friends', 5, 2018, 6, 192, '11.3 x 17.6', 50050)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000019', 5)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000019', 16)
 
-INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublisher, BookCategoryId, PageNumber, Size, Price)
+INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublish, BookCategoryId, PageNumber, Size, Price)
 VALUES ('', N'Little Stories - The Book For Peaceful Nights', 5, 2018, 6, 192, '11.3 x 17.6', 50050)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000020', 5)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000020', 17)
 
-INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublisher, BookCategoryId, PageNumber, Size, Price)
+INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublish, BookCategoryId, PageNumber, Size, Price)
 VALUES ('', N'Tự Thương Mình Sau Những Tháng Năm Thương Người', 3, 2019, 1, 248, '13 x 20.5', 58500)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000021', 10)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000021', 18)
 
-INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublisher, BookCategoryId, PageNumber, Size, Price)
+INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublish, BookCategoryId, PageNumber, Size, Price)
 VALUES ('', N'Mình Buồn Đủ Rồi, Mình Hạnh Phúc Thôi!', 3, 2020, 1, 224, '13 x 20.5', 71200)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000022', 10)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000022', 18)
 
-INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublisher, BookCategoryId, PageNumber, Size, Price)
+INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublish, BookCategoryId, PageNumber, Size, Price)
 VALUES ('', N'Khéo Ăn Nói Sẽ Có Được Thiên Hạ', 3, 2018, 2, 406, '14.5 x 20.5', 82500)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000023', 10)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000023', 19)
 
-INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublisher, BookCategoryId, PageNumber, Size, Price)
+INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublish, BookCategoryId, PageNumber, Size, Price)
 VALUES ('', N'Đắc Nhân Tâm', 7, 2018, 2, 320, '14.5 x 20.5', 73500)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000024', 15)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000024', 20)
 
-INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublisher, BookCategoryId, PageNumber, Size, Price)
+INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublish, BookCategoryId, PageNumber, Size, Price)
 VALUES ('', N'Đá Cuội Hay Kim Cương - Cùng Dale Carnegie Tiến Tới Thành Công', 8, 2018, 2, 248, '14.5 x 20.5', 73500)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000025', 15)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000025', 20)
@@ -530,12 +530,16 @@ CREATE VIEW [dbo].[View_Publisher] AS
 	GROUP BY P.Id, P.Name, P.PhoneNumber, P.Address, P.Email, P.Website, P.Status
 GO
 
-SELECT * FROM dbo.View_Author
+--SELECT * FROM dbo.View_Author
 
-SELECT * FROM dbo.Book
+--SELECT * FROM dbo.Book
 
-SELECT * FROM dbo.BookItem
+--SELECT * FROM dbo.BookItem
 
-SELECT B.Id, B.Title, BC.Name, P.Name, A.NickName AS [Tác giả], B.Price, B.PageNumber, B.Size, BI.Number
-FROM dbo.Book AS B, dbo.BookAuthor AS BA, dbo.BookCategory AS BC, dbo.Publisher AS P, dbo.Author AS A, dbo.BookItem AS BI
-WHERE B.PublisherId = P.Id AND B.BookCategoryId = BC.Id AND B.Id = BA.BookId AND A.Id = BA.AuthorId AND B.Id = BI.BookId
+CREATE VIEW View_Book AS
+	SELECT B.Id, B.Title, B.BookCategoryId ,BC.Name AS [BookCategoryName], B.PublisherId, P.Name AS [PublisherName], B.YearPublish, A.Id AS [AuthorId], A.NickName AS [AuthorName], B.Price, B.PageNumber, B.Size, BI.Number AS [NumberOfBook], B.Status
+	FROM dbo.Book AS B, dbo.BookAuthor AS BA, dbo.BookCategory AS BC, dbo.Publisher AS P, dbo.Author AS A, dbo.BookItem AS BI
+	WHERE B.PublisherId = P.Id AND B.BookCategoryId = BC.Id AND B.Id = BA.BookId AND A.Id = BA.AuthorId AND B.Id = BI.BookId
+GO
+
+--SELECT * FROM view_book

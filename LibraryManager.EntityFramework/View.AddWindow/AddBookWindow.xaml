@@ -51,10 +51,10 @@
 
                         <!---Giới tính-->
                         <StackPanel Grid.Column="0">
-                            <ComboBox materialDesign:HintAssist.Hint="Giới tính" x:Name="cmbSex" SelectedIndex="0"
+                            <ComboBox materialDesign:HintAssist.Hint="Nhà xuất bản" x:Name="cmbPublisher"
                                       Style="{StaticResource InfoComboBox}" Margin="20 0 5 0">
                             </ComboBox>
-                            <TextBlock Text="Chọn giới tính" x:Name="tblSexWarning"/>
+                            <TextBlock Text="Chọn nhà xuất bản" x:Name="tblPublisherWarning"/>
                         </StackPanel>
 
                         <!---Ngày sinh-->

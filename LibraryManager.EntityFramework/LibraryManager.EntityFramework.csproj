@@ -91,6 +91,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="FindMemberWindow.xaml.cs">
+      <DependentUpon>FindMemberWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="LibrarianWindow.xaml.cs">
       <DependentUpon>LibrarianWindow.xaml</DependentUpon>
     </Compile>
@@ -115,6 +118,7 @@
     <Compile Include="Model\DataAccessLayer\AccountDAL.cs" />
     <Compile Include="Model\DataAccessLayer\AuthorDAL.cs" />
     <Compile Include="Model\DataAccessLayer\BookCategoryDAL.cs" />
+    <Compile Include="Model\DataAccessLayer\BookDAL.cs" />
     <Compile Include="Model\DataAccessLayer\LibrarianDAL.cs" />
     <Compile Include="Model\DataAccessLayer\MemberDAL.cs" />
     <Compile Include="Model\DataAccessLayer\PublisherDAL.cs" />
@@ -159,6 +163,9 @@
       <DependentUpon>LibraryManager.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\View_AuthorNoBook.cs">
+      <DependentUpon>LibraryManager.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\View_Book.cs">
       <DependentUpon>LibraryManager.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\View_BookCategory.cs">
@@ -214,6 +221,7 @@
     <Compile Include="ViewModel\AddWindow\AddBookWindowVM.cs" />
     <Compile Include="ViewModel\AddWindow\AddMemberWindowVM.cs" />
     <Compile Include="ViewModel\AddWindow\AddPublisherWindowVM.cs" />
+    <Compile Include="ViewModel\FindMemberWindowViewModel.cs" />
     <Compile Include="ViewModel\LibrarianWindowViewModel.cs" />
     <Compile Include="ViewModel\LoginWindowViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
@@ -226,6 +234,10 @@
     <Compile Include="ViewModel\PageUC\PageLibrarianManagerVM.cs" />
     <Compile Include="ViewModel\PageUC\PageMemberManagerVM.cs" />
     <Compile Include="ViewModel\PageUC\PagePublisherManagerVM.cs" />
+    <Page Include="FindMemberWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="LibrarianWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

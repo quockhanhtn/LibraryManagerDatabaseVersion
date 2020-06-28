@@ -16,6 +16,12 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
     {
         public static PublisherDAL Instance { get => (instance == null) ? new PublisherDAL() : instance; }
         private PublisherDAL() { }
+
+        public PublisherDTO GetPublisher(int publisherId)
+        {
+            return new PublisherDTO(DataProvider.Instance.Database.View_Publisher.Where(x => x.Id == publisherId).SingleOrDefault());
+        }
+
         public ObservableCollection<PublisherDTO> GetList()
         {
             var listRaw = DataProvider.Instance.Database.View_Publisher.ToList();

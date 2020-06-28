@@ -12,11 +12,14 @@ namespace LibraryManager.EntityFramework.Model.DataTransferObject
         public BookCategoryDTO() : base() { }
         public BookCategoryDTO(View_BookCategory bookCategoryView) : base()
         {
-            this.Id = bookCategoryView.Id;
-            this.Name = bookCategoryView.Name;
-            this.LimitDays = bookCategoryView.LimitDays;
-            this.NumberOfBook = bookCategoryView.NumberOfBook;
-            this.Status = bookCategoryView.Status;
+            if (bookCategoryView != null)
+            {
+                this.Id = bookCategoryView.Id;
+                this.Name = bookCategoryView.Name;
+                this.LimitDays = bookCategoryView.LimitDays;
+                this.NumberOfBook = bookCategoryView.NumberOfBook;
+                this.Status = bookCategoryView.Status;
+            }
         }
 
         public BookCategory GetBaseModel()

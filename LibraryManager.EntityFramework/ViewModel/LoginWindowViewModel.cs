@@ -38,9 +38,6 @@ namespace LibraryManager.EntityFramework.ViewModel
 
             LoginCommand = new RelayCommand<Window>((p) => { return p != null; }, (p) =>
             {
-                var a = new AddBookWindow();
-                a.Show();
-
                 var tbxUsername = p.FindName("tbxUsername") as TextBox;
                 var tbxPassWord = p.FindName("tbxPassWord") as PasswordBox;
 

@@ -13,14 +13,17 @@ namespace LibraryManager.EntityFramework.Model.DataTransferObject
 
         public PublisherDTO(View_Publisher publisherRaw) : base()
         {
-            this.Id = publisherRaw.Id;
-            this.Name = publisherRaw.Name;
-            this.PhoneNumber = publisherRaw.PhoneNumber;
-            this.Address = publisherRaw.Address;
-            this.Email = publisherRaw.Email;
-            this.Website = publisherRaw.Website;
-            this.NumberOfBook = publisherRaw.NumberOfBook;
-            this.Status = publisherRaw.Status;
+            if (publisherRaw != null)
+            {
+                this.Id = publisherRaw.Id;
+                this.Name = publisherRaw.Name;
+                this.PhoneNumber = publisherRaw.PhoneNumber;
+                this.Address = publisherRaw.Address;
+                this.Email = publisherRaw.Email;
+                this.Website = publisherRaw.Website;
+                this.NumberOfBook = publisherRaw.NumberOfBook;
+                this.Status = publisherRaw.Status;
+            }
         }
 
         public Publisher GetBaseModel()
