@@ -19,7 +19,7 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
         private LibrarianDAL() { }
         public ObservableCollection<LibrarianDTO> GetList()
         {
-            var listRaw = DataProvider.Instance.Database.Librarians.ToList();
+            var listRaw = DataProvider.Instance.Database.Librarians.Where(x => x.Id != "LIB000").ToList();
             var listLibrarianDTO = new ObservableCollection<LibrarianDTO>();
 
             foreach (var lib in listRaw)
@@ -31,7 +31,7 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
         }
         public ObservableCollection<LibrarianDTO> GetList(bool status)
         {
-            var listRaw = DataProvider.Instance.Database.Librarians.Where(x => x.Status == status).ToList();
+            var listRaw = DataProvider.Instance.Database.Librarians.Where(x => x.Id != "LIB000" && x.Status == status).ToList();
             var listLibrarianDTO = new ObservableCollection<LibrarianDTO>();
 
             foreach (var lib in listRaw)

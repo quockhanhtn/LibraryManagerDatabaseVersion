@@ -22,6 +22,8 @@ public partial class BookItem
 
     public Nullable<int> Number { get; set; }
 
+    public Nullable<int> Count { get; set; }
+
     public Nullable<bool> Status { get; set; }
 
 

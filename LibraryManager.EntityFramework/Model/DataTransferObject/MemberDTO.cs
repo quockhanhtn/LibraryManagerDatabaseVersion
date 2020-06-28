@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace LibraryManager.EntityFramework.Model.DataTransferObject
 {
-    public class MemberDTO : Member
-    {
+	public class MemberDTO : Member
+	{
 		public string FullName { get { return this.LastName + " " + this.FirstName; } }
 		public string Note { get { return (this.Status == true) ? "Hoạt động" : "Bị khóa"; } }
 		public MemberDTO() : base() { }

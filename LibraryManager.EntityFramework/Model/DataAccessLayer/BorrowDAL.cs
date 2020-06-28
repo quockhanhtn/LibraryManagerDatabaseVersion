@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace LibraryManager.EntityFramework.Model.DataAccessLayer
+{
+    public class BorrowDAL
+    {
+        public static BorrowDAL Instance { get => (instance == null) ? new BorrowDAL() : instance; }
+        private BorrowDAL() { }
+
+        public void Add(string memberId, string librarianId, string bookId)
+        {
+            var br = new Borrow() { BookId = bookId, MemberId = memberId, LibrarianId = librarianId, BorrowDate = DateTime.Now };
+            DataProvider.Instance.SaveEntity(br, EntityState.Added, true);
+        }
+
+        private static BorrowDAL instance;
+    }
+}

@@ -38,6 +38,8 @@ public partial class View_Book
 
     public Nullable<int> NumberOfBook { get; set; }
 
+    public Nullable<int> Count { get; set; }
+
     public Nullable<bool> Status { get; set; }
 
 }

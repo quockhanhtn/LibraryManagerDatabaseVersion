@@ -9,7 +9,6 @@ namespace LibraryManager.EntityFramework.Model.DataTransferObject
 {
 	public class BookDTO : View_Book
 	{
-		public string Note { get { return (this.Status == true) ? "Đang làm" : "Đã nghỉ"; } }
         public BookCategoryDTO BookCategory { get; set; }
 		public PublisherDTO Publisher { get; set; }
 		public List<AuthorDTO> ListAuthor { get; set; } = new List<AuthorDTO>();
@@ -45,6 +44,7 @@ namespace LibraryManager.EntityFramework.Model.DataTransferObject
 				this.PageNumber = bookRaw[0].PageNumber;
 				this.Size = bookRaw[0].Size;
 				this.NumberOfBook = bookRaw[0].NumberOfBook;
+				this.Count = bookRaw[0].Count;
 				this.Status = bookRaw[0].Status;
 
                 foreach (var book in bookRaw)

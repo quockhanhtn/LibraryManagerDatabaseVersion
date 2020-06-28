@@ -24,6 +24,10 @@ CREATE TABLE dbo.Librarian
 )
 GO
 
+--Account for Admin
+INSERT INTO dbo.Librarian (Id, LastName,PhoneNumber, Status) VALUES ('LIB000', N'Quản trị viên','', 1)
+GO
+
 -- Tạo bảng Member
 CREATE TABLE dbo.Member
 (
@@ -107,6 +111,7 @@ CREATE TABLE dbo.BookItem
 (
 	BookId VARCHAR(10) PRIMARY KEY,
 	Number INT NULL,
+	Count INT NULL,
 	Status BIT DEFAULT 1 NULL
 
 	FOREIGN KEY(BookId) REFERENCES dbo.Book(Id)
@@ -134,8 +139,6 @@ CREATE TABLE dbo.Borrow
 	MemberId VARCHAR(10) NOT NULL,
 	LibrarianId VARCHAR(6) NOT NULL,
 	BorrowDate DATE NOT NULL,
-	Status BIT DEFAULT 1 NULL
-
 
 	FOREIGN KEY(BookId) REFERENCES dbo.Book(Id),
 	FOREIGN KEY(MemberId) REFERENCES dbo.Member(Id),
@@ -263,11 +266,56 @@ AS
 	END
 GO
 
+--Trigger cập nhật số lượng sách khi cho mượn
+CREATE TRIGGER Trig_InsertBookItem ON [dbo].[BookItem] FOR INSERT
+AS
+	BEGIN
+		DECLARE @BookId VARCHAR(10)
+		SET @BookId = (SELECT TOP (1) BookId FROM dbo.BookItem ORDER BY BookId DESC)
+		UPDATE dbo.BookItem SET Count = Number WHERE BookId = @BookId
+	END
+GO
+
+--Trigger cập nhật số lượng sách khi trả
+CREATE TRIGGER Trig_InsertBorrow ON [dbo].[Borrow] AFTER INSERT
+AS
+	BEGIN
+		UPDATE dbo.BookItem SET Count = Count - 1 WHERE BookId = (SELECT Inserted.BookId FROM Inserted)
+	End
+GO
+
+CREATE TRIGGER Trig_DeleteBorrow ON [dbo].[Borrow] AFTER DELETE
+AS
+	BEGIN
+		UPDATE dbo.BookItem SET Count = Count + 1 WHERE BookId = (SELECT Deleted.BookId FROM Deleted)
+	End
+GO
+
+
+--CREATE TRIGGER Trig_InsertBorrow ON [dbo].[Borrow] FOR INSERT
+--AS
+--	BEGIN
+--		DECLARE @BookId VARCHAR(10)
+--		SET @BookId = (SELECT TOP (1) BookId FROM dbo.Borrow ORDER BY BookId DESC)
+--		UPDATE dbo.BookItem SET Count = Count - 1 WHERE BookId = @BookId
+--	End
+--GO
+
+--CREATE TRIGGER Trig_DeleteBorrow ON [dbo].[Borrow] FOR DELETE
+--AS
+--	BEGIN
+--		DECLARE @BookId VARCHAR(10)
+--		DELETE FROM dbo.Borrow
+--			WHERE @BookId in (select BookId from dbo.Borrow);
+--		UPDATE dbo.BookItem SET Count = Count + 1 WHERE BookId = @BookId
+--	End
+--GO
+
 --Create admin account
 --	username: admin
 --	password: admin
 INSERT INTO dbo.Account (PersonId, Username, Password, AccountType )
-VALUES ('ADMIN', 'admin', 'db69fc039dcbd2962cb4d28f5891aae1', 0)
+VALUES ('LIB000', 'admin', 'db69fc039dcbd2962cb4d28f5891aae1', 0)
 
 --inser librarian data
 INSERT INTO dbo.Librarian (Id, FirstName, LastName, Birthday, Sex, SSN, Address, PhoneNumber, Email, StartDate, Salary)
@@ -536,10 +584,34 @@ GO
 
 --SELECT * FROM dbo.BookItem
 
+--CREATE VIEW View_Book AS
+--	SELECT B.Id, B.Title, B.BookCategoryId ,BC.Name AS [BookCategoryName], B.PublisherId, P.Name AS [PublisherName], B.YearPublish, A.Id AS [AuthorId], A.NickName AS [AuthorName], B.Price, B.PageNumber, B.Size, BI.Number AS [NumberOfBook], B.Status
+--	FROM dbo.Book AS B, dbo.BookAuthor AS BA, dbo.BookCategory AS BC, dbo.Publisher AS P, dbo.Author AS A, dbo.BookItem AS BI
+--	WHERE B.PublisherId = P.Id AND B.BookCategoryId = BC.Id AND B.Id = BA.BookId AND A.Id = BA.AuthorId AND B.Id = BI.BookId
+--GO
+
 CREATE VIEW View_Book AS
-	SELECT B.Id, B.Title, B.BookCategoryId ,BC.Name AS [BookCategoryName], B.PublisherId, P.Name AS [PublisherName], B.YearPublish, A.Id AS [AuthorId], A.NickName AS [AuthorName], B.Price, B.PageNumber, B.Size, BI.Number AS [NumberOfBook], B.Status
+	SELECT B.Id, B.Title, B.BookCategoryId ,B.PublisherId, B.YearPublish, A.Id AS [AuthorId], B.Price, B.PageNumber, B.Size, BI.Number AS [NumberOfBook],BI.Count AS [Count], B.Status
 	FROM dbo.Book AS B, dbo.BookAuthor AS BA, dbo.BookCategory AS BC, dbo.Publisher AS P, dbo.Author AS A, dbo.BookItem AS BI
 	WHERE B.PublisherId = P.Id AND B.BookCategoryId = BC.Id AND B.Id = BA.BookId AND A.Id = BA.AuthorId AND B.Id = BI.BookId
 GO
 
 --SELECT * FROM view_book
+
+INSERT INTO dbo.Borrow (BookId, MemberId, LibrarianId, BorrowDate)
+VALUES ('B000000021', 'MEM0000011', 'LIB001', '2019-12-20')
+INSERT INTO dbo.Borrow (BookId, MemberId, LibrarianId, BorrowDate)
+VALUES ('B000000022', 'MEM0000011', 'LIB001', '2019-12-20')
+INSERT INTO dbo.Borrow (BookId, MemberId, LibrarianId, BorrowDate)
+VALUES ('B000000023', 'MEM0000011', 'LIB001', '2019-12-20')
+INSERT INTO dbo.Borrow (BookId, MemberId, LibrarianId, BorrowDate)
+VALUES ('B000000015', 'MEM0000011', 'LIB000', '2019-12-20')
+INSERT INTO dbo.Borrow (BookId, MemberId, LibrarianId, BorrowDate)
+VALUES ('B000000011', 'MEM0000011', 'LIB001', '2020-1-20')
+
+INSERT INTO dbo.Borrow (BookId, MemberId, LibrarianId, BorrowDate)
+VALUES ('B000000001', 'MEM0000012', 'LIB001', '2019-12-20')
+
+
+SELECT * FROM dbo.BookItem
+

@@ -49,5 +49,10 @@ namespace LibraryManager.EntityFramework.Model.DataTransferObject
 				Status = this.Status,
 			};
 		}
+
+		public Librarian GetEntityModel()
+		{
+			return DataProvider.Instance.Database.Librarians.Where(x => x.Id == this.Id).SingleOrDefault();
+		}
     }
 }

@@ -8,7 +8,6 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:uc="clr-namespace:LibraryManager.MyUserControl;assembly=LibraryManager.MyUserControl"
              
-             DataContext="{StaticResource PageBookManagerVM}"
              
              mc:Ignorable="d" x:Name="pageBookManager" Background="#fafafa"
              d:DesignHeight="734" d:DesignWidth="1300">
@@ -188,6 +187,14 @@
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
                                         <TextBlock Foreground="Black" Text="{Binding NumberOfBook}"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            
+                            <GridViewColumn Header="Còn lại">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Foreground="Black" Text="{Binding Count}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

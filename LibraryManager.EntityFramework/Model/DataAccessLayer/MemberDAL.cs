@@ -71,6 +71,17 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
             DataProvider.Instance.SaveEntity(memberUpdate, EntityState.Modified);
         }
 
+        public ObservableCollection<BorrowDTO> GetListBookBorrow(string memberId)
+        {
+            var result = new ObservableCollection<BorrowDTO>();
+            foreach (var item in DataProvider.Instance.Database.Borrows.Where(x => x.MemberId == memberId).ToList())
+            {
+                result.Add(new BorrowDTO(item));
+            }
+            return result;
+        }
+
+
         private static MemberDAL instance;
     }
 }

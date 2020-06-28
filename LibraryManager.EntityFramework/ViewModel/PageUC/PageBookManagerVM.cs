@@ -1,5 +1,6 @@
 ﻿using LibraryManager.EntityFramework.Model.DataAccessLayer;
 using LibraryManager.EntityFramework.Model.DataTransferObject;
+using LibraryManager.EntityFramework.View.PageUC;
 using LibraryManager.MyUserControl.MyBox;
 using LibraryManager.Utility;
 using Microsoft.Win32;
@@ -37,7 +38,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
         public ICommand RemoveCommand { get; set; }
         public ICommand StatisticCommand { get; set; }
         public ICommand ExportToExcelCommand { get; set; }
-        public PageBookManagerVM()
+        public PageBookManagerVM(LibrarianDTO librarian)
         {
             ListBookCategory = BookCategoryDAL.Instance.GetList(true);
             ListBookCategory.Add(new BookCategoryDTO() { Id = 0, Name = "Tất cả chuyên mục" });
@@ -55,6 +56,21 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 var findMemberWindow = new FindMemberWindow() { DataContext = findMemberVM };
 
                 findMemberWindow.ShowDialog();
+                var memberFound = findMemberVM.MemberSelected;
+
+                if(memberFound != null)
+                {
+                    var borrowVM = new PageBorrowBookVM(memberFound, librarian);
+                    var borrowPage = new PageBorrowBook() { DataContext = borrowVM };
+                    try
+                    {
+                        var w = FrameworkElementExtend.GetWindowParent(p) as Window;
+                        var gridMain = w.FindName("gridMain") as Grid;
+                        //gridMain.Children.Clear();
+                        gridMain.Children.Add(borrowPage);
+                    }
+                    catch (Exception) { }
+                }
             });
 
             ReturnBookCommand = new RelayCommand<UserControl>((p) => { return p != null; }, (p) =>
@@ -126,7 +142,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
 
             RemoveCommand = new RelayCommand<object>((p) => { return BookSelected != null; }, (p) => { });
 
-            StatisticCommand = new RelayCommand<object>((p) => { return BookSelected != null; }, (p) => { });
+            StatisticCommand = new RelayCommand<object>((p) => { return BookSelected != null && BookSelected.NumberOfBook > BookSelected.Count; }, (p) => { });
 
             ExportToExcelCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
@@ -162,10 +178,10 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                         ExcelHelper.SetSheetInfo(worksheet, "List Book Sheet");
 
                         // set column width
-                        ExcelHelper.SetColumWidth(worksheet, new int[] { 14, 50, 25, 25, 7, 25, 10, 13, 9, 15 });
+                        ExcelHelper.SetColumWidth(worksheet, new int[] { 14, 50, 25, 25, 7, 25, 10, 13, 9, 15, 15 });
 
                         // Tạo danh sách các column header
-                        string[] arrColumnHeader = { "Mã sách", "Tựa sách", "Chuyên mục", "Nhà xuất bản", "Năm", "Tác giả", "Số trang", "Kích thước", "Giá tiền", "Tổng số sách" };
+                        string[] arrColumnHeader = { "Mã sách", "Tựa sách", "Chuyên mục", "Nhà xuất bản", "Năm", "Tác giả", "Số trang", "Kích thước", "Giá tiền", "Tổng số sách", "Còn lại" };
 
                         // lấy ra số lượng cột cần dùng dựa vào số lượng header
                         var countColHeader = arrColumnHeader.Count();
@@ -236,6 +252,9 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
 
                             ExcelHelper.FormatCellBorder(worksheet, rowIndex, colIndex);
                             worksheet.Cells[rowIndex, colIndex++].Value = item.NumberOfBook;
+
+                            ExcelHelper.FormatCellBorder(worksheet, rowIndex, colIndex);
+                            worksheet.Cells[rowIndex, colIndex++].Value = item.Count;
                         }
 
                         ExcelHelper.SaveExcelPackage(excelPackage, filePath);
@@ -254,7 +273,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
             });
         }
 
-        private void ReloadList()
+        public void ReloadList()
         {
             if (BookCategorySelected == null && PublisherSelected == null)
             {

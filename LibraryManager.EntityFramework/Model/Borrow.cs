@@ -39,8 +39,6 @@ public partial class Borrow
 
     public System.DateTime BorrowDate { get; set; }
 
-    public Nullable<bool> Status { get; set; }
-
 
 
     public virtual Book Book { get; set; }

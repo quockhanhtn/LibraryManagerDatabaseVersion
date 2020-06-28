@@ -109,6 +109,11 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
             DataProvider.Instance.SaveEntity(bookUpdate, EntityState.Modified);
         }
 
+        public Book GetBookById(string bookId)
+        {
+            return DataProvider.Instance.Database.Books.Where(x => x.Id == bookId).SingleOrDefault();
+        }
+
         private static BookDAL instance;
     }
 }

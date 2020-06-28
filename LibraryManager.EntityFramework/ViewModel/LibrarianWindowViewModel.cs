@@ -1,5 +1,6 @@
 ﻿using LibraryManager.EntityFramework.Model;
 using LibraryManager.EntityFramework.Model.DataAccessLayer;
+using LibraryManager.EntityFramework.Model.DataTransferObject;
 using LibraryManager.EntityFramework.View.PageUC;
 using LibraryManager.EntityFramework.ViewModel.PageUC;
 using LibraryManager.Utility;
@@ -86,7 +87,7 @@ namespace LibraryManager.EntityFramework.ViewModel
         {
             this.PageAccountInfor = new PageAccountInfor();// { DataContext = new PageLibrarianManagerVM() };
             this.PageMemberManager = new PageMemberManager() { DataContext = new PageMemberManagerVM() };
-            this.PageBookManager = new PageBookManager() { DataContext = new PageBookManagerVM() };
+            this.PageBookManager = new PageBookManager() { DataContext = new PageBookManagerVM(new LibrarianDTO(LibrarianLogin)) };
             this.PagePublisherManager = new PagePublisherManager() { DataContext = new PagePublisherManagerVM() };
             this.PageBookCategoryManager = new PageBookCategoryManager() { DataContext = new PageBookCategoryManagerVM() };
             this.PageAuthorManager = new PageAuthorManager() { DataContext = new PageAuthorManagerVM() };
