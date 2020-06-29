@@ -228,6 +228,7 @@
     <Compile Include="ViewModel\PageUC\PageLibrarianManagerVM.cs" />
     <Compile Include="ViewModel\PageUC\PageMemberManagerVM.cs" />
     <Compile Include="ViewModel\PageUC\PagePublisherManagerVM.cs" />
+    <Compile Include="ViewModel\PageUC\PageReturnBookVM.cs" />
     <Page Include="FindMemberWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

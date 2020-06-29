@@ -190,7 +190,7 @@
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
-                            
+
                             <GridViewColumn Header="Còn lại">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
@@ -253,9 +253,8 @@
                     </DockPanel>
                 </Button>
             </Grid>
-            
+
             <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="mySnackbar" />
         </Grid>
     </materialDesign:Card>
 </UserControl>
-

@@ -12,6 +12,7 @@
              mc:Ignorable="d" x:Name="pageBorrowBook"
              d:DesignHeight="734" d:DesignWidth="1300" Background="#fafafa">
     <UserControl.Resources>
+        <Style TargetType="materialDesign:Card" BasedOn="{StaticResource MaterialDesignPageCard}"></Style>
         <Style TargetType="Button" BasedOn="{StaticResource DarkBlueButton}"/>
     </UserControl.Resources>
     <Grid>
@@ -27,7 +28,7 @@
         </Grid.ColumnDefinitions>
 
         <!---Thông tin sách mượn-->
-        <materialDesign:Card Style="{StaticResource MaterialDesignPageCard}" Margin="5 5 2.5 2.5" Grid.Row="0">
+        <materialDesign:Card Margin="5 5 2.5 2.5" Grid.Row="0">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition/>
@@ -41,7 +42,7 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="150"/>
                         <ColumnDefinition/>
-                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="200"/>
                     </Grid.ColumnDefinitions>
 
                     <ComboBox Margin="10 0" Grid.Column="0" x:Name="cmbBookId" materialDesign:HintAssist.Hint="Mã sách"
@@ -53,8 +54,8 @@
                           Style="{StaticResource InfoComboBox}" DisplayMemberPath="Title" FontSize="16"
                           ItemsSource="{Binding ListBook}" SelectedValue="{Binding NewBookBorrow}">
                     </ComboBox>
-                    
-                    <Button Content="MƯỢN SÁCH" Grid.Column="2" Margin="5 5 15  0"
+
+                    <Button Content="MƯỢN SÁCH" Grid.Column="2" Margin="10 0" FontSize="18" Height="45"
                             ToolTip="Thêm sách vào danh sách sách mượn" IsDefault="True"
                             Command="{Binding BorrowBookCommand}"/>
                 </Grid>
@@ -149,29 +150,29 @@
         </materialDesign:Card>
 
         <!--Button-->
-        <materialDesign:Card Margin="10 5 5 10" Grid.Row="2">
+        <materialDesign:Card Margin="5 2.5 2.5 5" Grid.Row="2">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                
-                <Button Content="LƯU" ToolTip="Lưu những thay đổi"  Grid.Column="0" FontSize="20" Margin="20 0 5 0"
+
+                <Button Margin="200 5 5 5" Content="LƯU" ToolTip="Lưu những thay đổi"  Grid.Column="0" FontSize="20"
                         Command="{Binding SaveChangeCommand}" CommandParameter="{Binding ElementName=pageBorrowBook}"/>
 
-                <Button Content="HỦY" ToolTip="Hủy những thay đổi" IsCancel="True" Grid.Column="1" FontSize="20" Margin="5 0 20 0"
+                <Button Margin="5 5 200 5" Content="HỦY" ToolTip="Hủy những thay đổi" IsCancel="True" Grid.Column="1" FontSize="20"
                         Command="{Binding DiscardChangeCommand}" CommandParameter="{Binding ElementName=pageBorrowBook}"/>
             </Grid>
         </materialDesign:Card>
 
-        <materialDesign:Card Grid.Column="1" Grid.RowSpan="3" Style="{StaticResource MaterialDesignPageCard}" Margin="2.5 5 5 5">
+        <materialDesign:Card Grid.Column="1" Grid.RowSpan="3" Margin="2.5 5 5 5">
             <Grid >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Margin="0 15 0 0" Text="THÔNG TIN NGƯỜI MƯỢN" Style="{StaticResource TitleTextBlock}"/>
+                <TextBlock Grid.Row="0" Margin="0 15 0 0" Text="THÔNG TIN THÀNH VIÊN" Style="{StaticResource TitleTextBlock}"/>
 
                 <!---Thông tin nhân viên-->
                 <ScrollViewer VerticalAlignment="Center" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">

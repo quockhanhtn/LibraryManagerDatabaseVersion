@@ -162,7 +162,8 @@ CREATE TABLE dbo.PayFineInfo
 (
 	Id int IDENTITY(1,1) PRIMARY KEY,
 	BorrowId INT NOT NULL,
-	Cash DECIMAL(19, 0) NOT NULL
+	Cash DECIMAL(19, 0) NOT NULL,
+	Reson NVARCHAR(20)
 
 	FOREIGN KEY(BorrowId) REFERENCES dbo.Borrow(Id)
 )

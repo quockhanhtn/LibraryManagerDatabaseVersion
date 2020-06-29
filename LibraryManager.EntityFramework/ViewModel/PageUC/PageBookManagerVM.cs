@@ -54,10 +54,9 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                     Title = "Nhập thông tin người mượn sách"
                 };
                 var findMemberWindow = new FindMemberWindow() { DataContext = findMemberVM };
-
                 findMemberWindow.ShowDialog();
-                var memberFound = findMemberVM.MemberSelected;
 
+                var memberFound = findMemberVM.MemberSelected;
                 if(memberFound != null)
                 {
                     var borrowVM = new PageBorrowBookVM(memberFound, librarian);
@@ -81,8 +80,22 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                     Title = "Nhập thông tin người trả sách"
                 };
                 var findMemberWindow = new FindMemberWindow() { DataContext = findMemberVM };
-
                 findMemberWindow.ShowDialog();
+
+                var memberFound = findMemberVM.MemberSelected;
+                if (memberFound != null)
+                {
+                    var returnVM = new PageReturnBookVM(memberFound, librarian);
+                    var returnPage = new PageReturnBook() { DataContext = returnVM };
+                    try
+                    {
+                        var w = FrameworkElementExtend.GetWindowParent(p) as Window;
+                        var gridMain = w.FindName("gridMain") as Grid;
+                        //gridMain.Children.Clear();
+                        gridMain.Children.Add(returnPage);
+                    }
+                    catch (Exception) { }
+                }
             });
 
             SearchCommand = new RelayCommand<TextBox>((p) => { return p != null; }, (p) =>

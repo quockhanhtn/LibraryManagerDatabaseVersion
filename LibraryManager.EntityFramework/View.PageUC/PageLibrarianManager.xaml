@@ -82,10 +82,8 @@
                 <Grid Grid.Row="2">
                     <ScrollViewer ScrollViewer.CanContentScroll="True"  VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                         <ListView ItemsSource="{Binding ListLibrarian, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
-                                      VerticalAlignment="Stretch" 
-                                      HorizontalAlignment="Stretch"
-                                      Foreground="Black"
-                                      SelectedItem="{Binding LibrarianSelected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                                  VerticalAlignment="Stretch"  HorizontalAlignment="Stretch" Foreground="Black"
+                                  SelectedItem="{Binding LibrarianSelected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
 
                             <!--<ListView.Template>
                                 <ControlTemplate>
