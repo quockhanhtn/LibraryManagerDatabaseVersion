@@ -186,7 +186,7 @@
                             <GridViewColumn Header="Tổng số sách">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Foreground="Black" Text="{Binding NumberOfBook}"/>
+                                        <TextBlock Foreground="Black" Text="{Binding BookItem.Number}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
@@ -194,7 +194,7 @@
                             <GridViewColumn Header="Còn lại">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Foreground="Black" Text="{Binding Count}"/>
+                                        <TextBlock Foreground="Black" Text="{Binding BookItem.Count}"/>
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>

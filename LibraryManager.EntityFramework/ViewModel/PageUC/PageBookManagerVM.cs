@@ -142,7 +142,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
 
             RemoveCommand = new RelayCommand<object>((p) => { return BookSelected != null; }, (p) => { });
 
-            StatisticCommand = new RelayCommand<object>((p) => { return BookSelected != null && BookSelected.NumberOfBook > BookSelected.Count; }, (p) => { });
+            StatisticCommand = new RelayCommand<object>((p) => { return BookSelected != null && BookSelected.BookItem.Number > BookSelected.BookItem.Count; }, (p) => { });
 
             ExportToExcelCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
@@ -251,10 +251,10 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                             worksheet.Cells[rowIndex, colIndex++].Value = item.Price;
 
                             ExcelHelper.FormatCellBorder(worksheet, rowIndex, colIndex);
-                            worksheet.Cells[rowIndex, colIndex++].Value = item.NumberOfBook;
+                            worksheet.Cells[rowIndex, colIndex++].Value = item.BookItem.Count;
 
                             ExcelHelper.FormatCellBorder(worksheet, rowIndex, colIndex);
-                            worksheet.Cells[rowIndex, colIndex++].Value = item.Count;
+                            worksheet.Cells[rowIndex, colIndex++].Value = item.BookItem.Count;
                         }
 
                         ExcelHelper.SaveExcelPackage(excelPackage, filePath);

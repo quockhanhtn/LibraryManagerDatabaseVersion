@@ -19,20 +19,17 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
         private BookDAL() { }
         public ObservableCollection<BookDTO> GetList()
         {
-            var listRaw = DataProvider.Instance.Database.View_Book.GroupBy(b => b.Id).Select(grp => grp.ToList()).ToList();
+            var listRaw = DataProvider.Instance.Database.Books.ToList();
             var listBookDTO = new ObservableCollection<BookDTO>();
 
-            foreach (var book in listRaw)
-            {
-                listBookDTO.Add(new BookDTO(book));
-            }
+            foreach (var book in listRaw) { listBookDTO.Add(new BookDTO(book)); }
 
             return listBookDTO;
         }
 
         public ObservableCollection<BookDTO> GetList(int bookCategoryId, int publisherId)
         {
-            var listRaw = DataProvider.Instance.Database.View_Book.GroupBy(b => b.Id).Select(grp => grp.ToList()).ToList();
+            var listRaw = DataProvider.Instance.Database.Books.ToList();
             var listBookDTO = new ObservableCollection<BookDTO>();
 
             foreach (var book in listRaw)
@@ -43,11 +40,15 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
                 }
                 else if (bookCategoryId == 0)
                 {
-                    if (book[0].PublisherId == publisherId) { listBookDTO.Add(new BookDTO(book)); }
+                    if (book.PublisherId == publisherId) { listBookDTO.Add(new BookDTO(book)); }
                 }
                 else if (publisherId == 0)
                 {
-                    if (book[0].BookCategoryId == bookCategoryId) { listBookDTO.Add(new BookDTO(book)); }
+                    if (book.BookCategoryId == bookCategoryId) { listBookDTO.Add(new BookDTO(book)); }
+                }
+                else
+                {
+                    if (book.PublisherId == publisherId && book.BookCategoryId == bookCategoryId) { listBookDTO.Add(new BookDTO(book)); }
                 }
             }
 

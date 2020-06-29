@@ -117,6 +117,7 @@
     </Compile>
     <Compile Include="Model\DataAccessLayer\AccountDAL.cs" />
     <Compile Include="Model\DataAccessLayer\AuthorDAL.cs" />
+    <Compile Include="Model\DataAccessLayer\BookAuthorDAL.cs" />
     <Compile Include="Model\DataAccessLayer\BookCategoryDAL.cs" />
     <Compile Include="Model\DataAccessLayer\BookDAL.cs" />
     <Compile Include="Model\DataAccessLayer\BorrowDAL.cs" />

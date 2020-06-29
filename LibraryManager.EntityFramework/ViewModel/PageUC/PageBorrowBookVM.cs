@@ -43,7 +43,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
 
             BorrowBookCommand = new RelayCommand<object>((p) =>
             {
-                if (NewBookBorrow == null || NewBookBorrow.Count < 1) { return false; }
+                if (NewBookBorrow == null || NewBookBorrow.BookItem.Count < 1) { return false; }
                 var listBookIdBorrow = new List<string>();
                 foreach (var item in ListBookBorrow) { listBookIdBorrow.Add(item.BookId); }
                 return !listBookIdBorrow.Contains(NewBookBorrow.Id);
