@@ -74,6 +74,12 @@
                         <ListView Margin="20" ItemsSource="{Binding ListAuthor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Foreground="Black"
                                   SelectedItem="{Binding AuthorSelected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Ẩn/hiện" x:Name="mnuStatusChange" Command="{Binding StatusChangeCommand}"/>
+                                    <MenuItem Header="Xóa" Command="{Binding DeleteCommand}"/>
+                                </ContextMenu>
+                            </ListView.ContextMenu>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
                                     <i:InvokeCommandAction Command="{Binding AuthorSelectedChanged}" CommandParameter="{Binding ElementName=pageAuthorManager}"/>

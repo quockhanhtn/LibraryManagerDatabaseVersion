@@ -72,12 +72,18 @@
                             <ListView ItemsSource="{Binding ListBookCategory, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                       VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Foreground="Black"
                                       SelectedItem="{Binding BookCategorySelected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="SelectionChanged">
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Ẩn/hiện" x:Name="mnuStatusChange" Command="{Binding StatusChangeCommand}"/>
+                                    <MenuItem Header="Xóa chuyên mục" Command="{Binding DeleteCommand}"/>
+                                </ContextMenu>
+                            </ListView.ContextMenu>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
                                     <i:InvokeCommandAction Command="{Binding BookCategorySelectedChanged}" CommandParameter="{Binding ElementName=pageBookCategoryManager}"/>
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                                <ListView.View>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <ListView.View>
                                     <GridView>
                                         <GridViewColumn Header="Mã chuyên mục">
                                             <GridViewColumn.CellTemplate>

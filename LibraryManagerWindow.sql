@@ -293,25 +293,6 @@ AS
 GO
 
 
---CREATE TRIGGER Trig_InsertBorrow ON [dbo].[Borrow] FOR INSERT
---AS
---	BEGIN
---		DECLARE @BookId VARCHAR(10)
---		SET @BookId = (SELECT TOP (1) BookId FROM dbo.Borrow ORDER BY BookId DESC)
---		UPDATE dbo.BookItem SET Count = Count - 1 WHERE BookId = @BookId
---	End
---GO
-
---CREATE TRIGGER Trig_DeleteBorrow ON [dbo].[Borrow] FOR DELETE
---AS
---	BEGIN
---		DECLARE @BookId VARCHAR(10)
---		DELETE FROM dbo.Borrow
---			WHERE @BookId in (select BookId from dbo.Borrow);
---		UPDATE dbo.BookItem SET Count = Count + 1 WHERE BookId = @BookId
---	End
---GO
-
 --Create admin account
 --	username: admin
 --	password: admin

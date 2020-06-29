@@ -59,6 +59,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
             AuthorSelectedChanged = new RelayCommand<UserControl>((p) => { return p != null && AuthorSelected != null; }, (p) =>
             {
                 var btnStatusChange = p.FindName("btnStatusChange") as Button;
+                var mnuStatusChange = p.FindName("mnuStatusChange") as MenuItem;
                 //var tblStatusChange = p.FindName("tblStatusChange") as TextBlock;
                 //var icoStatusChange = p.FindName("icoStatusChange") as PackIcon;
                 if (AuthorSelected.Status == true)
@@ -67,6 +68,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                     //icoStatusChange.Kind = PackIconKind.BlockHelper;
                     btnStatusChange.Content = "ẨN";
                     btnStatusChange.ToolTip = "Ẩn tác giả \"" + AuthorSelected.NickName + "\"";
+                    mnuStatusChange.Header = "Ẩn tác giả";
                 }
                 else
                 {
@@ -74,6 +76,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                     //icoStatusChange.Kind = PackIconKind.Restore;
                     btnStatusChange.Content = "HIỂN THỊ";
                     btnStatusChange.ToolTip = "Hiển thị tác giả \"" + AuthorSelected.NickName + "\"";
+                    mnuStatusChange.Header = "Hiển thị tác giả";
                 }
             });
 

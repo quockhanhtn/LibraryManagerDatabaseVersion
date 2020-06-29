@@ -58,6 +58,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
             BookCategorySelectedChanged = new RelayCommand<UserControl>((p) => { return p != null && BookCategorySelected != null; }, (p) =>
             {
                 var btnStatusChange = p.FindName("btnStatusChange") as Button;
+                var mnuStatusChange = p.FindName("mnuStatusChange") as MenuItem;
                 //var tblStatusChange = p.FindName("tblStatusChange") as TextBlock;
                 //var icoStatusChange = p.FindName("icoStatusChange") as PackIcon;
                 if (BookCategorySelected.Status == true)
@@ -66,6 +67,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                     //icoStatusChange.Kind = PackIconKind.BlockHelper;
                     btnStatusChange.Content = "ẨN";
                     btnStatusChange.ToolTip = "Ẩn chuyên mục \"" + BookCategorySelected.Name + "\"";
+                    mnuStatusChange.Header = "Ẩn chuyên mục";
                 }
                 else
                 {
@@ -73,6 +75,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                     //icoStatusChange.Kind = PackIconKind.Restore;
                     btnStatusChange.Content = "HIỂN THỊ";
                     btnStatusChange.ToolTip = "Hiển thị chuyên mục \"" + BookCategorySelected.Name + "\"";
+                    mnuStatusChange.Header = "Hiển thị chuyên mục";
                 }
             });
 

@@ -60,6 +60,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
             PublisherSelectedChanged = new RelayCommand<UserControl>((p) => { return p != null && PublisherSelected != null; }, (p) =>
             {
                 var btnStatusChange = p.FindName("btnStatusChange") as Button;
+                var mnuStatusChange = p.FindName("mnuStatusChange") as MenuItem;
                 //var tblStatusChange = p.FindName("tblStatusChange") as TextBlock;
                 //var icoStatusChange = p.FindName("icoStatusChange") as PackIcon;
                 if (PublisherSelected.Status == true)
@@ -67,14 +68,16 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                     //tblStatusChange.Text = "THÔI VIỆC";
                     //icoStatusChange.Kind = PackIconKind.BlockHelper;
                     btnStatusChange.Content = "ẨN";
-                    btnStatusChange.ToolTip = "Ẩn chuyên mục \"" + PublisherSelected.Name + "\"";
+                    btnStatusChange.ToolTip = "Ẩn nhà xuất bản \"" + PublisherSelected.Name + "\"";
+                    mnuStatusChange.Header = "Ẩn nhà xuất bản";
                 }
                 else
                 {
                     //tblStatusChange.Text = "ĐI LÀM LẠI";
                     //icoStatusChange.Kind = PackIconKind.Restore;
                     btnStatusChange.Content = "HIỂN THỊ";
-                    btnStatusChange.ToolTip = "Hiển thị chuyên mục \"" + PublisherSelected.Name + "\"";
+                    btnStatusChange.ToolTip = "Hiển thị nhà xuất bản \"" + PublisherSelected.Name + "\"";
+                    mnuStatusChange.Header = "Hiển thị nhà xuất bản";
                 }
             });
 

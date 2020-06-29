@@ -14,9 +14,6 @@
     <viewmodel_pageuc:PageAuthorManagerVM x:Key="PageAuthorManagerVM"/>
     <viewmodel_pageuc:PagePublisherManagerVM x:Key="PagePublisherManagerVM"/>
     <viewmodel_pageuc:PageAboutSoftwareVM x:Key="PageAboutSoftwareVM"/>
-    
-    
-    <viewmodel_pageuc:PageReturnBookVM x:Key="PageReturnBookVM"/>
 
 
     <viewmodel_addwindow:AddBookCategoryWindowVM x:Key="AddBookCategoryWindowVM"/>

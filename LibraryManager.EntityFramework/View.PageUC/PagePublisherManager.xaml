@@ -10,7 +10,7 @@
              xmlns:uc="clr-namespace:LibraryManager.MyUserControl;assembly=LibraryManager.MyUserControl" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              
-             mc:Ignorable="d" x:Name="pagePublisherManager" DataContext="{StaticResource PagePublisherManagerVM}"
+             mc:Ignorable="d" x:Name="pagePublisherManager"  DataContext="{StaticResource PagePublisherManagerVM}"
              d:DesignHeight="734" d:DesignWidth="1300" Background="#fafafa">
     <Grid>
         <Grid.Resources>
@@ -78,8 +78,8 @@
                                 <ContextMenu>
                                     <MenuItem Header="Gửi mail" Command="{Binding SendEmailCommand}"/>
                                     <MenuItem Header="Truy cập trang web" Command="{Binding OpenWebCommand}"/>
-                                    <MenuItem Header="Ẩn/hiện" Command="{Binding StatusChangeCommand}"/>
-                                    <MenuItem Header="Xóa" Command="{Binding DeleteCommand}"/>
+                                    <MenuItem Header="Ẩn/hiện" x:Name="mnuStatusChange" Command="{Binding StatusChangeCommand}"/>
+                                    <MenuItem Header="Xóa nhà xuất bản" Command="{Binding DeleteCommand}"/>
                                 </ContextMenu>
                             </ListView.ContextMenu>
                             <i:Interaction.Triggers>
