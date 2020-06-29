@@ -74,6 +74,14 @@
                         <ListView ItemsSource="{Binding ListPublisher, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                       VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Foreground="Black"
                                       SelectedItem="{Binding PublisherSelected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+                            <ListView.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="Gửi mail" Command="{Binding SendEmailCommand}"/>
+                                    <MenuItem Header="Truy cập trang web" Command="{Binding OpenWebCommand}"/>
+                                    <MenuItem Header="Ẩn/hiện" Command="{Binding StatusChangeCommand}"/>
+                                    <MenuItem Header="Xóa" Command="{Binding DeleteCommand}"/>
+                                </ContextMenu>
+                            </ListView.ContextMenu>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
                                     <i:InvokeCommandAction Command="{Binding PublisherSelectedChanged}" CommandParameter="{Binding ElementName=pagePublisherManager}"/>

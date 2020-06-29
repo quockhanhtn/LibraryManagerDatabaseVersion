@@ -47,12 +47,11 @@
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
-                        <ColumnDefinition Width="60"/>
                         <ColumnDefinition Width="150"/>
                     </Grid.ColumnDefinitions>
 
                     <TextBox x:Name="tbxSearch" Style="{StaticResource MyTextBox}" Grid.Column="0" Margin="10 0"
-                             materialDesign:HintAssist.Hint="Tìm kiếm" >
+                             materialDesign:HintAssist.Hint="Tìm kiếm nhân viên theo họ tên, email hoặc số điện thoại" >
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="TextChanged">
                                 <i:InvokeCommandAction Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=tbxSearch}"/>
@@ -60,18 +59,10 @@
                         </i:Interaction.Triggers>
                     </TextBox>
 
-                    <Button Grid.Column="1" Style="{StaticResource MaterialDesignIconButton}" ToolTip="Trợ giúp tìm kiếm">
-                        <materialDesign:PackIcon Kind="Help" />
-                    </Button>
-
                     <!-- Filter theo loại nhân viên-->
-                    <ComboBox Grid.Column="2" x:Name="cmbStatusFillter" materialDesign:HintAssist.Hint="Trạng thái"
-                              Margin="10" FontSize="18" materialDesign:HintAssist.HintOpacity=".26" SelectedIndex="1">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="SelectionChanged">
-                                <i:InvokeCommandAction Command="{Binding FilterByStatusCommand}" CommandParameter="{Binding ElementName=cmbStatusFillter, Path=SelectedValue}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
+                    <ComboBox Grid.Column="1" x:Name="cmbStatusFillter" materialDesign:HintAssist.Hint="Trạng thái"
+                              Margin="10" FontSize="18" materialDesign:HintAssist.HintOpacity=".26" 
+                              SelectedIndex="{Binding StatusFillter, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                         <ComboBoxItem>Tất cả</ComboBoxItem>
                         <ComboBoxItem>Đang làm</ComboBoxItem>
                         <ComboBoxItem>Đã nghỉ</ComboBoxItem>
@@ -96,9 +87,8 @@
 
                             <ListView.ContextMenu>
                                 <ContextMenu>
-                                    <MenuItem Header="Email" Command="{Binding EmailToCommand}"/>
-                                    <MenuItem Header="Thôi việc" Command="{Binding StatusChangeCommand}" CommandParameter="True"/>
-                                    <MenuItem Header="Làm lại" Command="{Binding StatusChangeCommand}" CommandParameter="False"/>
+                                    <MenuItem Header="Gửi mail" Command="{Binding SendEmailCommand}"/>
+                                    <MenuItem Name="mnuStatusChange" Header="Thôi việc/Làm lại" Command="{Binding StatusChangeCommand}"/>
                                 </ContextMenu>
                             </ListView.ContextMenu>
 

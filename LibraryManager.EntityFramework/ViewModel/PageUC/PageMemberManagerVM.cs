@@ -1,4 +1,5 @@
-﻿using LibraryManager.EntityFramework.Model.DataAccessLayer;
+﻿using LibraryManager.EntityFramework.Model;
+using LibraryManager.EntityFramework.Model.DataAccessLayer;
 using LibraryManager.EntityFramework.Model.DataTransferObject;
 using LibraryManager.EntityFramework.View.AddWindow;
 using LibraryManager.EntityFramework.ViewModel.AddWindow;
@@ -23,13 +24,13 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
         public ObservableCollection<MemberDTO> ListMember { get => listMember; set { listMember = value; OnPropertyChanged(); } }
         public MemberDTO MemberSelected { get => memberSelected; set { memberSelected = value; OnPropertyChanged(); } }
         public ICommand SearchCommand { get; set; }
-        public ICommand FilterByStatusCommand { get; set; }
         public ICommand MemberSelectedChanged { get; set; }
         public ICommand ExportToExcelCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
-        public ICommand EmailToCommand { get; set; }
+        public ICommand SendEmailCommand { get; set; }
         public ICommand StatusChangeCommand { get; set; }
+        public int StatusFillter { get => (int)statusFillter; set { statusFillter = (EnumStatus)value; ReloadList(); OnPropertyChanged(); } }
 
         public PageMemberManagerVM()
         {
@@ -66,25 +67,10 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 }
             });
 
-            FilterByStatusCommand = new RelayCommand<int>((selectIndex) => { return true; }, (selectIndex) =>
-            {
-                switch (selectIndex)
-                {
-                    case 0:
-                        ListMember = MemberDAL.Instance.GetList();
-                        break;
-                    case 1:
-                        ListMember = MemberDAL.Instance.GetList(true);
-                        break;
-                    case 2:
-                        ListMember = MemberDAL.Instance.GetList(false);
-                        break;
-                }
-            });
-
             MemberSelectedChanged = new RelayCommand<UserControl>((p) => { return p != null && MemberSelected != null; }, (p) =>
             {
                 var btnStatusChange = p.FindName("btnStatusChange") as Button;
+                var mnuStatusChange = p.FindName("mnuStatusChange") as MenuItem;
                 //var tblStatusChange = p.FindName("tblStatusChange") as TextBlock;
                 //var icoStatusChange = p.FindName("icoStatusChange") as PackIcon;
                 if (MemberSelected.Status == true)
@@ -93,6 +79,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                     //icoStatusChange.Kind = PackIconKind.BlockHelper;
                     btnStatusChange.Content = "KHÓA";
                     btnStatusChange.ToolTip = "Khóa thành viên \"" + MemberSelected.FullName + "\"";
+                    mnuStatusChange.Header = "Khóa";
                 }
                 else
                 {
@@ -100,6 +87,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                     //icoStatusChange.Kind = PackIconKind.Restore;
                     btnStatusChange.Content = "MỞ KHÓA";
                     btnStatusChange.ToolTip = "Mở khóa thành viên \"" + MemberSelected.FullName + "\"";
+                    mnuStatusChange.Header = "Mở khóa";
                 }
             });
 
@@ -358,7 +346,10 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 ReloadList();
             });
 
-            EmailToCommand = new RelayCommand<object>((p) => { return MemberSelected != null; }, (p) => { });
+            SendEmailCommand = new RelayCommand<object>((p) => { return MemberSelected != null && MemberSelected.Email != null; }, (p) =>
+            {
+                WebHelper.SendEmail(MemberSelected.Email);
+            });
 
             StatusChangeCommand = new RelayCommand<object>((p) => { return MemberSelected != null; }, (p) =>
             {
@@ -369,10 +360,11 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
 
         private void ReloadList()
         {
-            ListMember = MemberDAL.Instance.GetList(true);
+            ListMember = MemberDAL.Instance.GetList(statusFillter);
         }
 
         private ObservableCollection<MemberDTO> listMember;
         private MemberDTO memberSelected;
+        EnumStatus statusFillter = EnumStatus.Active;
     }
 }

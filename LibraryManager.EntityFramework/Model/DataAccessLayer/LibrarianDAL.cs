@@ -1,7 +1,9 @@
 ﻿using LibraryManager.EntityFramework.Model.DataTransferObject;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
+using System.Windows.Documents;
 
 namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 {
@@ -12,28 +14,24 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
     {
         public static LibrarianDAL Instance { get => (instance == null) ? new LibrarianDAL() : instance; }
         private LibrarianDAL() { }
-        public ObservableCollection<LibrarianDTO> GetList()
+        public ObservableCollection<LibrarianDTO> GetList(EnumStatus statusFillter = EnumStatus.AllStatus)
         {
-            var listRaw = DataProvider.Instance.Database.Librarians.Where(x => x.Id != "LIB000").ToList();
-            var listLibrarianDTO = new ObservableCollection<LibrarianDTO>();
-
-            foreach (var lib in listRaw)
+            var listRaw = new List<Librarian>();
+            switch (statusFillter)
             {
-                listLibrarianDTO.Add(new LibrarianDTO(lib));
+                case EnumStatus.AllStatus:
+                    listRaw = DataProvider.Instance.Database.Librarians.Where(x => x.Id != "LIB000").ToList();
+                    break;
+                case EnumStatus.Active:
+                    listRaw = DataProvider.Instance.Database.Librarians.Where(x => x.Id != "LIB000" && x.Status == true).ToList();
+                    break;
+                case EnumStatus.InActive:
+                    listRaw = DataProvider.Instance.Database.Librarians.Where(x => x.Id != "LIB000" && x.Status == false).ToList();
+                    break;
             }
 
-            return listLibrarianDTO;
-        }
-        public ObservableCollection<LibrarianDTO> GetList(bool status)
-        {
-            var listRaw = DataProvider.Instance.Database.Librarians.Where(x => x.Id != "LIB000" && x.Status == status).ToList();
             var listLibrarianDTO = new ObservableCollection<LibrarianDTO>();
-
-            foreach (var lib in listRaw)
-            {
-                listLibrarianDTO.Add(new LibrarianDTO(lib));
-            }
-
+            foreach (var lib in listRaw) { listLibrarianDTO.Add(new LibrarianDTO(lib)); }
             return listLibrarianDTO;
         }
         

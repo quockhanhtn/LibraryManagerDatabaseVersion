@@ -17,19 +17,21 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
         public static MemberDAL Instance { get => (instance == null) ? new MemberDAL() : instance; }
         private MemberDAL() { }
 
-        public ObservableCollection<MemberDTO> GetList()
+        public ObservableCollection<MemberDTO> GetList(EnumStatus statusFillter = EnumStatus.AllStatus)
         {
-            var listRaw = DataProvider.Instance.Database.Members.ToList();
-            var listMemberDTO = new ObservableCollection<MemberDTO>();
-
-            foreach (var mem in listRaw) { listMemberDTO.Add(new MemberDTO(mem)); }
-
-            return listMemberDTO;
-        }
-
-        public ObservableCollection<MemberDTO> GetList(bool status)
-        {
-            var listRaw = DataProvider.Instance.Database.Members.Where(x => x.Status == status).ToList();
+            var listRaw = new List<Member>();
+            switch (statusFillter)
+            {
+                case EnumStatus.AllStatus:
+                    listRaw = DataProvider.Instance.Database.Members.ToList();
+                    break;
+                case EnumStatus.Active:
+                    listRaw = DataProvider.Instance.Database.Members.Where(x => x.Status == true).ToList();
+                    break;
+                case EnumStatus.InActive:
+                    listRaw = DataProvider.Instance.Database.Members.Where(x => x.Status == false).ToList();
+                    break;
+            }
             var listMemberDTO = new ObservableCollection<MemberDTO>();
 
             foreach (var mem in listRaw) { listMemberDTO.Add(new MemberDTO(mem)); }

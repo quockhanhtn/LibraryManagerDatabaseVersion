@@ -18,6 +18,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
 
 namespace LibraryManager.EntityFramework.ViewModel.PageUC
@@ -35,7 +36,8 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
         public ICommand UpdateCommand { get; set; }
         public ICommand StatusChangeCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
-
+        public ICommand SendEmailCommand { get; set; }
+        public ICommand OpenWebCommand { get; set; }
         public PagePublisherManagerVM()
         {
             ReloadList();
@@ -244,12 +246,25 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 ReloadList();
             });
 
+            SendEmailCommand = new RelayCommand<object>((p) => { return PublisherSelected != null && PublisherSelected.Email != null; }, (p) =>
+            {
+                WebHelper.SendEmail(PublisherSelected.Email);
+            });
+            
+            OpenWebCommand = new RelayCommand<object>((p) => { return PublisherSelected != null && PublisherSelected.Website != null; }, (p) =>
+            {
+                WebHelper.OpenLink(PublisherSelected.Website);
+            });
+
             DeleteCommand = new RelayCommand<UserControl>((p) => { return PublisherSelected != null && PublisherSelected.NumberOfBook == 0; }, (p) =>
             {
                 PublisherDAL.Instance.Delete(PublisherSelected.Id);
                 ReloadList();
-                var mySnackbar = p.FindName("mySnackbar") as Snackbar;
-                mySnackbar.MessageQueue.Enqueue("Xóa nhà xuất bản thành công !");
+                if (p != null)
+                {
+                    var mySnackbar = p.FindName("mySnackbar") as Snackbar;
+                    mySnackbar.MessageQueue.Enqueue("Xóa nhà xuất bản thành công !");
+                }
             });
         }
 

@@ -1,4 +1,5 @@
-﻿using LibraryManager.EntityFramework.Model.DataAccessLayer;
+﻿using LibraryManager.EntityFramework.Model;
+using LibraryManager.EntityFramework.Model.DataAccessLayer;
 using LibraryManager.EntityFramework.Model.DataTransferObject;
 using LibraryManager.EntityFramework.View.AddWindow;
 using LibraryManager.EntityFramework.ViewModel.AddWindow;
@@ -26,13 +27,13 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
         public ObservableCollection<LibrarianDTO> ListLibrarian { get => listLibrarian; set { listLibrarian = value; OnPropertyChanged(); } }
         public LibrarianDTO LibrarianSelected { get => librarianSelected; set { librarianSelected = value; OnPropertyChanged(); } }
         public ICommand SearchCommand { get; set; }
-        public ICommand FilterByStatusCommand { get; set; }
         public ICommand LibrarianSelectedChanged { get; set; }
         public ICommand ExportToExcelCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
-        public ICommand EmailToCommand { get; set; }
+        public ICommand SendEmailCommand { get; set; }
         public ICommand StatusChangeCommand { get; set; }
+        public int StatusFillter { get => (int)statusFillter; set { statusFillter = (EnumStatus)value; ReloadList(); OnPropertyChanged(); } }
 
         public PageLibrarianManagerVM()
         {
@@ -69,25 +70,10 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 }
             });
 
-            FilterByStatusCommand = new RelayCommand<ComboBoxItem>((p) => { return true; }, (p) =>
-            {
-                if (p.Content.ToString() == "Tất cả")
-                {
-                    ListLibrarian = LibrarianDAL.Instance.GetList();
-                }
-                else if (p.Content.ToString() == "Đang làm")
-                {
-                    ListLibrarian = LibrarianDAL.Instance.GetList(true);
-                }
-                else
-                {
-                    ListLibrarian = LibrarianDAL.Instance.GetList(false);
-                }
-            });
-
             LibrarianSelectedChanged = new RelayCommand<UserControl>((p) => { return p != null && LibrarianSelected != null; }, (p) =>
             {
                 var btnStatusChange = p.FindName("btnStatusChange") as Button;
+                var mnuStatusChange = p.FindName("mnuStatusChange") as MenuItem;
                 //var tblStatusChange = p.FindName("tblStatusChange") as TextBlock;
                 //var icoStatusChange = p.FindName("icoStatusChange") as PackIcon;
                 if (LibrarianSelected.Status == true)
@@ -96,6 +82,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                     //icoStatusChange.Kind = PackIconKind.BlockHelper;
                     btnStatusChange.Content = "THÔI VIỆC";
                     btnStatusChange.ToolTip = "Nhân viên " + LibrarianSelected.FullName + " nghỉ việc";
+                    mnuStatusChange.Header = "Thôi việc";
                 }
                 else
                 {
@@ -103,6 +90,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                     //icoStatusChange.Kind = PackIconKind.Restore;
                     btnStatusChange.Content = "ĐI LÀM LẠI";
                     btnStatusChange.ToolTip = "Nhân viên " + LibrarianSelected.FullName + " làm viêc lại";
+                    mnuStatusChange.Header = "Đi làm lại";
                 }
             });
 
@@ -375,7 +363,10 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 ReloadList();
             });
 
-            EmailToCommand = new RelayCommand<object>((p) => { return LibrarianSelected != null; }, (p) => { });
+            SendEmailCommand = new RelayCommand<object>((p) => { return LibrarianSelected != null && LibrarianSelected.Email != null; }, (p) =>
+            {
+                WebHelper.SendEmail(LibrarianSelected.Email);
+            });
 
             StatusChangeCommand = new RelayCommand<object>((p) => { return LibrarianSelected != null; }, (p) =>
             {
@@ -386,10 +377,11 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
 
         private void ReloadList()
         {
-            ListLibrarian = LibrarianDAL.Instance.GetList(true);
+            ListLibrarian = LibrarianDAL.Instance.GetList(statusFillter);
         }
 
         private ObservableCollection<LibrarianDTO> listLibrarian;
         private LibrarianDTO librarianSelected;
+        EnumStatus statusFillter = EnumStatus.Active;
     }
 }
