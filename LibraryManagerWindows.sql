@@ -556,47 +556,28 @@ GO
 --	 ON DT2.AuthorId = DT1.AuthorId
 --GO
 
-CREATE VIEW [dbo].[View_Author] AS
-	SELECT A.Id AS [AuthorId], A.NickName, B.Id AS [BookId], B.Title AS [BookTitle], A.Status
-	FROM dbo.Author AS A INNER JOIN dbo.BookAuthor AS BA ON BA.AuthorId = A.Id
-	INNER JOIN dbo.Book AS B ON B.Id = BA.BookId
-GO
-
-CREATE VIEW [dbo].[View_AuthorNoBook] AS
-	SELECT Id AS [AuthorId], NickName, Status FROM dbo.Author WHERE dbo.Author.Id NOT IN ( SELECT AuthorID FROM View_Author)
-GO
-
-CREATE VIEW [dbo].[View_BookCategory] AS
-	SELECT BC.Id, BC.Name, BC.LimitDays, COUNT(dbo.Book.Id) AS [NumberOfBook], BC.Status 
-	FROM dbo.BookCategory AS BC Left JOIN dbo.Book ON Book.BookCategoryId = BC.Id 
-	GROUP BY BC.Id, BC.Name, BC.LimitDays, BC.Status
-GO
-
-CREATE VIEW [dbo].[View_Publisher] AS
-	SELECT P.Id, P.Name, P.PhoneNumber, P.Address, P.Email, P.Website, COUNT(dbo.Book.Id) AS [NumberOfBook], P.Status
-	FROM dbo.Publisher AS P Left JOIN dbo.Book ON Book.PublisherId = P.Id
-	GROUP BY P.Id, P.Name, P.PhoneNumber, P.Address, P.Email, P.Website, P.Status
-GO
-
---SELECT * FROM dbo.View_Author
-
---SELECT * FROM dbo.Book
-
---SELECT * FROM dbo.BookItem
-
---CREATE VIEW View_Book AS
---	SELECT B.Id, B.Title, B.BookCategoryId ,BC.Name AS [BookCategoryName], B.PublisherId, P.Name AS [PublisherName], B.YearPublish, A.Id AS [AuthorId], A.NickName AS [AuthorName], B.Price, B.PageNumber, B.Size, BI.Number AS [NumberOfBook], B.Status
---	FROM dbo.Book AS B, dbo.BookAuthor AS BA, dbo.BookCategory AS BC, dbo.Publisher AS P, dbo.Author AS A, dbo.BookItem AS BI
---	WHERE B.PublisherId = P.Id AND B.BookCategoryId = BC.Id AND B.Id = BA.BookId AND A.Id = BA.AuthorId AND B.Id = BI.BookId
+--CREATE VIEW [dbo].[View_Author] AS
+--	SELECT A.Id AS [AuthorId], A.NickName, B.Id AS [BookId], B.Title AS [BookTitle], A.Status
+--	FROM dbo.Author AS A INNER JOIN dbo.BookAuthor AS BA ON BA.AuthorId = A.Id
+--	INNER JOIN dbo.Book AS B ON B.Id = BA.BookId
 --GO
 
-CREATE VIEW View_Book AS
-	SELECT B.Id, B.Title, B.BookCategoryId ,B.PublisherId, B.YearPublish, A.Id AS [AuthorId], B.Price, B.PageNumber, B.Size, BI.Number AS [NumberOfBook],BI.Count AS [Count], B.Status
-	FROM dbo.Book AS B, dbo.BookAuthor AS BA, dbo.BookCategory AS BC, dbo.Publisher AS P, dbo.Author AS A, dbo.BookItem AS BI
-	WHERE B.PublisherId = P.Id AND B.BookCategoryId = BC.Id AND B.Id = BA.BookId AND A.Id = BA.AuthorId AND B.Id = BI.BookId
-GO
+--CREATE VIEW [dbo].[View_AuthorNoBook] AS
+--	SELECT Id AS [AuthorId], NickName, Status FROM dbo.Author WHERE dbo.Author.Id NOT IN ( SELECT AuthorID FROM View_Author)
+--GO
 
---SELECT * FROM view_book
+--CREATE VIEW [dbo].[View_BookCategory] AS
+--	SELECT BC.Id, BC.Name, BC.LimitDays, COUNT(dbo.Book.Id) AS [NumberOfBook], BC.Status 
+--	FROM dbo.BookCategory AS BC Left JOIN dbo.Book ON Book.BookCategoryId = BC.Id 
+--	GROUP BY BC.Id, BC.Name, BC.LimitDays, BC.Status
+--GO
+
+--CREATE VIEW [dbo].[View_Publisher] AS
+--	SELECT P.Id, P.Name, P.PhoneNumber, P.Address, P.Email, P.Website, COUNT(dbo.Book.Id) AS [NumberOfBook], P.Status
+--	FROM dbo.Publisher AS P Left JOIN dbo.Book ON Book.PublisherId = P.Id
+--	GROUP BY P.Id, P.Name, P.PhoneNumber, P.Address, P.Email, P.Website, P.Status
+--GO
+
 
 INSERT INTO dbo.Borrow (BookId, MemberId, LibrarianId, BorrowDate)
 VALUES ('B000000021', 'MEM0000011', 'LIB001', '2019-12-20')
@@ -613,6 +594,3 @@ INSERT INTO dbo.Borrow (BookId, MemberId, LibrarianId, BorrowDate)
 VALUES ('B000000001', 'MEM0000012', 'LIB001', '2019-12-20')
 
 
-SELECT * FROM dbo.BookItem
-
-SELECT * FROM dbo.Borrow

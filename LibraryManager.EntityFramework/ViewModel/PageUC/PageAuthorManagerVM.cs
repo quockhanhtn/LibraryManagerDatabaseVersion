@@ -158,7 +158,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
 
                             //gán giá trị cho từng cell                      
                             ExcelHelper.FormatCellBorder(worksheet, rowIndex, colIndex);
-                            worksheet.Cells[rowIndex, colIndex++].Value = item.AuthorId;
+                            worksheet.Cells[rowIndex, colIndex++].Value = item.Id;
 
                             ExcelHelper.FormatCellBorder(worksheet, rowIndex, colIndex);
                             worksheet.Cells[rowIndex, colIndex++].Value = item.NickName;
@@ -223,13 +223,13 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
 
             StatusChangeCommand = new RelayCommand<object>((p) => { return AuthorSelected != null; }, (p) =>
             {
-                AuthorDAL.Instance.ChangeStatus(AuthorSelected.AuthorId);
+                AuthorDAL.Instance.ChangeStatus(AuthorSelected.Id);
                 ReloadList();
             });
 
             DeleteCommand = new RelayCommand<UserControl>((p) => { return AuthorSelected != null && AuthorSelected.NumberOfBook == 0; }, (p) =>
             {
-                AuthorDAL.Instance.Delete(AuthorSelected.AuthorId);
+                AuthorDAL.Instance.Delete(AuthorSelected.Id);
                 ReloadList();
                 var mySnackbar = p.FindName("mySnackbar") as Snackbar;
                 mySnackbar.MessageQueue.Enqueue("Xóa tác giả thành công !");

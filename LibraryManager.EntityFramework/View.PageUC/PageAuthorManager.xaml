@@ -84,7 +84,7 @@
                                     <GridViewColumn Header="Mã tác giả">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock Foreground="Black" Text="{Binding AuthorId}"></TextBlock>
+                                                <TextBlock Foreground="Black" Text="{Binding Id}"></TextBlock>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
@@ -174,7 +174,7 @@
 
                             <!---Mã CHUYÊN MỤC-->
                             <TextBox materialDesign:HintAssist.Hint="Mã tác giả" IsReadOnly="True"
-                                     Text="{Binding AuthorSelected.AuthorId, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                                     Text="{Binding AuthorSelected.Id, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
 
                             <!---TÊn tác giả-->
                             <TextBox materialDesign:HintAssist.Hint="Tên tác giả" x:Name="tbxNickName" MaxLength="40"
@@ -186,7 +186,7 @@
                                      Text="{Binding AuthorSelected.NumberOfBook, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
 
                             <Expander Header="Các sách đã viết">
-                               <ListView Margin="30 0 20 0" ItemsSource="{Binding AuthorSelected.ListBook, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                               <ListView Margin="30 0 20 0" ItemsSource="{Binding AuthorSelected.ListBookTitle, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
                                           VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Foreground="Black">
                                 </ListView>
                             </Expander>

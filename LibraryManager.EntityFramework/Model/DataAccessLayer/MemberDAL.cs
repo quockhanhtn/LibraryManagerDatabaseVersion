@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 {
+    /// <summary>
+    /// Class Data Access Layer for Member
+    /// </summary>
     public class MemberDAL
     {
         public static MemberDAL Instance { get => (instance == null) ? new MemberDAL() : instance; }
@@ -55,9 +58,9 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
                 memberUpdate.PhoneNumber = member.PhoneNumber;
 
                 memberUpdate.RegisterDate = member.RegisterDate;
+                
+                DataProvider.Instance.SaveEntity(memberUpdate, EntityState.Modified);
             }
-
-            DataProvider.Instance.SaveEntity(memberUpdate, EntityState.Modified);
         }
 
         public void ChangeStatus(string idMember)
@@ -67,8 +70,8 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
             if (memberUpdate != null)
             {
                 memberUpdate.Status = (memberUpdate.Status == true) ? false : true;
+                DataProvider.Instance.SaveEntity(memberUpdate, EntityState.Modified);
             }
-            DataProvider.Instance.SaveEntity(memberUpdate, EntityState.Modified);
         }
 
         private static MemberDAL instance;

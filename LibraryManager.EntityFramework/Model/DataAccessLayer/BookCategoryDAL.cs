@@ -1,25 +1,21 @@
 ﻿using LibraryManager.EntityFramework.Model.DataTransferObject;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 {
+    /// <summary>
+    /// Class Data Access Layer for BookCategory
+    /// </summary>
     public class BookCategoryDAL
     {
         public static BookCategoryDAL Instance { get => (instance == null) ? new BookCategoryDAL() : instance; }
         private BookCategoryDAL() { }
-        public BookCategoryDTO GetBookCategory(int bookCategoryId)
-        {
-            return new BookCategoryDTO(DataProvider.Instance.Database.View_BookCategory.Where(x => x.Id == bookCategoryId).SingleOrDefault());
-        }
+
         public ObservableCollection<BookCategoryDTO> GetList()
         {
-            var listRaw = DataProvider.Instance.Database.View_BookCategory.ToList();
+            var listRaw = DataProvider.Instance.Database.BookCategories.ToList();
             var listBookCategoryDTO = new ObservableCollection<BookCategoryDTO>();
 
             foreach (var bookCategory in listRaw) { listBookCategoryDTO.Add(new BookCategoryDTO(bookCategory)); }
@@ -29,7 +25,7 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 
         public ObservableCollection<BookCategoryDTO> GetList(bool status)
         {
-            var listRaw = DataProvider.Instance.Database.View_BookCategory.Where(x => x.Status == status).ToList();
+            var listRaw = DataProvider.Instance.Database.BookCategories.Where(x => x.Status == status).ToList();
             var listBookCategoryDTO = new ObservableCollection<BookCategoryDTO>();
 
             foreach (var bookCategory in listRaw) { listBookCategoryDTO.Add(new BookCategoryDTO(bookCategory)); }
@@ -50,9 +46,9 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
             {
                 bookCategoryUpdate.Name = bookCategory.Name;
                 bookCategoryUpdate.LimitDays = bookCategory.LimitDays;
-            }
 
-            DataProvider.Instance.SaveEntity(bookCategoryUpdate, EntityState.Modified, true);
+                DataProvider.Instance.SaveEntity(bookCategoryUpdate, EntityState.Modified, true);
+            }
         }
 
         public void ChangeStatus(int idBookCategory)
@@ -62,9 +58,8 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
             if (bookCategoryUpdate != null)
             {
                 bookCategoryUpdate.Status = (bookCategoryUpdate.Status == true) ? false : true;
+                DataProvider.Instance.SaveEntity(bookCategoryUpdate, EntityState.Modified, true);
             }
-
-            DataProvider.Instance.SaveEntity(bookCategoryUpdate, EntityState.Modified, true);
         }
 
         public void Delete(int idBookCategory)

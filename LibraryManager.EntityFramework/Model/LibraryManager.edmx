@@ -133,78 +133,6 @@
           <Property Name="BorrowId" Type="int" Nullable="false" />
           <Property Name="ReturnDate" Type="date" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'LibraryManager.dbo.View_Author' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="View_Author">
-          <Key>
-            <PropertyRef Name="AuthorId" />
-            <PropertyRef Name="BookId" />
-          </Key>
-          <Property Name="AuthorId" Type="int" Nullable="false" />
-          <Property Name="NickName" Type="nvarchar" MaxLength="40" />
-          <Property Name="BookId" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="BookTitle" Type="nvarchar" MaxLength="100" />
-          <Property Name="Status" Type="bit" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'LibraryManager.dbo.View_AuthorNoBook' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="View_AuthorNoBook">
-          <Key>
-            <PropertyRef Name="AuthorId" />
-          </Key>
-          <Property Name="AuthorId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="NickName" Type="nvarchar" MaxLength="40" />
-          <Property Name="Status" Type="bit" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'LibraryManager.dbo.View_Book' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="View_Book">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="PublisherId" />
-            <PropertyRef Name="AuthorId" />
-          </Key>
-          <Property Name="Id" Type="varchar" MaxLength="10" Nullable="false" />
-          <Property Name="Title" Type="nvarchar" MaxLength="100" />
-          <Property Name="BookCategoryId" Type="int" />
-          <Property Name="PublisherId" Type="int" Nullable="false" />
-          <Property Name="YearPublish" Type="int" />
-          <Property Name="AuthorId" Type="int" Nullable="false" />
-          <Property Name="Price" Type="decimal" Precision="19" Scale="0" />
-          <Property Name="PageNumber" Type="int" />
-          <Property Name="Size" Type="varchar" MaxLength="11" />
-          <Property Name="NumberOfBook" Type="int" />
-          <Property Name="Count" Type="int" />
-          <Property Name="Status" Type="bit" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'LibraryManager.dbo.View_BookCategory' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="View_BookCategory">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="50" />
-          <Property Name="LimitDays" Type="int" />
-          <Property Name="NumberOfBook" Type="int" />
-          <Property Name="Status" Type="bit" />
-        </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'LibraryManager.dbo.View_Publisher' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
-        <EntityType Name="View_Publisher">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="Name" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
-          <Property Name="PhoneNumber" Type="varchar" MaxLength="15" />
-          <Property Name="Address" Type="nvarchar" MaxLength="100" />
-          <Property Name="Email" Type="varchar" MaxLength="30" />
-          <Property Name="Website" Type="varchar" MaxLength="40" />
-          <Property Name="NumberOfBook" Type="int" />
-          <Property Name="Status" Type="bit" />
-        </EntityType>
         <Association Name="FK__Book__BookCatego__398D8EEE">
           <End Role="BookCategory" Type="Self.BookCategory" Multiplicity="0..1" />
           <End Role="Book" Type="Self.Book" Multiplicity="*" />
@@ -338,59 +266,6 @@ warning 6002: The table/view 'LibraryManager.dbo.View_Publisher' does not have a
           <EntitySet Name="PayFineInfo" EntityType="Self.PayFineInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Publisher" EntityType="Self.Publisher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ReturnBook" EntityType="Self.ReturnBook" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="View_Author" EntityType="Self.View_Author" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [View_Author].[AuthorId] AS [AuthorId], 
-    [View_Author].[NickName] AS [NickName], 
-    [View_Author].[BookId] AS [BookId], 
-    [View_Author].[BookTitle] AS [BookTitle], 
-    [View_Author].[Status] AS [Status]
-    FROM [dbo].[View_Author] AS [View_Author]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="View_AuthorNoBook" EntityType="Self.View_AuthorNoBook" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [View_AuthorNoBook].[AuthorId] AS [AuthorId], 
-    [View_AuthorNoBook].[NickName] AS [NickName], 
-    [View_AuthorNoBook].[Status] AS [Status]
-    FROM [dbo].[View_AuthorNoBook] AS [View_AuthorNoBook]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="View_Book" EntityType="Self.View_Book" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [View_Book].[Id] AS [Id], 
-    [View_Book].[Title] AS [Title], 
-    [View_Book].[BookCategoryId] AS [BookCategoryId], 
-    [View_Book].[PublisherId] AS [PublisherId], 
-    [View_Book].[YearPublish] AS [YearPublish], 
-    [View_Book].[AuthorId] AS [AuthorId], 
-    [View_Book].[Price] AS [Price], 
-    [View_Book].[PageNumber] AS [PageNumber], 
-    [View_Book].[Size] AS [Size], 
-    [View_Book].[NumberOfBook] AS [NumberOfBook], 
-    [View_Book].[Count] AS [Count], 
-    [View_Book].[Status] AS [Status]
-    FROM [dbo].[View_Book] AS [View_Book]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="View_BookCategory" EntityType="Self.View_BookCategory" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [View_BookCategory].[Id] AS [Id], 
-    [View_BookCategory].[Name] AS [Name], 
-    [View_BookCategory].[LimitDays] AS [LimitDays], 
-    [View_BookCategory].[NumberOfBook] AS [NumberOfBook], 
-    [View_BookCategory].[Status] AS [Status]
-    FROM [dbo].[View_BookCategory] AS [View_BookCategory]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="View_Publisher" EntityType="Self.View_Publisher" store:Type="Views" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [View_Publisher].[Id] AS [Id], 
-    [View_Publisher].[Name] AS [Name], 
-    [View_Publisher].[PhoneNumber] AS [PhoneNumber], 
-    [View_Publisher].[Address] AS [Address], 
-    [View_Publisher].[Email] AS [Email], 
-    [View_Publisher].[Website] AS [Website], 
-    [View_Publisher].[NumberOfBook] AS [NumberOfBook], 
-    [View_Publisher].[Status] AS [Status]
-    FROM [dbo].[View_Publisher] AS [View_Publisher]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK__Book__BookCatego__398D8EEE" Association="Self.FK__Book__BookCatego__398D8EEE">
             <End Role="BookCategory" EntitySet="BookCategory" />
             <End Role="Book" EntitySet="Book" />
@@ -448,11 +323,6 @@ warning 6002: The table/view 'LibraryManager.dbo.View_Publisher' does not have a
           <EntitySet Name="PayFineInfoes" EntityType="LibraryManagerModel.PayFineInfo" />
           <EntitySet Name="Publishers" EntityType="LibraryManagerModel.Publisher" />
           <EntitySet Name="ReturnBooks" EntityType="LibraryManagerModel.ReturnBook" />
-          <EntitySet Name="View_Author" EntityType="LibraryManagerModel.View_Author" />
-          <EntitySet Name="View_AuthorNoBook" EntityType="LibraryManagerModel.View_AuthorNoBook" />
-          <EntitySet Name="View_Book" EntityType="LibraryManagerModel.View_Book" />
-          <EntitySet Name="View_BookCategory" EntityType="LibraryManagerModel.View_BookCategory" />
-          <EntitySet Name="View_Publisher" EntityType="LibraryManagerModel.View_Publisher" />
           <AssociationSet Name="FK__Book__BookCatego__398D8EEE" Association="LibraryManagerModel.FK__Book__BookCatego__398D8EEE">
             <End Role="BookCategory" EntitySet="BookCategories" />
             <End Role="Book" EntitySet="Books" />
@@ -627,68 +497,6 @@ warning 6002: The table/view 'LibraryManager.dbo.View_Publisher' does not have a
           <Property Name="BorrowId" Type="Int32" Nullable="false" />
           <Property Name="ReturnDate" Type="DateTime" Nullable="false" Precision="0" />
           <NavigationProperty Name="Borrow" Relationship="LibraryManagerModel.FK__ReturnBoo__Retur__49C3F6B7" FromRole="ReturnBook" ToRole="Borrow" />
-        </EntityType>
-        <EntityType Name="View_Author">
-          <Key>
-            <PropertyRef Name="AuthorId" />
-            <PropertyRef Name="BookId" />
-          </Key>
-          <Property Name="AuthorId" Type="Int32" Nullable="false" />
-          <Property Name="NickName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="BookId" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="BookTitle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="View_AuthorNoBook">
-          <Key>
-            <PropertyRef Name="AuthorId" />
-          </Key>
-          <Property Name="AuthorId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="NickName" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
-          <Property Name="Status" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="View_Book">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="PublisherId" />
-            <PropertyRef Name="AuthorId" />
-          </Key>
-          <Property Name="Id" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="BookCategoryId" Type="Int32" />
-          <Property Name="PublisherId" Type="Int32" Nullable="false" />
-          <Property Name="YearPublish" Type="Int32" />
-          <Property Name="AuthorId" Type="Int32" Nullable="false" />
-          <Property Name="Price" Type="Decimal" Precision="19" Scale="0" />
-          <Property Name="PageNumber" Type="Int32" />
-          <Property Name="Size" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
-          <Property Name="NumberOfBook" Type="Int32" />
-          <Property Name="Count" Type="Int32" />
-          <Property Name="Status" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="View_BookCategory">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="LimitDays" Type="Int32" />
-          <Property Name="NumberOfBook" Type="Int32" />
-          <Property Name="Status" Type="Boolean" />
-        </EntityType>
-        <EntityType Name="View_Publisher">
-          <Key>
-            <PropertyRef Name="Id" />
-            <PropertyRef Name="Name" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="PhoneNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
-          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Email" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
-          <Property Name="Website" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="NumberOfBook" Type="Int32" />
-          <Property Name="Status" Type="Boolean" />
         </EntityType>
         <Association Name="FK__Book__BookCatego__398D8EEE">
           <End Type="LibraryManagerModel.BookCategory" Role="BookCategory" Multiplicity="0..1" />
@@ -923,69 +731,6 @@ warning 6002: The table/view 'LibraryManager.dbo.View_Publisher' does not have a
               <MappingFragment StoreEntitySet="ReturnBook">
                 <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
                 <ScalarProperty Name="BorrowId" ColumnName="BorrowId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="View_Author">
-            <EntityTypeMapping TypeName="LibraryManagerModel.View_Author">
-              <MappingFragment StoreEntitySet="View_Author">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="BookTitle" ColumnName="BookTitle" />
-                <ScalarProperty Name="BookId" ColumnName="BookId" />
-                <ScalarProperty Name="NickName" ColumnName="NickName" />
-                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="View_AuthorNoBook">
-            <EntityTypeMapping TypeName="LibraryManagerModel.View_AuthorNoBook">
-              <MappingFragment StoreEntitySet="View_AuthorNoBook">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="NickName" ColumnName="NickName" />
-                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="View_Book">
-            <EntityTypeMapping TypeName="LibraryManagerModel.View_Book">
-              <MappingFragment StoreEntitySet="View_Book">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="NumberOfBook" ColumnName="NumberOfBook" />
-                <ScalarProperty Name="Size" ColumnName="Size" />
-                <ScalarProperty Name="PageNumber" ColumnName="PageNumber" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
-                <ScalarProperty Name="YearPublish" ColumnName="YearPublish" />
-                <ScalarProperty Name="PublisherId" ColumnName="PublisherId" />
-                <ScalarProperty Name="BookCategoryId" ColumnName="BookCategoryId" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="View_BookCategory">
-            <EntityTypeMapping TypeName="LibraryManagerModel.View_BookCategory">
-              <MappingFragment StoreEntitySet="View_BookCategory">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="NumberOfBook" ColumnName="NumberOfBook" />
-                <ScalarProperty Name="LimitDays" ColumnName="LimitDays" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="View_Publisher">
-            <EntityTypeMapping TypeName="LibraryManagerModel.View_Publisher">
-              <MappingFragment StoreEntitySet="View_Publisher">
-                <ScalarProperty Name="Status" ColumnName="Status" />
-                <ScalarProperty Name="NumberOfBook" ColumnName="NumberOfBook" />
-                <ScalarProperty Name="Website" ColumnName="Website" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

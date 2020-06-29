@@ -1,12 +1,7 @@
 ﻿using LibraryManager.EntityFramework.Model.DataTransferObject;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
-using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 {
@@ -67,13 +62,12 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
                 librarianUpdate.PhoneNumber = librarian.PhoneNumber;
                 librarianUpdate.StartDate = librarian.StartDate;
                 librarianUpdate.Salary = librarian.Salary;
+
+                DataProvider.Instance.SaveEntity(librarianUpdate, EntityState.Modified);
+                //DataProvider.Instance.Database.Entry(librarianUpdate).State = EntityState.Modified;
+                //DataProvider.Instance.Database.SaveChanges();
+                //DataProvider.Instance.Database.Entry(librarianUpdate).State = EntityState.Detached;
             }
-
-            DataProvider.Instance.SaveEntity(librarianUpdate, EntityState.Modified);
-
-            //DataProvider.Instance.Database.Entry(librarianUpdate).State = EntityState.Modified;
-            //DataProvider.Instance.Database.SaveChanges();
-            //DataProvider.Instance.Database.Entry(librarianUpdate).State = EntityState.Detached;
         }
 
         public void ChangeStatus(string idLibrarian)
@@ -83,13 +77,11 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
             if (librarianUpdate != null)
             {
                 librarianUpdate.Status = (librarianUpdate.Status == true) ? false : true;
+                DataProvider.Instance.SaveEntity(librarianUpdate, EntityState.Modified);
+                //DataProvider.Instance.Database.Entry(librarianUpdate).State = EntityState.Modified;
+                //DataProvider.Instance.Database.SaveChanges();
+                //DataProvider.Instance.Database.Entry(librarianUpdate).State = EntityState.Detached;
             }
-
-            DataProvider.Instance.SaveEntity(librarianUpdate, EntityState.Modified);
-
-            //DataProvider.Instance.Database.Entry(librarianUpdate).State = EntityState.Modified;
-            //DataProvider.Instance.Database.SaveChanges();
-            //DataProvider.Instance.Database.Entry(librarianUpdate).State = EntityState.Detached;
         }
 
         public Librarian GetLibrarian(string idLibrarian)

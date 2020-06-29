@@ -117,7 +117,6 @@
     </Compile>
     <Compile Include="Model\DataAccessLayer\AccountDAL.cs" />
     <Compile Include="Model\DataAccessLayer\AuthorDAL.cs" />
-    <Compile Include="Model\DataAccessLayer\BookAuthorDAL.cs" />
     <Compile Include="Model\DataAccessLayer\BookCategoryDAL.cs" />
     <Compile Include="Model\DataAccessLayer\BookDAL.cs" />
     <Compile Include="Model\DataAccessLayer\BorrowDAL.cs" />
@@ -160,21 +159,6 @@
       <DependentUpon>LibraryManager.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\ReturnBook.cs">
-      <DependentUpon>LibraryManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\View_Author.cs">
-      <DependentUpon>LibraryManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\View_AuthorNoBook.cs">
-      <DependentUpon>LibraryManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\View_Book.cs">
-      <DependentUpon>LibraryManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\View_BookCategory.cs">
-      <DependentUpon>LibraryManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\View_Publisher.cs">
       <DependentUpon>LibraryManager.tt</DependentUpon>
     </Compile>
     <Compile Include="View.AddWindow\AddAuthorWindow.xaml.cs">

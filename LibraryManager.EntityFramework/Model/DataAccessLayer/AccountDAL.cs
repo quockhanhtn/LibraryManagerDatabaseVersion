@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 
 namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 {
+    /// <summary>
+    /// Class Data Access Layer for Account
+    /// </summary>
     public class AccountDAL
     {
         public static AccountDAL Instance { get => (instance == null) ? new AccountDAL() : instance; }

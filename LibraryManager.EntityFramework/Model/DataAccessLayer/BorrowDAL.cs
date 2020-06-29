@@ -1,14 +1,14 @@
 ﻿using LibraryManager.EntityFramework.Model.DataTransferObject;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 {
+    /// <summary>
+    /// Class Data Access Layer for Borrow
+    /// </summary>
     public class BorrowDAL
     {
         public static BorrowDAL Instance { get => (instance == null) ? new BorrowDAL() : instance; }

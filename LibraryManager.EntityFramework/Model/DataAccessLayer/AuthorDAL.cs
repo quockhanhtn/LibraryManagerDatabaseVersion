@@ -1,11 +1,7 @@
 ﻿using LibraryManager.EntityFramework.Model.DataTransferObject;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 {
@@ -16,10 +12,10 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
     {
         public static AuthorDAL Instance { get => (instance == null) ? new AuthorDAL() : instance; }
         private AuthorDAL() { }
+
         public ObservableCollection<AuthorDTO> GetList()
         {
-            var listRaw = DataProvider.Instance.Database.View_Author.GroupBy(u => u.AuthorId).Select(grp => grp.ToList()).ToList();
-            var listAuthorNoBook = DataProvider.Instance.Database.View_AuthorNoBook.ToList();
+            var listRaw = DataProvider.Instance.Database.Authors.ToList();
             var listAuthorDTO = new ObservableCollection<AuthorDTO>();
 
             foreach (var author in listRaw)
@@ -27,28 +23,17 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
                 listAuthorDTO.Add(new AuthorDTO(author));
             }
 
-            foreach (var authorNoBook in listAuthorNoBook)
-            {
-                listAuthorDTO.Add(new AuthorDTO(authorNoBook));
-            }
-
             return listAuthorDTO;
         }
 
         public ObservableCollection<AuthorDTO> GetList(bool status)
         {
-            var listRaw = DataProvider.Instance.Database.View_Author.GroupBy(u => u.AuthorId).Select(grp => grp.ToList()).ToList();
-            var listAuthorNoBook = DataProvider.Instance.Database.View_AuthorNoBook.Where(x => x.Status == status).ToList();
+            var listRaw = DataProvider.Instance.Database.Authors.Where(x => x.Status == status).ToList();
             var listAuthorDTO = new ObservableCollection<AuthorDTO>();
 
             foreach (var author in listRaw)
             {
-                if (author[0].Status == status) { listAuthorDTO.Add(new AuthorDTO(author)); }
-            }
-
-            foreach (var authorNoBook in listAuthorNoBook)
-            {
-                listAuthorDTO.Add(new AuthorDTO(authorNoBook));
+                listAuthorDTO.Add(new AuthorDTO(author));
             }
 
             return listAuthorDTO;
@@ -62,13 +47,12 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 
         public void Update(AuthorDTO author)
         {
-            var authorUpdate = DataProvider.Instance.Database.Authors.Where(x => x.Id == author.AuthorId).SingleOrDefault();
+            var authorUpdate = DataProvider.Instance.Database.Authors.Where(x => x.Id == author.Id).SingleOrDefault();
             if (authorUpdate != null)
             {
                 authorUpdate.NickName = author.NickName;
+                DataProvider.Instance.SaveEntity(authorUpdate, EntityState.Modified, true);
             }
-
-            DataProvider.Instance.SaveEntity(authorUpdate, EntityState.Modified, true);
         }
 
         public void ChangeStatus(int idAuthor)
@@ -78,9 +62,8 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
             if (authorUpdate != null)
             {
                 authorUpdate.Status = (authorUpdate.Status == true) ? false : true;
+                DataProvider.Instance.SaveEntity(authorUpdate, EntityState.Modified, true);
             }
-
-            DataProvider.Instance.SaveEntity(authorUpdate, EntityState.Modified, true);
         }
 
         public void Delete(int idAuthor)

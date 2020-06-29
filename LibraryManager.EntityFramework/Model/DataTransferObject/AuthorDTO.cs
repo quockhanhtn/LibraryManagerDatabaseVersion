@@ -7,30 +7,28 @@ using System.Threading.Tasks;
 
 namespace LibraryManager.EntityFramework.Model.DataTransferObject
 {
-    public class AuthorDTO : View_Author
+    public class AuthorDTO : Author
     {
-        public ObservableCollection<string> ListBook { get; set; } = new ObservableCollection<string>();
-        public int NumberOfBook { get => ListBook.Count; }
-        public string Note { get { return (this.Status != true) ? "Đã ẩn" : ""; } }
-        public AuthorDTO() : base() { }
-
-        public AuthorDTO(List<View_Author> authorRaw) : base()
+        public ObservableCollection<string> ListBookTitle
         {
-            this.AuthorId = authorRaw[0].AuthorId;
-            this.NickName = authorRaw[0].NickName;
-            this.Status = authorRaw[0].Status;
-
-            foreach (var item in authorRaw)
+            get
             {
-                ListBook.Add(item.BookTitle);
+                var list = new ObservableCollection<string>();
+                foreach (var b in Books) { list.Add(b.Title); }
+                return list;
             }
         }
 
-        public AuthorDTO(View_AuthorNoBook authorNoBook) : base()
+        public int NumberOfBook { get => Books.Count; }
+        public string Note { get { return (this.Status != true) ? "Đã ẩn" : ""; } }
+        public AuthorDTO() : base() { }
+
+        public AuthorDTO(Author authorRaw) : base()
         {
-            this.AuthorId = authorNoBook.AuthorId;
-            this.NickName = authorNoBook.NickName;
-            this.Status = authorNoBook.Status;
+            this.Id = authorRaw.Id;
+            this.NickName = authorRaw.NickName;
+            this.Status = authorRaw.Status;
+            this.Books = authorRaw.Books;
         }
 
         public Author GetBaseModel()

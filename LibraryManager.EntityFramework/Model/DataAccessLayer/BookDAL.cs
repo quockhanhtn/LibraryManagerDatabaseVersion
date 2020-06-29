@@ -1,12 +1,7 @@
 ﻿using LibraryManager.EntityFramework.Model.DataTransferObject;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
-using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 {
@@ -105,9 +100,8 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
             if (bookUpdate != null)
             {
                 bookUpdate.Status = (bookUpdate.Status == true) ? false : true;
+                DataProvider.Instance.SaveEntity(bookUpdate, EntityState.Modified);
             }
-
-            DataProvider.Instance.SaveEntity(bookUpdate, EntityState.Modified);
         }
 
         public Book GetBookById(string bookId)

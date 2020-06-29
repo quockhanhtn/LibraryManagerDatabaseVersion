@@ -6,19 +6,21 @@ using System.Threading.Tasks;
 
 namespace LibraryManager.EntityFramework.Model.DataTransferObject
 {
-    public class BookCategoryDTO : View_BookCategory
+    public class BookCategoryDTO : BookCategory
     {
         public string Note { get { return (this.Status != true) ? "Đã ẩn" : ""; } }
+        public int NumberOfBook { get => Books.Count; }
         public BookCategoryDTO() : base() { }
-        public BookCategoryDTO(View_BookCategory bookCategoryView) : base()
+        public BookCategoryDTO(BookCategory bookCategoryRaw) : base()
         {
-            if (bookCategoryView != null)
+            if (bookCategoryRaw != null)
             {
-                this.Id = bookCategoryView.Id;
-                this.Name = bookCategoryView.Name;
-                this.LimitDays = bookCategoryView.LimitDays;
-                this.NumberOfBook = bookCategoryView.NumberOfBook;
-                this.Status = bookCategoryView.Status;
+                this.Id = bookCategoryRaw.Id;
+                this.Name = bookCategoryRaw.Name;
+                this.LimitDays = bookCategoryRaw.LimitDays;
+                this.Status = bookCategoryRaw.Status;
+
+                this.Books = bookCategoryRaw.Books;
             }
         }
 

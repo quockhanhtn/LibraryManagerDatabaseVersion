@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace LibraryManager.EntityFramework.Model.DataTransferObject
 {
-    public class PublisherDTO : View_Publisher
+    public class PublisherDTO : Publisher
     {
+        public int NumberOfBook { get => Books.Count; }
         public string Note { get { return (this.Status != true) ? "Đã ẩn" : ""; } }
         public PublisherDTO() : base() { }
 
-        public PublisherDTO(View_Publisher publisherRaw) : base()
+        public PublisherDTO(Publisher publisherRaw) : base()
         {
             if (publisherRaw != null)
             {
@@ -21,8 +22,9 @@ namespace LibraryManager.EntityFramework.Model.DataTransferObject
                 this.Address = publisherRaw.Address;
                 this.Email = publisherRaw.Email;
                 this.Website = publisherRaw.Website;
-                this.NumberOfBook = publisherRaw.NumberOfBook;
                 this.Status = publisherRaw.Status;
+
+                this.Books = publisherRaw.Books;
             }
         }
 

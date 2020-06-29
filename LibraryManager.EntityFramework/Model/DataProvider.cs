@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data.Entity;
 
 namespace LibraryManager.EntityFramework.Model
 {
@@ -42,6 +34,8 @@ namespace LibraryManager.EntityFramework.Model
 
         public void SaveEntity(object entity, EntityState entityState, bool reloadDatabase=false)
         {
+            if (entity == null) { return; }
+
             Database.Entry(entity).State = entityState;
             Instance.Database.SaveChanges();
             Instance.Database.Entry(entity).State = EntityState.Detached;

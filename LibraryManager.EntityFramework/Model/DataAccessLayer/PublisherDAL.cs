@@ -17,14 +17,9 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
         public static PublisherDAL Instance { get => (instance == null) ? new PublisherDAL() : instance; }
         private PublisherDAL() { }
 
-        public PublisherDTO GetPublisher(int publisherId)
-        {
-            return new PublisherDTO(DataProvider.Instance.Database.View_Publisher.Where(x => x.Id == publisherId).SingleOrDefault());
-        }
-
         public ObservableCollection<PublisherDTO> GetList()
         {
-            var listRaw = DataProvider.Instance.Database.View_Publisher.ToList();
+            var listRaw = DataProvider.Instance.Database.Publishers.ToList();
             var listPublisherDTO = new ObservableCollection<PublisherDTO>();
 
             foreach (var pub in listRaw)
@@ -36,7 +31,7 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
         }
         public ObservableCollection<PublisherDTO> GetList(bool status)
         {
-            var listRaw = DataProvider.Instance.Database.View_Publisher.Where(x => x.Status == status).ToList();
+            var listRaw = DataProvider.Instance.Database.Publishers.Where(x => x.Status == status).ToList();
             var listPublisherDTO = new ObservableCollection<PublisherDTO>();
 
             foreach (var pub in listRaw)
