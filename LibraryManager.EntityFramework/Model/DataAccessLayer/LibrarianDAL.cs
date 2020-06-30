@@ -1,4 +1,6 @@
 ﻿using LibraryManager.EntityFramework.Model.DataTransferObject;
+using LibraryManager.Utility.Enums;
+using LibraryManager.Utility.Interfaces;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
@@ -9,31 +11,33 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
     /// <summary>
     /// Class Data Access Layer for Librarian
     /// </summary>
-    public class LibrarianDAL
+    public class LibrarianDAL : IDatabaseAccess<LibrarianDTO, string>
     {
         public static LibrarianDAL Instance { get => (instance == null) ? new LibrarianDAL() : instance; }
         private LibrarianDAL() { }
-        public ObservableCollection<LibrarianDTO> GetList(EnumStatus statusFillter = EnumStatus.AllStatus)
+
+        public ObservableCollection<LibrarianDTO> GetList(StatusFillter fillter = StatusFillter.AllStatus)
         {
+            var listLibrarianDTO = new ObservableCollection<LibrarianDTO>();
             var listRaw = new List<Librarian>();
-            switch (statusFillter)
+
+            switch (fillter)
             {
-                case EnumStatus.AllStatus:
+                case StatusFillter.AllStatus:
                     listRaw = DataProvider.Instance.Database.Librarians.Where(x => x.Id != "LIB000").ToList();
                     break;
-                case EnumStatus.Active:
+                case StatusFillter.Active:
                     listRaw = DataProvider.Instance.Database.Librarians.Where(x => x.Id != "LIB000" && x.Status == true).ToList();
                     break;
-                case EnumStatus.InActive:
+                case StatusFillter.InActive:
                     listRaw = DataProvider.Instance.Database.Librarians.Where(x => x.Id != "LIB000" && x.Status == false).ToList();
                     break;
             }
 
-            var listLibrarianDTO = new ObservableCollection<LibrarianDTO>();
             foreach (var lib in listRaw) { listLibrarianDTO.Add(new LibrarianDTO(lib)); }
             return listLibrarianDTO;
         }
-        
+
         public void Add(LibrarianDTO newLibrarian)
         {
             var newLib = newLibrarian.GetBaseModel();
@@ -85,6 +89,8 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
         {
             return DataProvider.Instance.Database.Librarians.Where(x => x.Id == idLibrarian).SingleOrDefault();
         }
+
+        public void Delete(string objectId) { throw new System.NotImplementedException(); }
 
         private static LibrarianDAL instance;
     }

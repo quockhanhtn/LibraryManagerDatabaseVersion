@@ -1,4 +1,6 @@
 ﻿using LibraryManager.EntityFramework.Model.DataTransferObject;
+using LibraryManager.Utility.Enums;
+using LibraryManager.Utility.Interfaces;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
@@ -8,7 +10,7 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
     /// <summary>
     /// Class Data Access Layer for Book
     /// </summary>
-    public class BookDAL
+    public class BookDAL : IDatabaseAccess<BookDTO, string>
     {
         public static BookDAL Instance { get => (instance == null) ? new BookDAL() : instance; }
         private BookDAL() { }
@@ -107,6 +109,16 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
         public Book GetBookById(string bookId)
         {
             return DataProvider.Instance.Database.Books.Where(x => x.Id == bookId).SingleOrDefault();
+        }
+
+        public ObservableCollection<BookDTO> GetList(StatusFillter fillter)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Delete(string objectId)
+        {
+            throw new System.NotImplementedException();
         }
 
         private static BookDAL instance;

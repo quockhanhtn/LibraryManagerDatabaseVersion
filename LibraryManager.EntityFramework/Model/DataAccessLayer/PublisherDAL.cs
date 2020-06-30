@@ -1,4 +1,6 @@
 ﻿using LibraryManager.EntityFramework.Model.DataTransferObject;
+using LibraryManager.Utility.Enums;
+using LibraryManager.Utility.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,33 +14,30 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
     /// <summary>
     /// Class Data Access Layer for Publisher
     /// </summary>
-    public class PublisherDAL
+    public class PublisherDAL : IDatabaseAccess<PublisherDTO, int>
     {
         public static PublisherDAL Instance { get => (instance == null) ? new PublisherDAL() : instance; }
         private PublisherDAL() { }
 
-        public ObservableCollection<PublisherDTO> GetList()
+        public ObservableCollection<PublisherDTO> GetList(StatusFillter fillter = StatusFillter.AllStatus)
         {
-            var listRaw = DataProvider.Instance.Database.Publishers.ToList();
             var listPublisherDTO = new ObservableCollection<PublisherDTO>();
+            var listRaw = new List<Publisher>();
 
-            foreach (var pub in listRaw)
+            switch (fillter)
             {
-                listPublisherDTO.Add(new PublisherDTO(pub));
+                case StatusFillter.AllStatus:
+                    listRaw = DataProvider.Instance.Database.Publishers.ToList();
+                    break;
+                case StatusFillter.Active:
+                    listRaw = DataProvider.Instance.Database.Publishers.Where(x => x.Status == true).ToList();
+                    break;
+                case StatusFillter.InActive:
+                    listRaw = DataProvider.Instance.Database.Publishers.Where(x => x.Status == false).ToList();
+                    break;
             }
 
-            return listPublisherDTO;
-        }
-        public ObservableCollection<PublisherDTO> GetList(bool status)
-        {
-            var listRaw = DataProvider.Instance.Database.Publishers.Where(x => x.Status == status).ToList();
-            var listPublisherDTO = new ObservableCollection<PublisherDTO>();
-
-            foreach (var pub in listRaw)
-            {
-                listPublisherDTO.Add(new PublisherDTO(pub));
-            }
-
+            foreach (var pub in listRaw) { listPublisherDTO.Add(new PublisherDTO(pub)); }
             return listPublisherDTO;
         }
 

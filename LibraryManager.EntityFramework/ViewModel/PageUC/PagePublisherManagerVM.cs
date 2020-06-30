@@ -272,7 +272,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
         private void ReloadList()
         {
             if (isShowHiddenPublisher) { ListPublisher = PublisherDAL.Instance.GetList(); }
-            else { ListPublisher = PublisherDAL.Instance.GetList(true); }
+            else { ListPublisher = PublisherDAL.Instance.GetList(Utility.Enums.StatusFillter.Active); }
         }
 
         private ObservableCollection<PublisherDTO> listPublisher;

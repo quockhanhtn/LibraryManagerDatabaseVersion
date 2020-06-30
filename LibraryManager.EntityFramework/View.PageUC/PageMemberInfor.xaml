@@ -29,18 +29,8 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
-        <!-- List member-->
-        <materialDesign:Card Grid.Column="1" Style="{StaticResource MaterialDesignPageCard}" Margin="2.5 5 5 5">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition/>
-                    <RowDefinition Height="70"/>
-                </Grid.RowDefinitions>
-            </Grid>
-        </materialDesign:Card>
 
+        <!--Thông tin tài khoản-->
         <materialDesign:Card Grid.Column="0" Style="{StaticResource MaterialDesignPageCard}" Margin="5 5 2.5 5">
             <Grid >
                 <Grid.RowDefinitions>
@@ -154,6 +144,52 @@
                         </DockPanel>-->
                     </Button>
                 </Grid>
+            </Grid>
+        </materialDesign:Card>
+
+
+        <!-- THÔNG TIN ĐĂNG NHẬP-->
+        <materialDesign:Card Grid.Column="1" Style="{StaticResource MaterialDesignPageCard}" Margin="2.5 5 5 5">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition />
+                    <RowDefinition Height="70"/>
+                </Grid.RowDefinitions>
+
+                <!---Tiêu đề "THÔNG TIN CÁ NHÂN"-->
+                <TextBlock Grid.Row="0" Text="THÔNG TIN ĐĂNG NHẬP" Style="{StaticResource TitleTextBlock}"/>
+
+                <StackPanel Grid.Row="1">
+                    
+                </StackPanel>
+
+                <!--Button-->
+                <Grid Grid.Row="2" Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <!---Button Cập nhật-->
+                    <Button Grid.Column="0" ToolTip="Cập nhật" Content="CẬP NHẬT"
+                            Command="{Binding UpdateCommand}" CommandParameter="{Binding ElementName=pageMemberInfor}">
+                        <!--<DockPanel LastChildFill="True" Margin="0" HorizontalAlignment="Stretch">
+                            <materialDesign:PackIcon Kind="AccountEdit" HorizontalAlignment="Center"/>
+                            <TextBlock Text="CẬP NHẬT" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        </DockPanel>-->
+                    </Button>
+
+                    <!---Button Thôi viêc-->
+                    <Button Grid.Column="1" ToolTip="Hủy thay đổi" Content="HỦY THAY ĐỔI"
+                            Command="{Binding CancelUpdateCommand}" CommandParameter="{Binding ElementName=pageMemberInfor}">
+                        <!--<DockPanel LastChildFill="True" Margin="0" HorizontalAlignment="Stretch">
+                            <materialDesign:PackIcon Kind="AccountMinus" x:Name="icoStatusChange" HorizontalAlignment="Center"/>
+                            <TextBlock Text="THÔI VIỆC" x:Name="tblStatusChange" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                        </DockPanel>-->
+                    </Button>
+                </Grid>
+
             </Grid>
         </materialDesign:Card>
 

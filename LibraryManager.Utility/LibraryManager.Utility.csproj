@@ -57,8 +57,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseViewModel.cs" />
+    <Compile Include="Enums\StatusFillter.cs" />
     <Compile Include="ExcelHelper.cs" />
     <Compile Include="FrameworkElementExtend.cs" />
+    <Compile Include="Interfaces\IDatabaseAccess.cs" />
     <Compile Include="Interfaces\IObjectManager.cs" />
     <Compile Include="PasswordEncoder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

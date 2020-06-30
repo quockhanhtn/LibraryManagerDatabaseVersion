@@ -240,7 +240,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
         void ReloadList()
         {
             if (isShowHiddenAuthor) { ListAuthor = AuthorDAL.Instance.GetList(); }
-            else { ListAuthor = AuthorDAL.Instance.GetList(true); }
+            else { ListAuthor = AuthorDAL.Instance.GetList(Utility.Enums.StatusFillter.Active); }
         }
 
         ObservableCollection<AuthorDTO> listAuthor;

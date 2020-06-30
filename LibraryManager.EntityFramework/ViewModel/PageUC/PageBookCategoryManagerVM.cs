@@ -5,6 +5,7 @@ using LibraryManager.EntityFramework.View.AddWindow;
 using LibraryManager.EntityFramework.ViewModel.AddWindow;
 using LibraryManager.MyUserControl.MyBox;
 using LibraryManager.Utility;
+using LibraryManager.Utility.Enums;
 using LibraryManager.Utility.Interfaces;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
@@ -253,7 +254,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
         private void ReloadList()
         {
             if (isShowDeleteCategory) { ListBookCategory = BookCategoryDAL.Instance.GetList(); }
-            else { ListBookCategory = BookCategoryDAL.Instance.GetList(true); }
+            else { ListBookCategory = BookCategoryDAL.Instance.GetList(StatusFillter.Active); }
         }
 
         private ObservableCollection<BookCategoryDTO> listBookCategory;

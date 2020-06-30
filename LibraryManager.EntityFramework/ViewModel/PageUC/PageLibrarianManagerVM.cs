@@ -5,6 +5,7 @@ using LibraryManager.EntityFramework.View.AddWindow;
 using LibraryManager.EntityFramework.ViewModel.AddWindow;
 using LibraryManager.MyUserControl.MyBox;
 using LibraryManager.Utility;
+using LibraryManager.Utility.Enums;
 using LibraryManager.Utility.Interfaces;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
@@ -31,7 +32,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
         public ICommand UpdateCommand { get; set; }
         public ICommand SendEmailCommand { get; set; }
         public ICommand StatusChangeCommand { get; set; }
-        public int StatusFillter { get => (int)statusFillter; set { statusFillter = (EnumStatus)value; ReloadList(); OnPropertyChanged(); } }
+        public int StatusFillter { get => (int)statusFillter; set { statusFillter = (StatusFillter)value; ReloadList(); OnPropertyChanged(); } }
         public ICommand DeleteCommand { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public PageLibrarianManagerVM()
@@ -381,6 +382,6 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
 
         private ObservableCollection<LibrarianDTO> listLibrarian;
         private LibrarianDTO librarianSelected;
-        EnumStatus statusFillter = EnumStatus.Active;
+        StatusFillter statusFillter = Utility.Enums.StatusFillter.Active;
     }
 }

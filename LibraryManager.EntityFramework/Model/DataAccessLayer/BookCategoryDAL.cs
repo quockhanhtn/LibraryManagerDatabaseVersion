@@ -1,35 +1,41 @@
 ﻿using LibraryManager.EntityFramework.Model.DataTransferObject;
+using LibraryManager.Utility.Enums;
+using LibraryManager.Utility.Interfaces;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
+using System.Windows.Documents;
 
 namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 {
     /// <summary>
     /// Class Data Access Layer for BookCategory
     /// </summary>
-    public class BookCategoryDAL
+    public class BookCategoryDAL : IDatabaseAccess<BookCategoryDTO, int>
     {
         public static BookCategoryDAL Instance { get => (instance == null) ? new BookCategoryDAL() : instance; }
         private BookCategoryDAL() { }
 
-        public ObservableCollection<BookCategoryDTO> GetList()
+        public ObservableCollection<BookCategoryDTO> GetList(StatusFillter fillter = StatusFillter.AllStatus)
         {
-            var listRaw = DataProvider.Instance.Database.BookCategories.ToList();
+            var listRaw = new List<BookCategory>();
             var listBookCategoryDTO = new ObservableCollection<BookCategoryDTO>();
 
+            switch (fillter)
+            {
+                case StatusFillter.AllStatus:
+                    listRaw = DataProvider.Instance.Database.BookCategories.ToList();
+                    break;
+                case StatusFillter.Active:
+                    listRaw = DataProvider.Instance.Database.BookCategories.Where(x => x.Status == true).ToList();
+                    break;
+                case StatusFillter.InActive:
+                    listRaw = DataProvider.Instance.Database.BookCategories.Where(x => x.Status == false).ToList();
+                    break;
+            }
+
             foreach (var bookCategory in listRaw) { listBookCategoryDTO.Add(new BookCategoryDTO(bookCategory)); }
-
-            return listBookCategoryDTO;
-        }
-
-        public ObservableCollection<BookCategoryDTO> GetList(bool status)
-        {
-            var listRaw = DataProvider.Instance.Database.BookCategories.Where(x => x.Status == status).ToList();
-            var listBookCategoryDTO = new ObservableCollection<BookCategoryDTO>();
-
-            foreach (var bookCategory in listRaw) { listBookCategoryDTO.Add(new BookCategoryDTO(bookCategory)); }
-
             return listBookCategoryDTO;
         }
 

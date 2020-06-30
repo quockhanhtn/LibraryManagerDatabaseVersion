@@ -1,4 +1,6 @@
 ﻿using LibraryManager.EntityFramework.Model.DataTransferObject;
+using LibraryManager.Utility.Enums;
+using LibraryManager.Utility.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,30 +14,29 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
     /// <summary>
     /// Class Data Access Layer for Member
     /// </summary>
-    public class MemberDAL
+    public class MemberDAL : IDatabaseAccess<MemberDTO, string>
     {
         public static MemberDAL Instance { get => (instance == null) ? new MemberDAL() : instance; }
         private MemberDAL() { }
 
-        public ObservableCollection<MemberDTO> GetList(EnumStatus statusFillter = EnumStatus.AllStatus)
+        public ObservableCollection<MemberDTO> GetList(StatusFillter fillter = StatusFillter.AllStatus)
         {
+            var listMemberDTO = new ObservableCollection<MemberDTO>();
             var listRaw = new List<Member>();
-            switch (statusFillter)
+            switch (fillter)
             {
-                case EnumStatus.AllStatus:
+                case StatusFillter.AllStatus:
                     listRaw = DataProvider.Instance.Database.Members.ToList();
                     break;
-                case EnumStatus.Active:
+                case StatusFillter.Active:
                     listRaw = DataProvider.Instance.Database.Members.Where(x => x.Status == true).ToList();
                     break;
-                case EnumStatus.InActive:
+                case StatusFillter.InActive:
                     listRaw = DataProvider.Instance.Database.Members.Where(x => x.Status == false).ToList();
                     break;
             }
-            var listMemberDTO = new ObservableCollection<MemberDTO>();
 
             foreach (var mem in listRaw) { listMemberDTO.Add(new MemberDTO(mem)); }
-
             return listMemberDTO;
         }
 
@@ -80,6 +81,8 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
         {
             return DataProvider.Instance.Database.Members.Where(x => x.Id == idMember).SingleOrDefault();
         }
+
+        public void Delete(string objectId) { throw new NotImplementedException(); }
 
         private static MemberDAL instance;
     }

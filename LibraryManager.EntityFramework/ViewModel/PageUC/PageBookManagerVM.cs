@@ -3,6 +3,7 @@ using LibraryManager.EntityFramework.Model.DataTransferObject;
 using LibraryManager.EntityFramework.View.PageUC;
 using LibraryManager.MyUserControl.MyBox;
 using LibraryManager.Utility;
+using LibraryManager.Utility.Enums;
 using LibraryManager.Utility.Interfaces;
 using Microsoft.Win32;
 using OfficeOpenXml;
@@ -44,9 +45,9 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
 
         public PageBookManagerVM(LibrarianDTO librarian)
         {
-            ListBookCategory = BookCategoryDAL.Instance.GetList(true);
+            ListBookCategory = BookCategoryDAL.Instance.GetList(StatusFillter.Active);
             ListBookCategory.Add(new BookCategoryDTO() { Id = 0, Name = "Tất cả chuyên mục" });
-            ListPublisher = PublisherDAL.Instance.GetList(true);
+            ListPublisher = PublisherDAL.Instance.GetList(StatusFillter.Active);
             ListPublisher.Add(new PublisherDTO() { Id = 0, Name = "Tất cả NXB" });
             ReloadList();
 

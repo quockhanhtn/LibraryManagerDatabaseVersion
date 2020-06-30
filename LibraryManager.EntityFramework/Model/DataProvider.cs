@@ -2,12 +2,6 @@
 
 namespace LibraryManager.EntityFramework.Model
 {
-    public enum EnumStatus
-    {
-        AllStatus,
-        Active,
-        InActive
-    }
     public class DataProvider
     {
         private static DataProvider instance;

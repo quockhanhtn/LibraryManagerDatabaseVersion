@@ -1,4 +1,7 @@
 ﻿using LibraryManager.EntityFramework.Model.DataTransferObject;
+using LibraryManager.Utility.Enums;
+using LibraryManager.Utility.Interfaces;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
@@ -8,30 +11,32 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
     /// <summary>
     /// Class Data Access Layer for Author
     /// </summary>
-    public class AuthorDAL
+    public class AuthorDAL : IDatabaseAccess<AuthorDTO, int>
     {
         public static AuthorDAL Instance { get => (instance == null) ? new AuthorDAL() : instance; }
         private AuthorDAL() { }
 
-        public ObservableCollection<AuthorDTO> GetList()
+        public ObservableCollection<AuthorDTO> GetList(StatusFillter fillter = StatusFillter.AllStatus)
         {
-            var listRaw = DataProvider.Instance.Database.Authors.ToList();
             var listAuthorDTO = new ObservableCollection<AuthorDTO>();
+            var listRaw = new List<Author>();
 
-            foreach (var author in listRaw)
+            switch (fillter)
             {
-                listAuthorDTO.Add(new AuthorDTO(author));
+                case StatusFillter.AllStatus:
+                    listRaw = DataProvider.Instance.Database.Authors.ToList();
+                    break;
+                case StatusFillter.Active:
+                    listRaw = DataProvider.Instance.Database.Authors.Where(x => x.Status == true).ToList();
+                    break;
+                case StatusFillter.InActive:
+                    listRaw = DataProvider.Instance.Database.Authors.Where(x => x.Status == false).ToList();
+                    break;
+                default:
+                    break;
             }
 
-            return listAuthorDTO;
-        }
-
-        public ObservableCollection<AuthorDTO> GetList(bool status)
-        {
-            var listRaw = DataProvider.Instance.Database.Authors.Where(x => x.Status == status).ToList();
-            var listAuthorDTO = new ObservableCollection<AuthorDTO>();
-
-            foreach (var author in listRaw)
+            foreach (var author in listRaw) 
             {
                 listAuthorDTO.Add(new AuthorDTO(author));
             }
