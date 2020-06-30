@@ -146,26 +146,17 @@ CREATE TABLE dbo.Borrow
 )
 GO 
 
--- Tạo bảng Return
-CREATE TABLE dbo.ReturnBook
-(
-	Id int IDENTITY(1,1) PRIMARY KEY,
-	BorrowId INT NOT NULL,
-	ReturnDate DATE DEFAULT GETDATE() NOT NULL
-
-	FOREIGN KEY(BorrowId) REFERENCES dbo.Borrow(Id)
-)
-GO 
-
 -- Tạo bảng PayFineInfo
 CREATE TABLE dbo.PayFineInfo
 (
 	Id int IDENTITY(1,1) PRIMARY KEY,
-	BorrowId INT NOT NULL,
+	BookId VARCHAR(10) NOT NULL,
+	MemberId VARCHAR(10) NOT NULL,
+	LibrarianId VARCHAR(6) NOT NULL,
+	TermDate DATE NOT NULL,
+	ReturnDate DATE DEFAULT GETDATE() NOT NULL,
 	Cash DECIMAL(19, 0) NOT NULL,
-	Reson NVARCHAR(20)
-
-	FOREIGN KEY(BorrowId) REFERENCES dbo.Borrow(Id)
+	IsLostBook BIT DEFAULT 0 NOT NULL
 )
 GO 
 
@@ -574,5 +565,7 @@ VALUES ('B000000011', 'MEM0000011', 'LIB001', '2020-1-20')
 
 INSERT INTO dbo.Borrow (BookId, MemberId, LibrarianId, BorrowDate)
 VALUES ('B000000001', 'MEM0000012', 'LIB001', '2019-12-20')
+GO
 
 
+--SELECT * FROM dbo.Member

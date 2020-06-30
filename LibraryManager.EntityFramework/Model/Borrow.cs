@@ -18,17 +18,6 @@ using System;
 public partial class Borrow
 {
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public Borrow()
-    {
-
-        this.PayFineInfoes = new HashSet<PayFineInfo>();
-
-        this.ReturnBooks = new HashSet<ReturnBook>();
-
-    }
-
-
     public int Id { get; set; }
 
     public string BookId { get; set; }
@@ -46,14 +35,6 @@ public partial class Borrow
     public virtual Librarian Librarian { get; set; }
 
     public virtual Member Member { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<PayFineInfo> PayFineInfoes { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<ReturnBook> ReturnBooks { get; set; }
 
 }
 

@@ -9,7 +9,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:uc="clr-namespace:LibraryManager.MyUserControl;assembly=LibraryManager.MyUserControl" 
-             
+
              mc:Ignorable="d" x:Name="pageAuthorManager" DataContext="{StaticResource PageAuthorManagerVM}"
              d:DesignHeight="734" d:DesignWidth="1300" Background="#fafafa">
     <Grid>
@@ -82,7 +82,7 @@
                             </ListView.ContextMenu>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
-                                    <i:InvokeCommandAction Command="{Binding AuthorSelectedChanged}" CommandParameter="{Binding ElementName=pageAuthorManager}"/>
+                                    <i:InvokeCommandAction Command="{Binding ObjectSelectedChangedCommand}" CommandParameter="{Binding ElementName=pageAuthorManager}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                             <ListView.View>

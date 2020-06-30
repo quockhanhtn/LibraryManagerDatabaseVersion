@@ -3,6 +3,7 @@ using LibraryManager.EntityFramework.Model.DataTransferObject;
 using LibraryManager.EntityFramework.View.PageUC;
 using LibraryManager.MyUserControl.MyBox;
 using LibraryManager.Utility;
+using LibraryManager.Utility.Interfaces;
 using Microsoft.Win32;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
@@ -10,15 +11,13 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace LibraryManager.EntityFramework.ViewModel.PageUC
 {
-    public class PageBookManagerVM : BaseViewModel
+    public class PageBookManagerVM : BaseViewModel, IObjectManager
     {
         public ObservableCollection<BookDTO> ListBook { get => listBook; set { listBook = value; OnPropertyChanged(); } }
         public ObservableCollection<BookCategoryDTO> ListBookCategory { get => listBookCategory; set { listBookCategory = value; OnPropertyChanged(); } }
@@ -38,6 +37,11 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
         public ICommand RemoveCommand { get; set; }
         public ICommand StatisticCommand { get; set; }
         public ICommand ExportToExcelCommand { get; set; }
+
+        public ICommand ObjectSelectedChangedCommand { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ICommand StatusChangeCommand { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ICommand DeleteCommand { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public PageBookManagerVM(LibrarianDTO librarian)
         {
             ListBookCategory = BookCategoryDAL.Instance.GetList(true);

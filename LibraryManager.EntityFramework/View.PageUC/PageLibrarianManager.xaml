@@ -78,9 +78,9 @@
 
                             <!--<ListView.Template>
                                 <ControlTemplate>
-                                     -->
-                            <!--Empty template to allow ScrollViewer to capture mouse scroll-->
-                            <!-- 
+                                     
+                            --><!--Empty template to allow ScrollViewer to capture mouse scroll--><!--
+                             
                                     <ItemsPresenter />
                                 </ControlTemplate>
                             </ListView.Template>-->
@@ -94,7 +94,7 @@
 
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
-                                    <i:InvokeCommandAction Command="{Binding LibrarianSelectedChanged}" CommandParameter="{Binding ElementName=pageLibrarianManager}"/>
+                                    <i:InvokeCommandAction Command="{Binding ObjectSelectedChangedCommand}" CommandParameter="{Binding ElementName=pageLibrarianManager}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
 

@@ -1,10 +1,10 @@
-﻿using LibraryManager.EntityFramework.Model;
-using LibraryManager.EntityFramework.Model.DataAccessLayer;
+﻿using LibraryManager.EntityFramework.Model.DataAccessLayer;
 using LibraryManager.EntityFramework.Model.DataTransferObject;
 using LibraryManager.EntityFramework.View.AddWindow;
 using LibraryManager.EntityFramework.ViewModel.AddWindow;
 using LibraryManager.MyUserControl.MyBox;
 using LibraryManager.Utility;
+using LibraryManager.Utility.Interfaces;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
 using OfficeOpenXml;
@@ -12,10 +12,7 @@ using OfficeOpenXml.Style;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -23,14 +20,15 @@ using System.Windows.Input;
 
 namespace LibraryManager.EntityFramework.ViewModel.PageUC
 {
-    public class PageAuthorManagerVM : BaseViewModel
+    public class PageAuthorManagerVM : BaseViewModel, IObjectManager
     {
         public bool IsShowHiddenAuthor { get => isShowHiddenAuthor; set { isShowHiddenAuthor = value; ReloadList(); } }
 
         public ObservableCollection<AuthorDTO> ListAuthor { get => listAuthor; set { listAuthor = value; OnPropertyChanged(); } }
         public AuthorDTO AuthorSelected { get => publisherSelected; set { publisherSelected = value; OnPropertyChanged(); } }
+
         public ICommand SearchCommand { get; set; }
-        public ICommand AuthorSelectedChanged { get; set; }
+        public ICommand ObjectSelectedChangedCommand { get; set; }
         public ICommand ExportToExcelCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
@@ -42,21 +40,21 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
             ReloadList();
 
             SearchCommand = new RelayCommand<TextBox>((p) => { return p != null; }, (p) =>
+        {
+            if (p.Text == "" || p.Text == " ")
             {
-                if (p.Text == "" || p.Text == " ")
-                {
-                    p.Text = "";
-                    ReloadList();
-                    return;
-                }
+                p.Text = "";
+                ReloadList();
+                return;
+            }
 
-                var searchKeyWord = StringHelper.StringConvertToUnSign(p.Text).ToLower();
+            var searchKeyWord = StringHelper.StringConvertToUnSign(p.Text).ToLower();
 
-                ListAuthor = new ObservableCollection<AuthorDTO>(AuthorDAL.Instance.GetList().Where(
-                    x => StringHelper.StringConvertToUnSign(x.NickName).ToLower().Contains(searchKeyWord)));
-            });
+            ListAuthor = new ObservableCollection<AuthorDTO>(AuthorDAL.Instance.GetList().Where(
+                x => StringHelper.StringConvertToUnSign(x.NickName).ToLower().Contains(searchKeyWord)));
+        });
 
-            AuthorSelectedChanged = new RelayCommand<UserControl>((p) => { return p != null && AuthorSelected != null; }, (p) =>
+            ObjectSelectedChangedCommand = new RelayCommand<UserControl>((p) => { return p != null && AuthorSelected != null; }, (p) =>
             {
                 var btnStatusChange = p.FindName("btnStatusChange") as Button;
                 var mnuStatusChange = p.FindName("mnuStatusChange") as MenuItem;
@@ -115,7 +113,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                         ExcelHelper.SetSheetInfo(worksheet, "List Author Sheet");
 
                         // set column width
-                        ExcelHelper.SetColumWidth(worksheet, new int[] { 13, 25, 17, 10});
+                        ExcelHelper.SetColumWidth(worksheet, new int[] { 13, 25, 17, 10 });
 
                         // Tạo danh sách các column header
                         string[] arrColumnHeader = { "Mã tác giả", "Tên tác giả", "Số lượng sách", "Ghi chú" };
@@ -239,14 +237,14 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
             });
         }
 
-        private void ReloadList()
+        void ReloadList()
         {
             if (isShowHiddenAuthor) { ListAuthor = AuthorDAL.Instance.GetList(); }
             else { ListAuthor = AuthorDAL.Instance.GetList(true); }
         }
 
-        private ObservableCollection<AuthorDTO> listAuthor;
-        private AuthorDTO publisherSelected;
+        ObservableCollection<AuthorDTO> listAuthor;
+        AuthorDTO publisherSelected;
 
         bool isShowHiddenAuthor = false;
     }

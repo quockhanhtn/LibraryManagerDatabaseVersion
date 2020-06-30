@@ -76,6 +76,11 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
             }
         }
 
+        public Member GetMember(string idMember)
+        {
+            return DataProvider.Instance.Database.Members.Where(x => x.Id == idMember).SingleOrDefault();
+        }
+
         private static MemberDAL instance;
     }
 }

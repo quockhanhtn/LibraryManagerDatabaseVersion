@@ -41,7 +41,8 @@ namespace LibraryManager.EntityFramework.ViewModel
                 var tbxUsername = p.FindName("tbxUsername") as TextBox;
                 var tbxPassWord = p.FindName("tbxPassWord") as PasswordBox;
 
-                var (loginResult, idPerson) = (0,"");//AccountDAL.Instance.Login(tbxUsername.Text, tbxPassWord.Password);
+                //var (loginResult, idPerson) = (0,"");
+                var (loginResult, idPerson) = AccountDAL.Instance.Login(tbxUsername.Text, tbxPassWord.Password);
 
                 if (loginResult == -1)
                 {
@@ -54,17 +55,18 @@ namespace LibraryManager.EntityFramework.ViewModel
                     p.Hide();
                     if (loginResult == 0)
                     {
-                        MainWindow mainWindow = new MainWindow();
+                        var mainWindow = new MainWindow();
                         mainWindow.Show();
                     }
                     else if (loginResult == 1)
                     {
-                        LibrarianWindow librarianWindow = new LibrarianWindow() { DataContext = new LibrarianWindowViewModel(idPerson) };
+                        var librarianWindow = new LibrarianWindow() { DataContext = new LibrarianWindowViewModel(idPerson) };
                         librarianWindow.Show();
                     }
                     else if (loginResult == 2)
                     {
-                        MessageBox.Show("Member");
+                        var memberWindow = new MemberWindow() { DataContext = new MemberWindowViewModel(idPerson) };
+                        memberWindow.Show();
                     }
                     p.Close();
                 }

@@ -59,6 +59,7 @@
     <Compile Include="BaseViewModel.cs" />
     <Compile Include="ExcelHelper.cs" />
     <Compile Include="FrameworkElementExtend.cs" />
+    <Compile Include="Interfaces\IObjectManager.cs" />
     <Compile Include="PasswordEncoder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StringHelper.cs" />

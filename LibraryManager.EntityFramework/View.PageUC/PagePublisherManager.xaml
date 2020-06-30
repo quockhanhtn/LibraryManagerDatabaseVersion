@@ -84,7 +84,7 @@
                             </ListView.ContextMenu>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
-                                    <i:InvokeCommandAction Command="{Binding PublisherSelectedChanged}" CommandParameter="{Binding ElementName=pagePublisherManager}"/>
+                                    <i:InvokeCommandAction Command="{Binding ObjectSelectedChangedCommand}" CommandParameter="{Binding ElementName=pagePublisherManager}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                             <ListView.View>

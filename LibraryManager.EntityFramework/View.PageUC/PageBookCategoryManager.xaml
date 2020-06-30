@@ -80,7 +80,7 @@
                             </ListView.ContextMenu>
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
-                                    <i:InvokeCommandAction Command="{Binding BookCategorySelectedChanged}" CommandParameter="{Binding ElementName=pageBookCategoryManager}"/>
+                                    <i:InvokeCommandAction Command="{Binding ObjectSelectedChangedCommand}" CommandParameter="{Binding ElementName=pageBookCategoryManager}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                             <ListView.View>

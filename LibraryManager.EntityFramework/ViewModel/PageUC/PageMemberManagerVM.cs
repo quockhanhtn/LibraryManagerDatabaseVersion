@@ -5,6 +5,7 @@ using LibraryManager.EntityFramework.View.AddWindow;
 using LibraryManager.EntityFramework.ViewModel.AddWindow;
 using LibraryManager.MyUserControl.MyBox;
 using LibraryManager.Utility;
+using LibraryManager.Utility.Interfaces;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
 using OfficeOpenXml;
@@ -19,18 +20,19 @@ using System.Windows.Input;
 
 namespace LibraryManager.EntityFramework.ViewModel.PageUC
 {
-    public class PageMemberManagerVM : BaseViewModel
+    public class PageMemberManagerVM : BaseViewModel, IObjectManager
     {
         public ObservableCollection<MemberDTO> ListMember { get => listMember; set { listMember = value; OnPropertyChanged(); } }
         public MemberDTO MemberSelected { get => memberSelected; set { memberSelected = value; OnPropertyChanged(); } }
         public ICommand SearchCommand { get; set; }
-        public ICommand MemberSelectedChanged { get; set; }
+        public ICommand ObjectSelectedChangedCommand { get; set; }
         public ICommand ExportToExcelCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
         public ICommand SendEmailCommand { get; set; }
         public ICommand StatusChangeCommand { get; set; }
         public int StatusFillter { get => (int)statusFillter; set { statusFillter = (EnumStatus)value; ReloadList(); OnPropertyChanged(); } }
+        public ICommand DeleteCommand { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public PageMemberManagerVM()
         {
@@ -67,24 +69,18 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 }
             });
 
-            MemberSelectedChanged = new RelayCommand<UserControl>((p) => { return p != null && MemberSelected != null; }, (p) =>
+            ObjectSelectedChangedCommand = new RelayCommand<UserControl>((p) => { return p != null && MemberSelected != null; }, (p) =>
             {
                 var btnStatusChange = p.FindName("btnStatusChange") as Button;
                 var mnuStatusChange = p.FindName("mnuStatusChange") as MenuItem;
-                //var tblStatusChange = p.FindName("tblStatusChange") as TextBlock;
-                //var icoStatusChange = p.FindName("icoStatusChange") as PackIcon;
                 if (MemberSelected.Status == true)
                 {
-                    //tblStatusChange.Text = "THÔI VIỆC";
-                    //icoStatusChange.Kind = PackIconKind.BlockHelper;
                     btnStatusChange.Content = "KHÓA";
                     btnStatusChange.ToolTip = "Khóa thành viên \"" + MemberSelected.FullName + "\"";
                     mnuStatusChange.Header = "Khóa";
                 }
                 else
                 {
-                    //tblStatusChange.Text = "ĐI LÀM LẠI";
-                    //icoStatusChange.Kind = PackIconKind.Restore;
                     btnStatusChange.Content = "MỞ KHÓA";
                     btnStatusChange.ToolTip = "Mở khóa thành viên \"" + MemberSelected.FullName + "\"";
                     mnuStatusChange.Header = "Mở khóa";

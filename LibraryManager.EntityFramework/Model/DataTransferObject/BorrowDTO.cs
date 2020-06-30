@@ -24,8 +24,6 @@ namespace LibraryManager.EntityFramework.Model.DataTransferObject
                 this.LibrarianId = borrowRaw.LibrarianId;
                 this.Member = borrowRaw.Member;
                 this.MemberId = borrowRaw.MemberId;
-                this.PayFineInfoes = borrowRaw.PayFineInfoes;
-                this.ReturnBooks = borrowRaw.ReturnBooks;
             }
         }
     }

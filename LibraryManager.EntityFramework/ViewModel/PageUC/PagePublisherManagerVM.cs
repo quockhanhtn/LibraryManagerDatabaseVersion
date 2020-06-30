@@ -5,6 +5,7 @@ using LibraryManager.EntityFramework.View.AddWindow;
 using LibraryManager.EntityFramework.ViewModel.AddWindow;
 using LibraryManager.MyUserControl.MyBox;
 using LibraryManager.Utility;
+using LibraryManager.Utility.Interfaces;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
 using OfficeOpenXml;
@@ -12,25 +13,21 @@ using OfficeOpenXml.Style;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Forms.VisualStyles;
 using System.Windows.Input;
 
 namespace LibraryManager.EntityFramework.ViewModel.PageUC
 {
-    public class PagePublisherManagerVM : BaseViewModel
+    public class PagePublisherManagerVM : BaseViewModel, IObjectManager
     {
         public bool IsShowHiddenPublisher { get => isShowHiddenPublisher; set { isShowHiddenPublisher = value; ReloadList(); } }
 
         public ObservableCollection<PublisherDTO> ListPublisher { get => listPublisher; set { listPublisher = value; OnPropertyChanged(); } }
         public PublisherDTO PublisherSelected { get => publisherSelected; set { publisherSelected = value; OnPropertyChanged(); } }
         public ICommand SearchCommand { get; set; }
-        public ICommand PublisherSelectedChanged { get; set; }
+        public ICommand ObjectSelectedChangedCommand { get; set; }
         public ICommand ExportToExcelCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
@@ -38,6 +35,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
         public ICommand DeleteCommand { get; set; }
         public ICommand SendEmailCommand { get; set; }
         public ICommand OpenWebCommand { get; set; }
+
         public PagePublisherManagerVM()
         {
             ReloadList();
@@ -57,7 +55,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                     x => StringHelper.StringConvertToUnSign(x.Name).ToLower().Contains(searchKeyWord)));
             });
 
-            PublisherSelectedChanged = new RelayCommand<UserControl>((p) => { return p != null && PublisherSelected != null; }, (p) =>
+            ObjectSelectedChangedCommand = new RelayCommand<UserControl>((p) => { return p != null && PublisherSelected != null; }, (p) =>
             {
                 var btnStatusChange = p.FindName("btnStatusChange") as Button;
                 var mnuStatusChange = p.FindName("mnuStatusChange") as MenuItem;

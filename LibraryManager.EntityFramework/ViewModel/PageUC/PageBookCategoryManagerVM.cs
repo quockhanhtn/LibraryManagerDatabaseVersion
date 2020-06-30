@@ -5,6 +5,7 @@ using LibraryManager.EntityFramework.View.AddWindow;
 using LibraryManager.EntityFramework.ViewModel.AddWindow;
 using LibraryManager.MyUserControl.MyBox;
 using LibraryManager.Utility;
+using LibraryManager.Utility.Interfaces;
 using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
 using OfficeOpenXml;
@@ -12,30 +13,27 @@ using OfficeOpenXml.Style;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace LibraryManager.EntityFramework.ViewModel.PageUC
 {
-    public class PageBookCategoryManagerVM : BaseViewModel
+    public class PageBookCategoryManagerVM : BaseViewModel, IObjectManager
     {
         public bool IsShowDeleteCategory { get => isShowDeleteCategory; set { isShowDeleteCategory = value; ReloadList(); } }
 
         public ObservableCollection<BookCategoryDTO> ListBookCategory { get => listBookCategory; set { listBookCategory = value; OnPropertyChanged(); } }
         public BookCategoryDTO BookCategorySelected { get => bookCategorySelected; set { bookCategorySelected = value; OnPropertyChanged(); } }
         public ICommand SearchCommand { get; set; }
-        public ICommand BookCategorySelectedChanged { get; set; }
         public ICommand ExportToExcelCommand { get; set; }
+        public ICommand ObjectSelectedChangedCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
         public ICommand StatusChangeCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
-
+        
         public PageBookCategoryManagerVM()
         {
             ReloadList();
@@ -55,7 +53,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                     x => StringHelper.StringConvertToUnSign(x.Name).ToLower().Contains(searchKeyWord)));
             });
 
-            BookCategorySelectedChanged = new RelayCommand<UserControl>((p) => { return p != null && BookCategorySelected != null; }, (p) =>
+            ObjectSelectedChangedCommand = new RelayCommand<UserControl>((p) => { return p != null && BookCategorySelected != null; }, (p) =>
             {
                 var btnStatusChange = p.FindName("btnStatusChange") as Button;
                 var mnuStatusChange = p.FindName("mnuStatusChange") as MenuItem;

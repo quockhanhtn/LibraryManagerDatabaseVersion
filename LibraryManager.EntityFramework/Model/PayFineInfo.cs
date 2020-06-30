@@ -20,13 +20,19 @@ public partial class PayFineInfo
 
     public int Id { get; set; }
 
-    public int BorrowId { get; set; }
+    public string BookId { get; set; }
+
+    public string MemberId { get; set; }
+
+    public string LibrarianId { get; set; }
+
+    public System.DateTime TermDate { get; set; }
+
+    public System.DateTime ReturnDate { get; set; }
 
     public decimal Cash { get; set; }
 
-
-
-    public virtual Borrow Borrow { get; set; }
+    public bool IsLostBook { get; set; }
 
 }
 

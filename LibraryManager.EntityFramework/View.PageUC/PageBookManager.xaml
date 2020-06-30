@@ -107,8 +107,8 @@
             <!-- List -->
             <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
                 <ListView ItemsSource="{Binding ListBook, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
-                              VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
-                              SelectedItem="{Binding BookSelected, UpdateSourceTrigger=PropertyChanged}">
+                          VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                          SelectedItem="{Binding BookSelected, UpdateSourceTrigger=PropertyChanged}">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Mã sách" Width="auto">

@@ -75,16 +75,6 @@
                         <ListView ItemsSource="{Binding ListMember, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                   VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Foreground="Black"
                                   SelectedItem="{Binding MemberSelected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-
-                            <!--<ListView.Template>
-                                <ControlTemplate>
-                                     -->
-                            <!--Empty template to allow ScrollViewer to capture mouse scroll-->
-                            <!-- 
-                                    <ItemsPresenter />
-                                </ControlTemplate>
-                            </ListView.Template>-->
-
                             <ListView.ContextMenu>
                                 <ContextMenu>
                                     <MenuItem Header="Gửi mail" Command="{Binding SendEmailCommand}"/>
@@ -94,7 +84,7 @@
 
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
-                                    <i:InvokeCommandAction Command="{Binding MemberSelectedChanged}" CommandParameter="{Binding ElementName=pageMemberManager}"/>
+                                    <i:InvokeCommandAction Command="{Binding ObjectSelectedChangedCommand}" CommandParameter="{Binding ElementName=pageMemberManager}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
 

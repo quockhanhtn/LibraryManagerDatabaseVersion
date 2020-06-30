@@ -31,7 +31,6 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
         public ICommand SaveChangeCommand { get; set; }
         public ICommand DiscardChangeCommand { get; set; }
 
-
         public PageBorrowBookVM(MemberDTO member, LibrarianDTO librarian)
         {
             MemberBorrow = member;
