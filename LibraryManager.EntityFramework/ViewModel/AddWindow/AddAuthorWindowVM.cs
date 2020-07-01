@@ -1,11 +1,8 @@
 ﻿using LibraryManager.EntityFramework.Model.DataAccessLayer;
 using LibraryManager.EntityFramework.Model.DataTransferObject;
 using LibraryManager.Utility;
-using System;
-using System.Collections.Generic;
+using LibraryManager.Utility.Interfaces;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -13,22 +10,9 @@ using System.Windows.Input;
 
 namespace LibraryManager.EntityFramework.ViewModel.AddWindow
 {
-    public class AddAuthorWindowVM : BaseViewModel
+    public class AddAuthorWindowVM : BaseViewModel, IAddNewObject<AuthorDTO>
     {
-        /// <summary>
-        /// if (Result == "") -> Not add new librarian
-        /// else Result = new Author().FullName
-        /// </summary>
-        public string Result
-        {
-            get
-            {
-                var resultCopy = result;
-                result = "";
-                return resultCopy;
-            }
-            set => result = value;
-        }
+        public AuthorDTO Result { get; set; }
 
         public ICommand OKCommand { get; set; }
         public ICommand CancelCommand { get; set; }
@@ -65,13 +49,11 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
                 };
 
                 AuthorDAL.Instance.Add(newAuthor);
-                Result = newAuthor.NickName;
+                Result = newAuthor;
                 p.Close();
             });
 
             CancelCommand = new RelayCommand<Window>((p) => { return !(p == null); }, (p) => { p.Close(); });
         }
-
-        private string result = "";
     }
 }

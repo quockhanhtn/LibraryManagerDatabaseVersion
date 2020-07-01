@@ -545,7 +545,3 @@ VALUES ('B000000011', 'MEM0000011', 'LIB001', '2020-1-20')
 INSERT INTO dbo.Borrow (BookId, MemberId, LibrarianId, BorrowDate)
 VALUES ('B000000001', 'MEM0000012', 'LIB001', '2019-12-20')
 GO
-
-SELECT * FROM dbo.Borrow
-
-SELECT * FROM dbo.ReturnBook

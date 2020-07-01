@@ -9,8 +9,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:uc="clr-namespace:LibraryManager.MyUserControl;assembly=LibraryManager.MyUserControl" 
         
-        mc:Ignorable="d" x:Name="addBookCategoryWindow"
-        Title="Thêm chuyên mục mới - Library Manager" DataContext="{StaticResource AddBookCategoryWindowVM}"
+        mc:Ignorable="d" x:Name="addBookCategoryWindow" Title="Thêm chuyên mục mới - Library Manager" 
         Style="{StaticResource ResizeWindowNoBoder}" WindowStartupLocation="CenterScreen" 
         Height="300" Width="400">
 

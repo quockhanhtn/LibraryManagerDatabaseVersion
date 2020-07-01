@@ -1,35 +1,16 @@
-﻿using LibraryManager.EntityFramework.Model;
-using LibraryManager.EntityFramework.Model.DataAccessLayer;
+﻿using LibraryManager.EntityFramework.Model.DataAccessLayer;
 using LibraryManager.EntityFramework.Model.DataTransferObject;
 using LibraryManager.Utility;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using LibraryManager.Utility.Interfaces;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace LibraryManager.EntityFramework.ViewModel.AddWindow
 {
-    public class AddPublisherWindowVM : BaseViewModel
+    public class AddPublisherWindowVM : BaseViewModel, IAddNewObject<PublisherDTO>
     {
-        /// <summary>
-        /// if (Result == "") -> Not add new librarian
-        /// else Result = new Publisher().FullName
-        /// </summary>
-        public string Result
-        {
-            get
-            {
-                var resultCopy = result;
-                result = "";
-                return resultCopy;
-            }
-            set => result = value;
-        }
-
+        public PublisherDTO Result { get; set; }
         public ICommand OKCommand { get; set; }
         public ICommand RetypeCommand { get; set; }
         public ICommand CancelCommand { get; set; }
@@ -74,7 +55,7 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
                 };
 
                 PublisherDAL.Instance.Add(newPublisher);
-                Result = newPublisher.Name;
+                Result = newPublisher;
                 p.Close();
             });
 
@@ -99,7 +80,5 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
 
             CancelCommand = new RelayCommand<Window>((p) => { return !(p == null); }, (p) => { p.Close(); });
         }
-
-        private string result = "";
     }
 }

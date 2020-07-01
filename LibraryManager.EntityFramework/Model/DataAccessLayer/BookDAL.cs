@@ -1,11 +1,10 @@
 ﻿using LibraryManager.EntityFramework.Model.DataTransferObject;
 using LibraryManager.Utility.Enums;
 using LibraryManager.Utility.Interfaces;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
-using System.Windows.Ink;
-using System.Windows.Media;
 
 namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 {
@@ -16,13 +15,25 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
     {
         public static BookDAL Instance { get => (instance == null) ? new BookDAL() : instance; }
         private BookDAL() { }
-        public ObservableCollection<BookDTO> GetList()
+        public ObservableCollection<BookDTO> GetList(StatusFillter fillter = StatusFillter.AllStatus)
         {
-            var listRaw = DataProvider.Instance.Database.Books.ToList();
+            var listRaw = new List<Book>();
             var listBookDTO = new ObservableCollection<BookDTO>();
 
-            foreach (var book in listRaw) { listBookDTO.Add(new BookDTO(book)); }
+            switch (fillter)
+            {
+                case StatusFillter.AllStatus:
+                    listRaw = DataProvider.Instance.Database.Books.ToList();
+                    break;
+                case StatusFillter.Active:
+                    listRaw = DataProvider.Instance.Database.Books.Where(x => x.Status == true).ToList();
+                    break;
+                case StatusFillter.InActive:
+                    listRaw = DataProvider.Instance.Database.Books.Where(x => x.Status == false).ToList();
+                    break;
+            }
 
+            foreach (var book in listRaw) { listBookDTO.Add(new BookDTO(book)); }
             return listBookDTO;
         }
 
@@ -54,11 +65,24 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
             return listBookDTO;
         }
 
-        public void Add(BookDTO newBook,int number)
+        public void Add(BookDTO newBook, int number)
         {
-            var book = newBook.GetBaseModel();
+            var book = newBook.GetBaseModelWithoutAuthors();
             DataProvider.Instance.SaveEntity(book, EntityState.Added);
-            BookItem bookItem = new BookItem() { BookId = book.Id, Number = number, Count = number, Status = true };
+
+            //Lấy ra book vừa thêm vào Database
+            var bookAdded = DataProvider.Instance.Database.Books.Where(x =>
+                x.Title == book.Title && x.BookCategoryId == book.BookCategoryId
+                && x.PublisherId == book.PublisherId && x.YearPublish == book.YearPublish
+                && x.Size == book.Size).FirstOrDefault();
+
+            //Cập nhật tác giả
+            bookAdded.Authors = newBook.Authors;
+            foreach (var item in bookAdded.Authors) { item.Books.Add(bookAdded); }
+            DataProvider.Instance.SaveEntity(bookAdded, EntityState.Modified, true);
+
+            //Cập nhật số lương
+            var bookItem = new BookItem() { BookId = bookAdded.Id, Number = number, Count = number, Status = true };
             DataProvider.Instance.SaveEntity(bookItem, EntityState.Added, true);
         }
 
@@ -102,20 +126,9 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
             return DataProvider.Instance.Database.Books.Where(x => x.Id == bookId).SingleOrDefault();
         }
 
-        public ObservableCollection<BookDTO> GetList(StatusFillter fillter)
-        {
-            throw new System.NotImplementedException();
-        }
+        public void Delete(string objectId) { throw new System.NotImplementedException(); }
 
-        public void Delete(string objectId)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Add(BookDTO newObject)
-        {
-            throw new System.NotImplementedException();
-        }
+        public void Add(BookDTO newObject) { throw new System.NotImplementedException(); }
 
         private static BookDAL instance;
     }

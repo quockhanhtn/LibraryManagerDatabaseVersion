@@ -163,7 +163,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
 
             RemoveCommand = new RelayCommand<object>((p) => { return BookSelected != null; }, (p) => { });
 
-            StatisticCommand = new RelayCommand<object>((p) => { return BookSelected != null && BookSelected.BookItem.Number > BookSelected.BookItem.Count; }, (p) => { });
+            StatisticCommand = new RelayCommand<object>((p) => { return BookSelected != null && BookSelected.BookItem != null && BookSelected.BookItem.Number > BookSelected.BookItem.Count; }, (p) => { });
 
             ExportToExcelCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {

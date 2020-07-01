@@ -1,39 +1,21 @@
-﻿using LibraryManager.EntityFramework.Model;
-using LibraryManager.EntityFramework.Model.DataAccessLayer;
+﻿using LibraryManager.EntityFramework.Model.DataAccessLayer;
 using LibraryManager.EntityFramework.Model.DataTransferObject;
 using LibraryManager.Utility;
+using LibraryManager.Utility.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace LibraryManager.EntityFramework.ViewModel.AddWindow
 {
-    public class AddLibrarianWindowVM : BaseViewModel
+    public class AddLibrarianWindowVM : BaseViewModel, IAddNewObject<LibrarianDTO>
     {
-        /// <summary>
-        /// if (Result == "") -> Not add new librarian
-        /// else Result = new Librarian().FullName
-        /// </summary>
-        public string Result
-        {
-            get
-            {
-                var resultCopy = result;
-                result = "";
-                return resultCopy;
-            }
-            set => result = value;
-        }
-        
         public ICommand OKCommand { get; set; }
         public ICommand RetypeCommand { get; set; }
         public ICommand CancelCommand { get; set; }
-        
+        public LibrarianDTO Result { get; set; }
+
         public AddLibrarianWindowVM()
         {
             OKCommand = new RelayCommand<Window>((p) => { return !(p == null); }, (p) =>
@@ -148,7 +130,7 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
                 };
 
                 LibrarianDAL.Instance.Add(newLibrarian);
-                Result = newLibrarian.FullName;
+                Result = newLibrarian;
                 p.Close();
             });
 
@@ -173,7 +155,5 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
 
             CancelCommand = new RelayCommand<Window>((p) => { return !(p == null); }, (p) => { p.Close(); });
         }
-
-        private string result = "";
     }
 }

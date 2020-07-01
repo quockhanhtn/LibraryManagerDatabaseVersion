@@ -1,5 +1,4 @@
-﻿using LibraryManager.EntityFramework.Model;
-using LibraryManager.EntityFramework.Model.DataAccessLayer;
+﻿using LibraryManager.EntityFramework.Model.DataAccessLayer;
 using LibraryManager.EntityFramework.Model.DataTransferObject;
 using LibraryManager.EntityFramework.View.AddWindow;
 using LibraryManager.EntityFramework.ViewModel.AddWindow;
@@ -189,14 +188,14 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
 
             AddCommand = new RelayCommand<UserControl>((p) => { return p != null; }, (p) =>
             {
-                var addPublisherWindow = new AddPublisherWindow();
+                var addDataContext = new AddPublisherWindowVM();
+                var addPublisherWindow = new AddPublisherWindow() { DataContext = addDataContext };
                 addPublisherWindow.ShowDialog();
 
                 var mySnackbar = p.FindName("mySnackbar") as Snackbar;
-                var newPublisherName = (addPublisherWindow.DataContext as AddPublisherWindowVM).Result;
-                if (newPublisherName != "")
+                if (addDataContext.Result != null)
                 {
-                    mySnackbar.MessageQueue.Enqueue("Thêm nhà xuất bản \"" + newPublisherName + "\" thành công");
+                    mySnackbar.MessageQueue.Enqueue("Thêm nhà xuất bản \"" + addDataContext.Result.Name + "\" thành công");
                     ReloadList();
                 }
                 else { mySnackbar.MessageQueue.Enqueue("Không có thay đổi"); }

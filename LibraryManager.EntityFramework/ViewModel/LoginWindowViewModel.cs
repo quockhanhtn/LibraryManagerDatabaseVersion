@@ -1,9 +1,5 @@
 ﻿using Dragablz;
-using LibraryManager.EntityFramework.Model;
-using LibraryManager.EntityFramework.Model.DataAccessLayer;
-using LibraryManager.EntityFramework.View.AddWindow;
 using LibraryManager.Utility;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;

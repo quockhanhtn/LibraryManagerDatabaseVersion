@@ -1,14 +1,10 @@
-﻿using LibraryManager.EntityFramework.Model;
-using LibraryManager.EntityFramework.Model.DataAccessLayer;
+﻿using LibraryManager.EntityFramework.Model.DataAccessLayer;
 using LibraryManager.EntityFramework.Model.DataTransferObject;
 using LibraryManager.EntityFramework.View.PageUC;
 using LibraryManager.Utility;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -42,7 +38,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
 
             BorrowBookCommand = new RelayCommand<object>((p) =>
             {
-                if (NewBookBorrow == null || NewBookBorrow.BookItem.Count < 1) { return false; }
+                if (NewBookBorrow == null || NewBookBorrow.BookItem == null || NewBookBorrow.BookItem.Count < 1) { return false; }
                 var listBookIdBorrow = new List<string>();
                 foreach (var item in ListBookBorrow) { listBookIdBorrow.Add(item.BookId); }
                 return !listBookIdBorrow.Contains(NewBookBorrow.Id);

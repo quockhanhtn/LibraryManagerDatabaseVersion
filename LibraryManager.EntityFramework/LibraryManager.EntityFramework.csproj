@@ -125,7 +125,6 @@
     <Compile Include="Model\DataAccessLayer\BorrowDAL.cs" />
     <Compile Include="Model\DataAccessLayer\LibrarianDAL.cs" />
     <Compile Include="Model\DataAccessLayer\MemberDAL.cs" />
-    <Compile Include="Model\DataAccessLayer\PayFineInfoDAL.cs" />
     <Compile Include="Model\DataAccessLayer\PublisherDAL.cs" />
     <Compile Include="Model\DataAccessLayer\ReturnBookDAL.cs" />
     <Compile Include="Model\DataProvider.cs" />
@@ -135,9 +134,7 @@
     <Compile Include="Model\DataTransferObject\BorrowDTO.cs" />
     <Compile Include="Model\DataTransferObject\LibrarianDTO.cs" />
     <Compile Include="Model\DataTransferObject\MemberDTO.cs" />
-    <Compile Include="Model\DataTransferObject\PayFineInfoDTO.cs" />
     <Compile Include="Model\DataTransferObject\PublisherDTO.cs" />
-    <Compile Include="Model\DataTransferObject\ReturnBookDTO.cs" />
     <Compile Include="Model\Librarian.cs">
       <DependentUpon>LibraryManager.tt</DependentUpon>
     </Compile>
@@ -167,9 +164,6 @@
     </Compile>
     <Compile Include="Model\ReturnBook.cs">
       <DependentUpon>LibraryManager.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PayFineInfoWindow.xaml.cs">
-      <DependentUpon>PayFineInfoWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View.AddWindow\AddAuthorWindow.xaml.cs">
       <DependentUpon>AddAuthorWindow.xaml</DependentUpon>
@@ -244,7 +238,6 @@
     <Compile Include="ViewModel\PageUC\PageMemberManagerVM.cs" />
     <Compile Include="ViewModel\PageUC\PagePublisherManagerVM.cs" />
     <Compile Include="ViewModel\PageUC\PageReturnBookVM.cs" />
-    <Compile Include="ViewModel\PayFineInfoWindowViewModel.cs" />
     <Page Include="FindMemberWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -273,10 +266,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MemberWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="PayFineInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

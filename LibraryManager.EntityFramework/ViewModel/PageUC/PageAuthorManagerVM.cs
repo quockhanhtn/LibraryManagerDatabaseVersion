@@ -17,7 +17,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
-
 namespace LibraryManager.EntityFramework.ViewModel.PageUC
 {
     public class PageAuthorManagerVM : BaseViewModel, IObjectManager
@@ -188,14 +187,14 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
 
             AddCommand = new RelayCommand<UserControl>((p) => { return p != null; }, (p) =>
             {
-                var addAuthorWindow = new AddAuthorWindow();
+                var addDataContext = new AddAuthorWindowVM();
+                var addAuthorWindow = new AddAuthorWindow() { DataContext = addDataContext };
                 addAuthorWindow.ShowDialog();
 
                 var mySnackbar = p.FindName("mySnackbar") as Snackbar;
-                var newAuthorName = (addAuthorWindow.DataContext as AddAuthorWindowVM).Result;
-                if (newAuthorName != "")
+                if (addDataContext.Result != null)
                 {
-                    mySnackbar.MessageQueue.Enqueue("Thêm tác giả \"" + newAuthorName + "\" thành công");
+                    mySnackbar.MessageQueue.Enqueue("Thêm tác giả \"" + addDataContext.Result.NickName + "\" thành công");
                     ReloadList();
                 }
                 else { mySnackbar.MessageQueue.Enqueue("Không có thay đổi"); }

@@ -1,11 +1,4 @@
-﻿using LibraryManager.EntityFramework.Model.DataAccessLayer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LibraryManager.EntityFramework.Model.DataTransferObject
+﻿namespace LibraryManager.EntityFramework.Model.DataTransferObject
 {
 	public class BookDTO : Book
 	{
@@ -15,7 +8,7 @@ namespace LibraryManager.EntityFramework.Model.DataTransferObject
 			{
 				string authorNames = "";
                 foreach (var item in Authors) { authorNames += item.NickName + ", "; }
-				return authorNames.Substring(0, authorNames.Length - 2);
+				return authorNames.Length > 2 ? authorNames.Substring(0, authorNames.Length - 2) : "";
 			}
 		}
         public BookDTO() : base() { }
@@ -41,10 +34,11 @@ namespace LibraryManager.EntityFramework.Model.DataTransferObject
             }
 		}
 
-        public Book GetBaseModel()
+        public Book GetBaseModelWithoutAuthors()
         {
             return new Book()
             {
+                Id = "",
                 Title = this.Title,
                 BookCategoryId = this.BookCategoryId,
                 PublisherId = this.PublisherId,
@@ -52,7 +46,8 @@ namespace LibraryManager.EntityFramework.Model.DataTransferObject
                 PageNumber = this.PageNumber,
                 Size = this.Size,
                 Price = this.Price,
-                Authors = this.Authors
+                //Authors = this.Authors,
+                Status = true
             };
         }
 	}

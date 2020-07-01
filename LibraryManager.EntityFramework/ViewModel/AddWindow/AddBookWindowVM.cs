@@ -4,21 +4,16 @@ using LibraryManager.EntityFramework.Model.DataTransferObject;
 using LibraryManager.EntityFramework.View.AddWindow;
 using LibraryManager.Utility;
 using LibraryManager.Utility.Enums;
-using System;
+using LibraryManager.Utility.Interfaces;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Data.Entity.Migrations.Model;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace LibraryManager.EntityFramework.ViewModel.AddWindow
 {
-    public class AddBookWindowVM : BaseViewModel
+    public class AddBookWindowVM : BaseViewModel, IAddNewObject<BookDTO>
     {
         public ObservableCollection<BookCategoryDTO> ListBookCategory { get => listBookCategory; set { listBookCategory = value; OnPropertyChanged(); } }
         public ObservableCollection<PublisherDTO> ListPublisher { get => listPublisher; set { listPublisher = value; OnPropertyChanged(); } }
@@ -37,6 +32,7 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
         public ICommand RetypeCommand { get; set; }
         public ICommand CancelCommand { get; set; }
 
+        public BookDTO Result { get; set; }
 
         public AddBookWindowVM()
         {
@@ -49,14 +45,14 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
                  var tbxTitle = p.FindName("tbxTitle") as TextBox;
                  tbxTitle.Focus();
              });
-            
+
             AddBookCategoryCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
              {
-                 var addBookCategoryWindow = new AddBookCategoryWindow();
+                 var addDataContext = new AddBookCategoryWindowVM();
+                 var addBookCategoryWindow = new AddBookCategoryWindow() { DataContext = addDataContext };
                  addBookCategoryWindow.ShowDialog();
 
-                 var result = (addBookCategoryWindow.DataContext as AddBookCategoryWindowVM).Result;
-                 if (result != null)
+                 if (addDataContext.Result != null)
                  {
                      ListBookCategory = BookCategoryDAL.Instance.GetList(StatusFillter.Active);
                  }
@@ -64,11 +60,11 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
             
             AddPublisherCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
              {
-                 var addPublisherWindow = new AddPublisherWindow();
+                 var addDataContext = new AddPublisherWindowVM();
+                 var addPublisherWindow = new AddPublisherWindow() { DataContext = addDataContext };
                  addPublisherWindow.ShowDialog();
 
-                 var result = (addPublisherWindow.DataContext as AddPublisherWindowVM).Result;
-                 if (result != null)
+                 if (addDataContext.Result != null)
                  {
                      ListPublisher = PublisherDAL.Instance.GetList(StatusFillter.Active);
                  }
@@ -76,11 +72,11 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
 
             AddAuthorCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
              {
-                 var addAuthorWindow = new AddAuthorWindow();
+                 var addDataContext = new AddAuthorWindowVM();
+                 var addAuthorWindow = new AddAuthorWindow() { DataContext = addDataContext };
                  addAuthorWindow.ShowDialog();
 
-                 var result = (addAuthorWindow.DataContext as AddAuthorWindowVM).Result;
-                 if (result != "")
+                 if (addDataContext.Result != null)
                  {
                      ListAuthor = AuthorDAL.Instance.GetRawList();
                  }
@@ -159,7 +155,7 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
 
                  if (StringHelper.ToInt(tbxNumber.Text) == 0)
                  {
-                     tblPageNumberWarning.Visibility = Visibility.Visible;
+                     tblNumberWarning.Visibility = Visibility.Visible;
                      tbxNumber.Focus();
                      return;
                  }
@@ -183,6 +179,8 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
                  };
 
                  BookDAL.Instance.Add(newBook, StringHelper.ToInt(tbxNumber.Text));
+                 Result = newBook;
+                 p.Close();
              });
             
             RetypeCommand = new RelayCommand<Window>((p) => { return p != null; }, (p) =>
@@ -203,7 +201,5 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
         Author authorSelected1;
         Author authorSelected2;
         Author authorSelected3;
-
-        Window addBookWindow;
     }
 }
