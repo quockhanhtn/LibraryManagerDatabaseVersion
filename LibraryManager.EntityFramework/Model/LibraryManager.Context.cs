@@ -52,6 +52,8 @@ public partial class LibraryManagerEntities : DbContext
 
     public virtual DbSet<Publisher> Publishers { get; set; }
 
+    public virtual DbSet<ReturnBook> ReturnBooks { get; set; }
+
 }
 
 }

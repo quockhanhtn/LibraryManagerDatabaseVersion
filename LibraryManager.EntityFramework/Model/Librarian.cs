@@ -24,6 +24,8 @@ public partial class Librarian
 
         this.Borrows = new HashSet<Borrow>();
 
+        this.ReturnBooks = new HashSet<ReturnBook>();
+
     }
 
 
@@ -56,6 +58,10 @@ public partial class Librarian
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<Borrow> Borrows { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<ReturnBook> ReturnBooks { get; set; }
 
 }
 

@@ -16,7 +16,7 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
         public ObservableCollection<BorrowDTO> GetList(string memberId)
         {
             var result = new ObservableCollection<BorrowDTO>();
-            foreach (var item in DataProvider.Instance.Database.Borrows.Where(x => x.MemberId == memberId).ToList())
+            foreach (var item in DataProvider.Instance.Database.Borrows.Where(x => x.MemberId == memberId && x.Status == true).ToList())
             {
                 result.Add(new BorrowDTO(item));
             }
@@ -24,7 +24,7 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
         }
         public void Add(string memberId, string librarianId, string bookId)
         {
-            var br = new Borrow() { BookId = bookId, MemberId = memberId, LibrarianId = librarianId, BorrowDate = DateTime.Now };
+            var br = new Borrow() { BookId = bookId, MemberId = memberId, LibrarianId = librarianId, BorrowDate = DateTime.Now , Status = true};
             DataProvider.Instance.SaveEntity(br, EntityState.Added, true);
         }
 

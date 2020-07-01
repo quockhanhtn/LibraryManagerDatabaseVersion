@@ -41,8 +41,8 @@ namespace LibraryManager.EntityFramework.ViewModel
                 var tbxUsername = p.FindName("tbxUsername") as TextBox;
                 var tbxPassWord = p.FindName("tbxPassWord") as PasswordBox;
 
-                //var (loginResult, idPerson) = (0,"");
-                var (loginResult, idPerson) = AccountDAL.Instance.Login(tbxUsername.Text, tbxPassWord.Password);
+                var (loginResult, idPerson) = (0,"");
+                //var (loginResult, idPerson) = AccountDAL.Instance.Login(tbxUsername.Text, tbxPassWord.Password);
 
                 if (loginResult == -1)
                 {

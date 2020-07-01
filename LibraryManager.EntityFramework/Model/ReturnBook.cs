@@ -15,18 +15,22 @@ namespace LibraryManager.EntityFramework.Model
 using System;
     using System.Collections.Generic;
     
-public partial class PayFineInfo
+public partial class ReturnBook
 {
 
     public int Id { get; set; }
 
     public int BorrowId { get; set; }
 
-    public decimal Cash { get; set; }
+    public System.DateTime ReturnDate { get; set; }
+
+    public string LibrarianId { get; set; }
 
 
 
     public virtual Borrow Borrow { get; set; }
+
+    public virtual Librarian Librarian { get; set; }
 
 }
 
