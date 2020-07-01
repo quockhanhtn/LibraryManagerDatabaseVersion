@@ -72,6 +72,7 @@
       <DependentUpon>MyMessageBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="MySnackbar.cs" />
+    <Compile Include="NumericPicker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

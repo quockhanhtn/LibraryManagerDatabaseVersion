@@ -40,5 +40,20 @@ namespace LibraryManager.EntityFramework.Model.DataTransferObject
                 this.Authors = bookRaw.Authors;
             }
 		}
+
+        public Book GetBaseModel()
+        {
+            return new Book()
+            {
+                Title = this.Title,
+                BookCategoryId = this.BookCategoryId,
+                PublisherId = this.PublisherId,
+                YearPublish = this.YearPublish,
+                PageNumber = this.PageNumber,
+                Size = this.Size,
+                Price = this.Price,
+                Authors = this.Authors
+            };
+        }
 	}
 }

@@ -10,8 +10,7 @@
         xmlns:uc="clr-namespace:LibraryManager.MyUserControl;assembly=LibraryManager.MyUserControl" 
         
         mc:Ignorable="d" x:Name="addBookCategoryWindow"
-        
-        Title="AddBookCategoryWindow" DataContext="{StaticResource AddBookCategoryWindowVM}"
+        Title="Thêm chuyên mục mới - Library Manager" DataContext="{StaticResource AddBookCategoryWindowVM}"
         Style="{StaticResource ResizeWindowNoBoder}" WindowStartupLocation="CenterScreen" 
         Height="300" Width="400">
 

@@ -11,7 +11,7 @@
         xmlns:uc="clr-namespace:LibraryManager.MyUserControl;assembly=LibraryManager.MyUserControl" 
         
         mc:Ignorable="d" x:Name="addPublisherWindow" DataContext="{StaticResource AddPublisherWindowVM}"
-        Title="AddPublisherWindow" 
+        Title="Thêm NXB mới - Library Manager" 
         Style="{StaticResource ResizeWindowNoBoder}" WindowStartupLocation="CenterScreen" 
         Height="450" Width="400">
 

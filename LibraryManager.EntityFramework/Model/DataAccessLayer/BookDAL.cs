@@ -4,6 +4,8 @@ using LibraryManager.Utility.Interfaces;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
+using System.Windows.Ink;
+using System.Windows.Media;
 
 namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 {
@@ -52,23 +54,12 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
             return listBookDTO;
         }
 
-        //public ObservableCollection<BookDTO> GetList(bool status)
-        //{
-        //    var listRaw = DataProvider.Instance.Database.Books.Where(x => x.Status == status).ToList();
-        //    var listBookDTO = new ObservableCollection<BookDTO>();
-
-        //    foreach (var book in listRaw)
-        //    {
-        //        listBookDTO.Add(new BookDTO(book));
-        //    }
-
-        //    return listBookDTO;
-        //}
-
-        public void Add(BookDTO newBook)
+        public void Add(BookDTO newBook,int number)
         {
-            //var newLib = newBook.GetBaseModel();
-            //DataProvider.Instance.SaveEntity(newLib, EntityState.Added);
+            var book = newBook.GetBaseModel();
+            DataProvider.Instance.SaveEntity(book, EntityState.Added);
+            BookItem bookItem = new BookItem() { BookId = book.Id, Number = number, Count = number, Status = true };
+            DataProvider.Instance.SaveEntity(bookItem, EntityState.Added, true);
         }
 
         public void Update(BookDTO book)
@@ -117,6 +108,11 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
         }
 
         public void Delete(string objectId)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Add(BookDTO newObject)
         {
             throw new System.NotImplementedException();
         }

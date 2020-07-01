@@ -267,7 +267,7 @@
                             <StackPanel Grid.Column="1">
                                 <DatePicker materialDesign:HintAssist.Hint="Ngày sinh" x:Name="dtpkBirthday" Style="{StaticResource MyDatePicker}" Margin="5 0 20 0"
                                         SelectedDate="{Binding MemberSelected.Birthday, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
-                                <TextBlock Text="Chọn ngày sinh" x:Name="tblBirthdayWarning"/>
+                                <TextBlock Text="Chọn ngày sinh" x:Name="tblBirthdayWarning"  Margin="5 0 20 0"/>
                             </StackPanel>
                         </Grid>
 

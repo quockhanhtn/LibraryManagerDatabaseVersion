@@ -1,6 +1,8 @@
 ﻿using LibraryManager.EntityFramework.Model.DataAccessLayer;
 using LibraryManager.EntityFramework.Model.DataTransferObject;
+using LibraryManager.EntityFramework.View.AddWindow;
 using LibraryManager.EntityFramework.View.PageUC;
+using LibraryManager.EntityFramework.ViewModel.AddWindow;
 using LibraryManager.MyUserControl.MyBox;
 using LibraryManager.Utility;
 using LibraryManager.Utility.Enums;
@@ -143,8 +145,9 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
 
             AddCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                //var addBookWindow = new AddBookWindow();
-                //addBookWindow.ShowDialog();
+                var addBookVM = new AddBookWindowVM();
+                var addBookWindow = new AddBookWindow() { DataContext = addBookVM };
+                addBookWindow.ShowDialog();
 
                 //var mySnackbar = p.FindName("mySnackbar") as Snackbar;
                 //var newBookName = (addBookWindow.DataContext as AddBookWindowVM).Result;

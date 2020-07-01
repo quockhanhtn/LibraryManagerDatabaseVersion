@@ -12,7 +12,7 @@
         
         mc:Ignorable="d" x:Name="addAuthorWindow"
         
-        Title="AddLibrarianWindow" DataContext="{StaticResource AddAuthorWindowVM}"
+        Title="Thêm tác giả - Library Manager" DataContext="{StaticResource AddAuthorWindowVM}"
         Style="{StaticResource ResizeWindowNoBoder}" WindowStartupLocation="CenterScreen" 
         Height="220" Width="400">
 

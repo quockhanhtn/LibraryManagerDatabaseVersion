@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
 using System.Linq;
+using System.Runtime.Serialization;
 
 namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 {
@@ -15,6 +16,14 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
     {
         public static AuthorDAL Instance { get => (instance == null) ? new AuthorDAL() : instance; }
         private AuthorDAL() { }
+
+        public ObservableCollection<Author> GetRawList()
+        {
+            var rawList = DataProvider.Instance.Database.Authors.Where(x => x.Status == true).ToList();
+            var result = new ObservableCollection<Author>();
+            foreach (var item in rawList) { result.Add(item); }
+            return result;
+        }
 
         public ObservableCollection<AuthorDTO> GetList(StatusFillter fillter = StatusFillter.AllStatus)
         {

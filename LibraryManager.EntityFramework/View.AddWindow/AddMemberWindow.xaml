@@ -13,7 +13,7 @@
         
         mc:Ignorable="d" x:Name="addMemberWindow"
         
-        Title="AddMemberWindow" DataContext="{StaticResource AddMemberWindowVM}"
+        Title="Thêm thành viên mới - Library Manager" DataContext="{StaticResource AddMemberWindowVM}"
         Style="{StaticResource ResizeWindowNoBoder}" WindowStartupLocation="CenterScreen" 
         Height="620" Width="400">
 
@@ -69,7 +69,7 @@
                         <StackPanel Grid.Column="1">
                             <DatePicker materialDesign:HintAssist.Hint="Ngày sinh" x:Name="dtpkBirthday" SelectedDate="1/1/1990"
                                         Style="{StaticResource MyDatePicker}" Margin="5 0 20 0"/>
-                            <TextBlock Text="Chọn ngày sinh" x:Name="tblBirthdayWarning"/>
+                            <TextBlock Text="Chọn ngày sinh" x:Name="tblBirthdayWarning"  Margin="5 0 20 0"/>
                         </StackPanel>
                     </Grid>
 
