@@ -13,10 +13,20 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
     {
         public static BorrowDAL Instance { get => (instance == null) ? new BorrowDAL() : instance; }
         private BorrowDAL() { }
-        public ObservableCollection<BorrowDTO> GetList(string memberId)
+        public ObservableCollection<BorrowDTO> GetListByMemberId(string memberId)
         {
             var result = new ObservableCollection<BorrowDTO>();
             foreach (var item in DataProvider.Instance.Database.Borrows.Where(x => x.MemberId == memberId && x.Status == true).ToList())
+            {
+                result.Add(new BorrowDTO(item));
+            }
+            return result;
+        }
+        
+        public ObservableCollection<BorrowDTO> GetListByBookId(string bookId)
+        {
+            var result = new ObservableCollection<BorrowDTO>();
+            foreach (var item in DataProvider.Instance.Database.Borrows.Where(x => x.BookId == bookId && x.Status == true).ToList())
             {
                 result.Add(new BorrowDTO(item));
             }

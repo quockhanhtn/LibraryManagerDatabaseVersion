@@ -31,7 +31,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
             MemberBorrow = member;
             LibrarianReturn = librarian;
 
-            ListBookBorrow = BorrowDAL.Instance.GetList(member.Id);
+            ListBookBorrow = BorrowDAL.Instance.GetListByMemberId(member.Id);
             ListBookReturn = new ObservableCollection<BorrowDTO>();
 
             ReturnBookCommand = new RelayCommand<object>((p) => { return SelectedBorrow != null; }, (p) =>

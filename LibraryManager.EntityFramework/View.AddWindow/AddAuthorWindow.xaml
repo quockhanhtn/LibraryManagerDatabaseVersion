@@ -33,8 +33,7 @@
                     </StackPanel.Resources>
 
                     <!---TÊn tác giả-->
-                    <TextBox materialDesign:HintAssist.Hint="Tên tác giả" x:Name="tbxNickName" MaxLength="40" FontSize="18"
-                             Text="{Binding AuthorSelected.NickName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                    <TextBox materialDesign:HintAssist.Hint="Tên tác giả" x:Name="tbxNickName" MaxLength="40" FontSize="18"/>
                     <TextBlock Text="Tên tác giả không được để trống" x:Name="tblNickNameWarning"/>
 
                 </StackPanel>

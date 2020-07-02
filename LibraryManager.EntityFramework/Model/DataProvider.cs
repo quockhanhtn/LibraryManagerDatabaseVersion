@@ -38,9 +38,9 @@ namespace LibraryManager.EntityFramework.Model
         {
             if (entity == null) { return; }
 
-            Database.Entry(entity).State = entityState;
             try
             {
+                Database.Entry(entity).State = entityState;
                 Instance.Database.SaveChanges();
             }
             catch (DbEntityValidationException e)

@@ -7,6 +7,7 @@ using LibraryManager.MyUserControl.MyBox;
 using LibraryManager.Utility;
 using LibraryManager.Utility.Enums;
 using LibraryManager.Utility.Interfaces;
+using MaterialDesignThemes.Wpf;
 using Microsoft.Win32;
 using OfficeOpenXml;
 using OfficeOpenXml.Style;
@@ -143,20 +144,19 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 //}
             });
 
-            AddCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            AddCommand = new RelayCommand<UserControl>((p) => { return true; }, (p) =>
             {
                 var addBookVM = new AddBookWindowVM();
                 var addBookWindow = new AddBookWindow() { DataContext = addBookVM };
                 addBookWindow.ShowDialog();
 
-                //var mySnackbar = p.FindName("mySnackbar") as Snackbar;
-                //var newBookName = (addBookWindow.DataContext as AddBookWindowVM).Result;
-                //if (newBookName != "")
-                //{
-                //    mySnackbar.MessageQueue.Enqueue("Thêm nhân viên \"" + newBookName + "\" thành công");
-                //    ReloadList();
-                //}
-                //else { mySnackbar.MessageQueue.Enqueue("Không có thay đổi"); }
+                var mySnackbar = p.FindName("mySnackbar") as Snackbar;
+                if (addBookVM.Result != null)
+                {
+                    mySnackbar.MessageQueue.Enqueue("Thêm sách \"" + addBookVM.Result.Title + "\" thành công");
+                    ReloadList();
+                }
+                else { mySnackbar.MessageQueue.Enqueue("Không có thay đổi"); }
             });
 
             UpdateCommand = new RelayCommand<object>((p) => { return BookSelected != null; }, (p) => { });

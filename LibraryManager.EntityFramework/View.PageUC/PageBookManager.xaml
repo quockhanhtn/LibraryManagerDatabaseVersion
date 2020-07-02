@@ -214,7 +214,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Button Grid.Column="0" ToolTip="Nhập sách mới vào thư viện" Margin="10" 
-                        Command="{Binding AddCommand}">
+                        Command="{Binding AddCommand}" CommandParameter="{Binding ElementName=pageBookManager}">
                     <DockPanel LastChildFill="True" Margin="0" HorizontalAlignment="Stretch">
                         <materialDesign:PackIcon Kind="ArrowTopBoldCircle" />
                         <TextBlock Text="NHẬP SÁCH" Margin="10 0"/>

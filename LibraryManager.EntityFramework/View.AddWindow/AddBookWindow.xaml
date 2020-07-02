@@ -49,11 +49,11 @@
                             <ColumnDefinition/>
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
-                        <ComboBox materialDesign:HintAssist.Hint="Chuyên mục"  Style="{StaticResource InfoComboBox}" Margin="20 0 5 0"
+                        <ComboBox Name="cmbBookCategory" materialDesign:HintAssist.Hint="Chuyên mục"  Style="{StaticResource InfoComboBox}" Margin="20 0 5 0"
                                   ItemsSource="{Binding ListBookCategory, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" DisplayMemberPath="Name" 
                                   SelectedValue="{Binding BookCategorySelected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                        <Button Grid.Column="1" Content="THÊM" Margin="5 5 20 5" ToolTip="Thêm chuyên mục mới"
-                                Command="{Binding AddBookCategoryCommand}"/>
+                        <Button Grid.Column="1" Content="+" Margin="5 5 20 5" ToolTip="Thêm chuyên mục mới"
+                                Command="{Binding AddBookCategoryCommand}" CommandParameter="{Binding ElementName=addBookWindow}"/>
                     </Grid>
                     <TextBlock Text="Chọn chuyên mục" x:Name="tblBookCategoryWarning"/>
                     
@@ -63,56 +63,45 @@
                             <ColumnDefinition/>
                             <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
-                        <ComboBox materialDesign:HintAssist.Hint="Nhà xuất bản" Style="{StaticResource InfoComboBox}" Margin="20 0 5 0"
+                        <ComboBox x:Name="cmbPublisher" materialDesign:HintAssist.Hint="Nhà xuất bản" Style="{StaticResource InfoComboBox}" Margin="20 0 5 0"
                                   ItemsSource="{Binding ListPublisher, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" DisplayMemberPath="Name" 
                                   SelectedValue="{Binding PublisherSelected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                        <Button Grid.Column="1" Content="THÊM" Margin="5 5 20 5" ToolTip="Thêm nhà xuất bản mới"
-                                Command="{Binding AddPublisherCommand}"/>
+                        <Button Grid.Column="1" Content="+" Margin="5 5 20 5" ToolTip="Thêm nhà xuất bản mới"
+                                Command="{Binding AddPublisherCommand}" CommandParameter="{Binding ElementName=addBookWindow}"/>
                     </Grid>
                     <TextBlock Text="Chọn nhà xuất bản" x:Name="tblPublisherWarning"/>
 
-                    <uc:YearPicker x:Name="cmbYearPublish" materialDesign:HintAssist.Hint="Năm xuất bản" Style="{StaticResource InfoComboBox}" Margin="20 0 5 0"/>
+                    <TextBox x:Name="tbxYearPublish" materialDesign:HintAssist.Hint="Năm xuất bản" Margin="20 0 5 0"/>
                     <TextBlock Text="Chọn năm xuất bản" x:Name="tblYearPublishWarning"/>
 
-                    <!---Tác giả 1-->
+                    <!---Tác giả-->
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="auto"/>
                         </Grid.ColumnDefinitions>
-                        <ComboBox materialDesign:HintAssist.Hint="Tác giả 1" Style="{StaticResource InfoComboBox}" Margin="20 0 5 0"
+                        <ComboBox x:Name="cmbAuthor" materialDesign:HintAssist.Hint="Tác giả" Style="{StaticResource InfoComboBox}" Margin="20 0 5 0"
                                   ItemsSource="{Binding ListAuthor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" DisplayMemberPath="NickName"
-                                  SelectedValue="{Binding AuthorSelected1, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                        <Button Grid.Column="1" Content="THÊM" Margin="5 5 20 5"  ToolTip="Thêm tác giả mới"
-                                Command="{Binding AddAuthorCommand}"/>
+                                  SelectedValue="{Binding AuthorSelected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                        <Button Grid.Column="1" Content="THÊM" Margin="5"  ToolTip="Thêm tác giả mới"
+                                Command="{Binding AddAuthorToListCommand}"/>
+                        
+                        <Button Grid.Column="2" Content="+" Margin="5 5 20 5"  ToolTip="Thêm tác giả mới"
+                                Command="{Binding AddAuthorCommand}" CommandParameter="{Binding ElementName=addBookWindow}"/>
                     </Grid>
                     <TextBlock Text="Chọn tác giả" x:Name="tblAuthorWaning"/>
 
-                    <!---Tác giả 2-->
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="auto"/>
-                        </Grid.ColumnDefinitions>
-                        <ComboBox materialDesign:HintAssist.Hint="Tác giả 2" Style="{StaticResource InfoComboBox}" Margin="20 0 5 0"
-                                  ItemsSource="{Binding ListAuthor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" DisplayMemberPath="NickName"
-                                  SelectedValue="{Binding AuthorSelected2, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                        <Button Grid.Column="1" Content="THÊM" Margin="5 5 20 5" ToolTip="Thêm tác giả mới"
-                                Command="{Binding AddAuthorCommand}"/>
-                    </Grid>
-
-                    <!---Tác giả 3-->
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="auto"/>
-                        </Grid.ColumnDefinitions>
-                        <ComboBox materialDesign:HintAssist.Hint="Tác giả 3" Style="{StaticResource InfoComboBox}" Margin="20 0 5 0"
-                                  ItemsSource="{Binding ListAuthor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  DisplayMemberPath="NickName"
-                                  SelectedValue="{Binding AuthorSelected3, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-                        <Button Grid.Column="1" Content="THÊM" Margin="5 5 20 5"  ToolTip="Thêm tác giả mới"
-                                Command="{Binding AddAuthorCommand}"/>
-                    </Grid>
+                    <!--Listview hiển thị các tác giả của cuốn sách-->
+                    <ListView Margin="30 0 20 0" ItemsSource="{Binding ListBookAuthor, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                              SelectedItem="{Binding BookAuthorSelected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                              VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Foreground="Black" DisplayMemberPath="NickName">
+                        <ListView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Xóa tác giả" Command="{Binding DeleteAuthorFromListCommand}"/>
+                            </ContextMenu>
+                        </ListView.ContextMenu>
+                    </ListView>
 
                     <!---Giới tính và ngày sinh-->
                     <Grid>

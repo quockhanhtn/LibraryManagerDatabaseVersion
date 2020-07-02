@@ -68,7 +68,7 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
         public void Add(BookDTO newBook, int number)
         {
             var book = newBook.GetBaseModelWithoutAuthors();
-            DataProvider.Instance.SaveEntity(book, EntityState.Added);
+            DataProvider.Instance.SaveEntity(book, EntityState.Added, true);
 
             //Lấy ra book vừa thêm vào Database
             var bookAdded = DataProvider.Instance.Database.Books.Where(x =>
