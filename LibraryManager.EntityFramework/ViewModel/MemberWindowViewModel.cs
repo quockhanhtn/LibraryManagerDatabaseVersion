@@ -41,6 +41,11 @@ namespace LibraryManager.EntityFramework.ViewModel
                         break;
                     case "BorrowBookList":
                         break;
+                    case "ChangePassword":
+                        var dataContext = new ChangePasswordWindowViewModel(MemberLogin.Id);
+                        var changePasswordWindow = new ChangePasswordWindow() { DataContext = dataContext };
+                        changePasswordWindow.Show();
+                        break;
                     case "AboutSoftware":
                         GridMain.Children.Add(this.PageAboutSoftware);
                         break;

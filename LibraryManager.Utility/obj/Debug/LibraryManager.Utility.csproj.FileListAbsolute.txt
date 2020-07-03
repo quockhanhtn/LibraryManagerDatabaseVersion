@@ -1,0 +1,20 @@
+C:\Users\quock\Desktop\LibraryManagerDatabaseVersion\LibraryManager.Utility\bin\Debug\LibraryManager.Utility.dll
+C:\Users\quock\Desktop\LibraryManagerDatabaseVersion\LibraryManager.Utility\bin\Debug\LibraryManager.Utility.pdb
+C:\Users\quock\Desktop\LibraryManagerDatabaseVersion\LibraryManager.Utility\bin\Debug\EPPlus.dll
+C:\Users\quock\Desktop\LibraryManagerDatabaseVersion\LibraryManager.Utility\bin\Debug\EPPlus.xml
+C:\Users\quock\Desktop\LibraryManagerDatabaseVersion\LibraryManager.Utility\obj\Debug\LibraryManager.Utility.csprojAssemblyReference.cache
+C:\Users\quock\Desktop\LibraryManagerDatabaseVersion\LibraryManager.Utility\obj\Debug\LibraryManager.Utility.csproj.ResolveComReference.cache
+C:\Users\quock\Desktop\LibraryManagerDatabaseVersion\LibraryManager.Utility\obj\Debug\LibraryManager.Utility.csproj.CoreCompileInputs.cache
+C:\Users\quock\Desktop\LibraryManagerDatabaseVersion\LibraryManager.Utility\obj\Debug\LibraryManager.Utility.csproj.CopyComplete
+C:\Users\quock\Desktop\LibraryManagerDatabaseVersion\LibraryManager.Utility\obj\Debug\LibraryManager.Utility.dll
+C:\Users\quock\Desktop\LibraryManagerDatabaseVersion\LibraryManager.Utility\obj\Debug\LibraryManager.Utility.pdb
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.Utility\bin\Debug\LibraryManager.Utility.dll
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.Utility\bin\Debug\LibraryManager.Utility.pdb
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.Utility\bin\Debug\EPPlus.dll
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.Utility\bin\Debug\EPPlus.xml
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.Utility\obj\Debug\LibraryManager.Utility.csproj.ResolveComReference.cache
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.Utility\obj\Debug\LibraryManager.Utility.csproj.CoreCompileInputs.cache
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.Utility\obj\Debug\LibraryManager.Utility.csproj.CopyComplete
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.Utility\obj\Debug\LibraryManager.Utility.dll
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.Utility\obj\Debug\LibraryManager.Utility.pdb
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.Utility\obj\Debug\LibraryManager.Utility.csprojAssemblyReference.cache

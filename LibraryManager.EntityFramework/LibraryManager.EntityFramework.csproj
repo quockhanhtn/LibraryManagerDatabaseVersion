@@ -91,6 +91,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ChangePasswordWindow.xaml.cs">
+      <DependentUpon>ChangePasswordWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FindMemberWindow.xaml.cs">
       <DependentUpon>FindMemberWindow.xaml</DependentUpon>
     </Compile>
@@ -186,9 +189,7 @@
     <Compile Include="View.PageUC\PageAboutSoftware.xaml.cs">
       <DependentUpon>PageAboutSoftware.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View.PageUC\PageAccountInfor.xaml.cs">
-      <DependentUpon>PageAccountInfor.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="View.PageUC\PageAccountInfor.xaml.cs" />
     <Compile Include="View.PageUC\PageAuthorManager.xaml.cs">
       <DependentUpon>PageAuthorManager.xaml</DependentUpon>
     </Compile>
@@ -221,6 +222,7 @@
     <Compile Include="ViewModel\AddWindow\AddBookWindowVM.cs" />
     <Compile Include="ViewModel\AddWindow\AddMemberWindowVM.cs" />
     <Compile Include="ViewModel\AddWindow\AddPublisherWindowVM.cs" />
+    <Compile Include="ViewModel\ChangePasswordWindowViewModel.cs" />
     <Compile Include="ViewModel\FindMemberWindowViewModel.cs" />
     <Compile Include="ViewModel\LibrarianWindowViewModel.cs" />
     <Compile Include="ViewModel\LoginWindowViewModel.cs" />
@@ -238,6 +240,10 @@
     <Compile Include="ViewModel\PageUC\PageMemberManagerVM.cs" />
     <Compile Include="ViewModel\PageUC\PagePublisherManagerVM.cs" />
     <Compile Include="ViewModel\PageUC\PageReturnBookVM.cs" />
+    <Page Include="ChangePasswordWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="FindMemberWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -302,8 +308,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View.PageUC\PageAccountInfor.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View.PageUC\PageAuthorManager.xaml">
       <SubType>Designer</SubType>

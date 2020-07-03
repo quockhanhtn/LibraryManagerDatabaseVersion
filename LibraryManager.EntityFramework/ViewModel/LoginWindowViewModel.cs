@@ -1,4 +1,6 @@
 ﻿using Dragablz;
+using LibraryManager.EntityFramework.Model.DataAccessLayer;
+using LibraryManager.MyUserControl.MyBox;
 using LibraryManager.Utility;
 using System.Windows;
 using System.Windows.Controls;
@@ -37,10 +39,9 @@ namespace LibraryManager.EntityFramework.ViewModel
                 var tbxUsername = p.FindName("tbxUsername") as TextBox;
                 var tbxPassWord = p.FindName("tbxPassWord") as PasswordBox;
 
-                var (loginResult, idPerson) = (0,"");
-                //var (loginResult, idPerson) = AccountDAL.Instance.Login(tbxUsername.Text, tbxPassWord.Password);
+                var accountLogin = AccountDAL.Instance.Login(tbxUsername.Text, tbxPassWord.Password);
 
-                if (loginResult == -1)
+                if (accountLogin == null)
                 {
                     var tblLoginFail = p.FindName("tblLoginFail") as TextBlock;
                     tblLoginFail.Visibility = Visibility.Visible;
@@ -49,20 +50,28 @@ namespace LibraryManager.EntityFramework.ViewModel
                 else
                 {
                     p.Hide();
-                    if (loginResult == 0)
+
+                    switch (accountLogin.AccountType)
                     {
-                        var mainWindow = new MainWindow();
-                        mainWindow.Show();
-                    }
-                    else if (loginResult == 1)
-                    {
-                        var librarianWindow = new LibrarianWindow() { DataContext = new LibrarianWindowViewModel(idPerson) };
-                        librarianWindow.Show();
-                    }
-                    else if (loginResult == 2)
-                    {
-                        var memberWindow = new MemberWindow() { DataContext = new MemberWindowViewModel(idPerson) };
-                        memberWindow.Show();
+                        case 0:
+                            var mainWindow = new MainWindow();
+                            mainWindow.Show();
+                            break;
+                        case 1:
+                            var librarian = LibrarianDAL.Instance.GetLibrarian(accountLogin.PersonId);
+                            if (librarian.Status != true)
+                            {
+                                p.Show();
+                                MyMessageBox.Show("Tài khoản của bạn đã bị khóa!\n\rLiên hệ với quản trị viên để mở lại", "Thông báo", "OK", "", MessageBoxImage.Error);
+                                return;
+                            }
+                            var librarianWindow = new LibrarianWindow() { DataContext = new LibrarianWindowViewModel(librarian) };
+                            librarianWindow.Show();
+                            break;
+                        case 2:
+                            var memberWindow = new MemberWindow() { DataContext = new MemberWindowViewModel(accountLogin.PersonId) };
+                            memberWindow.Show();
+                            break;
                     }
                     p.Close();
                 }

@@ -159,7 +159,14 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 else { mySnackbar.MessageQueue.Enqueue("Không có thay đổi"); }
             });
 
-            UpdateCommand = new RelayCommand<object>((p) => { return BookSelected != null; }, (p) => { });
+            UpdateCommand = new RelayCommand<object>((p) => { return BookSelected != null; }, (p) =>
+            {
+                var updateBookVM = new AddBookWindowVM(BookSelected);
+                var addBookWindow = new AddBookWindow() { DataContext = updateBookVM };
+                addBookWindow.ShowDialog();
+
+                ReloadList();
+            });
 
             RemoveCommand = new RelayCommand<object>((p) => { return BookSelected != null; }, (p) => { });
 

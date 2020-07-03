@@ -3,6 +3,7 @@ using LibraryManager.EntityFramework.Model.DataAccessLayer;
 using LibraryManager.EntityFramework.Model.DataTransferObject;
 using LibraryManager.EntityFramework.View.PageUC;
 using LibraryManager.EntityFramework.ViewModel.PageUC;
+using LibraryManager.MyUserControl.MyBox;
 using LibraryManager.Utility;
 using MaterialDesignThemes.Wpf;
 using System.Windows;
@@ -25,9 +26,9 @@ namespace LibraryManager.EntityFramework.ViewModel
         public UserControl PageAuthorManager { get; set; }
         public UserControl PageAboutSoftware { get; set; }
 
-        public LibrarianWindowViewModel(string idLibrarian)
+        public LibrarianWindowViewModel(Librarian librarianLogin)
         {
-            LibrarianLogin = LibrarianDAL.Instance.GetLibrarian(idLibrarian);
+            LibrarianLogin = librarianLogin;
 
             MenuSelectionChangedCommand = new RelayCommand<Window>((p) => { return (p != null); }, (p) =>
             {
@@ -41,6 +42,7 @@ namespace LibraryManager.EntityFramework.ViewModel
                 switch (listViewSelectedItem.Name)
                 {
                     case "AccountInfo":
+                        MyMessageBox.Show("Comming soon", "Sorry", "OK", "", MessageBoxImage.Error);
                         GridMain.Children.Add(this.PageAccountInfor);
                         break;
                     case "MemberManager":
@@ -58,6 +60,11 @@ namespace LibraryManager.EntityFramework.ViewModel
                     case "AuthorManager":
                         GridMain.Children.Add(this.PageAuthorManager);
                         break;
+                    case "ChangePassword":
+                        var dataContext = new ChangePasswordWindowViewModel(LibrarianLogin.Id);
+                        var changePasswordWindow = new ChangePasswordWindow() { DataContext = dataContext };
+                        changePasswordWindow.Show();
+                        break;
                     case "AboutSoftware":
                         GridMain.Children.Add(this.PageAboutSoftware);
                         break;
@@ -73,7 +80,6 @@ namespace LibraryManager.EntityFramework.ViewModel
                 var icoAccount = p.FindName("icoAccount") as PackIcon;
                 int firstChar = char.ToUpper(LibrarianLogin.FirstName[0]);
                 icoAccount.Kind = (PackIconKind)(158 + 5 * (firstChar - (int)'A' + 2));
-
             });
         }
 

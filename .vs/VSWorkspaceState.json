@@ -1,0 +1,11 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\LibraryManager.EntityFramework\\Model\\DataTransferObject",
+    "\\LibraryManager.EntityFramework\\View.AddWindow",
+    "\\LibraryManager.EntityFramework\\ViewModel",
+    "\\LibraryManager.EntityFramework\\ViewModel\\AddWindow"
+  ],
+  "SelectedNode": "\\LibraryManagerDatabaseVersion.sln",
+  "PreviewInSolutionExplorer": false
+}

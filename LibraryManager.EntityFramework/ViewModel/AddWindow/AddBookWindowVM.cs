@@ -217,6 +217,201 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
             CancelCommand = new RelayCommand<Window>((p) => { return p != null; }, (p) => { p.Close(); });
         }
 
+        /// <summary>
+        /// Update book
+        /// </summary>
+        /// <param name="bookUpdate"></param>
+        public AddBookWindowVM(BookDTO bookUpdate)
+        {
+            ListBookCategory = BookCategoryDAL.Instance.GetList(StatusFillter.Active);
+            ListPublisher = PublisherDAL.Instance.GetList(StatusFillter.Active);
+            ListAuthor = AuthorDAL.Instance.GetRawList();
+            ListBookAuthor = new ObservableCollection<Author>();
+            foreach (var item in bookUpdate.Authors) { ListBookAuthor.Add(item); }
+
+            BookCategorySelected = new BookCategoryDTO(bookUpdate.BookCategory);
+            PublisherSelected = new PublisherDTO(bookUpdate.Publisher);
+
+            LoadedCommand = new RelayCommand<Window>((p) => { return p != null; }, (p) =>
+            {
+                var tbxTitle = p.FindName("tbxTitle") as TextBox;
+                var tbxYearPublish = p.FindName("tbxYearPublish") as TextBox;
+                var tbxPageNumber = p.FindName("tbxPageNumber") as TextBox;
+                var tbxSize = p.FindName("tbxSize") as TextBox;
+                var tbxPrice = p.FindName("tbxPrice") as TextBox;
+                var tbxNumber = p.FindName("tbxNumber") as TextBox;
+                var btnOK = p.FindName("btnOK") as Button;
+
+                tbxTitle.Text = bookUpdate.Title;
+                tbxYearPublish.Text = bookUpdate.YearPublish.ToString();
+                tbxPageNumber.Text = bookUpdate.PageNumber.ToString();
+                tbxSize.Text = bookUpdate.Size;
+                tbxPrice.Text = bookUpdate.Price.ToString();
+                tbxNumber.Text = bookUpdate.BookItem.Number.ToString();
+                btnOK.Content = "CẬP NHẬT";
+            });
+
+            AddBookCategoryCommand = new RelayCommand<Window>((p) => { return p != null; }, (p) =>
+            {
+                var addDataContext = new AddBookCategoryWindowVM();
+                var addBookCategoryWindow = new AddBookCategoryWindow() { DataContext = addDataContext };
+                addBookCategoryWindow.ShowDialog();
+
+                if (addDataContext.Result != null)
+                {
+                    ListBookCategory = BookCategoryDAL.Instance.GetList(StatusFillter.Active);
+                    var cmbBookCategory = p.FindName("cmbBookCategory") as ComboBox;
+                    cmbBookCategory.SelectedIndex = ListBookCategory.Count - 1;
+                }
+            });
+
+            AddPublisherCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                var addDataContext = new AddPublisherWindowVM();
+                var addPublisherWindow = new AddPublisherWindow() { DataContext = addDataContext };
+                addPublisherWindow.ShowDialog();
+
+                if (addDataContext.Result != null)
+                {
+                    ListPublisher = PublisherDAL.Instance.GetList(StatusFillter.Active);
+                    var cmbPublisher = p.FindName("cmbPublisher") as ComboBox;
+                    cmbPublisher.SelectedIndex = ListPublisher.Count - 1;
+                }
+            });
+
+            AddAuthorCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
+            {
+                var addDataContext = new AddAuthorWindowVM();
+                var addAuthorWindow = new AddAuthorWindow() { DataContext = addDataContext };
+                addAuthorWindow.ShowDialog();
+
+                if (addDataContext.Result != null)
+                {
+                    ListAuthor = AuthorDAL.Instance.GetRawList();
+
+                    foreach (var item in ListBookAuthor) { ListAuthor.Remove(item); }
+
+                    var cmbAuthor = p.FindName("cmbAuthor") as ComboBox;
+                    cmbAuthor.SelectedIndex = ListAuthor.Count - 1;
+                }
+            });
+
+            AddAuthorToListCommand = new RelayCommand<object>((p) => { return AuthorSelected != null; }, (p) =>
+            {
+                ListBookAuthor.Add(AuthorSelected);
+                ListAuthor.Remove(AuthorSelected);
+            });
+
+            DeleteAuthorFromListCommand = new RelayCommand<object>((p) => { return BookAuthorSelected != null; }, (p) =>
+            {
+                ListAuthor.Add(BookAuthorSelected);
+                ListBookAuthor.Remove(BookAuthorSelected);
+            });
+
+            OKCommand = new RelayCommand<Window>((p) => { return p != null; }, (p) =>
+            {
+                var tbxTitle = p.FindName("tbxTitle") as TextBox;
+                var tbxYearPublish = p.FindName("tbxYearPublish") as TextBox;
+                var tbxPageNumber = p.FindName("tbxPageNumber") as TextBox;
+                var tbxSize = p.FindName("tbxSize") as TextBox;
+                var tbxPrice = p.FindName("tbxPrice") as TextBox;
+                var tbxNumber = p.FindName("tbxNumber") as TextBox;
+
+                var tblTitleWarning = p.FindName("tblTitleWarning") as TextBlock;
+                var tblBookCategoryWarning = p.FindName("tblBookCategoryWarning") as TextBlock;
+                var tblPublisherWarning = p.FindName("tblPublisherWarning") as TextBlock;
+                var tblYearPublishWarning = p.FindName("tblYearPublishWarning") as TextBlock;
+                var tblAuthorWaning = p.FindName("tblAuthorWaning") as TextBlock;
+                var tblPageNumberWarning = p.FindName("tblPageNumberWarning") as TextBlock;
+                var tblPriceWarning = p.FindName("tblPriceWarning") as TextBlock;
+                var tblNumberWarning = p.FindName("tblNumberWarning") as TextBlock;
+
+                if (tbxTitle.Text == "")
+                {
+                    tblTitleWarning.Visibility = Visibility.Visible;
+                    tbxTitle.Focus();
+                    return;
+                }
+                else { tblTitleWarning.Visibility = Visibility.Hidden; }
+
+                if (BookCategorySelected == null)
+                {
+                    tblBookCategoryWarning.Visibility = Visibility.Visible;
+                    return;
+                }
+                else { tblBookCategoryWarning.Visibility = Visibility.Hidden; }
+
+                if (PublisherSelected == null)
+                {
+                    tblPublisherWarning.Visibility = Visibility.Visible;
+                    return;
+                }
+                else { tblPublisherWarning.Visibility = Visibility.Hidden; }
+
+                if (StringHelper.ToInt(tbxYearPublish.Text) < 1900 || StringHelper.ToInt(tbxYearPublish.Text) > DateTime.Now.Year)
+                {
+                    tblYearPublishWarning.Visibility = Visibility.Visible;
+                    tbxYearPublish.Focus();
+                    return;
+                }
+                else { tblYearPublishWarning.Visibility = Visibility.Hidden; }
+
+                if (ListBookAuthor.Count == 0)
+                {
+                    tblAuthorWaning.Visibility = Visibility.Visible;
+                    return;
+                }
+                else { tblAuthorWaning.Visibility = Visibility.Hidden; }
+
+                if (StringHelper.ToInt(tbxPageNumber.Text) == 0)
+                {
+                    tblPageNumberWarning.Visibility = Visibility.Visible;
+                    tbxPageNumber.Focus();
+                    return;
+                }
+                else { tblPageNumberWarning.Visibility = Visibility.Hidden; }
+
+                if (StringHelper.ToDecimal(tbxPrice.Text) == 0)
+                {
+                    tblPriceWarning.Visibility = Visibility.Visible;
+                    tbxPrice.Focus();
+                    return;
+                }
+                else { tblPriceWarning.Visibility = Visibility.Hidden; }
+
+                if (StringHelper.ToInt(tbxNumber.Text) == 0)
+                {
+                    tblNumberWarning.Visibility = Visibility.Visible;
+                    tbxNumber.Focus();
+                    return;
+                }
+                else { tblNumberWarning.Visibility = Visibility.Hidden; }
+
+                var listAuthor = new List<Author>();
+                foreach (var item in ListBookAuthor)
+                {
+                    listAuthor.Add(new Author() { Id = item.Id, NickName = item.NickName });
+                }
+
+                bookUpdate.Title = StringHelper.CapitalizeEachWord(tbxTitle.Text);
+                bookUpdate.BookCategoryId = BookCategorySelected.Id;
+                bookUpdate.PublisherId = PublisherSelected.Id;
+                bookUpdate.YearPublish = StringHelper.ToInt(tbxYearPublish.Text);
+                bookUpdate.PageNumber = StringHelper.ToInt(tbxPageNumber.Text);
+                bookUpdate.Size = tbxSize.Text;
+                bookUpdate.Price = StringHelper.ToDecimal(tbxPrice.Text);
+                bookUpdate.Authors = listAuthor;
+
+                BookDAL.Instance.Update(bookUpdate, StringHelper.ToInt(tbxNumber.Text));
+                p.Close();
+            });
+
+            RetypeCommand = new RelayCommand<Window>((p) => { return p != null; }, (p) =>
+            {
+            });
+
+            CancelCommand = new RelayCommand<Window>((p) => { return p != null; }, (p) => { p.Close(); });
+        }
 
         ObservableCollection<BookCategoryDTO> listBookCategory;
         ObservableCollection<PublisherDTO> listPublisher;

@@ -86,28 +86,22 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
             DataProvider.Instance.SaveEntity(bookItem, EntityState.Added, true);
         }
 
-        public void Update(BookDTO book)
+        public void Update(BookDTO bookUpdate, int number)
         {
-            //var bookUpdate = DataProvider.Instance.Database.Books.Where(x => x.Id == book.Id).SingleOrDefault();
-            //if (bookUpdate != null)
-            //{
-            //    bookUpdate.LastName = book.LastName;
-            //    bookUpdate.FirstName = book.FirstName;
-            //    bookUpdate.Sex = book.Sex;
-            //    bookUpdate.Birthday = book.Birthday;
-            //    bookUpdate.SSN = book.SSN;
-            //    bookUpdate.Address = book.Address;
-            //    bookUpdate.Email = book.Email;
-            //    bookUpdate.PhoneNumber = book.PhoneNumber;
-            //    bookUpdate.StartDate = book.StartDate;
-            //    bookUpdate.Salary = book.Salary;
-            //}
+            var book = DataProvider.Instance.Database.Books.Where(x => x.Id == bookUpdate.Id).FirstOrDefault();
+            book.Title = bookUpdate.Title;
+            book.BookCategoryId = bookUpdate.BookCategoryId;
+            book.PublisherId = bookUpdate.PublisherId;
+            book.YearPublish = bookUpdate.YearPublish;
+            book.PageNumber = bookUpdate.PageNumber;
+            book.Size = bookUpdate.Size;
+            book.Price = bookUpdate.Price;
+            book.Authors = bookUpdate.Authors;
+            var distance = number - book.BookItem.Number;
+            book.BookItem.Number += distance;
+            book.BookItem.Count += distance;
 
-            //DataProvider.Instance.SaveEntity(bookUpdate, EntityState.Modified);
-
-            //DataProvider.Instance.Database.Entry(bookUpdate).State = EntityState.Modified;
-            //DataProvider.Instance.Database.SaveChanges();
-            //DataProvider.Instance.Database.Entry(bookUpdate).State = EntityState.Detached;
+            DataProvider.Instance.SaveEntity(book, EntityState.Modified, true);
         }
 
         public void ChangeStatus(string idBook)
@@ -129,6 +123,11 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
         public void Delete(string objectId) { throw new System.NotImplementedException(); }
 
         public void Add(BookDTO newObject) { throw new System.NotImplementedException(); }
+
+        public void Update(BookDTO objectUpdate)
+        {
+            throw new System.NotImplementedException();
+        }
 
         private static BookDAL instance;
     }

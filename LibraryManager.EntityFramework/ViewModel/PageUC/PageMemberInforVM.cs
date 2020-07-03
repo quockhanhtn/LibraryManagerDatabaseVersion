@@ -11,12 +11,22 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
     public class PageMemberInforVM : BaseViewModel
     {
         public MemberDTO MemberLogin { get => memberLogin; set { memberLogin = value; OnPropertyChanged(); } }
+        public ICommand LoadedCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
         public ICommand CancelUpdateCommand { get; set; }
+        public ICommand UpdatePasswordCommand { get; set; }
+        public ICommand CancelPasswordCommand { get; set; }
 
         public PageMemberInforVM(MemberDTO member)
         {
             MemberLogin = member;
+
+            LoadedCommand = new RelayCommand<UserControl>((p) => { return p != null; }, (p) =>
+            {
+                //var icoAccount = p.FindName("icoAccount") as PackIcon;
+                //int firstChar = char.ToUpper(member.FirstName[0]);
+                //icoAccount.Kind = (PackIconKind)(158 + 5 * (firstChar - (int)'A' + 2));
+            });
 
             CancelUpdateCommand = new RelayCommand<UserControl>((p) => { return p != null; }, (p) =>
             {
@@ -136,6 +146,14 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 var mySnackbar = p.FindName("mySnackbar") as Snackbar;
                 mySnackbar.MessageQueue.Enqueue("Cập nhật thông tin thành viên thành công");
                 OnPropertyChanged();
+            });
+
+            UpdatePasswordCommand = new RelayCommand<UserControl>((p) => { return p != null; }, (p) =>
+            {
+            });
+
+            CancelPasswordCommand = new RelayCommand<UserControl>((p) => { return p != null; }, (p) =>
+            {
             });
         }
 

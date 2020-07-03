@@ -64,6 +64,13 @@
         <Setter Property="FontSize" Value="16"/>
     </Style>
 
+    <!--MyPasswordBox-->
+    <Style TargetType="PasswordBox" x:Key="MyPasswordBox" BasedOn="{StaticResource MaterialDesignFloatingHintPasswordBox}">
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="20 0"/>
+        <Setter Property="FontSize" Value="16"/>
+    </Style>
+
     <!--TitleTextBlock-->
     <Style TargetType="TextBlock" x:Key="TitleTextBlock">
         <Setter Property="HorizontalAlignment" Value="Center" />

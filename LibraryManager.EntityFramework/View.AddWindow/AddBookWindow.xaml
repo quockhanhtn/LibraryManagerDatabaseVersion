@@ -135,7 +135,6 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
-                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
                 <Grid.Resources>
@@ -146,13 +145,13 @@
                 </Grid.Resources>
 
                 <!---Button OK-->
-                <Button Grid.Column="0" IsDefault="True" Content="THÊM" Command="{Binding OKCommand}" CommandParameter="{Binding ElementName=addBookWindow}"/>
+                <Button x:Name="btnOK" Grid.Column="0" IsDefault="True" Content="THÊM" Command="{Binding OKCommand}" CommandParameter="{Binding ElementName=addBookWindow}"/>
 
                 <!-- Button Nhập lại-->
-                <Button Grid.Column="1" Content="NHẬP LẠI" Command="{Binding RetypeCommand}" CommandParameter="{Binding ElementName=addBookWindow}" />
+                <!--<Button Grid.Column="1" Content="NHẬP LẠI" Command="{Binding RetypeCommand}" CommandParameter="{Binding ElementName=addBookWindow}" />-->
 
                 <!---Button Cancel-->
-                <Button Grid.Column="2" IsCancel="True" Content="HỦY" Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=addBookWindow}"/>
+                <Button Grid.Column="1" IsCancel="True" Content="HỦY" Command="{Binding CancelCommand}" CommandParameter="{Binding ElementName=addBookWindow}"/>
             </Grid>
         </Grid>
     </Border>

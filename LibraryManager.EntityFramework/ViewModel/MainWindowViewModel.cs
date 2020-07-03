@@ -53,6 +53,11 @@ namespace LibraryManager.EntityFramework.ViewModel
                     case "AuthorManager":
                         GridMain.Children.Add(this.PageAuthorManager);
                         break;
+                    case "ChangePassword":
+                        var dataContext = new ChangePasswordWindowViewModel("admin");
+                        var changePasswordWindow = new ChangePasswordWindow() { DataContext = dataContext };
+                        changePasswordWindow.Show();
+                        break;
                     case "AboutSoftware":
                         GridMain.Children.Add(this.PageAboutSoftware);
                         break;

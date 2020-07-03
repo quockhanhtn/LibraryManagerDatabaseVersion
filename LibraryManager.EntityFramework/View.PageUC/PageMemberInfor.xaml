@@ -11,11 +11,20 @@
              
              mc:Ignorable="d" x:Name="pageMemberInfor"
              d:DesignHeight="734" d:DesignWidth="1300" Background="#fafafa">
+    
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=pageMemberInfor}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
     <Grid>
         <Grid.Resources>
             <Style TargetType="Button" BasedOn="{StaticResource DarkBlueButton}">
                 <Setter Property="Margin" Value="5 5"/>
             </Style>
+
+            <Style TargetType="PasswordBox" BasedOn="{StaticResource MyPasswordBox}"></Style>
 
             <Style TargetType="materialDesign:PackIcon">
                 <Setter Property="Height" Value="30"/>
@@ -24,14 +33,19 @@
             </Style>
         </Grid.Resources>
 
-        <Grid.ColumnDefinitions>
+        <!--<Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>-->
+
 
         <!--Thông tin tài khoản-->
-        <materialDesign:Card Grid.Column="0" Style="{StaticResource MaterialDesignPageCard}" Margin="5 5 2.5 5">
+        <materialDesign:Card Grid.Column="0"  Grid.RowSpan="2" Style="{StaticResource MaterialDesignPageCard}" Margin="5 5 2.5 5">
             <Grid >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -148,8 +162,8 @@
         </materialDesign:Card>
 
 
-        <!-- THÔNG TIN ĐĂNG NHẬP-->
-        <materialDesign:Card Grid.Column="1" Style="{StaticResource MaterialDesignPageCard}" Margin="2.5 5 5 5">
+        <!-- THÔNG TIN ĐĂNG NHẬP--><!--
+        <materialDesign:Card Grid.Column="1" Style="{StaticResource MaterialDesignPageCard}" Margin="2.5 5 5 2.5">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="auto"/>
@@ -157,41 +171,71 @@
                     <RowDefinition Height="70"/>
                 </Grid.RowDefinitions>
 
-                <!---Tiêu đề "THÔNG TIN CÁ NHÂN"-->
+                --><!---Tiêu đề "THÔNG TIN CÁ NHÂN"--><!--
                 <TextBlock Grid.Row="0" Text="THÔNG TIN ĐĂNG NHẬP" Style="{StaticResource TitleTextBlock}"/>
 
-                <StackPanel Grid.Row="1">
-                    
+                <StackPanel Grid.Row="1" VerticalAlignment="Center">
+                    --><!-- Mật khẩu hiện tại --><!--
+                    <PasswordBox MaxLength="32" materialDesign:HintAssist.Hint="Mật khẩu hiện tại" x:Name="pwxPassword"/>
+                    <TextBlock Text="Mật khẩu sai" x:Name="tblPasswordWarning" Style="{StaticResource WarningTextBlock}"/>
+
+                    --><!-- Mật khẩu mới --><!--
+                    <PasswordBox MaxLength="32" materialDesign:HintAssist.Hint="Mật khẩu mới" x:Name="pwxPasswordNew"/>
+                    <TextBlock Text="Mật khẩu có độ dài ít nhất 6 ký tự" x:Name="tblPasswordNewWarning" Style="{StaticResource WarningTextBlock}"/>
+
+                    --><!--Nhập lại mật khẩu mới --><!--
+                    <PasswordBox MaxLength="32" materialDesign:HintAssist.Hint="Nhập lại mật khẩu mới" x:Name="pwxRetypePasswordNew"/>
+                    <TextBlock Text="Mật khẩu không kớp" x:Name="tblRetypePasswordNewWarning" Style="{StaticResource WarningTextBlock}"/>
                 </StackPanel>
 
-                <!--Button-->
+                --><!--Button--><!--
                 <Grid Grid.Row="2" Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
 
-                    <!---Button Cập nhật-->
+                    --><!---Button Cập nhật--><!--
                     <Button Grid.Column="0" ToolTip="Cập nhật" Content="CẬP NHẬT"
-                            Command="{Binding UpdateCommand}" CommandParameter="{Binding ElementName=pageMemberInfor}">
-                        <!--<DockPanel LastChildFill="True" Margin="0" HorizontalAlignment="Stretch">
-                            <materialDesign:PackIcon Kind="AccountEdit" HorizontalAlignment="Center"/>
-                            <TextBlock Text="CẬP NHẬT" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                        </DockPanel>-->
+                            Command="{Binding UpdatePasswordCommand}" CommandParameter="{Binding ElementName=pageMemberInfor}">
                     </Button>
 
-                    <!---Button Thôi viêc-->
+                    --><!---Button Thôi viêc--><!--
                     <Button Grid.Column="1" ToolTip="Hủy thay đổi" Content="HỦY THAY ĐỔI"
-                            Command="{Binding CancelUpdateCommand}" CommandParameter="{Binding ElementName=pageMemberInfor}">
-                        <!--<DockPanel LastChildFill="True" Margin="0" HorizontalAlignment="Stretch">
-                            <materialDesign:PackIcon Kind="AccountMinus" x:Name="icoStatusChange" HorizontalAlignment="Center"/>
-                            <TextBlock Text="THÔI VIỆC" x:Name="tblStatusChange" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
-                        </DockPanel>-->
+                            Command="{Binding CancelPasswordCommand}" CommandParameter="{Binding ElementName=pageMemberInfor}">
                     </Button>
                 </Grid>
 
             </Grid>
         </materialDesign:Card>
+
+        --><!-- Avatar --><!--
+        <materialDesign:Card Margin="2.5 2.5 5 5" Grid.Row="1" Grid.Column="1" >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <TextBlock Text="ẢNH ĐẠI DIỆN" Grid.Row="0" Grid.Column="1" Style="{StaticResource TitleTextBlock}"/>
+
+                <materialDesign:PackIcon x:Name="icoAccount" Kind="LetterACircle" HorizontalAlignment="Stretch"  VerticalAlignment="Center"
+                                         Height="auto" Width="auto" Grid.Column="0" Grid.RowSpan="2"/>
+
+                <Button Grid.Column="1" Grid.Row="1" Height="50" Margin="20" VerticalAlignment="Bottom">
+                    <StackPanel Orientation="Horizontal">
+                        <materialDesign:PackIcon Kind="Update" Margin="10 0"/>
+                        <TextBlock Text="ĐỔI ẢNH" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible"></TextBlock>
+                    </StackPanel>
+                </Button>
+
+            </Grid>
+        </materialDesign:Card>-->
 
         <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="mySnackbar" />
     </Grid>
