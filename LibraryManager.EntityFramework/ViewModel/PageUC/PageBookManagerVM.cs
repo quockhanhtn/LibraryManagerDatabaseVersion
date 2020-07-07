@@ -187,11 +187,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 if (dialog.ShowDialog() == true) { filePath = dialog.FileName; }
 
                 // nếu đường dẫn null hoặc rỗng thì báo không hợp lệ và return hàm
-                if (string.IsNullOrEmpty(filePath))
-                {
-                    MyMessageBox.Show("Đường dẫn báo cáo không hợp lệ!", "Lỗi", "OK", "", MessageBoxImage.Error);
-                    return;
-                }
+                if (string.IsNullOrEmpty(filePath)) { return; }
 
                 try
                 {
@@ -206,7 +202,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                         ExcelHelper.SetSheetInfo(worksheet, "List Book Sheet");
 
                         // set column width
-                        ExcelHelper.SetColumWidth(worksheet, new int[] { 14, 50, 25, 25, 7, 25, 10, 13, 9, 15, 15 });
+                        ExcelHelper.SetColumWidth(worksheet, new double[] { 14, 50, 25, 25, 7, 25, 10, 13, 9, 15, 15 });
 
                         // Tạo danh sách các column header
                         string[] arrColumnHeader = { "Mã sách", "Tựa sách", "Chuyên mục", "Nhà xuất bản", "Năm", "Tác giả", "Số trang", "Kích thước", "Giá tiền", "Tổng số sách", "Còn lại" };

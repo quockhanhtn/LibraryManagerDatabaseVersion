@@ -20,6 +20,7 @@ namespace LibraryManager.EntityFramework.ViewModel
         public UserControl PagePublisherManager { get; set; }
         public UserControl PageBookCategoryManager { get; set; }
         public UserControl PageAuthorManager { get; set; }
+        public UserControl PageStatistic { get; set; }
         public UserControl PageAboutSoftware { get; set; }
 
         public MainWindowViewModel()
@@ -53,6 +54,9 @@ namespace LibraryManager.EntityFramework.ViewModel
                     case "AuthorManager":
                         GridMain.Children.Add(this.PageAuthorManager);
                         break;
+                    case "Statistic":
+                        GridMain.Children.Add(this.PageStatistic);
+                        break;
                     case "ChangePassword":
                         var dataContext = new ChangePasswordWindowViewModel("admin");
                         var changePasswordWindow = new ChangePasswordWindow() { DataContext = dataContext };
@@ -81,6 +85,7 @@ namespace LibraryManager.EntityFramework.ViewModel
             this.PagePublisherManager = new PagePublisherManager() { DataContext = new PagePublisherManagerVM() };
             this.PageBookCategoryManager = new PageBookCategoryManager() { DataContext = new PageBookCategoryManagerVM() };
             this.PageAuthorManager = new PageAuthorManager() { DataContext = new PageAuthorManagerVM() };
+            this.PageStatistic = new PageStatistic();
             this.PageAboutSoftware = new PageAboutSoftware();
         }
     }

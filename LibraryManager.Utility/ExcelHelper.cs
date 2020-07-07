@@ -47,7 +47,7 @@ namespace LibraryManager.Utility
         /// </summary>
         /// <param name="excelWorksheet">Sheet cần gán</param>
         /// <param name="columnWidth">List colum width, bắt đầu từ column 1</param>
-        public static void SetColumWidth(ExcelWorksheet excelWorksheet, int[] columnWidth)
+        public static void SetColumWidth(ExcelWorksheet excelWorksheet, double[] columnWidth)
         {
             for (int i = 0; i < columnWidth.Length; i++)
             {

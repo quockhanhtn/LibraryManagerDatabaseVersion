@@ -92,11 +92,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 if (dialog.ShowDialog() == true) { filePath = dialog.FileName; }
 
                 // nếu đường dẫn null hoặc rỗng thì báo không hợp lệ và return hàm
-                if (string.IsNullOrEmpty(filePath))
-                {
-                    MyMessageBox.Show("Đường dẫn báo cáo không hợp lệ!", "Lỗi", "OK", "", MessageBoxImage.Error);
-                    return;
-                }
+                if (string.IsNullOrEmpty(filePath)) { return; }
 
                 try
                 {
@@ -112,7 +108,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                         ExcelHelper.SetSheetInfo(worksheet, "List Author Sheet");
 
                         // set column width
-                        ExcelHelper.SetColumWidth(worksheet, new int[] { 13, 25, 17, 10 });
+                        ExcelHelper.SetColumWidth(worksheet, new double[] { 13, 25, 17, 10 });
 
                         // Tạo danh sách các column header
                         string[] arrColumnHeader = { "Mã tác giả", "Tên tác giả", "Số lượng sách", "Ghi chú" };

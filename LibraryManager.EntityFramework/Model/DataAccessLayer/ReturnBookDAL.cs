@@ -1,6 +1,7 @@
 ﻿using LibraryManager.EntityFramework.Model.DataTransferObject;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 {
@@ -11,6 +12,16 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
     {
         public static ReturnBookDAL Instance { get => (instance == null) ? new ReturnBookDAL() : instance; }
         private ReturnBookDAL() { }
+
+        public ObservableCollection<ReturnDTO> GetListByDate(DateTime fromDate, DateTime toDate)
+        {
+            var result = new ObservableCollection<ReturnDTO>();
+            foreach (var item in DataProvider.Instance.Database.ReturnBooks.Where(x => x.ReturnDate >= fromDate && x.ReturnDate <= toDate))
+            {
+                result.Add(new ReturnDTO(item));
+            }
+            return result;
+        }
 
         public void Add(ObservableCollection<BorrowDTO> listBookReturn, string librarianId)
         {

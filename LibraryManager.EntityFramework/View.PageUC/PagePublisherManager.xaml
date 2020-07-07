@@ -105,7 +105,7 @@
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
                                     
-                                    <GridViewColumn Header="Số điển thoại">
+                                    <GridViewColumn Header="Số điện thoại">
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
                                                 <TextBlock Foreground="Black" Text="{Binding PhoneNumber}"></TextBlock>

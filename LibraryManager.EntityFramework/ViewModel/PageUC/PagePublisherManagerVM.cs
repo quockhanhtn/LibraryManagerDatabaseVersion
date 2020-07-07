@@ -84,7 +84,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 // tạo SaveFileDialog để lưu file excel
                 SaveFileDialog dialog = new SaveFileDialog();
 
-                dialog.Title = "Xuất danh chuyên mục sách";
+                dialog.Title = "Xuất danh sách NXB";
 
                 // chỉ lọc ra các file có định dạng Excel
                 dialog.Filter = "Excel | *.xlsx | Excel 2003 | *.xls";
@@ -93,11 +93,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 if (dialog.ShowDialog() == true) { filePath = dialog.FileName; }
 
                 // nếu đường dẫn null hoặc rỗng thì báo không hợp lệ và return hàm
-                if (string.IsNullOrEmpty(filePath))
-                {
-                    MyMessageBox.Show("Đường dẫn báo cáo không hợp lệ!", "Lỗi", "OK", "", MessageBoxImage.Error);
-                    return;
-                }
+                if (string.IsNullOrEmpty(filePath)) { return; }
 
                 try
                 {
@@ -105,7 +101,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                     using (var excelPackage = new ExcelPackage())
                     {
 
-                        ExcelHelper.SetExcelPackageInfo(excelPackage, "Library Manger", "Danh sách chuyên mục sách", new List<string>() { "List Publisher Sheet" });
+                        ExcelHelper.SetExcelPackageInfo(excelPackage, "Library Manger", "Danh sách NXB", new List<string>() { "List Publisher Sheet" });
 
                         // lấy sheet vừa add ra để thao tác
                         ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets[0];
@@ -113,17 +109,17 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                         ExcelHelper.SetSheetInfo(worksheet, "List Publisher Sheet");
 
                         // set column width
-                        ExcelHelper.SetColumWidth(worksheet, new int[] { 30, 30, 30, 30, 30 });
+                        ExcelHelper.SetColumWidth(worksheet, new double[] { 10, 30, 16, 50, 45, 45, 17, 12 });
 
                         // Tạo danh sách các column header
-                        string[] arrColumnHeader = { "Mã chuyên mục", "Tên chuyên mục", "Số ngày cho mượn", "Số lượng sách", "Ghi chú" };
+                        string[] arrColumnHeader = { "Mã NXB", "Tên nhà xuất bản", "Số điện thoại", "Địa chỉ", "Email", "Trang web", "Số lượng sách", "Ghi chú" };
 
                         // lấy ra số lượng cột cần dùng dựa vào số lượng header
                         var countColHeader = arrColumnHeader.Count();
 
                         // merge các column lại từ column 1 đến số column header
                         // gán giá trị cho cell vừa merge là Thống kê thông tni User Kteam
-                        worksheet.Cells[1, 1].Value = "Thống kê chuyên mục sách".ToUpper();
+                        worksheet.Cells[1, 1].Value = "Thống kê nhà xuất bản".ToUpper();
                         ExcelHelper.MergeAndCenter(worksheet, 1, 1, 1, countColHeader, true);
 
                         worksheet.Cells[2, 1].Value = "Ngày " + DateTime.Now.ToString();
@@ -164,11 +160,23 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                             ExcelHelper.FormatCellBorder(worksheet, rowIndex, colIndex);
                             worksheet.Cells[rowIndex, colIndex++].Value = item.Name;
 
-                            
+                            ExcelHelper.FormatCellBorder(worksheet, rowIndex, colIndex);
+                            worksheet.Cells[rowIndex, colIndex++].Value = item.PhoneNumber;
+
+                            ExcelHelper.FormatCellBorder(worksheet, rowIndex, colIndex);
+                            worksheet.Cells[rowIndex, colIndex++].Value = item.Address;
+
+                            ExcelHelper.FormatCellBorder(worksheet, rowIndex, colIndex);
+                            worksheet.Cells[rowIndex, colIndex++].Value = item.Email;
+
+                            ExcelHelper.FormatCellBorder(worksheet, rowIndex, colIndex);
+                            worksheet.Cells[rowIndex, colIndex++].Value = item.Website;
 
                             ExcelHelper.FormatCellBorder(worksheet, rowIndex, colIndex);
                             worksheet.Cells[rowIndex, colIndex++].Value = item.NumberOfBook;
 
+                            ExcelHelper.FormatCellBorder(worksheet, rowIndex, colIndex);
+                            worksheet.Cells[rowIndex, colIndex++].Value = item.Note;
                         }
 
                         ExcelHelper.SaveExcelPackage(excelPackage, filePath);

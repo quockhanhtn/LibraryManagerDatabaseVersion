@@ -143,3 +143,5 @@ D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManag
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\View.PageUC\PageMemberInfor.baml
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\ChangePasswordWindow.g.cs
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\ChangePasswordWindow.baml
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\View.PageUC\PageStatistic.g.cs
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\View.PageUC\PageStatistic.baml

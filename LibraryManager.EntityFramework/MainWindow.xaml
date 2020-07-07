@@ -192,6 +192,14 @@
                                 </StackPanel>
                             </ListViewItem>
 
+                            <ListViewItem x:Name="Statistic" Height="60" ToolTip="Quản lý tác giả">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="FileReport"/>
+                                    <TextBlock Text="Trang"/>
+                                    <TextBlock Text=" Thống kê" FontWeight="SemiBold"/>
+                                </StackPanel>
+                            </ListViewItem>
+
                             <ListViewItem x:Name="ChangePassword" Height="60" ToolTip="Quản lý tác giả">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="PasswordReset"/>

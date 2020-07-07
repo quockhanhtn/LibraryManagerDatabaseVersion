@@ -1,4 +1,5 @@
 ﻿using LibraryManager.EntityFramework.Model.DataTransferObject;
+using MaterialDesignColors.Recommended;
 using System;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
@@ -32,6 +33,17 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
             }
             return result;
         }
+
+        public ObservableCollection<BorrowDTO> GetListByDate(DateTime fromDate, DateTime toDate)
+        {
+            var result = new ObservableCollection<BorrowDTO>();
+            foreach (var item in DataProvider.Instance.Database.Borrows.Where(x => x.BorrowDate >= fromDate && x.BorrowDate <= toDate && x.Status == true).ToList())
+            {
+                result.Add(new BorrowDTO(item));
+            }
+            return result;
+        }
+
         public void Add(string memberId, string librarianId, string bookId)
         {
             var br = new Borrow() { BookId = bookId, MemberId = memberId, LibrarianId = librarianId, BorrowDate = DateTime.Now , Status = true};

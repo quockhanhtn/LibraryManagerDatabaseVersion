@@ -108,11 +108,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 if (dialog.ShowDialog() == true)  { filePath = dialog.FileName; }
 
                 // nếu đường dẫn null hoặc rỗng thì báo không hợp lệ và return hàm
-                if (string.IsNullOrEmpty(filePath))
-                {
-                    MyMessageBox.Show("Đường dẫn báo cáo không hợp lệ!", "Lỗi", "OK", "", MessageBoxImage.Error);
-                    return;
-                }
+                if (string.IsNullOrEmpty(filePath)) { return; }
 
                 try
                 {
@@ -127,7 +123,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                         ExcelHelper.SetSheetInfo(worksheet, "List Librarian Sheet");
 
                         // set column width
-                        ExcelHelper.SetColumWidth(worksheet, new int[] { 10, 20, 10, 15, 10, 18, 45, 35, 18, 18, 14, 12 });
+                        ExcelHelper.SetColumWidth(worksheet, new double[] { 10, 20, 10, 15, 10, 18, 45, 35, 18, 18, 14, 12 });
 
                         // Tạo danh sách các column header
                         string[] arrColumnHeader = { "Mã số", "Họ", "Tên", "Ngày sinh", "Giới tính", "CCCD", "Địa chỉ", "Email", "Số điện thoại", "Ngày làm việc", "Mức lương", "Ghi chú" };

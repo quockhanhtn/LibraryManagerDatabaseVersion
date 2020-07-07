@@ -13,6 +13,7 @@
     <viewmodel_pageuc:PageMemberManagerVM x:Key="PageMemberManagerVM"/>
     <viewmodel_pageuc:PageAuthorManagerVM x:Key="PageAuthorManagerVM"/>
     <viewmodel_pageuc:PagePublisherManagerVM x:Key="PagePublisherManagerVM"/>
+    <viewmodel_pageuc:PageStatisticVM x:Key="PageStatisticVM"/>
     <viewmodel_pageuc:PageAboutSoftwareVM x:Key="PageAboutSoftwareVM"/>
 
 

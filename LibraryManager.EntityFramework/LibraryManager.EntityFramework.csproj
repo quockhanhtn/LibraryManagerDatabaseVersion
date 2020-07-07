@@ -138,6 +138,7 @@
     <Compile Include="Model\DataTransferObject\LibrarianDTO.cs" />
     <Compile Include="Model\DataTransferObject\MemberDTO.cs" />
     <Compile Include="Model\DataTransferObject\PublisherDTO.cs" />
+    <Compile Include="Model\DataTransferObject\ReturnDTO.cs" />
     <Compile Include="Model\Librarian.cs">
       <DependentUpon>LibraryManager.tt</DependentUpon>
     </Compile>
@@ -217,6 +218,9 @@
     <Compile Include="View.PageUC\PageReturnBook.xaml.cs">
       <DependentUpon>PageReturnBook.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View.PageUC\PageStatistic.xaml.cs">
+      <DependentUpon>PageStatistic.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\AddWindow\AddAuthorWindowVM.cs" />
     <Compile Include="ViewModel\AddWindow\AddBookCategoryWindowVM.cs" />
     <Compile Include="ViewModel\AddWindow\AddBookWindowVM.cs" />
@@ -240,6 +244,7 @@
     <Compile Include="ViewModel\PageUC\PageMemberManagerVM.cs" />
     <Compile Include="ViewModel\PageUC\PagePublisherManagerVM.cs" />
     <Compile Include="ViewModel\PageUC\PageReturnBookVM.cs" />
+    <Compile Include="ViewModel\PageUC\PageStatisticVM.cs" />
     <Page Include="ChangePasswordWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -344,6 +349,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View.PageUC\PageReturnBook.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View.PageUC\PageStatistic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
