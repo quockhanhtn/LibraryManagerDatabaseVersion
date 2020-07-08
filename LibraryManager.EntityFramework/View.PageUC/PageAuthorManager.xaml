@@ -76,6 +76,9 @@
                                   SelectedItem="{Binding AuthorSelected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                             <ListView.ContextMenu>
                                 <ContextMenu>
+                                    <MenuItem Header="Sao chép Mã tác giả" Command="{Binding CopyIdCommand}"/>
+                                    <MenuItem Header="Sao chép Tên tác giả" Command="{Binding CopyNameCommand}"/>
+                                    <Separator />
                                     <MenuItem Header="Ẩn/hiện" x:Name="mnuStatusChange" Command="{Binding StatusChangeCommand}"/>
                                     <MenuItem Header="Xóa" Command="{Binding DeleteCommand}"/>
                                 </ContextMenu>

@@ -87,6 +87,11 @@
 
                             <ListView.ContextMenu>
                                 <ContextMenu>
+                                    <MenuItem Header="Sao chép Mã" Command="{Binding CopyIdCommand}"/>
+                                    <MenuItem Header="Sao chép Họ tên" Command="{Binding CopyNameCommand}"/>
+                                    <MenuItem Header="Sao chép Địa chỉ" Command="{Binding CopyAddressCommand}"/>
+                                    <MenuItem Header="Sao chép SĐT" Command="{Binding CopyPhoneNumberCommand}"/>
+                                    <Separator />
                                     <MenuItem Header="Gửi mail" Command="{Binding SendEmailCommand}"/>
                                     <MenuItem Name="mnuStatusChange" Header="Thôi việc/Làm lại" Command="{Binding StatusChangeCommand}"/>
                                 </ContextMenu>

@@ -19,7 +19,7 @@ using System.Windows.Input;
 
 namespace LibraryManager.EntityFramework.ViewModel.PageUC
 {
-    public class PagePublisherManagerVM : BaseViewModel, IObjectManager
+    public class PagePublisherManagerVM : BaseViewModel, IObjectManager, ICopyInfoAndContact
     {
         public bool IsShowHiddenPublisher { get => isShowHiddenPublisher; set { isShowHiddenPublisher = value; ReloadList(); } }
 
@@ -34,6 +34,11 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
         public ICommand DeleteCommand { get; set; }
         public ICommand SendEmailCommand { get; set; }
         public ICommand OpenWebCommand { get; set; }
+
+        public ICommand CopyIdCommand { get; set; }
+        public ICommand CopyNameCommand { get; set; }
+        public ICommand CopyPhoneNumberCommand { get; set; }
+        public ICommand CopyAddressCommand { get; set; }
 
         public PagePublisherManagerVM()
         {
@@ -258,7 +263,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
             {
                 WebHelper.SendEmail(PublisherSelected.Email);
             });
-            
+
             OpenWebCommand = new RelayCommand<object>((p) => { return PublisherSelected != null && PublisherSelected.Website != null; }, (p) =>
             {
                 WebHelper.OpenLink(PublisherSelected.Website);
@@ -274,6 +279,14 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                     mySnackbar.MessageQueue.Enqueue("Xóa nhà xuất bản thành công !");
                 }
             });
+
+            CopyIdCommand = new RelayCommand<object>((p) => { return PublisherSelected != null; }, (p) => { Clipboard.SetText(PublisherSelected.Id.ToString()); });
+
+            CopyNameCommand = new RelayCommand<object>((p) => { return PublisherSelected != null; }, (p) => { Clipboard.SetText(PublisherSelected.Name); });
+
+            CopyPhoneNumberCommand = new RelayCommand<object>((p) => { return PublisherSelected != null; }, (p) => { Clipboard.SetText(PublisherSelected.PhoneNumber); });
+
+            CopyAddressCommand = new RelayCommand<object>((p) => { return PublisherSelected != null; }, (p) => { Clipboard.SetText(PublisherSelected.Address); });
         }
 
         private void ReloadList()

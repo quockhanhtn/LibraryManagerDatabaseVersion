@@ -20,7 +20,7 @@ using System.Windows.Input;
 
 namespace LibraryManager.EntityFramework.ViewModel.PageUC
 {
-    public class PageLibrarianManagerVM : BaseViewModel, IObjectManager
+    public class PageLibrarianManagerVM : BaseViewModel, IObjectManager, ICopyInfoAndContact
     {
         public ObservableCollection<LibrarianDTO> ListLibrarian { get => listLibrarian; set { listLibrarian = value; OnPropertyChanged(); } }
         public LibrarianDTO LibrarianSelected { get => librarianSelected; set { librarianSelected = value; OnPropertyChanged(); } }
@@ -33,6 +33,11 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
         public ICommand StatusChangeCommand { get; set; }
         public int StatusFillter { get => (int)statusFillter; set { statusFillter = (StatusFillter)value; ReloadList(); OnPropertyChanged(); } }
         public ICommand DeleteCommand { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public ICommand CopyIdCommand { get; set; }
+        public ICommand CopyNameCommand { get; set; }
+        public ICommand CopyPhoneNumberCommand { get; set; }
+        public ICommand CopyAddressCommand { get; set; }
 
         public PageLibrarianManagerVM()
         {
@@ -358,16 +363,21 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 ReloadList();
             });
 
-            SendEmailCommand = new RelayCommand<object>((p) => { return LibrarianSelected != null && LibrarianSelected.Email != null; }, (p) =>
-            {
-                WebHelper.SendEmail(LibrarianSelected.Email);
-            });
+            SendEmailCommand = new RelayCommand<object>((p) => { return LibrarianSelected != null && LibrarianSelected.Email != null; }, (p) => { WebHelper.SendEmail(LibrarianSelected.Email); });
 
             StatusChangeCommand = new RelayCommand<object>((p) => { return LibrarianSelected != null; }, (p) =>
             {
                 LibrarianDAL.Instance.ChangeStatus(LibrarianSelected.Id);
                 ReloadList();
             });
+
+            CopyIdCommand = new RelayCommand<object>((p) => { return LibrarianSelected != null; }, (p) => { Clipboard.SetText(LibrarianSelected.Id); });
+
+            CopyNameCommand = new RelayCommand<object>((p) => { return LibrarianSelected != null; }, (p) => { Clipboard.SetText(LibrarianSelected.FullName); });
+
+            CopyPhoneNumberCommand = new RelayCommand<object>((p) => { return LibrarianSelected != null; }, (p) => { Clipboard.SetText(LibrarianSelected.PhoneNumber); });
+
+            CopyAddressCommand = new RelayCommand<object>((p) => { return LibrarianSelected != null; }, (p) => { Clipboard.SetText(LibrarianSelected.Address); });
         }
 
         private void ReloadList()

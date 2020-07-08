@@ -20,7 +20,7 @@ using System.Windows.Input;
 
 namespace LibraryManager.EntityFramework.ViewModel.PageUC
 {
-    public class PageMemberManagerVM : BaseViewModel, IObjectManager
+    public class PageMemberManagerVM : BaseViewModel, IObjectManager, ICopyInfoAndContact
     {
         public ObservableCollection<MemberDTO> ListMember { get => listMember; set { listMember = value; OnPropertyChanged(); } }
         public MemberDTO MemberSelected { get => memberSelected; set { memberSelected = value; OnPropertyChanged(); } }
@@ -33,6 +33,10 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
         public ICommand StatusChangeCommand { get; set; }
         public int StatusFillter { get => (int)statusFillter; set { statusFillter = (StatusFillter)value; ReloadList(); OnPropertyChanged(); } }
         public ICommand DeleteCommand { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public ICommand CopyIdCommand { get; set; }
+        public ICommand CopyNameCommand { get; set; }
+        public ICommand CopyPhoneNumberCommand { get; set; }
+        public ICommand CopyAddressCommand { get; set; }
 
         public PageMemberManagerVM()
         {
@@ -348,6 +352,14 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 MemberDAL.Instance.ChangeStatus(MemberSelected.Id);
                 ReloadList();
             });
+
+            CopyIdCommand = new RelayCommand<object>((p) => { return MemberSelected != null; }, (p) => { Clipboard.SetText(MemberSelected.Id); });
+
+            CopyNameCommand = new RelayCommand<object>((p) => { return MemberSelected != null; }, (p) => { Clipboard.SetText(MemberSelected.FullName); });
+
+            CopyPhoneNumberCommand = new RelayCommand<object>((p) => { return MemberSelected != null; }, (p) => { Clipboard.SetText(MemberSelected.PhoneNumber); });
+
+            CopyAddressCommand = new RelayCommand<object>((p) => { return MemberSelected != null; }, (p) => { Clipboard.SetText(MemberSelected.Address); });
         }
 
         private void ReloadList()

@@ -20,7 +20,7 @@ using System.Windows.Input;
 
 namespace LibraryManager.EntityFramework.ViewModel.PageUC
 {
-    public class PageBookCategoryManagerVM : BaseViewModel, IObjectManager
+    public class PageBookCategoryManagerVM : BaseViewModel, IObjectManager, ICopyInfo
     {
         public bool IsShowDeleteCategory { get => isShowDeleteCategory; set { isShowDeleteCategory = value; ReloadList(); } }
 
@@ -33,7 +33,9 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
         public ICommand UpdateCommand { get; set; }
         public ICommand StatusChangeCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
-        
+        public ICommand CopyIdCommand { get; set; }
+        public ICommand CopyNameCommand { get; set; }
+
         public PageBookCategoryManagerVM()
         {
             ReloadList();
@@ -244,6 +246,10 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 var mySnackbar = p.FindName("mySnackbar") as Snackbar;
                 mySnackbar.MessageQueue.Enqueue("Xóa chuyên mục thành công !");
             });
+
+            CopyIdCommand = new RelayCommand<object>((p) => { return BookCategorySelected != null; }, (p) => { Clipboard.SetText(BookCategorySelected.Id.ToString()); });
+
+            CopyNameCommand = new RelayCommand<object>((p) => { return BookCategorySelected != null; }, (p) => { Clipboard.SetText(BookCategorySelected.Name); });
         }
 
         private void ReloadList()

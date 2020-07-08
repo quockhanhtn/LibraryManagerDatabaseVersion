@@ -19,7 +19,7 @@ using System.Windows.Input;
 
 namespace LibraryManager.EntityFramework.ViewModel.PageUC
 {
-    public class PageAuthorManagerVM : BaseViewModel, IObjectManager
+    public class PageAuthorManagerVM : BaseViewModel, IObjectManager, ICopyInfo
     {
         public bool IsShowHiddenAuthor { get => isShowHiddenAuthor; set { isShowHiddenAuthor = value; ReloadList(); } }
 
@@ -33,6 +33,8 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
         public ICommand UpdateCommand { get; set; }
         public ICommand StatusChangeCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand CopyIdCommand { get ; set; }
+        public ICommand CopyNameCommand { get; set; }
 
         public PageAuthorManagerVM()
         {
@@ -230,6 +232,10 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 var mySnackbar = p.FindName("mySnackbar") as Snackbar;
                 mySnackbar.MessageQueue.Enqueue("Xóa tác giả thành công !");
             });
+
+            CopyIdCommand = new RelayCommand<object>((p) => { return AuthorSelected != null; }, (p) => { Clipboard.SetText(AuthorSelected.Id.ToString()); });
+
+            CopyNameCommand = new RelayCommand<object>((p) => { return AuthorSelected != null; }, (p) => { Clipboard.SetText(AuthorSelected.NickName); });
         }
 
         void ReloadList()

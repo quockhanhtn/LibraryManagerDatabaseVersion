@@ -60,7 +60,9 @@
     <Compile Include="Enums\StatusFillter.cs" />
     <Compile Include="ExcelHelper.cs" />
     <Compile Include="FrameworkElementExtend.cs" />
+    <Compile Include="Interfaces\ICopyInfoAndContact.cs" />
     <Compile Include="Interfaces\IAddNewObject.cs" />
+    <Compile Include="Interfaces\ICopyInfo.cs" />
     <Compile Include="Interfaces\IDatabaseAccess.cs" />
     <Compile Include="Interfaces\IObjectManager.cs" />
     <Compile Include="PasswordEncoder.cs" />

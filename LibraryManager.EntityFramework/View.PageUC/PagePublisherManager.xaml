@@ -76,6 +76,11 @@
                                       SelectedItem="{Binding PublisherSelected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                             <ListView.ContextMenu>
                                 <ContextMenu>
+                                    <MenuItem Header="Sao chép Mã NXB" Command="{Binding CopyIdCommand}"/>
+                                    <MenuItem Header="Sao chép Tên NXB" Command="{Binding CopyNameCommand}"/>
+                                    <MenuItem Header="Sao chép Địa chỉ" Command="{Binding CopyAddressCommand}"/>
+                                    <MenuItem Header="Sao chép SĐT" Command="{Binding CopyPhoneNumberCommand}"/>
+                                    <Separator />
                                     <MenuItem Header="Gửi mail" Command="{Binding SendEmailCommand}"/>
                                     <MenuItem Header="Truy cập trang web" Command="{Binding OpenWebCommand}"/>
                                     <MenuItem Header="Ẩn/hiện" x:Name="mnuStatusChange" Command="{Binding StatusChangeCommand}"/>

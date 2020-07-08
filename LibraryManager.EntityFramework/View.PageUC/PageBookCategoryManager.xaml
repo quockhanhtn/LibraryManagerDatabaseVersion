@@ -74,6 +74,9 @@
                                       SelectedItem="{Binding BookCategorySelected, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                             <ListView.ContextMenu>
                                 <ContextMenu>
+                                    <MenuItem Header="Sao chép Mã chuyên mục" Command="{Binding CopyIdCommand}"/>
+                                    <MenuItem Header="Sao chép Tên chuyên mục" Command="{Binding CopyNameCommand}"/>
+                                    <Separator />
                                     <MenuItem Header="Ẩn/hiện" x:Name="mnuStatusChange" Command="{Binding StatusChangeCommand}"/>
                                     <MenuItem Header="Xóa chuyên mục" Command="{Binding DeleteCommand}"/>
                                 </ContextMenu>
