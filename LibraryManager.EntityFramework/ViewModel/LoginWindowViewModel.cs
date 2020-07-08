@@ -36,10 +36,10 @@ namespace LibraryManager.EntityFramework.ViewModel
 
             LoginCommand = new RelayCommand<Window>((p) => { return p != null; }, (p) =>
             {
-                var tbxUsername = p.FindName("tbxUsername") as TextBox;
-                var tbxPassWord = p.FindName("tbxPassWord") as PasswordBox;
+                var txtUsername = p.FindName("txtUsername") as TextBox;
+                var txtPassWord = p.FindName("txtPassWord") as PasswordBox;
 
-                var accountLogin = AccountDAL.Instance.Login(tbxUsername.Text, tbxPassWord.Password);
+                var accountLogin = AccountDAL.Instance.Login(txtUsername.Text, txtPassWord.Password);
 
                 if (accountLogin == null)
                 {

@@ -19,38 +19,38 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
         {
             OKCommand = new RelayCommand<Window>((p) => { return !(p == null); }, (p) =>
             {
-                var tbxName = p.FindName("tbxName") as TextBox; 
-                var tbxPhone = p.FindName("tbxPhone") as TextBox;
-                var tbxAddress = p.FindName("tbxAddress") as TextBox;
-                var tbxEmail = p.FindName("tbxEmail") as TextBox;
-                var tbxWebsite = p.FindName("tbxWebsite") as TextBox;
+                var txtName = p.FindName("txtName") as TextBox; 
+                var txtPhone = p.FindName("txtPhone") as TextBox;
+                var txtAddress = p.FindName("txtAddress") as TextBox;
+                var txtEmail = p.FindName("txtEmail") as TextBox;
+                var txtWebsite = p.FindName("txtWebsite") as TextBox;
 
                 var tblNameWarning = p.FindName("tblNameWarning") as TextBlock;
                 var tblPhoneWarning = p.FindName("tblPhoneWarning") as TextBlock;
 
-                if (tbxName.Text == "")
+                if (txtName.Text == "")
                 {
                     tblNameWarning.Visibility = Visibility.Visible;
-                    tbxName.Focus();
+                    txtName.Focus();
                     return;
                 }
                 else { tblNameWarning.Visibility = Visibility.Hidden; }
 
-                if (tbxPhone.Text == "")
+                if (txtPhone.Text == "")
                 {
                     tblPhoneWarning.Visibility = Visibility.Visible;
-                    tbxPhone.Focus();
+                    txtPhone.Focus();
                     return;
                 }
                 else { tblPhoneWarning.Visibility = Visibility.Hidden; }
 
                 var newPublisher = new PublisherDTO()
                 {
-                    Name = tbxName.Text,
-                    PhoneNumber = tbxPhone.Text,
-                    Address = tbxAddress.Text,
-                    Email = tbxEmail.Text,
-                    Website = tbxWebsite.Text,
+                    Name = txtName.Text,
+                    PhoneNumber = txtPhone.Text,
+                    Address = txtAddress.Text,
+                    Email = txtEmail.Text,
+                    Website = txtWebsite.Text,
                     Status = true
                 };
 
@@ -61,21 +61,21 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
 
             RetypeCommand = new RelayCommand<Window>((p) => { return !(p == null); }, (p) =>
             {
-                var tbxLastName = p.FindName("tbxLastName") as TextBox;
-                var tbxFirstName = p.FindName("tbxFirstName") as TextBox;
-                var tbxSSN = p.FindName("tbxSSN") as TextBox;
-                var tbxAddress = p.FindName("tbxAddress") as TextBox;
-                var tbxEmail = p.FindName("tbxEmail") as TextBox;
-                var tbxPhone = p.FindName("tbxPhone") as TextBox;
-                var tbxSalary = p.FindName("tbxSalary") as TextBox;
+                var txtLastName = p.FindName("txtLastName") as TextBox;
+                var txtFirstName = p.FindName("txtFirstName") as TextBox;
+                var txtSSN = p.FindName("txtSSN") as TextBox;
+                var txtAddress = p.FindName("txtAddress") as TextBox;
+                var txtEmail = p.FindName("txtEmail") as TextBox;
+                var txtPhone = p.FindName("txtPhone") as TextBox;
+                var txtSalary = p.FindName("txtSalary") as TextBox;
 
-                tbxLastName.Text = "";
-                tbxFirstName.Text = "";
-                tbxSSN.Text = "";
-                tbxAddress.Text = "";
-                tbxEmail.Text = "";
-                tbxPhone.Text = "";
-                tbxSalary.Text = "";
+                txtLastName.Text = "";
+                txtFirstName.Text = "";
+                txtSSN.Text = "";
+                txtAddress.Text = "";
+                txtEmail.Text = "";
+                txtPhone.Text = "";
+                txtSalary.Text = "";
             });
 
             CancelCommand = new RelayCommand<Window>((p) => { return !(p == null); }, (p) => { p.Close(); });

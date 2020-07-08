@@ -22,7 +22,7 @@ namespace LibraryManager.EntityFramework
         public LoginWindow()
         {
             InitializeComponent();
-            tbxUsername.Focus();
+            txtUsername.Focus();
         }
     }
 }

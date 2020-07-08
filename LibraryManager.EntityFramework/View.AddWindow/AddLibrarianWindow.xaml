@@ -36,11 +36,11 @@
                     </StackPanel.Resources>
 
                     <!---Họ-->
-                    <TextBox MaxLength="20" materialDesign:HintAssist.Hint="Họ và tên đệm" x:Name="tbxLastName"/>
+                    <TextBox MaxLength="20" materialDesign:HintAssist.Hint="Họ và tên đệm" x:Name="txtLastName"/>
                     <TextBlock Text="Họ không được để trống" x:Name="tblLastNameWarning"/>
 
                     <!---Tên-->
-                    <TextBox MaxLength="10" materialDesign:HintAssist.Hint="Tên" x:Name="tbxFirstName"/>
+                    <TextBox MaxLength="10" materialDesign:HintAssist.Hint="Tên" x:Name="txtFirstName"/>
                     <TextBlock Text="Tên không được để trống" x:Name="tblFirstNameWarning"/>
 
                     <!---Giới tính và ngày sinh-->
@@ -73,23 +73,23 @@
                     </Grid>
 
                     <!--Căn cước công dân-->
-                    <TextBox MaxLength="12" materialDesign:HintAssist.Hint="Căn cước công dân" x:Name="tbxSSN"/>
+                    <TextBox MaxLength="12" materialDesign:HintAssist.Hint="Căn cước công dân" x:Name="txtSSN"/>
                     <TextBlock Text="Căn cước công dân sai định dạng" x:Name="tblSSNWarning"/>
 
                     <!---Địa chỉ-->
-                    <TextBox MaxLength="100" materialDesign:HintAssist.Hint="Địa chỉ" x:Name="tbxAddress"/>
+                    <TextBox MaxLength="100" materialDesign:HintAssist.Hint="Địa chỉ" x:Name="txtAddress"/>
                     <TextBlock Text="Địa chỉ không được để trống" x:Name="tblAddressWarning"/>
 
                     <!---Email-->
-                    <TextBox MaxLength="30" materialDesign:HintAssist.Hint="Email" x:Name="tbxEmail"/>
+                    <TextBox MaxLength="30" materialDesign:HintAssist.Hint="Email" x:Name="txtEmail"/>
                     <TextBlock Text="Email sai định dạng" x:Name="tblEmailWarning"/>
 
                     <!---Số điện thoại-->
-                    <TextBox MaxLength="15" materialDesign:HintAssist.Hint="Điện thoại" x:Name="tbxPhone"/>
+                    <TextBox MaxLength="15" materialDesign:HintAssist.Hint="Điện thoại" x:Name="txtPhone"/>
                     <TextBlock Text="Số điện thoại sai định dạng" x:Name="tblPhoneWarning"/>
 
                     <!--Mức lương-->
-                    <TextBox MaxLength="12" materialDesign:HintAssist.Hint="Mức lương" x:Name="tbxSalary"/>
+                    <TextBox MaxLength="12" materialDesign:HintAssist.Hint="Mức lương" x:Name="txtSalary"/>
                     <TextBlock Text="Mức lương sai dịnh dạng" x:Name="tblSalaryWarning"/>
 
                 </StackPanel>

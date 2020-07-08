@@ -59,11 +59,11 @@
                             <TextBlock Text="Hiển thị các NXB đã ẩn" Foreground="Black" FontWeight="Normal" FontSize="16" Margin="10 0" VerticalAlignment="Bottom"/>
                         </DockPanel>
 
-                        <TextBox Grid.Column="0" x:Name="tbxSearch" Style="{StaticResource MyTextBox}" Margin="10 0" FontSize="18"
+                        <TextBox Grid.Column="0" x:Name="txtSearch" Style="{StaticResource MyTextBox}" Margin="10 0" FontSize="18"
                              materialDesign:HintAssist.Hint="Tìm kiếm nhà xuất bản" >
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="TextChanged">
-                                    <i:InvokeCommandAction Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=tbxSearch}"/>
+                                    <i:InvokeCommandAction Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=txtSearch}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </TextBox>
@@ -225,26 +225,26 @@
                                  Text="{Binding PublisherSelected.Id, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
 
                         <!---Tên NXB-->
-                        <TextBox MaxLength="100" materialDesign:HintAssist.Hint="Tên nhà xuất bản" x:Name="tbxName"
+                        <TextBox MaxLength="100" materialDesign:HintAssist.Hint="Tên nhà xuất bản" x:Name="txtName"
                                  Text="{Binding PublisherSelected.Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                         <TextBlock Text="Tên không được để trống" x:Name="tblNameWarning"/>
 
                         <!---Số điện thoại-->
-                        <TextBox MaxLength="15" materialDesign:HintAssist.Hint="Số điện thoại" x:Name="tbxPhone"
+                        <TextBox MaxLength="15" materialDesign:HintAssist.Hint="Số điện thoại" x:Name="txtPhone"
                                  Text="{Binding PublisherSelected.PhoneNumber, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                         <TextBlock Text="Số điện thoại sai định dạng" x:Name="tblPhoneWarning"/>
 
                         <!---Địa chỉ-->
-                        <TextBox MaxLength="100" materialDesign:HintAssist.Hint="Địa chỉ" x:Name="tbxAddress"
+                        <TextBox MaxLength="100" materialDesign:HintAssist.Hint="Địa chỉ" x:Name="txtAddress"
                                  Text="{Binding PublisherSelected.Address, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
 
                         <!---Email-->
-                        <TextBox MaxLength="30" materialDesign:HintAssist.Hint="Email" x:Name="tbxEmail"
+                        <TextBox MaxLength="30" materialDesign:HintAssist.Hint="Email" x:Name="txtEmail"
                                  Text="{Binding PublisherSelected.Email, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                         <TextBlock Text="Email sai định dạng" x:Name="tblEmailWarning"/>
 
                         <!--Website-->
-                        <TextBox MaxLength="40" materialDesign:HintAssist.Hint="Trang web" x:Name="tbxWebsite"
+                        <TextBox MaxLength="40" materialDesign:HintAssist.Hint="Trang web" x:Name="txtWebsite"
                                  Text="{Binding PublisherSelected.Website, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
 
                     </StackPanel>

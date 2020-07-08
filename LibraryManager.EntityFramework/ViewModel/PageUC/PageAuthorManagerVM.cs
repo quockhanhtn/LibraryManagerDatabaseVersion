@@ -200,18 +200,18 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
 
             UpdateCommand = new RelayCommand<UserControl>((p) => { return p != null && AuthorSelected != null; }, (p) =>
             {
-                var tbxNickName = p.FindName("tbxNickName") as TextBox;
+                var txtNickName = p.FindName("txtNickName") as TextBox;
                 var tblNickNameWarning = p.FindName("tblNickNameWarning") as TextBlock;
 
-                if (tbxNickName.Text == "")
+                if (txtNickName.Text == "")
                 {
                     tblNickNameWarning.Visibility = Visibility.Visible;
-                    tbxNickName.Focus();
+                    txtNickName.Focus();
                     return;
                 }
                 else { tblNickNameWarning.Visibility = Visibility.Hidden; }
 
-                AuthorSelected.NickName = tbxNickName.Text;
+                AuthorSelected.NickName = txtNickName.Text;
 
                 AuthorDAL.Instance.Update(AuthorSelected);
                 var mySnackbar = p.FindName("mySnackbar") as Snackbar;

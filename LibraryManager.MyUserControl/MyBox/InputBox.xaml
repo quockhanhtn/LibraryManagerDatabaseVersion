@@ -82,7 +82,7 @@
                 </Grid.RowDefinitions>
 
                 <Grid Grid.Row="0">
-                    <TextBox Margin="20" x:Name="tbxInput" Text="Nội dung gì nè" TextWrapping="WrapWithOverflow" FontSize="25"/>
+                    <TextBox Margin="20" x:Name="txtInput" Text="Nội dung gì nè" TextWrapping="WrapWithOverflow" FontSize="25"/>
                 </Grid>
 
                 <!--Button OK, Cancel-->

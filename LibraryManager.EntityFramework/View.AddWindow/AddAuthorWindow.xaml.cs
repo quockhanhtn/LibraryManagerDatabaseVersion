@@ -10,7 +10,7 @@ namespace LibraryManager.EntityFramework.View.AddWindow
         public AddAuthorWindow()
         {
             InitializeComponent();
-            tbxNickName.Focus();
+            txtNickName.Focus();
         }
     }
 }

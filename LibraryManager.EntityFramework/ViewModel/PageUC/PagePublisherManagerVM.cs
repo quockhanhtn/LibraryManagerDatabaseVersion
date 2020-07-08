@@ -216,36 +216,36 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
 
             UpdateCommand = new RelayCommand<UserControl>((p) => { return p != null && PublisherSelected != null; }, (p) =>
             {
-                var tbxName = p.FindName("tbxName") as TextBox;
-                var tbxPhone = p.FindName("tbxPhone") as TextBox;
-                var tbxAddress = p.FindName("tbxAddress") as TextBox;
-                var tbxEmail = p.FindName("tbxEmail") as TextBox;
-                var tbxWebsite = p.FindName("tbxWebsite") as TextBox;
+                var txtName = p.FindName("txtName") as TextBox;
+                var txtPhone = p.FindName("txtPhone") as TextBox;
+                var txtAddress = p.FindName("txtAddress") as TextBox;
+                var txtEmail = p.FindName("txtEmail") as TextBox;
+                var txtWebsite = p.FindName("txtWebsite") as TextBox;
 
                 var tblNameWarning = p.FindName("tblNameWarning") as TextBlock;
                 var tblPhoneWarning = p.FindName("tblPhoneWarning") as TextBlock;
 
-                if (tbxName.Text == "")
+                if (txtName.Text == "")
                 {
                     tblNameWarning.Visibility = Visibility.Visible;
-                    tbxName.Focus();
+                    txtName.Focus();
                     return;
                 }
                 else { tblNameWarning.Visibility = Visibility.Hidden; }
 
-                if (tbxPhone.Text == "")
+                if (txtPhone.Text == "")
                 {
                     tblPhoneWarning.Visibility = Visibility.Visible;
-                    tbxPhone.Focus();
+                    txtPhone.Focus();
                     return;
                 }
                 else { tblPhoneWarning.Visibility = Visibility.Hidden; }
 
-                PublisherSelected.Name = tbxName.Text;
-                PublisherSelected.PhoneNumber = tbxPhone.Text;
-                PublisherSelected.Address = tbxAddress.Text;
-                PublisherSelected.Email = tbxEmail.Text;
-                PublisherSelected.Website = tbxWebsite.Text;
+                PublisherSelected.Name = txtName.Text;
+                PublisherSelected.PhoneNumber = txtPhone.Text;
+                PublisherSelected.Address = txtAddress.Text;
+                PublisherSelected.Email = txtEmail.Text;
+                PublisherSelected.Website = txtWebsite.Text;
 
                 PublisherDAL.Instance.Update(PublisherSelected);
                 var mySnackbar = p.FindName("mySnackbar") as Snackbar;

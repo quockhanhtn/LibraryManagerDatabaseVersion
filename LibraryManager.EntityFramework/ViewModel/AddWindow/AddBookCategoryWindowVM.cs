@@ -19,31 +19,31 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
         {
             OKCommand = new RelayCommand<Window>((p) => { return !(p == null); }, (p) =>
             {
-                var tbxName = p.FindName("tbxName") as TextBox;
-                var tbxLimitDays = p.FindName("tbxLimitDays") as TextBox;
+                var txtName = p.FindName("txtName") as TextBox;
+                var txtLimitDays = p.FindName("txtLimitDays") as TextBox;
                 var tblNameWarning = p.FindName("tblNameWarning") as TextBlock;
                 var tblLimitDaysWarning = p.FindName("tblLimitDaysWarning") as TextBlock;
 
-                if (tbxName.Text == "")
+                if (txtName.Text == "")
                 {
                     tblNameWarning.Visibility = Visibility.Visible;
-                    tbxName.Focus();
+                    txtName.Focus();
                     return;
                 }
                 else { tblNameWarning.Visibility = Visibility.Hidden; }
 
-                if (StringHelper.ToInt(tbxLimitDays.Text) == 0)
+                if (StringHelper.ToInt(txtLimitDays.Text) == 0)
                 {
                     tblLimitDaysWarning.Visibility = Visibility.Visible;
-                    tbxLimitDays.Focus();
+                    txtLimitDays.Focus();
                     return;
                 }
                 else { tblLimitDaysWarning.Visibility = Visibility.Hidden; }
 
                 BookCategoryDTO newBookCategory = new BookCategoryDTO()
                 {
-                    Name = tbxName.Text,
-                    LimitDays = StringHelper.ToInt(tbxLimitDays.Text),
+                    Name = txtName.Text,
+                    LimitDays = StringHelper.ToInt(txtLimitDays.Text),
                     Status = true
                 };
 

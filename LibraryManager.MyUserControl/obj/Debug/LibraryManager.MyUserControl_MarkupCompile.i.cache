@@ -16,5 +16,5 @@ DEBUG;TRACE
 201144675513
 MyBox\InputBox.xaml;MyBox\MyMessageBox.xaml;ResourceXAML\ControlStyle.xaml;ResourceXAML\BitmapImages.xaml;TitleBar.xaml;
 
-False
+True
 

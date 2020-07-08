@@ -35,12 +35,12 @@
                     </StackPanel.Resources>
 
                     <!---TÊn chuyên mục-->
-                    <TextBox materialDesign:HintAssist.Hint="Tên chuyên mục" x:Name="tbxName" MaxLength="50"
+                    <TextBox materialDesign:HintAssist.Hint="Tên chuyên mục" x:Name="txtName" MaxLength="50"
                              Text="{Binding BookCategorySelected.Name, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                     <TextBlock Text="Tên chuyên mục không được để trống" x:Name="tblNameWarning"/>
 
                     <!---Tên-->
-                    <TextBox materialDesign:HintAssist.Hint="Số ngày cho mượn" x:Name="tbxLimitDays" MaxLength="5"
+                    <TextBox materialDesign:HintAssist.Hint="Số ngày cho mượn" x:Name="txtLimitDays" MaxLength="5"
                                  Text="{Binding BookCategorySelected.LimitDays, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                     <TextBlock Text="Vui lòng nhập số nguyên dương" x:Name="tblLimitDaysWarning"/>
 

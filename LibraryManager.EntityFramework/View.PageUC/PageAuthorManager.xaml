@@ -59,11 +59,11 @@
                             <TextBlock Text="Hiển thị các tác giả đã ẩn" Foreground="Black" FontWeight="Normal" FontSize="16" Margin="10 0" VerticalAlignment="Bottom"/>
                         </DockPanel>
 
-                        <TextBox Grid.Column="0" x:Name="tbxSearch" Style="{StaticResource MyTextBox}" Margin="10 0" FontSize="18"
+                        <TextBox Grid.Column="0" x:Name="txtSearch" Style="{StaticResource MyTextBox}" Margin="10 0" FontSize="18"
                              materialDesign:HintAssist.Hint="Tìm kiếm tác giả theo tên" >
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="TextChanged">
-                                    <i:InvokeCommandAction Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=tbxSearch}"/>
+                                    <i:InvokeCommandAction Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=txtSearch}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </TextBox>
@@ -186,7 +186,7 @@
                                      Text="{Binding AuthorSelected.Id, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
 
                             <!---TÊn tác giả-->
-                            <TextBox materialDesign:HintAssist.Hint="Tên tác giả" x:Name="tbxNickName" MaxLength="40"
+                            <TextBox materialDesign:HintAssist.Hint="Tên tác giả" x:Name="txtNickName" MaxLength="40"
                                      Text="{Binding AuthorSelected.NickName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                             <TextBlock Text="Tên chuyên mục không được để trống" x:Name="tblNickNameWarning"/>
 

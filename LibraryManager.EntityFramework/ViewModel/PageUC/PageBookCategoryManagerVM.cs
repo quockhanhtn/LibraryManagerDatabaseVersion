@@ -203,29 +203,29 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
 
             UpdateCommand = new RelayCommand<UserControl>((p) => { return p != null && BookCategorySelected != null; }, (p) =>
             {
-                var tbxName = p.FindName("tbxName") as TextBox;
-                var tbxLimitDays = p.FindName("tbxLimitDays") as TextBox;
+                var txtName = p.FindName("txtName") as TextBox;
+                var txtLimitDays = p.FindName("txtLimitDays") as TextBox;
                 var tblNameWarning = p.FindName("tblNameWarning") as TextBlock;
                 var tblLimitDaysWarning = p.FindName("tblLimitDaysWarning") as TextBlock;
 
-                if (tbxName.Text == "")
+                if (txtName.Text == "")
                 {
                     tblNameWarning.Visibility = Visibility.Visible;
-                    tbxName.Focus();
+                    txtName.Focus();
                     return;
                 }
                 else { tblNameWarning.Visibility = Visibility.Hidden; }
 
-                if (StringHelper.ToInt(tbxLimitDays.Text) == 0)
+                if (StringHelper.ToInt(txtLimitDays.Text) == 0)
                 {
                     tblLimitDaysWarning.Visibility = Visibility.Visible;
-                    tbxLimitDays.Focus();
+                    txtLimitDays.Focus();
                     return;
                 }
                 else { tblLimitDaysWarning.Visibility = Visibility.Hidden; }
 
-                BookCategorySelected.Name = tbxName.Text;
-                BookCategorySelected.LimitDays = StringHelper.ToInt(tbxLimitDays.Text);
+                BookCategorySelected.Name = txtName.Text;
+                BookCategorySelected.LimitDays = StringHelper.ToInt(txtLimitDays.Text);
 
                 BookCategoryDAL.Instance.Update(BookCategorySelected);
                 var mySnackbar = p.FindName("mySnackbar") as Snackbar;

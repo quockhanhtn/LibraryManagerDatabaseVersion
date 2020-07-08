@@ -30,35 +30,35 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
 
             CancelUpdateCommand = new RelayCommand<UserControl>((p) => { return p != null; }, (p) =>
             {
-                var tbxLastName = p.FindName("tbxLastName") as TextBox;
-                var tbxFirstName = p.FindName("tbxFirstName") as TextBox;
+                var txtLastName = p.FindName("txtLastName") as TextBox;
+                var txtFirstName = p.FindName("txtFirstName") as TextBox;
                 var cmbSex = p.FindName("cmbSex") as ComboBox;
                 var dtpkBirthday = p.FindName("dtpkBirthday") as DatePicker;
-                var tbxSSN = p.FindName("tbxSSN") as TextBox;
-                var tbxAddress = p.FindName("tbxAddress") as TextBox;
-                var tbxEmail = p.FindName("tbxEmail") as TextBox;
-                var tbxPhone = p.FindName("tbxPhone") as TextBox;
+                var txtSSN = p.FindName("txtSSN") as TextBox;
+                var txtAddress = p.FindName("txtAddress") as TextBox;
+                var txtEmail = p.FindName("txtEmail") as TextBox;
+                var txtPhone = p.FindName("txtPhone") as TextBox;
 
-                tbxLastName.Text = MemberLogin.LastName;
-                tbxFirstName.Text = MemberLogin.FirstName;
+                txtLastName.Text = MemberLogin.LastName;
+                txtFirstName.Text = MemberLogin.FirstName;
                 cmbSex.SelectedValue = MemberLogin.Sex;
                 dtpkBirthday.SelectedDate = MemberLogin.Birthday;
-                tbxSSN.Text = MemberLogin.SSN;
-                tbxAddress.Text = MemberLogin.Address;
-                tbxEmail.Text = MemberLogin.Email;
-                tbxPhone.Text = MemberLogin.PhoneNumber;
+                txtSSN.Text = MemberLogin.SSN;
+                txtAddress.Text = MemberLogin.Address;
+                txtEmail.Text = MemberLogin.Email;
+                txtPhone.Text = MemberLogin.PhoneNumber;
             });
 
             UpdateCommand = new RelayCommand<UserControl>((p) => { return p != null; }, (p) =>
             {
-                var tbxLastName = p.FindName("tbxLastName") as TextBox;
-                var tbxFirstName = p.FindName("tbxFirstName") as TextBox;
+                var txtLastName = p.FindName("txtLastName") as TextBox;
+                var txtFirstName = p.FindName("txtFirstName") as TextBox;
                 var cmbSex = p.FindName("cmbSex") as ComboBox;
                 var dtpkBirthday = p.FindName("dtpkBirthday") as DatePicker;
-                var tbxSSN = p.FindName("tbxSSN") as TextBox;
-                var tbxAddress = p.FindName("tbxAddress") as TextBox;
-                var tbxEmail = p.FindName("tbxEmail") as TextBox;
-                var tbxPhone = p.FindName("tbxPhone") as TextBox;
+                var txtSSN = p.FindName("txtSSN") as TextBox;
+                var txtAddress = p.FindName("txtAddress") as TextBox;
+                var txtEmail = p.FindName("txtEmail") as TextBox;
+                var txtPhone = p.FindName("txtPhone") as TextBox;
 
                 var tblLastNameWarning = p.FindName("tblLastNameWarning") as TextBlock;
                 var tblFirstNameWarning = p.FindName("tblFirstNameWarning") as TextBlock;
@@ -69,18 +69,18 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 var tblEmailWarning = p.FindName("tblEmailWarning") as TextBlock;
                 var tblPhoneWarning = p.FindName("tblPhoneWarning") as TextBlock;
 
-                if (tbxLastName.Text == "")
+                if (txtLastName.Text == "")
                 {
                     tblLastNameWarning.Visibility = Visibility.Visible;
-                    tbxLastName.Focus();
+                    txtLastName.Focus();
                     return;
                 }
                 else { tblLastNameWarning.Visibility = Visibility.Hidden; }
 
-                if (tbxFirstName.Text == "")
+                if (txtFirstName.Text == "")
                 {
                     tblFirstNameWarning.Visibility = Visibility.Visible;
-                    tbxFirstName.Focus();
+                    txtFirstName.Focus();
                     return;
                 }
                 else { tblFirstNameWarning.Visibility = Visibility.Hidden; }
@@ -88,7 +88,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 if (cmbSex.SelectedItem == null)
                 {
                     tblSexWarning.Visibility = Visibility.Visible;
-                    tbxLastName.Focus();
+                    txtLastName.Focus();
                     return;
                 }
                 else { tblSexWarning.Visibility = Visibility.Hidden; }
@@ -101,46 +101,46 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 }
                 else { tblBirthdayWarning.Visibility = Visibility.Hidden; }
 
-                if (tbxSSN.Text == "")
+                if (txtSSN.Text == "")
                 {
                     tblSSNWarning.Visibility = Visibility.Visible;
-                    tbxSSN.Focus();
+                    txtSSN.Focus();
                     return;
                 }
                 else { tblSSNWarning.Visibility = Visibility.Hidden; }
 
-                if (tbxAddress.Text == "")
+                if (txtAddress.Text == "")
                 {
                     tblAddressWarning.Visibility = Visibility.Visible;
-                    tbxAddress.Focus();
+                    txtAddress.Focus();
                     return;
                 }
                 else { tblAddressWarning.Visibility = Visibility.Hidden; }
 
-                if (tbxEmail.Text == "")
+                if (txtEmail.Text == "")
                 {
                     tblEmailWarning.Visibility = Visibility.Visible;
-                    tbxEmail.Focus();
+                    txtEmail.Focus();
                     return;
                 }
                 else { tblEmailWarning.Visibility = Visibility.Hidden; }
 
-                if (tbxPhone.Text == "")
+                if (txtPhone.Text == "")
                 {
                     tblPhoneWarning.Visibility = Visibility.Visible;
-                    tbxPhone.Focus();
+                    txtPhone.Focus();
                     return;
                 }
                 else { tblPhoneWarning.Visibility = Visibility.Hidden; }
 
-                MemberLogin.LastName = StringHelper.CapitalizeEachWord(tbxLastName.Text);
-                MemberLogin.FirstName = StringHelper.CapitalizeEachWord(tbxFirstName.Text);
+                MemberLogin.LastName = StringHelper.CapitalizeEachWord(txtLastName.Text);
+                MemberLogin.FirstName = StringHelper.CapitalizeEachWord(txtFirstName.Text);
                 MemberLogin.Sex = cmbSex.SelectedValue.ToString();
                 MemberLogin.Birthday = dtpkBirthday.SelectedDate;
-                MemberLogin.SSN = tbxSSN.Text;
-                MemberLogin.Address = tbxAddress.Text;
-                MemberLogin.Email = tbxEmail.Text;
-                MemberLogin.PhoneNumber = tbxPhone.Text;
+                MemberLogin.SSN = txtSSN.Text;
+                MemberLogin.Address = txtAddress.Text;
+                MemberLogin.Email = txtEmail.Text;
+                MemberLogin.PhoneNumber = txtPhone.Text;
 
                 MemberDAL.Instance.Update(MemberLogin);
                 var mySnackbar = p.FindName("mySnackbar") as Snackbar;

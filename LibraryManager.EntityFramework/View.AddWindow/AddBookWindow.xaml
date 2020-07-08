@@ -42,7 +42,7 @@
             <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
                 <StackPanel>
                     <!---Tên sách-->
-                    <TextBox MaxLength="100" materialDesign:HintAssist.Hint="Tựa sách" x:Name="tbxTitle"/>
+                    <TextBox MaxLength="100" materialDesign:HintAssist.Hint="Tựa sách" x:Name="txtTitle"/>
                     <TextBlock Text="Tựa sách không được để trống" x:Name="tblTitleWarning"/>
 
                     <!---Chuyên mục sách-->
@@ -73,7 +73,7 @@
                     </Grid>
                     <TextBlock Text="Chọn nhà xuất bản" x:Name="tblPublisherWarning"/>
 
-                    <TextBox x:Name="tbxYearPublish" materialDesign:HintAssist.Hint="Năm xuất bản" Margin="20 0 5 0"/>
+                    <TextBox x:Name="txtYearPublish" materialDesign:HintAssist.Hint="Năm xuất bản" Margin="20 0 5 0"/>
                     <TextBlock Text="Chọn năm xuất bản" x:Name="tblYearPublishWarning"/>
 
                     <!---Tác giả-->
@@ -113,21 +113,21 @@
                         </Grid.ColumnDefinitions>
                         
                         <!---Kích thước-->
-                        <TextBox Grid.Column="0" MaxLength="11" materialDesign:HintAssist.Hint="Kích thước" x:Name="tbxSize" Margin="20 0 5 20"/>
+                        <TextBox Grid.Column="0" MaxLength="11" materialDesign:HintAssist.Hint="Kích thước" x:Name="txtSize" Margin="20 0 5 20"/>
 
                         <!---Số trang-->
                         <StackPanel Grid.Column="1">
-                            <TextBox MaxLength="10" materialDesign:HintAssist.Hint="Số trang" x:Name="tbxPageNumber" Margin="5 0 20 0"/>
+                            <TextBox MaxLength="10" materialDesign:HintAssist.Hint="Số trang" x:Name="txtPageNumber" Margin="5 0 20 0"/>
                             <TextBlock Text="Số trang không hợp lệ" x:Name="tblPageNumberWarning" Margin="5 0 20 0"/>
                         </StackPanel>
                     </Grid>
 
                     <!---Email-->
-                    <TextBox MaxLength="15" materialDesign:HintAssist.Hint="Giá tiền" x:Name="tbxPrice"/>
+                    <TextBox MaxLength="15" materialDesign:HintAssist.Hint="Giá tiền" x:Name="txtPrice"/>
                     <TextBlock Text="Giá tiền sai định dạng" x:Name="tblPriceWarning"/>
 
                     <!---Số điện thoại-->
-                    <TextBox MaxLength="10" materialDesign:HintAssist.Hint="Số lượng" x:Name="tbxNumber"/>
+                    <TextBox MaxLength="10" materialDesign:HintAssist.Hint="Số lượng" x:Name="txtNumber"/>
                     <TextBlock Text="Số lượng sai định dạng" x:Name="tblNumberWarning"/>
                 </StackPanel>
             </ScrollViewer>

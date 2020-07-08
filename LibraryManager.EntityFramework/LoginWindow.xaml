@@ -56,7 +56,7 @@
                                     <DockPanel LastChildFill="True" Margin="0 0 0 20">
                                         <materialDesign:PackIcon Grid.Column="0" Kind="Person"/>
 
-                                        <TextBox Grid.Column="1" x:Name="tbxUsername" Margin="20 0 0 0"
+                                        <TextBox Grid.Column="1" x:Name="txtUsername" Margin="20 0 0 0"
                                                  Foreground="#001e51" MaxLength="20" FontSize="20"
                                                  materialDesign:HintAssist.Foreground="#007acc" materialDesign:TextFieldAssist.UnderlineBrush="#007acc"
                                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}">
@@ -71,7 +71,7 @@
                                         <materialDesign:PackIcon Grid.Column="0"  Kind="Key"/>
 
                                         <!--Password mật khẩu-->
-                                        <PasswordBox Grid.Column="1" x:Name="tbxPassWord" Margin="20 0 0 0"
+                                        <PasswordBox Grid.Column="1" x:Name="txtPassWord" Margin="20 0 0 0"
                                                      Foreground="#001e51" MaxLength="20" FontSize="20"
                                                      materialDesign:HintAssist.Foreground="#007acc" materialDesign:TextFieldAssist.UnderlineBrush="#007acc"
                                                      Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" >
@@ -103,7 +103,7 @@
                                     <DockPanel LastChildFill="True" Margin="0 0 0 20">
                                         <materialDesign:PackIcon Grid.Column="0" Kind="Person"/>
 
-                                        <TextBox Grid.Column="1" x:Name="tbxFirstName" Margin="20 0 0 0"
+                                        <TextBox Grid.Column="1" x:Name="txtFirstName" Margin="20 0 0 0"
                                                  Foreground="#001e51" MaxLength="20" FontSize="20"
                                                  materialDesign:HintAssist.Foreground="#007acc" materialDesign:TextFieldAssist.UnderlineBrush="#007acc"
                                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" >
@@ -118,7 +118,7 @@
                                         <materialDesign:PackIcon Grid.Column="0"  Kind="Key"/>
 
                                         <!--Password mật khẩu-->
-                                        <PasswordBox Grid.Column="1" x:Name="tbxNewPassword" Margin="20 0 0 0"
+                                        <PasswordBox Grid.Column="1" x:Name="txtNewPassword" Margin="20 0 0 0"
                                                      Foreground="#001e51" MaxLength="20" FontSize="20"
                                                      materialDesign:HintAssist.Foreground="#007acc" materialDesign:TextFieldAssist.UnderlineBrush="#007acc"
                                                      Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" >
@@ -133,7 +133,7 @@
                                         <materialDesign:PackIcon Grid.Column="0"  Kind="Key"/>
 
                                         <!--Password mật khẩu-->
-                                        <PasswordBox Grid.Column="1" x:Name="tbxConfmPassword" Margin="20 0 0 0"
+                                        <PasswordBox Grid.Column="1" x:Name="txtConfmPassword" Margin="20 0 0 0"
                                                      Foreground="#001e51" MaxLength="20" FontSize="20"
                                                      materialDesign:HintAssist.Foreground="#007acc" materialDesign:TextFieldAssist.UnderlineBrush="#007acc"
                                                      Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" >

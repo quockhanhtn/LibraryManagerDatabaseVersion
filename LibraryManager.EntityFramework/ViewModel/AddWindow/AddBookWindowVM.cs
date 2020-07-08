@@ -47,8 +47,8 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
 
             LoadedCommand = new RelayCommand<Window>((p) => { return p != null; }, (p) =>
              {
-                 var tbxTitle = p.FindName("tbxTitle") as TextBox;
-                 tbxTitle.Focus();
+                 var txtTitle = p.FindName("txtTitle") as TextBox;
+                 txtTitle.Focus();
              });
 
             AddBookCategoryCommand = new RelayCommand<Window>((p) => { return p!= null; }, (p) =>
@@ -110,12 +110,12 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
             
             OKCommand = new RelayCommand<Window>((p) => { return p != null; }, (p) =>
              {
-                 var tbxTitle = p.FindName("tbxTitle") as TextBox;
-                 var tbxYearPublish = p.FindName("tbxYearPublish") as TextBox;
-                 var tbxPageNumber = p.FindName("tbxPageNumber") as TextBox;
-                 var tbxSize = p.FindName("tbxSize") as TextBox;
-                 var tbxPrice = p.FindName("tbxPrice") as TextBox;
-                 var tbxNumber = p.FindName("tbxNumber") as TextBox;
+                 var txtTitle = p.FindName("txtTitle") as TextBox;
+                 var txtYearPublish = p.FindName("txtYearPublish") as TextBox;
+                 var txtPageNumber = p.FindName("txtPageNumber") as TextBox;
+                 var txtSize = p.FindName("txtSize") as TextBox;
+                 var txtPrice = p.FindName("txtPrice") as TextBox;
+                 var txtNumber = p.FindName("txtNumber") as TextBox;
 
                  var tblTitleWarning = p.FindName("tblTitleWarning") as TextBlock;
                  var tblBookCategoryWarning = p.FindName("tblBookCategoryWarning") as TextBlock;
@@ -126,10 +126,10 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
                  var tblPriceWarning = p.FindName("tblPriceWarning") as TextBlock;
                  var tblNumberWarning = p.FindName("tblNumberWarning") as TextBlock;
 
-                 if (tbxTitle.Text == "")
+                 if (txtTitle.Text == "")
                  {
                      tblTitleWarning.Visibility = Visibility.Visible;
-                     tbxTitle.Focus();
+                     txtTitle.Focus();
                      return;
                  }
                  else { tblTitleWarning.Visibility = Visibility.Hidden; }
@@ -148,10 +148,10 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
                  }
                  else { tblPublisherWarning.Visibility = Visibility.Hidden; }
 
-                 if (StringHelper.ToInt(tbxYearPublish.Text) < 1900 || StringHelper.ToInt(tbxYearPublish.Text) >DateTime.Now.Year)
+                 if (StringHelper.ToInt(txtYearPublish.Text) < 1900 || StringHelper.ToInt(txtYearPublish.Text) >DateTime.Now.Year)
                  {
                      tblYearPublishWarning.Visibility = Visibility.Visible;
-                     tbxYearPublish.Focus();
+                     txtYearPublish.Focus();
                      return;
                  }
                  else { tblYearPublishWarning.Visibility = Visibility.Hidden; }
@@ -163,26 +163,26 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
                  }
                  else { tblAuthorWaning.Visibility = Visibility.Hidden; }
 
-                 if (StringHelper.ToInt(tbxPageNumber.Text) == 0)
+                 if (StringHelper.ToInt(txtPageNumber.Text) == 0)
                  {
                      tblPageNumberWarning.Visibility = Visibility.Visible;
-                     tbxPageNumber.Focus();
+                     txtPageNumber.Focus();
                      return;
                  }
                  else { tblPageNumberWarning.Visibility = Visibility.Hidden; }
 
-                 if (StringHelper.ToDecimal(tbxPrice.Text) == 0)
+                 if (StringHelper.ToDecimal(txtPrice.Text) == 0)
                  {
                      tblPriceWarning.Visibility = Visibility.Visible;
-                     tbxPrice.Focus();
+                     txtPrice.Focus();
                      return;
                  }
                  else { tblPriceWarning.Visibility = Visibility.Hidden; }
 
-                 if (StringHelper.ToInt(tbxNumber.Text) == 0)
+                 if (StringHelper.ToInt(txtNumber.Text) == 0)
                  {
                      tblNumberWarning.Visibility = Visibility.Visible;
-                     tbxNumber.Focus();
+                     txtNumber.Focus();
                      return;
                  }
                  else { tblNumberWarning.Visibility = Visibility.Hidden; }
@@ -195,17 +195,17 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
 
                  BookDTO newBook = new BookDTO()
                  {
-                     Title = StringHelper.CapitalizeEachWord(tbxTitle.Text),
+                     Title = StringHelper.CapitalizeEachWord(txtTitle.Text),
                      BookCategoryId = BookCategorySelected.Id,
                      PublisherId = PublisherSelected.Id,
-                     YearPublish = StringHelper.ToInt(tbxYearPublish.Text),
-                     PageNumber = StringHelper.ToInt(tbxPageNumber.Text),
-                     Size = tbxSize.Text,
-                     Price = StringHelper.ToDecimal(tbxPrice.Text),
+                     YearPublish = StringHelper.ToInt(txtYearPublish.Text),
+                     PageNumber = StringHelper.ToInt(txtPageNumber.Text),
+                     Size = txtSize.Text,
+                     Price = StringHelper.ToDecimal(txtPrice.Text),
                      Authors = listAuthor
                  };
 
-                 BookDAL.Instance.Add(newBook, StringHelper.ToInt(tbxNumber.Text));
+                 BookDAL.Instance.Add(newBook, StringHelper.ToInt(txtNumber.Text));
                  Result = newBook;
                  p.Close();
              });
@@ -234,20 +234,20 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
 
             LoadedCommand = new RelayCommand<Window>((p) => { return p != null; }, (p) =>
             {
-                var tbxTitle = p.FindName("tbxTitle") as TextBox;
-                var tbxYearPublish = p.FindName("tbxYearPublish") as TextBox;
-                var tbxPageNumber = p.FindName("tbxPageNumber") as TextBox;
-                var tbxSize = p.FindName("tbxSize") as TextBox;
-                var tbxPrice = p.FindName("tbxPrice") as TextBox;
-                var tbxNumber = p.FindName("tbxNumber") as TextBox;
+                var txtTitle = p.FindName("txtTitle") as TextBox;
+                var txtYearPublish = p.FindName("txtYearPublish") as TextBox;
+                var txtPageNumber = p.FindName("txtPageNumber") as TextBox;
+                var txtSize = p.FindName("txtSize") as TextBox;
+                var txtPrice = p.FindName("txtPrice") as TextBox;
+                var txtNumber = p.FindName("txtNumber") as TextBox;
                 var btnOK = p.FindName("btnOK") as Button;
 
-                tbxTitle.Text = bookUpdate.Title;
-                tbxYearPublish.Text = bookUpdate.YearPublish.ToString();
-                tbxPageNumber.Text = bookUpdate.PageNumber.ToString();
-                tbxSize.Text = bookUpdate.Size;
-                tbxPrice.Text = bookUpdate.Price.ToString();
-                tbxNumber.Text = bookUpdate.BookItem.Number.ToString();
+                txtTitle.Text = bookUpdate.Title;
+                txtYearPublish.Text = bookUpdate.YearPublish.ToString();
+                txtPageNumber.Text = bookUpdate.PageNumber.ToString();
+                txtSize.Text = bookUpdate.Size;
+                txtPrice.Text = bookUpdate.Price.ToString();
+                txtNumber.Text = bookUpdate.BookItem.Number.ToString();
                 btnOK.Content = "CẬP NHẬT";
             });
 
@@ -310,12 +310,12 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
 
             OKCommand = new RelayCommand<Window>((p) => { return p != null; }, (p) =>
             {
-                var tbxTitle = p.FindName("tbxTitle") as TextBox;
-                var tbxYearPublish = p.FindName("tbxYearPublish") as TextBox;
-                var tbxPageNumber = p.FindName("tbxPageNumber") as TextBox;
-                var tbxSize = p.FindName("tbxSize") as TextBox;
-                var tbxPrice = p.FindName("tbxPrice") as TextBox;
-                var tbxNumber = p.FindName("tbxNumber") as TextBox;
+                var txtTitle = p.FindName("txtTitle") as TextBox;
+                var txtYearPublish = p.FindName("txtYearPublish") as TextBox;
+                var txtPageNumber = p.FindName("txtPageNumber") as TextBox;
+                var txtSize = p.FindName("txtSize") as TextBox;
+                var txtPrice = p.FindName("txtPrice") as TextBox;
+                var txtNumber = p.FindName("txtNumber") as TextBox;
 
                 var tblTitleWarning = p.FindName("tblTitleWarning") as TextBlock;
                 var tblBookCategoryWarning = p.FindName("tblBookCategoryWarning") as TextBlock;
@@ -326,10 +326,10 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
                 var tblPriceWarning = p.FindName("tblPriceWarning") as TextBlock;
                 var tblNumberWarning = p.FindName("tblNumberWarning") as TextBlock;
 
-                if (tbxTitle.Text == "")
+                if (txtTitle.Text == "")
                 {
                     tblTitleWarning.Visibility = Visibility.Visible;
-                    tbxTitle.Focus();
+                    txtTitle.Focus();
                     return;
                 }
                 else { tblTitleWarning.Visibility = Visibility.Hidden; }
@@ -348,10 +348,10 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
                 }
                 else { tblPublisherWarning.Visibility = Visibility.Hidden; }
 
-                if (StringHelper.ToInt(tbxYearPublish.Text) < 1900 || StringHelper.ToInt(tbxYearPublish.Text) > DateTime.Now.Year)
+                if (StringHelper.ToInt(txtYearPublish.Text) < 1900 || StringHelper.ToInt(txtYearPublish.Text) > DateTime.Now.Year)
                 {
                     tblYearPublishWarning.Visibility = Visibility.Visible;
-                    tbxYearPublish.Focus();
+                    txtYearPublish.Focus();
                     return;
                 }
                 else { tblYearPublishWarning.Visibility = Visibility.Hidden; }
@@ -363,26 +363,26 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
                 }
                 else { tblAuthorWaning.Visibility = Visibility.Hidden; }
 
-                if (StringHelper.ToInt(tbxPageNumber.Text) == 0)
+                if (StringHelper.ToInt(txtPageNumber.Text) == 0)
                 {
                     tblPageNumberWarning.Visibility = Visibility.Visible;
-                    tbxPageNumber.Focus();
+                    txtPageNumber.Focus();
                     return;
                 }
                 else { tblPageNumberWarning.Visibility = Visibility.Hidden; }
 
-                if (StringHelper.ToDecimal(tbxPrice.Text) == 0)
+                if (StringHelper.ToDecimal(txtPrice.Text) == 0)
                 {
                     tblPriceWarning.Visibility = Visibility.Visible;
-                    tbxPrice.Focus();
+                    txtPrice.Focus();
                     return;
                 }
                 else { tblPriceWarning.Visibility = Visibility.Hidden; }
 
-                if (StringHelper.ToInt(tbxNumber.Text) == 0)
+                if (StringHelper.ToInt(txtNumber.Text) == 0)
                 {
                     tblNumberWarning.Visibility = Visibility.Visible;
-                    tbxNumber.Focus();
+                    txtNumber.Focus();
                     return;
                 }
                 else { tblNumberWarning.Visibility = Visibility.Hidden; }
@@ -393,16 +393,16 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
                     listAuthor.Add(new Author() { Id = item.Id, NickName = item.NickName });
                 }
 
-                bookUpdate.Title = StringHelper.CapitalizeEachWord(tbxTitle.Text);
+                bookUpdate.Title = StringHelper.CapitalizeEachWord(txtTitle.Text);
                 bookUpdate.BookCategoryId = BookCategorySelected.Id;
                 bookUpdate.PublisherId = PublisherSelected.Id;
-                bookUpdate.YearPublish = StringHelper.ToInt(tbxYearPublish.Text);
-                bookUpdate.PageNumber = StringHelper.ToInt(tbxPageNumber.Text);
-                bookUpdate.Size = tbxSize.Text;
-                bookUpdate.Price = StringHelper.ToDecimal(tbxPrice.Text);
+                bookUpdate.YearPublish = StringHelper.ToInt(txtYearPublish.Text);
+                bookUpdate.PageNumber = StringHelper.ToInt(txtPageNumber.Text);
+                bookUpdate.Size = txtSize.Text;
+                bookUpdate.Price = StringHelper.ToDecimal(txtPrice.Text);
                 bookUpdate.Authors = listAuthor;
 
-                BookDAL.Instance.Update(bookUpdate, StringHelper.ToInt(tbxNumber.Text));
+                BookDAL.Instance.Update(bookUpdate, StringHelper.ToInt(txtNumber.Text));
                 p.Close();
             });
 

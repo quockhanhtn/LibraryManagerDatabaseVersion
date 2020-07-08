@@ -50,11 +50,11 @@
                         <ColumnDefinition Width="150"/>
                     </Grid.ColumnDefinitions>
 
-                    <TextBox x:Name="tbxSearch" Style="{StaticResource MyTextBox}" Grid.Column="0" Margin="10 0"
+                    <TextBox x:Name="txtSearch" Style="{StaticResource MyTextBox}" Grid.Column="0" Margin="10 0"
                              materialDesign:HintAssist.Hint="Tìm kiếm nhân viên theo họ tên, email hoặc số điện thoại" >
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="TextChanged">
-                                <i:InvokeCommandAction Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=tbxSearch}"/>
+                                <i:InvokeCommandAction Command="{Binding SearchCommand}" CommandParameter="{Binding ElementName=txtSearch}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </TextBox>
@@ -252,16 +252,16 @@
                             <Style TargetType="TextBlock" BasedOn="{StaticResource WarningTextBlock}"/>
                         </StackPanel.Resources>
                         <!---Mã nhân viên-->
-                        <TextBox Grid.Column="0" materialDesign:HintAssist.Hint="Mã" x:Name="tbxId" IsReadOnly="True"
+                        <TextBox Grid.Column="0" materialDesign:HintAssist.Hint="Mã" x:Name="txtId" IsReadOnly="True"
                                  Text="{Binding LibrarianSelected.Id, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
 
                         <!---Họ-->
-                        <TextBox materialDesign:HintAssist.Hint="Họ và tên đệm" x:Name="tbxLastName" MaxLength="20"
+                        <TextBox materialDesign:HintAssist.Hint="Họ và tên đệm" x:Name="txtLastName" MaxLength="20"
                                  Text="{Binding LibrarianSelected.LastName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                         <TextBlock Text="Họ không được để trống" x:Name="tblLastNameWarning"/>
 
                         <!---Tên-->
-                        <TextBox materialDesign:HintAssist.Hint="Tên" x:Name="tbxFirstName" MaxLength="10"
+                        <TextBox materialDesign:HintAssist.Hint="Tên" x:Name="txtFirstName" MaxLength="10"
                                  Text="{Binding LibrarianSelected.FirstName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                         <TextBlock Text="Tên không được để trống" x:Name="tblFirstNameWarning"/>
 
@@ -296,27 +296,27 @@
                         </Grid>
 
                         <!--Căn cước công dân-->
-                        <TextBox materialDesign:HintAssist.Hint="Căn cước công dân" x:Name="tbxSSN" MaxLength="12"
+                        <TextBox materialDesign:HintAssist.Hint="Căn cước công dân" x:Name="txtSSN" MaxLength="12"
                                  Text="{Binding LibrarianSelected.SSN, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                         <TextBlock Text="Căn cước công dân sai định dạng" x:Name="tblSSNWarning"/>
 
                         <!---Địa chỉ-->
-                        <TextBox materialDesign:HintAssist.Hint="Địa chỉ" x:Name="tbxAddress" MaxLength="100"
+                        <TextBox materialDesign:HintAssist.Hint="Địa chỉ" x:Name="txtAddress" MaxLength="100"
                                  Text="{Binding LibrarianSelected.Address, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                         <TextBlock Text="Địa chỉ không được để trống" x:Name="tblAddressWarning"/>
 
                         <!---Email-->
-                        <TextBox materialDesign:HintAssist.Hint="Email" x:Name="tbxEmail" MaxLength="30"
+                        <TextBox materialDesign:HintAssist.Hint="Email" x:Name="txtEmail" MaxLength="30"
                                  Text="{Binding LibrarianSelected.Email, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                         <TextBlock Text="Email sai định dạng" x:Name="tblEmailWarning"/>
 
                         <!---Số điện thoại-->
-                        <TextBox materialDesign:HintAssist.Hint="Điện thoại" x:Name="tbxPhone" MaxLength="15"
+                        <TextBox materialDesign:HintAssist.Hint="Điện thoại" x:Name="txtPhone" MaxLength="15"
                                  Text="{Binding LibrarianSelected.PhoneNumber, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                         <TextBlock Text="Số điện thoại sai định dạng" x:Name="tblPhoneWarning"/>
 
                         <!--Mức lương-->
-                        <TextBox materialDesign:HintAssist.Hint="Mức lương" x:Name="tbxSalary" MaxLength="12"
+                        <TextBox materialDesign:HintAssist.Hint="Mức lương" x:Name="txtSalary" MaxLength="12"
                                  Text="{Binding LibrarianSelected.Salary, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                         <TextBlock Text="Mức lương sai dịnh dạng" x:Name="tblSalaryWarning"/>
 

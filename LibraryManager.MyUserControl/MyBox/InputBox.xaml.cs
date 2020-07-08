@@ -27,13 +27,13 @@ namespace LibraryManager.MyUserControl.MyBox
         {
             InitializeComponent();
             Result = "";
-            tbxInput.Text = inputTextExam;
+            txtInput.Text = inputTextExam;
             tblTitle.Text = caption.ToUpper();
             tblButton1.Text = btn1_Text;
             tblButton2.Text = btn2_Text;
 
-            tbxInput.Focus();
-            tbxInput.CaretIndex = tbxInput.Text.Length;
+            txtInput.Focus();
+            txtInput.CaretIndex = txtInput.Text.Length;
 
             if (btn2_Text == "")
             {
@@ -56,7 +56,7 @@ namespace LibraryManager.MyUserControl.MyBox
 
         private void btn1_Click(object sender, RoutedEventArgs e)
         {
-            Result = tbxInput.Text.Trim();
+            Result = txtInput.Text.Trim();
             this.Close();
         }
 

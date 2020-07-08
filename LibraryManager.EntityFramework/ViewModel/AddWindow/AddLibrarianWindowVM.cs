@@ -20,15 +20,15 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
         {
             OKCommand = new RelayCommand<Window>((p) => { return !(p == null); }, (p) =>
             {
-                var tbxLastName = p.FindName("tbxLastName") as TextBox;
-                var tbxFirstName = p.FindName("tbxFirstName") as TextBox;
+                var txtLastName = p.FindName("txtLastName") as TextBox;
+                var txtFirstName = p.FindName("txtFirstName") as TextBox;
                 var cmbSex = p.FindName("cmbSex") as ComboBox;
                 var dtpkBirthday = p.FindName("dtpkBirthday") as DatePicker;
-                var tbxSSN = p.FindName("tbxSSN") as TextBox;
-                var tbxAddress = p.FindName("tbxAddress") as TextBox;
-                var tbxEmail = p.FindName("tbxEmail") as TextBox;
-                var tbxPhone = p.FindName("tbxPhone") as TextBox;
-                var tbxSalary = p.FindName("tbxSalary") as TextBox;
+                var txtSSN = p.FindName("txtSSN") as TextBox;
+                var txtAddress = p.FindName("txtAddress") as TextBox;
+                var txtEmail = p.FindName("txtEmail") as TextBox;
+                var txtPhone = p.FindName("txtPhone") as TextBox;
+                var txtSalary = p.FindName("txtSalary") as TextBox;
 
                 var tblLastNameWarning = p.FindName("tblLastNameWarning") as TextBlock;
                 var tblFirstNameWarning = p.FindName("tblFirstNameWarning") as TextBlock;
@@ -40,18 +40,18 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
                 var tblPhoneWarning = p.FindName("tblPhoneWarning") as TextBlock;
                 var tblSalaryWarning = p.FindName("tblSalaryWarning") as TextBlock;
 
-                if (tbxLastName.Text == "")
+                if (txtLastName.Text == "")
                 {
                     tblLastNameWarning.Visibility = Visibility.Visible;
-                    tbxLastName.Focus();
+                    txtLastName.Focus();
                     return;
                 }
                 else { tblLastNameWarning.Visibility = Visibility.Hidden; }
 
-                if (tbxFirstName.Text == "")
+                if (txtFirstName.Text == "")
                 {
                     tblFirstNameWarning.Visibility = Visibility.Visible;
-                    tbxFirstName.Focus();
+                    txtFirstName.Focus();
                     return;
                 }
                 else { tblFirstNameWarning.Visibility = Visibility.Hidden; }
@@ -59,7 +59,7 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
                 if (cmbSex.SelectedItem == null)
                 {
                     tblSexWarning.Visibility = Visibility.Visible;
-                    tbxLastName.Focus();
+                    txtLastName.Focus();
                     return;
                 }
                 else { tblSexWarning.Visibility = Visibility.Hidden; }
@@ -72,42 +72,42 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
                 }
                 else { tblBirthdayWarning.Visibility = Visibility.Hidden; }
 
-                if (tbxSSN.Text == "")
+                if (txtSSN.Text == "")
                 {
                     tblSSNWarning.Visibility = Visibility.Visible;
-                    tbxSSN.Focus();
+                    txtSSN.Focus();
                     return;
                 }
                 else { tblSSNWarning.Visibility = Visibility.Hidden; }
 
-                if (tbxAddress.Text == "")
+                if (txtAddress.Text == "")
                 {
                     tblAddressWarning.Visibility = Visibility.Visible;
-                    tbxAddress.Focus();
+                    txtAddress.Focus();
                     return;
                 }
                 else { tblAddressWarning.Visibility = Visibility.Hidden; }
 
-                if (tbxEmail.Text == "")
+                if (txtEmail.Text == "")
                 {
                     tblEmailWarning.Visibility = Visibility.Visible;
-                    tbxEmail.Focus();
+                    txtEmail.Focus();
                     return;
                 }
                 else { tblEmailWarning.Visibility = Visibility.Hidden; }
 
-                if (tbxPhone.Text == "")
+                if (txtPhone.Text == "")
                 {
                     tblPhoneWarning.Visibility = Visibility.Visible;
-                    tbxPhone.Focus();
+                    txtPhone.Focus();
                     return;
                 }
                 else { tblPhoneWarning.Visibility = Visibility.Hidden; }
 
-                if (StringHelper.ToDecimal(tbxSalary.Text) == 0)
+                if (StringHelper.ToDecimal(txtSalary.Text) == 0)
                 {
                     tblSalaryWarning.Visibility = Visibility.Visible;
-                    tbxSalary.Focus();
+                    txtSalary.Focus();
                     return;
                 }
                 else { tblSalaryWarning.Visibility = Visibility.Hidden; }
@@ -116,15 +116,15 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
                 var newLibrarian = new LibrarianDTO()
                 {
                     Id = "",
-                    LastName = StringHelper.CapitalizeEachWord(tbxLastName.Text),
-                    FirstName = StringHelper.CapitalizeEachWord(tbxFirstName.Text),
+                    LastName = StringHelper.CapitalizeEachWord(txtLastName.Text),
+                    FirstName = StringHelper.CapitalizeEachWord(txtFirstName.Text),
                     Sex = cmbSex.SelectedValue.ToString(),
                     Birthday = dtpkBirthday.SelectedDate,
-                    SSN = tbxSSN.Text,
-                    Address = tbxAddress.Text,
-                    Email = tbxEmail.Text,
-                    PhoneNumber = tbxPhone.Text,
-                    Salary = StringHelper.ToDecimal(tbxSalary.Text),
+                    SSN = txtSSN.Text,
+                    Address = txtAddress.Text,
+                    Email = txtEmail.Text,
+                    PhoneNumber = txtPhone.Text,
+                    Salary = StringHelper.ToDecimal(txtSalary.Text),
                     StartDate = DateTime.Now,
                     Status = true
                 };
@@ -136,21 +136,21 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
 
             RetypeCommand = new RelayCommand<Window>((p) => { return !(p == null); }, (p) =>
             {
-                var tbxLastName = p.FindName("tbxLastName") as TextBox;
-                var tbxFirstName = p.FindName("tbxFirstName") as TextBox;
-                var tbxSSN = p.FindName("tbxSSN") as TextBox;
-                var tbxAddress = p.FindName("tbxAddress") as TextBox;
-                var tbxEmail = p.FindName("tbxEmail") as TextBox;
-                var tbxPhone = p.FindName("tbxPhone") as TextBox;
-                var tbxSalary = p.FindName("tbxSalary") as TextBox;
+                var txtLastName = p.FindName("txtLastName") as TextBox;
+                var txtFirstName = p.FindName("txtFirstName") as TextBox;
+                var txtSSN = p.FindName("txtSSN") as TextBox;
+                var txtAddress = p.FindName("txtAddress") as TextBox;
+                var txtEmail = p.FindName("txtEmail") as TextBox;
+                var txtPhone = p.FindName("txtPhone") as TextBox;
+                var txtSalary = p.FindName("txtSalary") as TextBox;
 
-                tbxLastName.Text = "";
-                tbxFirstName.Text = "";
-                tbxSSN.Text = "";
-                tbxAddress.Text = "";
-                tbxEmail.Text = "";
-                tbxPhone.Text = "";
-                tbxSalary.Text = "";
+                txtLastName.Text = "";
+                txtFirstName.Text = "";
+                txtSSN.Text = "";
+                txtAddress.Text = "";
+                txtEmail.Text = "";
+                txtPhone.Text = "";
+                txtSalary.Text = "";
             });
 
             CancelCommand = new RelayCommand<Window>((p) => { return !(p == null); }, (p) => { p.Close(); });

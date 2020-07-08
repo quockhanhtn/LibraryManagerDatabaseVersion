@@ -10,7 +10,7 @@ namespace LibraryManager.EntityFramework.View.AddWindow
         public AddBookCategoryWindow()
         {
             InitializeComponent();
-            tbxName.Focus();
+            txtName.Focus();
         }
     }
 }

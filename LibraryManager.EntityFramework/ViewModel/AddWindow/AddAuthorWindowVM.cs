@@ -21,30 +21,30 @@ namespace LibraryManager.EntityFramework.ViewModel.AddWindow
         {
             OKCommand = new RelayCommand<Window>((p) => { return !(p == null); }, (p) =>
             {
-                var tbxNickName = p.FindName("tbxNickName") as TextBox;
+                var txtNickName = p.FindName("txtNickName") as TextBox;
                 var tblNickNameWarning = p.FindName("tblNickNameWarning") as TextBlock;
 
-                if (tbxNickName.Text == "")
+                if (txtNickName.Text == "")
                 {
                     tblNickNameWarning.Visibility = Visibility.Visible;
-                    tbxNickName.Focus();
+                    txtNickName.Focus();
                     return;
                 }
                 else { tblNickNameWarning.Visibility = Visibility.Hidden; }
 
-                var exit = AuthorDAL.Instance.GetList().ToList().FindAll(a => a.NickName == StringHelper.CapitalizeEachWord(tbxNickName.Text)).Count();
+                var exit = AuthorDAL.Instance.GetList().ToList().FindAll(a => a.NickName == StringHelper.CapitalizeEachWord(txtNickName.Text)).Count();
 
                 if (exit > 0)
                 {
                     tblNickNameWarning.Text = "Tác giả đã tồn tại";
                     tblNickNameWarning.Visibility = Visibility.Visible;
-                    tbxNickName.Focus();
+                    txtNickName.Focus();
                     return;
                 }
 
                 AuthorDTO newAuthor = new AuthorDTO()
                 {
-                    NickName = StringHelper.CapitalizeEachWord(tbxNickName.Text),
+                    NickName = StringHelper.CapitalizeEachWord(txtNickName.Text),
                     Status = true
                 };
 

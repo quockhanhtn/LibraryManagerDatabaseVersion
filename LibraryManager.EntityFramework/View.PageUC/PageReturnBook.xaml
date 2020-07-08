@@ -277,15 +277,15 @@
                             <Style TargetType="TextBlock" BasedOn="{StaticResource WarningTextBlock}"/>
                         </StackPanel.Resources>
                         <!---Mã nhân viên-->
-                        <TextBox Grid.Column="0" materialDesign:HintAssist.Hint="Mã" x:Name="tbxId" IsReadOnly="True"
+                        <TextBox Grid.Column="0" materialDesign:HintAssist.Hint="Mã" x:Name="txtId" IsReadOnly="True"
                                  Text="{Binding MemberBorrow.Id, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
 
                         <!---Họ-->
-                        <TextBox materialDesign:HintAssist.Hint="Họ và tên đệm" x:Name="tbxLastName" MaxLength="20"
+                        <TextBox materialDesign:HintAssist.Hint="Họ và tên đệm" x:Name="txtLastName" MaxLength="20"
                                  Text="{Binding MemberBorrow.LastName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
 
                         <!---Tên-->
-                        <TextBox materialDesign:HintAssist.Hint="Tên" x:Name="tbxFirstName" MaxLength="10"
+                        <TextBox materialDesign:HintAssist.Hint="Tên" x:Name="txtFirstName" MaxLength="10"
                                  Text="{Binding MemberBorrow.FirstName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
 
                         <!---Giới tính và ngày sinh-->
@@ -313,19 +313,19 @@
                         </Grid>
 
                         <!--Căn cước công dân-->
-                        <TextBox materialDesign:HintAssist.Hint="Căn cước công dân" x:Name="tbxSSN" MaxLength="12"
+                        <TextBox materialDesign:HintAssist.Hint="Căn cước công dân" x:Name="txtSSN" MaxLength="12"
                                  Text="{Binding MemberBorrow.SSN, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
 
                         <!---Địa chỉ-->
-                        <TextBox materialDesign:HintAssist.Hint="Địa chỉ" x:Name="tbxAddress" MaxLength="100"
+                        <TextBox materialDesign:HintAssist.Hint="Địa chỉ" x:Name="txtAddress" MaxLength="100"
                                  Text="{Binding MemberBorrow.Address, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
 
                         <!---Email-->
-                        <TextBox materialDesign:HintAssist.Hint="Email" x:Name="tbxEmail" MaxLength="30"
+                        <TextBox materialDesign:HintAssist.Hint="Email" x:Name="txtEmail" MaxLength="30"
                                  Text="{Binding MemberBorrow.Email, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
 
                         <!---Số điện thoại-->
-                        <TextBox materialDesign:HintAssist.Hint="Điện thoại" x:Name="tbxPhone" MaxLength="15"
+                        <TextBox materialDesign:HintAssist.Hint="Điện thoại" x:Name="txtPhone" MaxLength="15"
                                  Text="{Binding MemberBorrow.PhoneNumber, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
 
                         <!---Ngày đăng ký-->

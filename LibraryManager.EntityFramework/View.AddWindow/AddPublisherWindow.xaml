@@ -35,22 +35,22 @@
                     </StackPanel.Resources>
 
                     <!---Tên NXB-->
-                    <TextBox MaxLength="100" materialDesign:HintAssist.Hint="Tên NXB" x:Name="tbxName"/>
+                    <TextBox MaxLength="100" materialDesign:HintAssist.Hint="Tên NXB" x:Name="txtName"/>
                     <TextBlock Text="Tên không được để trống" x:Name="tblNameWarning"/>
 
                     <!---Số điện thoại-->
-                    <TextBox MaxLength="15" materialDesign:HintAssist.Hint="Điện thoại" x:Name="tbxPhone"/>
+                    <TextBox MaxLength="15" materialDesign:HintAssist.Hint="Điện thoại" x:Name="txtPhone"/>
                     <TextBlock Text="Số điện thoại sai định dạng" x:Name="tblPhoneWarning"/>
 
                     <!---Địa chỉ-->
-                    <TextBox MaxLength="100" materialDesign:HintAssist.Hint="Địa chỉ" x:Name="tbxAddress"/>
+                    <TextBox MaxLength="100" materialDesign:HintAssist.Hint="Địa chỉ" x:Name="txtAddress"/>
 
                     <!---Email-->
-                    <TextBox MaxLength="30" materialDesign:HintAssist.Hint="Email" x:Name="tbxEmail"/>
+                    <TextBox MaxLength="30" materialDesign:HintAssist.Hint="Email" x:Name="txtEmail"/>
                     <TextBlock Text="Email sai định dạng" x:Name="tblEmailWarning"/>
 
                     <!--Website-->
-                    <TextBox MaxLength="40" materialDesign:HintAssist.Hint="Trang web" x:Name="tbxWebsite"/>
+                    <TextBox MaxLength="40" materialDesign:HintAssist.Hint="Trang web" x:Name="txtWebsite"/>
                 </StackPanel>
             </ScrollViewer>
 

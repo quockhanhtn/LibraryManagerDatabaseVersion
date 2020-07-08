@@ -35,7 +35,7 @@
                     </StackPanel.Resources>
 
                     <!---TÊn tác giả-->
-                    <TextBox materialDesign:HintAssist.Hint="Tên tác giả" x:Name="tbxNickName" MaxLength="40" FontSize="18"/>
+                    <TextBox materialDesign:HintAssist.Hint="Tên tác giả" x:Name="txtNickName" MaxLength="40" FontSize="18"/>
                     <TextBlock Text="Tên tác giả không được để trống" x:Name="tblNickNameWarning"/>
 
                 </StackPanel>
