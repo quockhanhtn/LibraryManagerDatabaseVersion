@@ -9,15 +9,18 @@
         xmlns:uc="clr-namespace:LibraryManager.MyUserControl;assembly=LibraryManager.MyUserControl" 
         x:Class="LibraryManager.EntityFramework.LoginWindow"
         
+        Title="Đăng nhập - Library Manager" Icon="{StaticResource LibraryIcon}"
+        
         mc:Ignorable="d" x:Name="loginWindow" DataContext="{StaticResource LoginWindowVM}"
-        Style="{StaticResource ResizeWindowNoBoder}"
-        Title="LoginWindow" WindowStartupLocation="CenterScreen"
+        Style="{StaticResource ResizeWindowNoBoder}" WindowStartupLocation="CenterScreen"
         Height="504" Width="904" MinHeight="504" MinWidth="454" >
-    
+
     <Border Style="{StaticResource WindowBoder}">
         <uc:DragMoveGrid>
+            <!--Background-->
+            <Image Stretch="Fill" StretchDirection="Both" Source="/LibraryManager.MyUserControl;component/ResourceXAML/Images/LoginWindowBackground.jpg"/>
             
-            <Image Style="{StaticResource LoginWindowBackgroundImage}"/>
+            <!--Title bar-->
             <uc:TitleBar WindowMaximizeButton="False" Background="Transparent" HorizontalAlignment="Stretch" Height="auto" Margin="0,0,0,0" VerticalAlignment="Top"/>
 
             <materialDesign:Card Width="420" Margin="25" HorizontalAlignment="Left">
@@ -150,7 +153,6 @@
                                 </StackPanel>
                             </Grid>
                         </TabItem>
-
                     </dragablz:TabablzControl>
                 </Grid>
             </materialDesign:Card>

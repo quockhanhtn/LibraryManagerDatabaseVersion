@@ -56,11 +56,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
 
             BorrowBookCommand = new RelayCommand<UserControl>((p) => { return p != null; }, (p) =>
             {
-                var findMemberVM = new FindMemberWindowViewModel()
-                {
-                    MemberAction = FindMemberWindowViewModel.BookAction.Borrow,
-                    Title = "Nhập thông tin người mượn sách"
-                };
+                var findMemberVM = new FindMemberWindowViewModel() { MemberAction = FindMemberWindowViewModel.BookAction.Borrow };
                 var findMemberWindow = new FindMemberWindow() { DataContext = findMemberVM };
                 findMemberWindow.ShowDialog();
 
@@ -82,11 +78,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
 
             ReturnBookCommand = new RelayCommand<UserControl>((p) => { return p != null; }, (p) =>
             {
-                var findMemberVM = new FindMemberWindowViewModel()
-                {
-                    MemberAction = FindMemberWindowViewModel.BookAction.Return,
-                    Title = "Nhập thông tin người trả sách"
-                };
+                var findMemberVM = new FindMemberWindowViewModel() { MemberAction = FindMemberWindowViewModel.BookAction.Return };
                 var findMemberWindow = new FindMemberWindow() { DataContext = findMemberVM };
                 findMemberWindow.ShowDialog();
 

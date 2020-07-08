@@ -10,7 +10,9 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:uc="clr-namespace:LibraryManager.MyUserControl;assembly=LibraryManager.MyUserControl" 
         
-        mc:Ignorable="d" Title="Library Hub" x:Name="memberWindow"
+        Title="Library Manager" Icon="{StaticResource LibraryIcon}"
+        
+        mc:Ignorable="d" x:Name="memberWindow"
         Style="{StaticResource ResizeWindowNoBoder}" WindowStartupLocation="CenterScreen" 
         Height="768" Width="1366" MinHeight="500" MinWidth="1004" >
 

@@ -9,7 +9,9 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:uc="clr-namespace:LibraryManager.MyUserControl;assembly=LibraryManager.MyUserControl" 
         
-        mc:Ignorable="d" x:Name="addAuthorWindow" Title="Thêm tác giả - Library Manager"
+        Title="Thêm tác giả - Library Manager" Icon="{StaticResource LibraryIcon}"
+        
+        mc:Ignorable="d" x:Name="addAuthorWindow" 
         Style="{StaticResource ResizeWindowNoBoder}" WindowStartupLocation="CenterScreen" 
         Height="220" Width="400">
 

@@ -14,7 +14,7 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml" />
                 <ResourceDictionary Source="/ResourceXAML/MainResource.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/LibraryManager.MyUserControl;component/ResourceXAML/ControlStyle.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/LibraryManager.MyUserControl;component/ResourceXAML/Images.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/LibraryManager.MyUserControl;component/ResourceXAML/BitmapImages.xaml"/>
                 <!--primary color-->
                 <ResourceDictionary>
                     <!--include your primary palette-->

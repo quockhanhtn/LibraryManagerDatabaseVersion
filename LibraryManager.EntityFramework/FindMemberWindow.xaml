@@ -6,15 +6,20 @@
         xmlns:local="clr-namespace:LibraryManager.EntityFramework"
         
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        xmlns:dragablz="clr-namespace:Dragablz;assembly=Dragablz"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:uc="clr-namespace:LibraryManager.MyUserControl;assembly=LibraryManager.MyUserControl" 
         
-        mc:Ignorable="d" x:Name="findMemberWindow"
+        Title="Tìm thành viên" Icon="{StaticResource LibraryIcon}"
         
-        Title="FindMemberWindow"
+        mc:Ignorable="d" x:Name="findMemberWindow"
         Style="{StaticResource ResizeWindowNoBoder}" WindowStartupLocation="CenterScreen" 
         Height="300" Width="400">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadedCommand}" CommandParameter="{Binding ElementName=findMemberWindow}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
     <Border Style="{StaticResource WindowBoder}">
         <Grid>
@@ -25,8 +30,7 @@
             </Grid.RowDefinitions>
 
             <!--Title-->
-            <uc:TitleBar Tag="{Binding Title, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
-                         Height="auto" Background="#007acc" WindowMaximizeButton="False" Grid.Row="0"></uc:TitleBar>
+            <uc:TitleBar x:Name="titleBar" Height="auto" Background="#007acc" WindowMaximizeButton="False" Grid.Row="0"></uc:TitleBar>
 
             <!---Thông tin nhân viên-->
             <ScrollViewer VerticalAlignment="Center" Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">

@@ -1,5 +1,6 @@
 ﻿using LibraryManager.EntityFramework.Model.DataAccessLayer;
 using LibraryManager.EntityFramework.Model.DataTransferObject;
+using LibraryManager.MyUserControl;
 using LibraryManager.Utility;
 using System.Collections.ObjectModel;
 using System.Windows;
@@ -12,9 +13,10 @@ namespace LibraryManager.EntityFramework.ViewModel
     {
         public BookAction MemberAction { get; set; } = BookAction.Borrow;
         public Visibility WarningVisibility { get; set; } = Visibility.Collapsed;
-        public string Title { get => title; set { title = value; OnPropertyChanged(); } }
         public ObservableCollection<MemberDTO> ListMember { get => listMember; set { listMember = value; OnPropertyChanged(); } }
         public MemberDTO MemberSelected { get => memberSelected; set { memberSelected = value; OnPropertyChanged(); } }
+
+        public ICommand LoadedCommand { get; set; }
         public ICommand ChangeMemberSelectedCommand { get; set; }
         public ICommand OKCommand { get; set; }
         public ICommand CancelCommand { get; set; }
@@ -23,6 +25,20 @@ namespace LibraryManager.EntityFramework.ViewModel
         public FindMemberWindowViewModel()
         {
             ListMember = MemberDAL.Instance.GetList();
+
+            LoadedCommand = new RelayCommand<Window>((p) => { return p != null; }, (p) =>
+            {
+                var titleBar = p.FindName("titleBar") as TitleBar;
+                switch (MemberAction)
+                {
+                    case BookAction.Borrow:
+                        titleBar.Tag = "Thông tin người mượn";
+                        break;
+                    case BookAction.Return:
+                        titleBar.Tag = "Thông tin người trả";
+                        break;
+                }
+            });
 
             ChangeMemberSelectedCommand = new RelayCommand<Window>((p) => { return (p != null && MemberSelected != null); }, (p) =>
             {
@@ -44,7 +60,6 @@ namespace LibraryManager.EntityFramework.ViewModel
 
         ObservableCollection<MemberDTO> listMember;
         MemberDTO memberSelected;
-        string title;
 
         public enum BookAction { Borrow, Return };
     }
