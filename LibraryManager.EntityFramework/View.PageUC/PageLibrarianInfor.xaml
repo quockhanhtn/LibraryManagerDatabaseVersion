@@ -209,6 +209,6 @@
             </Grid>
         </materialDesign:Card>
 
-        <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="mySnackbar" />
+        <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="mySnackbar" Grid.ColumnSpan="2" />
     </Grid>
 </UserControl>
