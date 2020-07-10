@@ -20,6 +20,7 @@ namespace LibraryManager.EntityFramework.ViewModel
         public Grid GridMain { get; set; }
         public UserControl PageAccountInfor { get; set; }
         public UserControl PageListBookBorrow { get; set; }
+        public UserControl PageMemberBorrowList { get; set; }
         public UserControl PageAboutSoftware { get; set; }
 
         public MemberWindowViewModel(Account accountLogin)
@@ -28,19 +29,20 @@ namespace LibraryManager.EntityFramework.ViewModel
 
             MenuSelectionChangedCommand = new RelayCommand<Window>((p) => { return (p != null); }, (p) =>
             {
-                var gridCursor = p.FindName("gridCursor") as Grid;
-                var listViewMenu = p.FindName("ListViewMenu") as ListView;
-                var listViewSelectedItem = (listViewMenu).SelectedItem as ListViewItem;
+            var gridCursor = p.FindName("gridCursor") as Grid;
+            var listViewMenu = p.FindName("ListViewMenu") as ListView;
+            var listViewSelectedItem = (listViewMenu).SelectedItem as ListViewItem;
 
-                gridCursor.Margin = new Thickness(0, 60 * listViewMenu.SelectedIndex, 0, 0);
+            gridCursor.Margin = new Thickness(0, 60 * listViewMenu.SelectedIndex, 0, 0);
 
-                GridMain.Children.Clear();
-                switch (listViewSelectedItem.Name)
-                {
-                    case "AccountInfo":
-                        GridMain.Children.Add(this.PageAccountInfor);
-                        break;
-                    case "BorrowBookList":
+            GridMain.Children.Clear();
+            switch (listViewSelectedItem.Name)
+            {
+                case "AccountInfo":
+                    GridMain.Children.Add(this.PageAccountInfor);
+                    break;
+                case "BorrowBookList":
+                        GridMain.Children.Add(this.PageMemberBorrowList);
                         break;
                     case "AboutSoftware":
                         GridMain.Children.Add(this.PageAboutSoftware);
@@ -72,6 +74,7 @@ namespace LibraryManager.EntityFramework.ViewModel
         void InitPage(Account accountLogin)
         {
             this.PageAccountInfor = new PageMemberInfor() { DataContext = new PageMemberInforVM(new MemberDTO(MemberLogin), accountLogin) };
+            this.PageMemberBorrowList = new PageMemberBorrowList() { DataContext = new PageMemberBorrowListVM(MemberLogin.Id) };
             this.PageAboutSoftware = new PageAboutSoftware();
         }
     }
