@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace LibraryManager.EntityFramework.View.PageUC
 {
     /// <summary>
-    /// Interaction logic for PageAccountInfor.xaml
+    /// Interaction logic for PageLibrarianInfor.xaml
     /// </summary>
-    public partial class PageAccountInfor : UserControl
+    public partial class PageLibrarianInfor : UserControl
     {
-        public PageAccountInfor()
+        public PageLibrarianInfor()
         {
             InitializeComponent();
         }

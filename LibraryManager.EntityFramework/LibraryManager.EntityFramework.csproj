@@ -36,6 +36,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>library-ico.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Dragablz, Version=0.0.3.203, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dragablz.0.0.3.203\lib\net45\Dragablz.dll</HintPath>
@@ -190,7 +193,6 @@
     <Compile Include="View.PageUC\PageAboutSoftware.xaml.cs">
       <DependentUpon>PageAboutSoftware.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View.PageUC\PageAccountInfor.xaml.cs" />
     <Compile Include="View.PageUC\PageAuthorManager.xaml.cs">
       <DependentUpon>PageAuthorManager.xaml</DependentUpon>
     </Compile>
@@ -202,6 +204,9 @@
     </Compile>
     <Compile Include="View.PageUC\PageBorrowBook.xaml.cs">
       <DependentUpon>PageBorrowBook.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View.PageUC\PageLibrarianInfor.xaml.cs">
+      <DependentUpon>PageLibrarianInfor.xaml</DependentUpon>
     </Compile>
     <Compile Include="View.PageUC\PageLibrarianManager.xaml.cs">
       <DependentUpon>PageLibrarianManager.xaml</DependentUpon>
@@ -240,6 +245,7 @@
     <Compile Include="ViewModel\PageUC\PageBookManagerVM.cs" />
     <Compile Include="ViewModel\PageUC\PageBorrowBookVM.cs" />
     <Compile Include="ViewModel\PageUC\PageLibrarianManagerVM.cs" />
+    <Compile Include="ViewModel\PageUC\PageLibrarianInforVM.cs" />
     <Compile Include="ViewModel\PageUC\PageMemberInforVM.cs" />
     <Compile Include="ViewModel\PageUC\PageMemberManagerVM.cs" />
     <Compile Include="ViewModel\PageUC\PagePublisherManagerVM.cs" />
@@ -312,10 +318,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View.PageUC\PageAccountInfor.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="View.PageUC\PageAuthorManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -329,6 +331,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View.PageUC\PageBorrowBook.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View.PageUC\PageLibrarianInfor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -402,6 +408,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="library-ico.ico" />
     <Content Include="Model\LibraryManager.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>LibraryManager.Context.cs</LastGenOutput>

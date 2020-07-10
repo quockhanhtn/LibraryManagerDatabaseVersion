@@ -320,7 +320,6 @@
                                  Text="{Binding LibrarianSelected.Salary, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
                         <TextBlock Text="Mức lương sai dịnh dạng" x:Name="tblSalaryWarning"/>
 
-
                         <!---Ngày tham gia-->
                         <DatePicker materialDesign:HintAssist.Hint="Ngày bắt đầu làm việc" x:Name="dtpkStartDate" Style="{StaticResource MyDatePicker}"
                                     SelectedDate="{Binding LibrarianSelected.StartDate, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>

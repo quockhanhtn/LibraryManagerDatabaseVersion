@@ -55,6 +55,7 @@ namespace LibraryManager.EntityFramework.ViewModel
 
                 AccountDAL.Instance.ChangePassword(personId, pwxPasswordNew.Password);
 
+                p.Hide();
                 MyMessageBox.Show("Đổi mật khẩu thành công !", "Thông báo", "OK", "", MessageBoxImage.Information);
                 p.Close();
             });

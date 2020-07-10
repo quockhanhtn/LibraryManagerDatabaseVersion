@@ -58,18 +58,11 @@ namespace LibraryManager.EntityFramework.ViewModel
                             mainWindow.Show();
                             break;
                         case 1:
-                            var librarian = LibrarianDAL.Instance.GetLibrarian(accountLogin.PersonId);
-                            if (librarian.Status != true)
-                            {
-                                p.Show();
-                                MyMessageBox.Show("Tài khoản của bạn đã bị khóa!\n\rLiên hệ với quản trị viên để mở lại", "Thông báo", "OK", "", MessageBoxImage.Error);
-                                return;
-                            }
-                            var librarianWindow = new LibrarianWindow() { DataContext = new LibrarianWindowViewModel(librarian) };
+                            var librarianWindow = new LibrarianWindow() { DataContext = new LibrarianWindowViewModel(accountLogin) };
                             librarianWindow.Show();
                             break;
                         case 2:
-                            var memberWindow = new MemberWindow() { DataContext = new MemberWindowViewModel(accountLogin.PersonId) };
+                            var memberWindow = new MemberWindow() { DataContext = new MemberWindowViewModel(accountLogin) };
                             memberWindow.Show();
                             break;
                     }

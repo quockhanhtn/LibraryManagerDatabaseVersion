@@ -1,5 +1,8 @@
-﻿using System.Data.Entity.Migrations;
+﻿using LibraryManager.Utility;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Windows;
 using System.Windows.Documents;
 
 namespace LibraryManager.EntityFramework.Model.DataAccessLayer
@@ -24,15 +27,22 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 
             username = username.Trim();
             password = password.Trim();
-            string passwordEncode = Utility.PasswordEncoder.Base64ThenMD5(password);
+            string passwordEncode = PasswordEncoder.Base64ThenMD5(password);
 
             return DataProvider.Instance.Database.Accounts.Where(a => a.Username == username && a.Password == passwordEncode).FirstOrDefault();
+        }
+
+        public bool CheckPassword(Account account, string passwordToCheck)
+        {
+            string passwordEncode = PasswordEncoder.Base64ThenMD5(passwordToCheck);
+            if (account.Password == passwordEncode) { return true; }
+            return false;
         }
 
         public bool CheckPassword(string personId, string password)
         {
             password = password.Trim();
-            string passwordEncode = Utility.PasswordEncoder.Base64ThenMD5(password);
+            string passwordEncode = PasswordEncoder.Base64ThenMD5(password);
             if (DataProvider.Instance.Database.Accounts.Count(a => a.Username == personId && a.Password == passwordEncode) > 0)
             {
                 return true;
@@ -43,10 +53,24 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
         public void ChangePassword(string personId, string newPassword)
         {
             newPassword = newPassword.Trim();
-            string passwordEncode = Utility.PasswordEncoder.Base64ThenMD5(newPassword);
+            string passwordEncode = PasswordEncoder.Base64ThenMD5(newPassword);
             var acc = DataProvider.Instance.Database.Accounts.Where(a => a.Username == personId).FirstOrDefault();
             acc.Password = passwordEncode;
-            DataProvider.Instance.SaveEntity(acc, System.Data.Entity.EntityState.Modified);
+            DataProvider.Instance.SaveEntity(acc, EntityState.Modified);
+        }
+
+        public Account Update(string personId, string username, string password)
+        {
+            try
+            {
+                var accUpdate = DataProvider.Instance.Database.Accounts.Where(a => a.PersonId == personId).FirstOrDefault();
+                accUpdate.Username = username;
+                accUpdate.Password = PasswordEncoder.Base64ThenMD5(password);
+                DataProvider.Instance.SaveEntity(accUpdate, EntityState.Modified);
+                return accUpdate;
+            }
+            catch (System.Exception) { /*MessageBox.Show(exp.Message);*/ }
+            return null;
         }
 
         private static AccountDAL instance;

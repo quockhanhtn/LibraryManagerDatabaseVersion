@@ -60,7 +60,7 @@ namespace LibraryManager.EntityFramework.ViewModel
                     case "ChangePassword":
                         var dataContext = new ChangePasswordWindowViewModel("admin");
                         var changePasswordWindow = new ChangePasswordWindow() { DataContext = dataContext };
-                        changePasswordWindow.Show();
+                        changePasswordWindow.ShowDialog();
                         break;
                     case "AboutSoftware":
                         GridMain.Children.Add(this.PageAboutSoftware);
@@ -78,7 +78,6 @@ namespace LibraryManager.EntityFramework.ViewModel
 
         void InitPage()
         {
-            var a = new LibrarianDTO(LibrarianDAL.Instance.GetLibrarian("LIB000"));
             this.PageLibrarianManager = new PageLibrarianManager();// { DataContext = new PageLibrarianManagerVM() };
             this.PageMemberManager = new PageMemberManager() { DataContext = new PageMemberManagerVM() };
             this.PageBookManager = new PageBookManager() { DataContext = new PageBookManagerVM(new LibrarianDTO(LibrarianDAL.Instance.GetLibrarian("LIB000"))) };

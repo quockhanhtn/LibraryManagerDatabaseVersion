@@ -2,7 +2,7 @@
 <Schema Namespace="LibraryManagerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="Account">
     <Key>
-      <PropertyRef Name="Username" />
+      <PropertyRef Name="PersonId" />
     </Key>
     <Property Name="PersonId" Type="varchar" MaxLength="10" Nullable="false" />
     <Property Name="Username" Type="varchar" MaxLength="20" Nullable="false" />
@@ -130,7 +130,7 @@
     <Property Name="ReturnDate" Type="date" Nullable="false" />
     <Property Name="LibrarianId" Type="varchar" MaxLength="6" Nullable="false" />
   </EntityType>
-  <Association Name="FK__Book__BookCatego__398D8EEE">
+  <Association Name="FK__Book__BookCatego__3A81B327">
     <End Role="BookCategory" Type="Self.BookCategory" Multiplicity="0..1" />
     <End Role="Book" Type="Self.Book" Multiplicity="*" />
     <ReferentialConstraint>
@@ -142,7 +142,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Book__Status__38996AB5">
+  <Association Name="FK__Book__Status__398D8EEE">
     <End Role="Publisher" Type="Self.Publisher" Multiplicity="1" />
     <End Role="Book" Type="Self.Book" Multiplicity="*" />
     <ReferentialConstraint>
@@ -154,7 +154,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__BookAutho__Autho__412EB0B6">
+  <Association Name="FK__BookAutho__Autho__4222D4EF">
     <End Role="Author" Type="Self.Author" Multiplicity="1" />
     <End Role="BookAuthor" Type="Self.BookAuthor" Multiplicity="*" />
     <ReferentialConstraint>
@@ -166,7 +166,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__BookAutho__BookI__403A8C7D">
+  <Association Name="FK__BookAutho__BookI__412EB0B6">
     <End Role="Book" Type="Self.Book" Multiplicity="1" />
     <End Role="BookAuthor" Type="Self.BookAuthor" Multiplicity="*" />
     <ReferentialConstraint>
@@ -178,7 +178,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__BookItem__Status__3D5E1FD2">
+  <Association Name="FK__BookItem__Status__3E52440B">
     <End Role="Book" Type="Self.Book" Multiplicity="1" />
     <End Role="BookItem" Type="Self.BookItem" Multiplicity="0..1" />
     <ReferentialConstraint>
@@ -190,7 +190,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Borrow__Libraria__46E78A0C">
+  <Association Name="FK__Borrow__Libraria__47DBAE45">
     <End Role="Librarian" Type="Self.Librarian" Multiplicity="1" />
     <End Role="Borrow" Type="Self.Borrow" Multiplicity="*" />
     <ReferentialConstraint>
@@ -202,7 +202,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Borrow__MemberId__45F365D3">
+  <Association Name="FK__Borrow__MemberId__46E78A0C">
     <End Role="Member" Type="Self.Member" Multiplicity="1" />
     <End Role="Borrow" Type="Self.Borrow" Multiplicity="*" />
     <ReferentialConstraint>
@@ -214,7 +214,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Borrow__Status__44FF419A">
+  <Association Name="FK__Borrow__Status__45F365D3">
     <End Role="Book" Type="Self.Book" Multiplicity="1" />
     <End Role="Borrow" Type="Self.Borrow" Multiplicity="*" />
     <ReferentialConstraint>
@@ -226,7 +226,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__PayFineInf__Cash__4E88ABD4">
+  <Association Name="FK__PayFineInf__Cash__4F7CD00D">
     <End Role="Borrow" Type="Self.Borrow" Multiplicity="1" />
     <End Role="PayFineInfo" Type="Self.PayFineInfo" Multiplicity="*" />
     <ReferentialConstraint>
@@ -238,7 +238,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ReturnBoo__Libra__4AB81AF0">
+  <Association Name="FK__ReturnBoo__Libra__4BAC3F29">
     <End Role="Borrow" Type="Self.Borrow" Multiplicity="1" />
     <End Role="ReturnBook" Type="Self.ReturnBook" Multiplicity="*" />
     <ReferentialConstraint>
@@ -250,7 +250,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ReturnBoo__Libra__4BAC3F29">
+  <Association Name="FK__ReturnBoo__Libra__4CA06362">
     <End Role="Librarian" Type="Self.Librarian" Multiplicity="1" />
     <End Role="ReturnBook" Type="Self.ReturnBook" Multiplicity="*" />
     <ReferentialConstraint>
@@ -275,47 +275,47 @@
     <EntitySet Name="PayFineInfo" EntityType="Self.PayFineInfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Publisher" EntityType="Self.Publisher" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ReturnBook" EntityType="Self.ReturnBook" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__Book__BookCatego__398D8EEE" Association="Self.FK__Book__BookCatego__398D8EEE">
+    <AssociationSet Name="FK__Book__BookCatego__3A81B327" Association="Self.FK__Book__BookCatego__3A81B327">
       <End Role="BookCategory" EntitySet="BookCategory" />
       <End Role="Book" EntitySet="Book" />
     </AssociationSet>
-    <AssociationSet Name="FK__Book__Status__38996AB5" Association="Self.FK__Book__Status__38996AB5">
+    <AssociationSet Name="FK__Book__Status__398D8EEE" Association="Self.FK__Book__Status__398D8EEE">
       <End Role="Publisher" EntitySet="Publisher" />
       <End Role="Book" EntitySet="Book" />
     </AssociationSet>
-    <AssociationSet Name="FK__BookAutho__Autho__412EB0B6" Association="Self.FK__BookAutho__Autho__412EB0B6">
+    <AssociationSet Name="FK__BookAutho__Autho__4222D4EF" Association="Self.FK__BookAutho__Autho__4222D4EF">
       <End Role="Author" EntitySet="Author" />
       <End Role="BookAuthor" EntitySet="BookAuthor" />
     </AssociationSet>
-    <AssociationSet Name="FK__BookAutho__BookI__403A8C7D" Association="Self.FK__BookAutho__BookI__403A8C7D">
+    <AssociationSet Name="FK__BookAutho__BookI__412EB0B6" Association="Self.FK__BookAutho__BookI__412EB0B6">
       <End Role="Book" EntitySet="Book" />
       <End Role="BookAuthor" EntitySet="BookAuthor" />
     </AssociationSet>
-    <AssociationSet Name="FK__BookItem__Status__3D5E1FD2" Association="Self.FK__BookItem__Status__3D5E1FD2">
+    <AssociationSet Name="FK__BookItem__Status__3E52440B" Association="Self.FK__BookItem__Status__3E52440B">
       <End Role="Book" EntitySet="Book" />
       <End Role="BookItem" EntitySet="BookItem" />
     </AssociationSet>
-    <AssociationSet Name="FK__Borrow__Libraria__46E78A0C" Association="Self.FK__Borrow__Libraria__46E78A0C">
+    <AssociationSet Name="FK__Borrow__Libraria__47DBAE45" Association="Self.FK__Borrow__Libraria__47DBAE45">
       <End Role="Librarian" EntitySet="Librarian" />
       <End Role="Borrow" EntitySet="Borrow" />
     </AssociationSet>
-    <AssociationSet Name="FK__Borrow__MemberId__45F365D3" Association="Self.FK__Borrow__MemberId__45F365D3">
+    <AssociationSet Name="FK__Borrow__MemberId__46E78A0C" Association="Self.FK__Borrow__MemberId__46E78A0C">
       <End Role="Member" EntitySet="Member" />
       <End Role="Borrow" EntitySet="Borrow" />
     </AssociationSet>
-    <AssociationSet Name="FK__Borrow__Status__44FF419A" Association="Self.FK__Borrow__Status__44FF419A">
+    <AssociationSet Name="FK__Borrow__Status__45F365D3" Association="Self.FK__Borrow__Status__45F365D3">
       <End Role="Book" EntitySet="Book" />
       <End Role="Borrow" EntitySet="Borrow" />
     </AssociationSet>
-    <AssociationSet Name="FK__PayFineInf__Cash__4E88ABD4" Association="Self.FK__PayFineInf__Cash__4E88ABD4">
+    <AssociationSet Name="FK__PayFineInf__Cash__4F7CD00D" Association="Self.FK__PayFineInf__Cash__4F7CD00D">
       <End Role="Borrow" EntitySet="Borrow" />
       <End Role="PayFineInfo" EntitySet="PayFineInfo" />
     </AssociationSet>
-    <AssociationSet Name="FK__ReturnBoo__Libra__4AB81AF0" Association="Self.FK__ReturnBoo__Libra__4AB81AF0">
+    <AssociationSet Name="FK__ReturnBoo__Libra__4BAC3F29" Association="Self.FK__ReturnBoo__Libra__4BAC3F29">
       <End Role="Borrow" EntitySet="Borrow" />
       <End Role="ReturnBook" EntitySet="ReturnBook" />
     </AssociationSet>
-    <AssociationSet Name="FK__ReturnBoo__Libra__4BAC3F29" Association="Self.FK__ReturnBoo__Libra__4BAC3F29">
+    <AssociationSet Name="FK__ReturnBoo__Libra__4CA06362" Association="Self.FK__ReturnBoo__Libra__4CA06362">
       <End Role="Librarian" EntitySet="Librarian" />
       <End Role="ReturnBook" EntitySet="ReturnBook" />
     </AssociationSet>

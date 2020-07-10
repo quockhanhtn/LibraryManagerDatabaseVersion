@@ -18,7 +18,7 @@ namespace LibraryManager.EntityFramework.ViewModel
         public ICommand MenuSelectionChangedCommand { get; set; }
         public Librarian LibrarianLogin { get; set; }
         public Grid GridMain { get; set; }
-        public UserControl PageAccountInfor { get; set; }
+        public UserControl PageLibrarianInfor { get; set; }
         public UserControl PageMemberManager { get; set; }
         public UserControl PageBookManager { get; set; }
         public UserControl PagePublisherManager { get; set; }
@@ -26,9 +26,9 @@ namespace LibraryManager.EntityFramework.ViewModel
         public UserControl PageAuthorManager { get; set; }
         public UserControl PageAboutSoftware { get; set; }
 
-        public LibrarianWindowViewModel(Librarian librarianLogin)
+        public LibrarianWindowViewModel(Account accountLogin)
         {
-            LibrarianLogin = librarianLogin;
+            LibrarianLogin = LibrarianDAL.Instance.GetLibrarian(accountLogin.PersonId);
 
             MenuSelectionChangedCommand = new RelayCommand<Window>((p) => { return (p != null); }, (p) =>
             {
@@ -42,8 +42,7 @@ namespace LibraryManager.EntityFramework.ViewModel
                 switch (listViewSelectedItem.Name)
                 {
                     case "AccountInfo":
-                        MyMessageBox.Show("Comming soon", "Sorry", "OK", "", MessageBoxImage.Error);
-                        GridMain.Children.Add(this.PageAccountInfor);
+                        GridMain.Children.Add(this.PageLibrarianInfor);
                         break;
                     case "MemberManager":
                         GridMain.Children.Add(this.PageMemberManager);
@@ -73,19 +72,28 @@ namespace LibraryManager.EntityFramework.ViewModel
 
             LoadedWindow = new RelayCommand<Window>((p) => { return (p != null); }, (p) =>
             {
-                InitPage();
+                if (LibrarianLogin.Status != true)
+                {
+                    MyMessageBox.Show("Tài khoản của bạn đã bị khóa!\n\rLiên hệ với quản trị viên để mở lại", "Thông báo", "OK", "", MessageBoxImage.Error);
+                    p.Close();
+                }
+
+                InitPage(accountLogin);
                 GridMain = p.FindName("gridMain") as Grid;
                 GridMain.Children.Add(this.PageBookManager);
 
                 var icoAccount = p.FindName("icoAccount") as PackIcon;
                 int firstChar = char.ToUpper(LibrarianLogin.FirstName[0]);
-                icoAccount.Kind = (PackIconKind)(158 + 5 * (firstChar - (int)'A' + 2));
+
+                if (firstChar == 'A') { icoAccount.Kind = PackIconKind.AlphaACircle; }
+                else if (firstChar == 'B') { icoAccount.Kind = PackIconKind.AlphaBCircle; }
+                else { icoAccount.Kind = (PackIconKind)(158 + 5 * (firstChar - (int)'A' + 2)); }
             });
         }
 
-        void InitPage()
+        void InitPage(Account accountLogin)
         {
-            this.PageAccountInfor = new PageAccountInfor();// { DataContext = new PageLibrarianManagerVM() };
+            this.PageLibrarianInfor = new PageLibrarianInfor() { DataContext = new PageLibrarianInforVM(new LibrarianDTO(LibrarianLogin), accountLogin) };
             this.PageMemberManager = new PageMemberManager() { DataContext = new PageMemberManagerVM() };
             this.PageBookManager = new PageBookManager() { DataContext = new PageBookManagerVM(new LibrarianDTO(LibrarianLogin)) };
             this.PagePublisherManager = new PagePublisherManager() { DataContext = new PagePublisherManagerVM() };

@@ -5,27 +5,27 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="d2bb76be034c4f84b9035980af2754b0" Name="Diagram1" ZoomLevel="64">
-        <EntityTypeShape EntityType="LibraryManagerModel.Account" Width="1.5" PointX="2.75" PointY="9.625" />
-        <EntityTypeShape EntityType="LibraryManagerModel.Author" Width="1.5" PointX="0.75" PointY="5.625" />
-        <EntityTypeShape EntityType="LibraryManagerModel.Book" Width="1.5" PointX="3" PointY="4.75" />
-        <EntityTypeShape EntityType="LibraryManagerModel.BookCategory" Width="1.5" PointX="0.75" PointY="2.875" />
-        <EntityTypeShape EntityType="LibraryManagerModel.BookItem" Width="1.5" PointX="5.25" PointY="5.5" />
-        <EntityTypeShape EntityType="LibraryManagerModel.Borrow" Width="1.5" PointX="8.25" PointY="5" />
-        <EntityTypeShape EntityType="LibraryManagerModel.Librarian" Width="1.5" PointX="6" PointY="0.75" />
-        <EntityTypeShape EntityType="LibraryManagerModel.Member" Width="1.5" PointX="6" PointY="9" />
-        <EntityTypeShape EntityType="LibraryManagerModel.PayFineInfo" Width="1.5" PointX="10.5" PointY="6.875" />
-        <EntityTypeShape EntityType="LibraryManagerModel.Publisher" Width="1.5" PointX="0.75" PointY="8.625" />
-        <EntityTypeShape EntityType="LibraryManagerModel.ReturnBook" Width="1.5" PointX="10.5" PointY="4.375" />
-        <AssociationConnector Association="LibraryManagerModel.FK__Book__BookCatego__398D8EEE" />
-        <AssociationConnector Association="LibraryManagerModel.FK__Book__Status__38996AB5" />
-        <AssociationConnector Association="LibraryManagerModel.FK__BookItem__Status__3D5E1FD2" />
-        <AssociationConnector Association="LibraryManagerModel.FK__Borrow__Status__44FF419A" />
-        <AssociationConnector Association="LibraryManagerModel.FK__Borrow__Libraria__46E78A0C" />
-        <AssociationConnector Association="LibraryManagerModel.FK__Borrow__MemberId__45F365D3" />
-        <AssociationConnector Association="LibraryManagerModel.FK__PayFineInf__Cash__4D94879B" />
-        <AssociationConnector Association="LibraryManagerModel.FK__ReturnBoo__Retur__4AB81AF0" />
-        <AssociationConnector Association="LibraryManagerModel.BookAuthor" />
+        <EntityTypeShape EntityType="LibraryManagerModel.Account" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="LibraryManagerModel.Author" Width="1.5" PointX="1.5" PointY="21.875" />
+        <EntityTypeShape EntityType="LibraryManagerModel.Book" Width="1.5" PointX="0.75" PointY="13.625" />
+        <EntityTypeShape EntityType="LibraryManagerModel.BookCategory" Width="1.5" PointX="1.5" PointY="24.375" />
+        <EntityTypeShape EntityType="LibraryManagerModel.BookItem" Width="1.5" PointX="3" PointY="14.5" />
+        <EntityTypeShape EntityType="LibraryManagerModel.Borrow" Width="1.5" PointX="3" PointY="1.875" />
+        <EntityTypeShape EntityType="LibraryManagerModel.Librarian" Width="1.5" PointX="0.75" PointY="1.5" />
+        <EntityTypeShape EntityType="LibraryManagerModel.Member" Width="1.5" PointX="0.75" PointY="7.5" />
+        <EntityTypeShape EntityType="LibraryManagerModel.PayFineInfo" Width="1.5" PointX="5.25" PointY="5.5" />
+        <EntityTypeShape EntityType="LibraryManagerModel.Publisher" Width="1.5" PointX="1.5" PointY="18.625" />
+        <EntityTypeShape EntityType="LibraryManagerModel.ReturnBook" Width="1.5" PointX="5.25" PointY="2.375" />
+        <AssociationConnector Association="LibraryManagerModel.FK__Book__BookCatego__3A81B327" />
+        <AssociationConnector Association="LibraryManagerModel.FK__Book__Status__398D8EEE" />
+        <AssociationConnector Association="LibraryManagerModel.FK__BookItem__Status__3E52440B" />
+        <AssociationConnector Association="LibraryManagerModel.FK__Borrow__Status__45F365D3" />
+        <AssociationConnector Association="LibraryManagerModel.FK__Borrow__Libraria__47DBAE45" />
+        <AssociationConnector Association="LibraryManagerModel.FK__Borrow__MemberId__46E78A0C" />
+        <AssociationConnector Association="LibraryManagerModel.FK__PayFineInf__Cash__4F7CD00D" />
         <AssociationConnector Association="LibraryManagerModel.FK__ReturnBoo__Libra__4BAC3F29" />
+        <AssociationConnector Association="LibraryManagerModel.FK__ReturnBoo__Libra__4CA06362" />
+        <AssociationConnector Association="LibraryManagerModel.BookAuthor" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

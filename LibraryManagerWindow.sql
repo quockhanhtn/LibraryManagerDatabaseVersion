@@ -49,8 +49,8 @@ GO
 -- Tạo bảng Account
 CREATE TABLE dbo.Account
 (
-	PersonId varchar(10) NOT NULL,
-	Username varchar(20) PRIMARY KEY NOT NULL,
+	PersonId varchar(10) NOT NULL PRIMARY KEY,
+	Username varchar(20) UNIQUE NOT NULL,
 	Password varchar(32) NOT NULL,
 	AccountType INT DEFAULT 2 NOT NULL	-- 0: admin , 1: librarian, 2: member
 )

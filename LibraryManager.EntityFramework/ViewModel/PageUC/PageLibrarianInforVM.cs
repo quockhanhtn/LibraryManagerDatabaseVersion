@@ -9,19 +9,19 @@ using System.Windows.Input;
 
 namespace LibraryManager.EntityFramework.ViewModel.PageUC
 {
-    public class PageMemberInforVM : BaseViewModel
+    public class PageLibrarianInforVM : BaseViewModel
     {
         public Account AccountLogin { get => accountLogin; set { accountLogin = value; OnPropertyChanged(); } }
-        public MemberDTO MemberLogin { get => memberLogin; set { memberLogin = value; OnPropertyChanged(); } }
+        public LibrarianDTO LibrarianLogin { get => memberLogin; set { memberLogin = value; OnPropertyChanged(); } }
         public ICommand LoadedCommand { get; set; }
         public ICommand UpdateCommand { get; set; }
         public ICommand CancelUpdateCommand { get; set; }
         public ICommand UpdateLoginInfoCommand { get; set; }
         public ICommand CancelLoginInfoCommand { get; set; }
         
-        public PageMemberInforVM(MemberDTO member, Account account)
+        public PageLibrarianInforVM(LibrarianDTO member, Account account)
         {
-            MemberLogin = member;
+            LibrarianLogin = member;
             AccountLogin = account;
 
             LoadedCommand = new RelayCommand<UserControl>((p) => { return p != null; }, (p) =>
@@ -42,14 +42,14 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 var txtEmail = p.FindName("txtEmail") as TextBox;
                 var txtPhone = p.FindName("txtPhone") as TextBox;
 
-                txtLastName.Text = MemberLogin.LastName;
-                txtFirstName.Text = MemberLogin.FirstName;
-                cmbSex.SelectedValue = MemberLogin.Sex;
-                dtpkBirthday.SelectedDate = MemberLogin.Birthday;
-                txtSSN.Text = MemberLogin.SSN;
-                txtAddress.Text = MemberLogin.Address;
-                txtEmail.Text = MemberLogin.Email;
-                txtPhone.Text = MemberLogin.PhoneNumber;
+                txtLastName.Text = LibrarianLogin.LastName;
+                txtFirstName.Text = LibrarianLogin.FirstName;
+                cmbSex.SelectedValue = LibrarianLogin.Sex;
+                dtpkBirthday.SelectedDate = LibrarianLogin.Birthday;
+                txtSSN.Text = LibrarianLogin.SSN;
+                txtAddress.Text = LibrarianLogin.Address;
+                txtEmail.Text = LibrarianLogin.Email;
+                txtPhone.Text = LibrarianLogin.PhoneNumber;
             });
 
             UpdateCommand = new RelayCommand<UserControl>((p) => { return p != null; }, (p) =>
@@ -136,16 +136,16 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 }
                 else { tblPhoneWarning.Visibility = Visibility.Hidden; }
 
-                MemberLogin.LastName = StringHelper.CapitalizeEachWord(txtLastName.Text);
-                MemberLogin.FirstName = StringHelper.CapitalizeEachWord(txtFirstName.Text);
-                MemberLogin.Sex = cmbSex.SelectedValue.ToString();
-                MemberLogin.Birthday = dtpkBirthday.SelectedDate;
-                MemberLogin.SSN = txtSSN.Text;
-                MemberLogin.Address = txtAddress.Text;
-                MemberLogin.Email = txtEmail.Text;
-                MemberLogin.PhoneNumber = txtPhone.Text;
+                LibrarianLogin.LastName = StringHelper.CapitalizeEachWord(txtLastName.Text);
+                LibrarianLogin.FirstName = StringHelper.CapitalizeEachWord(txtFirstName.Text);
+                LibrarianLogin.Sex = cmbSex.SelectedValue.ToString();
+                LibrarianLogin.Birthday = dtpkBirthday.SelectedDate;
+                LibrarianLogin.SSN = txtSSN.Text;
+                LibrarianLogin.Address = txtAddress.Text;
+                LibrarianLogin.Email = txtEmail.Text;
+                LibrarianLogin.PhoneNumber = txtPhone.Text;
 
-                MemberDAL.Instance.Update(MemberLogin);
+                LibrarianDAL.Instance.Update(LibrarianLogin);
                 var mySnackbar = p.FindName("mySnackbar") as Snackbar;
                 mySnackbar.MessageQueue.Enqueue("Cập nhật thông tin thành viên thành công");
                 OnPropertyChanged();
@@ -218,7 +218,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
             });
         }
 
-        MemberDTO memberLogin;
+        LibrarianDTO memberLogin;
         Account accountLogin;
     }
 }

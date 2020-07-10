@@ -96,7 +96,6 @@ D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManag
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\View.AddWindow\AddMemberWindow.g.cs
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\View.AddWindow\AddPublisherWindow.g.cs
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\View.PageUC\PageAboutSoftware.g.cs
-D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\View.PageUC\PageAccountInfor.g.cs
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\View.PageUC\PageAuthorManager.g.cs
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\View.PageUC\PageBookCategoryManager.g.cs
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\View.PageUC\PageBookManager.g.cs
@@ -127,7 +126,6 @@ D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManag
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\View.AddWindow\AddMemberWindow.baml
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\View.AddWindow\AddPublisherWindow.baml
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\View.PageUC\PageAboutSoftware.baml
-D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\View.PageUC\PageAccountInfor.baml
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\View.PageUC\PageAuthorManager.baml
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\View.PageUC\PageBookCategoryManager.baml
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\View.PageUC\PageBookManager.baml
@@ -145,3 +143,5 @@ D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManag
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\LibraryManager.EntityFramework.csproj.CopyComplete
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\LibraryManager.EntityFramework.exe
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\LibraryManager.EntityFramework.pdb
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\View.PageUC\PageLibrarianInfor.g.cs
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\View.PageUC\PageLibrarianInfor.baml
