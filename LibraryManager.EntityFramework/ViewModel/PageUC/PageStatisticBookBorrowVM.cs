@@ -24,7 +24,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
             {
                 try
                 {
-                    var w = FrameworkElementExtend.GetWindowParent(p) as Window;
+                    var w = FrameworkElementExtend.GetRootParent(p) as Window;
                     var gridMain = w.FindName("gridMain") as Grid;
                     gridMain.Children.Remove(p);
                 }

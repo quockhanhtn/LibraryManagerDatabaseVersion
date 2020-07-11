@@ -1,9 +1,6 @@
 ﻿using LibraryManager.Utility;
 using System.Data.Entity;
-using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Windows;
-using System.Windows.Documents;
 
 namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 {

@@ -2,9 +2,17 @@
 
 namespace LibraryManager.Utility
 {
+    /// <summary>
+    /// Hỗ trợ làm việc với các FrameworkElement
+    /// </summary>
     public class FrameworkElementExtend
     {
-        public static FrameworkElement GetWindowParent(FrameworkElement f)
+        /// <summary>
+        /// Trả về root parent của FrameworkElement
+        /// </summary>
+        /// <param name="f">FrameworkElement cần tìm root parrent</param>
+        /// <returns></returns>
+        public static FrameworkElement GetRootParent(FrameworkElement f)
         {
             FrameworkElement parent = f;
 

@@ -5,6 +5,9 @@ using System.Windows.Input;
 
 namespace LibraryManager.Utility
 {
+    /// <summary>
+    /// BaseviewModel
+    /// </summary>
     public class BaseViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;

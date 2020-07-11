@@ -1,5 +1,4 @@
 ﻿using LibraryManager.EntityFramework.Model.DataTransferObject;
-using MaterialDesignColors.Recommended;
 using System;
 using System.Collections.ObjectModel;
 using System.Data.Entity;

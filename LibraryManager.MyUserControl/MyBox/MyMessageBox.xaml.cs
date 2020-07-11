@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace LibraryManager.MyUserControl.MyBox
 {
@@ -27,16 +18,16 @@ namespace LibraryManager.MyUserControl.MyBox
         /// <summary>
         /// Hiện ra một MessageBox tùy chỉnh
         /// </summary>
-        /// <param name="kMessageBoxText">Nội dung hiển thị</param>
+        /// <param name="myMessageBoxText">Nội dung hiển thị</param>
         /// <param name="caption">Tiêu đề</param>
         /// <param name="btn1_Text">Nội dung của nút bấm thứ 1 - nút Default</param>
         /// <param name="btn2_Text">Nội dung của nút bấm thứ 2 - nút Cancel</param>
         /// <param name="messageBoxImage">Icon</param>
-        public MyMessageBox(string kMessageBoxText, string caption, string btn1_Text, string btn2_Text, MessageBoxImage messageBoxImage)
+        public MyMessageBox(string myMessageBoxText, string caption, string btn1_Text, string btn2_Text, MessageBoxImage messageBoxImage)
         {
             InitializeComponent();
             Result = false;
-            tblContent.Text = kMessageBoxText;
+            tblContent.Text = myMessageBoxText;
             tblTitle.Text = caption.ToUpper();
             tblButton1.Text = btn1_Text;
             tblButton2.Text = btn2_Text;
@@ -71,9 +62,9 @@ namespace LibraryManager.MyUserControl.MyBox
             }
         }
 
-        public static bool Show(string kMessageBoxText, string caption, string btn1_Text, string btn2_Text, MessageBoxImage messageBoxImage)
+        public static bool Show(string myMessageBoxText, string caption, string btn1_Text, string btn2_Text, MessageBoxImage messageBoxImage)
         {
-            MyMessageBox kMessageBox = new MyMessageBox(kMessageBoxText, caption, btn1_Text, btn2_Text, messageBoxImage);
+            MyMessageBox kMessageBox = new MyMessageBox(myMessageBoxText, caption, btn1_Text, btn2_Text, messageBoxImage);
             kMessageBox.ShowDialog();
             return kMessageBox.Result;
         }

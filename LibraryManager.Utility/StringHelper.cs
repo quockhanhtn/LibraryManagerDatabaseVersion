@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace LibraryManager.Utility
 {
@@ -64,6 +61,11 @@ namespace LibraryManager.Utility
             return str;
         }
 
+        /// <summary>
+        /// Chuyển chuỗi thành decimal
+        /// </summary>
+        /// <param name="str">Chuỗi cần chuyển thành decimal</param>
+        /// <returns>0 nếu không chuyển được, giá trị của chuỗi nếu chuyển thành công</returns>
         public static decimal ToDecimal(string str)
         {
             decimal result = 0;
@@ -71,6 +73,11 @@ namespace LibraryManager.Utility
             return result;
         }
 
+        /// <summary>
+        /// Chuyển chuỗi thành int
+        /// </summary>
+        /// <param name="str">Chuỗi cần chuyển thành int</param>
+        /// <returns>0 nếu không chuyển được, giá trị của chuỗi nếu chuyển thành công</returns>
         public static int ToInt(string str)
         {
             int result = 0;

@@ -67,7 +67,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                     var borrowPage = new PageBorrowBook() { DataContext = borrowVM };
                     try
                     {
-                        var w = FrameworkElementExtend.GetWindowParent(p) as Window;
+                        var w = FrameworkElementExtend.GetRootParent(p) as Window;
                         var gridMain = w.FindName("gridMain") as Grid;
                         //gridMain.Children.Clear();
                         gridMain.Children.Add(borrowPage);
@@ -89,7 +89,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                     var returnPage = new PageReturnBook() { DataContext = returnVM };
                     try
                     {
-                        var w = FrameworkElementExtend.GetWindowParent(p) as Window;
+                        var w = FrameworkElementExtend.GetRootParent(p) as Window;
                         var gridMain = w.FindName("gridMain") as Grid;
                         //gridMain.Children.Clear();
                         gridMain.Children.Add(returnPage);
@@ -167,7 +167,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                   try
                   {
                       var staticBookPage = new PageStatisticBookBorrow() { DataContext = new PageStatisticBookBorrowVM(BookSelected) };
-                      var w = FrameworkElementExtend.GetWindowParent(p) as Window;
+                      var w = FrameworkElementExtend.GetRootParent(p) as Window;
                       var gridMain = w.FindName("gridMain") as Grid;
                     //gridMain.Children.Clear();
                     gridMain.Children.Add(staticBookPage);

@@ -1,11 +1,8 @@
-﻿using Microsoft.Office.Interop.Excel;
-using OfficeOpenXml;
+﻿using OfficeOpenXml;
 using OfficeOpenXml.Style;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
-using System.Windows.Media;
 
 namespace LibraryManager.Utility
 {

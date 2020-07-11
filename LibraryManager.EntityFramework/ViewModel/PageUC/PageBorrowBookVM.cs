@@ -64,7 +64,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 }
                 try
                 {
-                    var w = FrameworkElementExtend.GetWindowParent(p) as Window;
+                    var w = FrameworkElementExtend.GetRootParent(p) as Window;
                     var gridMain = w.FindName("gridMain") as Grid;
                     gridMain.Children.Remove(p);
                     var dt = (gridMain.Children[0] as PageBookManager).DataContext as PageBookManagerVM;
@@ -77,7 +77,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
             {
                 try
                 {
-                    var w = FrameworkElementExtend.GetWindowParent(p) as Window;
+                    var w = FrameworkElementExtend.GetRootParent(p) as Window;
                     (w.FindName("gridMain") as Grid).Children.Remove(p);
                 }
                 catch (Exception) { }

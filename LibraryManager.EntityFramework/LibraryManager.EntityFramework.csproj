@@ -245,7 +245,6 @@
     <Compile Include="ViewModel\AddWindow\AddLibrarianWindowVM.cs" />
     <Compile Include="ViewModel\MemberWindowViewModel.cs" />
     <Compile Include="ViewModel\PageUC\PageAboutSoftwareVM.cs" />
-    <Compile Include="ViewModel\PageUC\PageAccountInforVM.cs" />
     <Compile Include="ViewModel\PageUC\PageAuthorManagerVM.cs" />
     <Compile Include="ViewModel\PageUC\PageBookCategoryManagerVM.cs" />
     <Compile Include="ViewModel\PageUC\PageBookManagerVM.cs" />
