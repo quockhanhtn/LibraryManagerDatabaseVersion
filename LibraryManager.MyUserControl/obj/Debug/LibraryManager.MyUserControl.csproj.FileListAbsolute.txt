@@ -48,6 +48,7 @@ D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManag
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.MyUserControl\bin\Debug\EPPlus.xml
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.MyUserControl\obj\Debug\LibraryManager.MyUserControl.csprojAssemblyReference.cache
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.MyUserControl\obj\Debug\ResourceXAML\ControlStyle.baml
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.MyUserControl\obj\Debug\ResourceXAML\BitmapImages.baml
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.MyUserControl\obj\Debug\MyBox\InputBox.g.cs
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.MyUserControl\obj\Debug\MyBox\MyMessageBox.g.cs
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.MyUserControl\obj\Debug\TitleBar.g.cs
@@ -63,4 +64,3 @@ D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManag
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.MyUserControl\obj\Debug\LibraryManager.MyUserControl.csproj.CopyComplete
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.MyUserControl\obj\Debug\LibraryManager.MyUserControl.dll
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.MyUserControl\obj\Debug\LibraryManager.MyUserControl.pdb
-D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.MyUserControl\obj\Debug\ResourceXAML\BitmapImages.baml

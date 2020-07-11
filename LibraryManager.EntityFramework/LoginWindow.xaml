@@ -102,7 +102,13 @@
                                     <TextBlock x:Name="tblLoginFail" Visibility="Collapsed" Text="Sai tên đăng nhập hoặc mật khẩu !" Foreground="#FE5969" FontSize="16" Margin="50 10 0 0"/>
 
                                     <!--Forgotten account-->
-                                    <TextBlock Margin="50 0 0 0" Text="Quên mật khẩu ?" FontSize="16" Style="{StaticResource LinkTextBlock}"></TextBlock>
+                                    <TextBlock Margin="50 0 0 0" Text="Quên mật khẩu ?" FontSize="16" Style="{StaticResource LinkTextBlock}">
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="MouseDown">
+                                                <i:InvokeCommandAction Command="{Binding LostPasswordCommand}"/>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </TextBlock>
 
                                     <Button ToolTip="Đăng nhập" IsDefault="True" Margin="0 20 0 0" Height="50" Style="{StaticResource DarkBlueButton}"
                                             Command="{Binding LoginCommand}" CommandParameter="{Binding ElementName=loginWindow}">

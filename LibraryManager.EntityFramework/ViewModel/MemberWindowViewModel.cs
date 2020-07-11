@@ -3,6 +3,7 @@ using LibraryManager.EntityFramework.Model.DataAccessLayer;
 using LibraryManager.EntityFramework.Model.DataTransferObject;
 using LibraryManager.EntityFramework.View.PageUC;
 using LibraryManager.EntityFramework.ViewModel.PageUC;
+using LibraryManager.MyUserControl;
 using LibraryManager.MyUserControl.MyBox;
 using LibraryManager.Utility;
 using MaterialDesignThemes.Wpf;
@@ -29,29 +30,45 @@ namespace LibraryManager.EntityFramework.ViewModel
 
             MenuSelectionChangedCommand = new RelayCommand<Window>((p) => { return (p != null); }, (p) =>
             {
-            var gridCursor = p.FindName("gridCursor") as Grid;
-            var listViewMenu = p.FindName("ListViewMenu") as ListView;
-            var listViewSelectedItem = (listViewMenu).SelectedItem as ListViewItem;
+                var gridCursor = p.FindName("gridCursor") as Grid;
+                var listViewMenu = p.FindName("ListViewMenu") as ListView;
+                var listViewSelectedItem = (listViewMenu).SelectedItem as ListViewItem;
 
-            gridCursor.Margin = new Thickness(0, 60 * listViewMenu.SelectedIndex, 0, 0);
+                gridCursor.Margin = new Thickness(0, 60 * listViewMenu.SelectedIndex, 0, 0);
 
-            GridMain.Children.Clear();
-            switch (listViewSelectedItem.Name)
-            {
-                case "AccountInfo":
-                    GridMain.Children.Add(this.PageAccountInfor);
-                    break;
-                case "BorrowBookList":
+                GridMain.Children.Clear();
+                switch (listViewSelectedItem.Name)
+                {
+                    case "AccountInfo":
+                        GridMain.Children.Add(this.PageAccountInfor);
+                        break;
+                    case "BorrowBookList":
                         GridMain.Children.Add(this.PageMemberBorrowList);
                         break;
                     case "AboutSoftware":
                         GridMain.Children.Add(this.PageAboutSoftware);
+                        break;
+                    case "Logout":
+                        var messageboxResult = MyMessageBox.Show("Bạn có muốn đăng xuất khỏi phần mềm ?", "Cảnh báo", "Không", "Có", MessageBoxImage.Warning);
+                        if (messageboxResult == true)
+                        {
+                            listViewMenu.SelectedIndex = 0;
+                            this.MenuSelectionChangedCommand.Execute(p);
+                        }
+                        else
+                        {
+                            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                            Application.Current.Shutdown();
+                        }
                         break;
                 }
             });
 
             LoadedWindow = new RelayCommand<Window>((p) => { return (p != null); }, (p) =>
             {
+                var titleBar = p.FindName("titleBar") as TitleBar;
+                titleBar.Tag = "Library Manager - " + MemberLogin.LastName + " " + MemberLogin.FirstName;
+
                 if (MemberLogin.Status != true)
                 {
                     MyMessageBox.Show("Tài khoản của bạn đã bị khóa!\n\rLiên hệ quản trị viên để được hỗ trợ", "Thông báo", "OK", "", MessageBoxImage.Error);

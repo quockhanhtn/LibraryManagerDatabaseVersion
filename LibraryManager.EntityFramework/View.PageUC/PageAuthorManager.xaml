@@ -195,7 +195,7 @@
                                      Text="{Binding AuthorSelected.NumberOfBook, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
 
                             <Expander Header="Các sách đã viết">
-                               <ListView Margin="30 0 20 0" ItemsSource="{Binding AuthorSelected.ListBookTitle, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
+                                <ListView Margin="30 0 20 0" ItemsSource="{Binding AuthorSelected.ListBookTitle, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" 
                                           VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Foreground="Black">
                                 </ListView>
                             </Expander>
@@ -237,4 +237,3 @@
         <materialDesign:Snackbar MessageQueue="{materialDesign:MessageQueue}" x:Name="mySnackbar" />
     </Grid>
 </UserControl>
-

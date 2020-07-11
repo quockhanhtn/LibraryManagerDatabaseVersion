@@ -3,6 +3,7 @@ using LibraryManager.EntityFramework.Model.DataAccessLayer;
 using LibraryManager.EntityFramework.Model.DataTransferObject;
 using LibraryManager.EntityFramework.View.PageUC;
 using LibraryManager.EntityFramework.ViewModel.PageUC;
+using LibraryManager.MyUserControl;
 using LibraryManager.MyUserControl.MyBox;
 using LibraryManager.Utility;
 using MaterialDesignThemes.Wpf;
@@ -67,11 +68,27 @@ namespace LibraryManager.EntityFramework.ViewModel
                     case "AboutSoftware":
                         GridMain.Children.Add(this.PageAboutSoftware);
                         break;
+                    case "Logout":
+                        var messageboxResult = MyMessageBox.Show("Bạn có muốn đăng xuất khỏi phần mềm ?", "Cảnh báo", "Không", "Có", MessageBoxImage.Warning);
+                        if (messageboxResult == true)
+                        {
+                            listViewMenu.SelectedIndex = 2;
+                            this.MenuSelectionChangedCommand.Execute(p);
+                        }
+                        else
+                        {
+                            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                            Application.Current.Shutdown();
+                        }
+                        break;
                 }
             });
 
             LoadedWindow = new RelayCommand<Window>((p) => { return (p != null); }, (p) =>
             {
+                var titleBar = p.FindName("titleBar") as TitleBar;
+                titleBar.Tag = "Library Manager - " + LibrarianLogin.LastName + " " + LibrarianLogin.FirstName;
+
                 if (LibrarianLogin.Status != true)
                 {
                     MyMessageBox.Show("Tài khoản của bạn đã bị khóa!\n\rLiên hệ với quản trị viên để mở lại", "Thông báo", "OK", "", MessageBoxImage.Error);

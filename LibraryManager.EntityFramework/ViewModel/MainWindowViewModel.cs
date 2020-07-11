@@ -2,6 +2,7 @@
 using LibraryManager.EntityFramework.Model.DataTransferObject;
 using LibraryManager.EntityFramework.View.PageUC;
 using LibraryManager.EntityFramework.ViewModel.PageUC;
+using LibraryManager.MyUserControl.MyBox;
 using LibraryManager.Utility;
 using System.Windows;
 using System.Windows.Controls;
@@ -64,6 +65,19 @@ namespace LibraryManager.EntityFramework.ViewModel
                         break;
                     case "AboutSoftware":
                         GridMain.Children.Add(this.PageAboutSoftware);
+                        break;
+                    case "Logout":
+                        var messageboxResult = MyMessageBox.Show("Bạn có muốn đăng xuất khỏi phần mềm ?", "Cảnh báo", "Không", "Có", MessageBoxImage.Warning);
+                        if (messageboxResult == true)
+                        {
+                            listViewMenu.SelectedIndex = 0;
+                            MenuSelectionChangedCommand.Execute(p);
+                        }
+                        else
+                        {
+                            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+                            Application.Current.Shutdown();
+                        }
                         break;
                 }
             });

@@ -1,5 +1,6 @@
 ﻿using Dragablz;
 using LibraryManager.EntityFramework.Model.DataAccessLayer;
+using LibraryManager.MyUserControl.MyBox;
 using LibraryManager.Utility;
 using MaterialDesignThemes.Wpf;
 using System.Windows;
@@ -13,7 +14,7 @@ namespace LibraryManager.EntityFramework.ViewModel
         public ICommand TabControlChanged { get; set; }
         public ICommand LoginCommand { get; set; }
         public ICommand SignUpCommand { get; set; }
-
+        public ICommand LostPasswordCommand { get; set; }
         public ICommand ShowPasswordCommand { get; set; }
 
         public LoginWindowViewModel()
@@ -73,6 +74,16 @@ namespace LibraryManager.EntityFramework.ViewModel
                     }
                     p.Close();
                 }
+            });
+
+            SignUpCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                MyMessageBox.Show("Comming soon !", "Sorry", "OK", "", MessageBoxImage.Error);
+            });
+
+            LostPasswordCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                MyMessageBox.Show("Comming soon !", "Sorry", "OK", "", MessageBoxImage.Error);
             });
 
             ShowPasswordCommand = new RelayCommand<Window>((p) => { return p != null; }, (p) =>

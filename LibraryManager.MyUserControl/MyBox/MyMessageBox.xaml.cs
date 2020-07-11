@@ -15,15 +15,7 @@ namespace LibraryManager.MyUserControl.MyBox
         /// </summary>
         public bool Result { get; set; }
 
-        /// <summary>
-        /// Hiện ra một MessageBox tùy chỉnh
-        /// </summary>
-        /// <param name="myMessageBoxText">Nội dung hiển thị</param>
-        /// <param name="caption">Tiêu đề</param>
-        /// <param name="btn1_Text">Nội dung của nút bấm thứ 1 - nút Default</param>
-        /// <param name="btn2_Text">Nội dung của nút bấm thứ 2 - nút Cancel</param>
-        /// <param name="messageBoxImage">Icon</param>
-        public MyMessageBox(string myMessageBoxText, string caption, string btn1_Text, string btn2_Text, MessageBoxImage messageBoxImage)
+        private MyMessageBox(string myMessageBoxText, string caption, string btn1_Text, string btn2_Text, MessageBoxImage messageBoxImage)
         {
             InitializeComponent();
             Result = false;
@@ -62,6 +54,15 @@ namespace LibraryManager.MyUserControl.MyBox
             }
         }
 
+        /// <summary>
+        /// Hiện ra một MessageBox tùy chỉnh
+        /// </summary>
+        /// <param name="myMessageBoxText">Nội dung hiển thị</param>
+        /// <param name="caption">Tiêu đề</param>
+        /// <param name="btn1_Text">Nội dung của nút bấm thứ 1 - nút Default</param>
+        /// <param name="btn2_Text">Nội dung của nút bấm thứ 2 - nút Cancel</param>
+        /// <param name="messageBoxImage">Icon</param>
+        /// <returns>True -> Button 1 được nhấn, False -> Button 2 được nhấn</returns>
         public static bool Show(string myMessageBoxText, string caption, string btn1_Text, string btn2_Text, MessageBoxImage messageBoxImage)
         {
             MyMessageBox kMessageBox = new MyMessageBox(myMessageBoxText, caption, btn1_Text, btn2_Text, messageBoxImage);

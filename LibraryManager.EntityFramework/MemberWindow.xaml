@@ -75,7 +75,7 @@
             </Grid.ColumnDefinitions>
 
             <!--Title-->
-            <uc:TitleBar Height="auto" Background="#007acc" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2"></uc:TitleBar>
+            <uc:TitleBar x:Name="titleBar" Height="auto" Background="#007acc" Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2"></uc:TitleBar>
 
             <Grid x:Name="gridMain" Background="DarkGray" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1" Grid.Row="1"/>
 
@@ -168,6 +168,13 @@
                                     <materialDesign:PackIcon Kind="AboutCircle"/>
                                     <TextBlock Text="Thông tin"/>
                                     <TextBlock Text=" Phần mềm" FontWeight="SemiBold"/>
+                                </StackPanel>
+                            </ListViewItem>
+
+                            <ListViewItem x:Name="Logout" Height="60" ToolTip="Đăng xuất">
+                                <StackPanel Orientation="Horizontal">
+                                    <materialDesign:PackIcon Kind="Logout"/>
+                                    <TextBlock Text="Đăng xuất" FontWeight="SemiBold"/>
                                 </StackPanel>
                             </ListViewItem>
                         </ListView>
