@@ -84,7 +84,7 @@ namespace LibraryManager.EntityFramework.ViewModel
             this.PagePublisherManager = new PagePublisherManager() { DataContext = new PagePublisherManagerVM() };
             this.PageBookCategoryManager = new PageBookCategoryManager() { DataContext = new PageBookCategoryManagerVM() };
             this.PageAuthorManager = new PageAuthorManager() { DataContext = new PageAuthorManagerVM() };
-            this.PageStatistic = new PageStatistic();
+            this.PageStatistic = new PageStatistic() { DataContext = new PageStatisticVM() };
             this.PageAboutSoftware = new PageAboutSoftware();
         }
     }

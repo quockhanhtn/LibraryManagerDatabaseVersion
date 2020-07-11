@@ -162,7 +162,18 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
 
             RemoveCommand = new RelayCommand<object>((p) => { return BookSelected != null; }, (p) => { });
 
-            StatisticCommand = new RelayCommand<object>((p) => { return BookSelected != null && BookSelected.BookItem != null && BookSelected.BookItem.Number > BookSelected.BookItem.Count; }, (p) => { });
+            StatisticCommand = new RelayCommand<UserControl>((p) => { return p != null && BookSelected != null && BookSelected.BookItem != null && BookSelected.BookItem.Number > BookSelected.BookItem.Count; }, (p) =>
+              {
+                  try
+                  {
+                      var staticBookPage = new PageStatisticBookBorrow() { DataContext = new PageStatisticBookBorrowVM(BookSelected) };
+                      var w = FrameworkElementExtend.GetWindowParent(p) as Window;
+                      var gridMain = w.FindName("gridMain") as Grid;
+                    //gridMain.Children.Clear();
+                    gridMain.Children.Add(staticBookPage);
+                  }
+                  catch (Exception) { }
+              });
 
             ExportToExcelCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {

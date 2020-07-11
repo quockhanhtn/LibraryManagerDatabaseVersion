@@ -37,6 +37,21 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
             foreach (var mem in listRaw) { listMemberDTO.Add(new MemberDTO(mem)); }
             return listMemberDTO;
         }
+        
+        public ObservableCollection<MemberDTO> GetList(DateTime fromDate, DateTime toDate)
+        {
+            var listMemberDTO = new ObservableCollection<MemberDTO>();
+            var listRaw = DataProvider.Instance.Database.Members.ToList();
+
+            foreach (var item in listRaw)
+            {
+                if (item.RegisterDate.Value.Date >= fromDate.Date && item.RegisterDate.Value.Date <= toDate.Date)
+                {
+                    listMemberDTO.Add(new MemberDTO(item));
+                }
+            }
+            return listMemberDTO;
+        }
 
         public void Add(MemberDTO newMember)
         {

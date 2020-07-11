@@ -147,3 +147,5 @@ D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManag
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\View.PageUC\PageLibrarianInfor.baml
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\View.PageUC\PageMemberBorrowList.g.cs
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\View.PageUC\PageMemberBorrowList.baml
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\View.PageUC\PageStatisticBookBorrow.g.cs
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.EntityFramework\obj\Debug\View.PageUC\PageStatisticBookBorrow.baml

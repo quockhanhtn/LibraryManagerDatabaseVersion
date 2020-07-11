@@ -238,7 +238,7 @@
                 </Button>
 
                 <Button Grid.Column="3" ToolTip="Thống kê những người mượn sách" Margin="10"
-                        Command="{Binding StatisticCommand}">
+                        Command="{Binding StatisticCommand}" CommandParameter="{Binding ElementName=pageBookManager}">
                     <DockPanel LastChildFill="True" Margin="0" HorizontalAlignment="Stretch">
                         <materialDesign:PackIcon Kind="FileReport" />
                         <TextBlock Text="THỐNG KÊ" Margin="10 0"/>

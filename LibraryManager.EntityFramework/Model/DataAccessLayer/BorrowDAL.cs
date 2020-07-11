@@ -37,9 +37,12 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
         public ObservableCollection<BorrowDTO> GetListByDate(DateTime fromDate, DateTime toDate)
         {
             var result = new ObservableCollection<BorrowDTO>();
-            foreach (var item in DataProvider.Instance.Database.Borrows.Where(x => x.BorrowDate >= fromDate && x.BorrowDate <= toDate && x.Status == true).ToList())
+            foreach (var item in DataProvider.Instance.Database.Borrows.Where(x => x.Status == true).ToList())
             {
-                result.Add(new BorrowDTO(item));
+                if (item.BorrowDate.Date >= fromDate.Date && item.BorrowDate.Date <= toDate.Date)
+                {
+                    result.Add(new BorrowDTO(item));
+                }
             }
             return result;
         }

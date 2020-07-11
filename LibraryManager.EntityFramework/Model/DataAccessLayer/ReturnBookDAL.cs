@@ -16,9 +16,12 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
         public ObservableCollection<ReturnDTO> GetListByDate(DateTime fromDate, DateTime toDate)
         {
             var result = new ObservableCollection<ReturnDTO>();
-            foreach (var item in DataProvider.Instance.Database.ReturnBooks.Where(x => x.ReturnDate >= fromDate && x.ReturnDate <= toDate))
+            foreach (var item in DataProvider.Instance.Database.ReturnBooks.ToList())
             {
-                result.Add(new ReturnDTO(item));
+                if (item.ReturnDate.Date >= fromDate.Date && item.ReturnDate.Date <= toDate.Date)
+                {
+                    result.Add(new ReturnDTO(item));
+                }
             }
             return result;
         }

@@ -296,12 +296,278 @@
             <!--Tab thống kê thành viên-->
             <TabItem Header="      THÀNH VIÊN      ">
                 <Grid x:Name="gridMember">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!--Title-->
+                    <TextBlock Grid.Row="0" Text="THỐNG KÊ THÀNH VIÊN"/>
+
+                    <!--Fillter-->
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="220"/>
+                            <ColumnDefinition Width="220"/>
+                        </Grid.ColumnDefinitions>
+                        <DatePicker Grid.Column="0" materialDesign:HintAssist.Hint="Từ ngày" Style="{StaticResource MyDatePicker}" Margin="20 10 5 10"
+                                    SelectedDate="{Binding FromDateMember, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                        <DatePicker Grid.Column="1" materialDesign:HintAssist.Hint="Đến ngày" Style="{StaticResource MyDatePicker}" Margin="5 10 20 10"
+                                    SelectedDate="{Binding ToDateMember, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                        <Button Grid.Column="2" Content="XEM THỐNG KÊ" Command="{Binding ViewMemberCommand}"/>
+                        <Button Grid.Column="3" Content="XUẤT FILE EXCEL" Command="{Binding ExportToExcelMemberCommand}"/>
+                    </Grid>
+
+                    <!--List-->
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.Row="2">
+                        <ListView ItemsSource="{Binding ListMember, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Mã">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Foreground="Black" Text="{Binding Id}"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Họ">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Foreground="Black" Text="{Binding LastName}"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Tên">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Foreground="Black" Text="{Binding FirstName}"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Giới tính">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Foreground="Black" Text="{Binding Sex}"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Ngày sinh">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Foreground="Black" Text="{Binding Birthday, StringFormat='dd/MM/yyyy'}"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="CCCD">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Foreground="Black" Text="{Binding SSN}"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Địa chỉ">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Foreground="Black" Text="{Binding Address}"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Email">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Foreground="Blue" Text="{Binding Email}" TextDecorations="Underline" Cursor="Hand"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Điện thoại">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Foreground="Black" Text="{Binding PhoneNumber}"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Ngày tham gia">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Foreground="Black" Text="{Binding RegisterDate, StringFormat='dd/MM/yyyy'}"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Ghi chú">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Foreground="Black" Text="{Binding Note}"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </ScrollViewer>
+
+                    <!--Tổng số -->
+                    <TextBlock Grid.Row="3" HorizontalAlignment="Right" Margin="0 0 10 10" FontSize="18">
+                        <Run Text="Tổng số thành viên :"/>
+                        <Run Text="{Binding ListMember.Count, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                    </TextBlock>
                 </Grid>
             </TabItem>
 
             <!--Tab thống kê nhân viên-->
             <TabItem Header="       NHÂN VIÊN      ">
                 <Grid x:Name="gridLibrarian">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <!--Title-->
+                    <TextBlock Grid.Row="0" Text="THỐNG KÊ NHÂN VIÊN"/>
+
+                    <!--Fillter-->
+                    <Grid Grid.Row="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="220"/>
+                            <ColumnDefinition Width="220"/>
+                        </Grid.ColumnDefinitions>
+                        <DatePicker Grid.Column="0" materialDesign:HintAssist.Hint="Từ ngày" Style="{StaticResource MyDatePicker}" Margin="20 10 5 10"
+                                    SelectedDate="{Binding FromDateLibrarian, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                        <DatePicker Grid.Column="1" materialDesign:HintAssist.Hint="Đến ngày" Style="{StaticResource MyDatePicker}" Margin="5 10 20 10"
+                                    SelectedDate="{Binding ToDateLibrarian, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                        <Button Grid.Column="2" Content="XEM THỐNG KÊ" Command="{Binding ViewLibrarianCommand}"/>
+                        <Button Grid.Column="3" Content="XUẤT FILE EXCEL" Command="{Binding ExportToExcelLibrarianCommand}"/>
+                    </Grid>
+
+                    <!--List-->
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Grid.Row="2">
+                        <ListView ItemsSource="{Binding ListLibrarian, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Mã">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Foreground="Black" Text="{Binding Id}"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Họ">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Foreground="Black" Text="{Binding LastName}"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Tên">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Foreground="Black" Text="{Binding FirstName}"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Giới tính">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Foreground="Black" Text="{Binding Sex}"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Ngày sinh">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Foreground="Black" Text="{Binding Birthday, StringFormat='dd/MM/yyyy'}"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="CCCD">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Foreground="Black" Text="{Binding SSN}"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Địa chỉ">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Foreground="Black" Text="{Binding Address}"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Email">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Foreground="Blue" Text="{Binding Email}" TextDecorations="Underline" Cursor="Hand"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Điện thoại">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Foreground="Black" Text="{Binding PhoneNumber}"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Ngày tham gia">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Foreground="Black" Text="{Binding StartDate, StringFormat='dd/MM/yyyy'}"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Mức lương">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Foreground="Black" Text="{Binding Salary}"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Ghi chú">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Foreground="Black" Text="{Binding Note}"></TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </ScrollViewer>
+
+                    <!--Tổng số -->
+                    <TextBlock Grid.Row="3" HorizontalAlignment="Right" Margin="0 0 10 10" FontSize="18">
+                        <Run Text="Tổng số nhân viên viên :"/>
+                        <Run Text="{Binding ListLibrarian.Count, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}"/>
+                    </TextBlock>
                 </Grid>
             </TabItem>
         </dragablz:TabablzControl>

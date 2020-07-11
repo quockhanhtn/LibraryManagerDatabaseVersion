@@ -1,6 +1,7 @@
 ﻿using LibraryManager.EntityFramework.Model.DataTransferObject;
 using LibraryManager.Utility.Enums;
 using LibraryManager.Utility.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
@@ -35,6 +36,21 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
             }
 
             foreach (var lib in listRaw) { listLibrarianDTO.Add(new LibrarianDTO(lib)); }
+            return listLibrarianDTO;
+        }
+
+        public ObservableCollection<LibrarianDTO> GetList(DateTime fromDate, DateTime toDate)
+        {
+            var listLibrarianDTO = new ObservableCollection<LibrarianDTO>();
+            var listRaw = DataProvider.Instance.Database.Librarians.Where(x => x.Id != "LIB000").ToList();
+
+            foreach (var item in listRaw)
+            {
+                if (item.StartDate.Value.Date >= fromDate.Date && item.StartDate.Value.Date <= toDate.Date)
+                {
+                    listLibrarianDTO.Add(new LibrarianDTO(item));
+                }
+            }
             return listLibrarianDTO;
         }
 
