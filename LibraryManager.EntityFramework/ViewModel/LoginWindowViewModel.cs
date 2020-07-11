@@ -1,7 +1,7 @@
 ﻿using Dragablz;
 using LibraryManager.EntityFramework.Model.DataAccessLayer;
-using LibraryManager.MyUserControl.MyBox;
 using LibraryManager.Utility;
+using MaterialDesignThemes.Wpf;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -13,6 +13,8 @@ namespace LibraryManager.EntityFramework.ViewModel
         public ICommand TabControlChanged { get; set; }
         public ICommand LoginCommand { get; set; }
         public ICommand SignUpCommand { get; set; }
+
+        public ICommand ShowPasswordCommand { get; set; }
 
         public LoginWindowViewModel()
         {
@@ -37,9 +39,12 @@ namespace LibraryManager.EntityFramework.ViewModel
             LoginCommand = new RelayCommand<Window>((p) => { return p != null; }, (p) =>
             {
                 var txtUsername = p.FindName("txtUsername") as TextBox;
-                var txtPassWord = p.FindName("txtPassWord") as PasswordBox;
+                var txtPassword = p.FindName("txtPassword") as PasswordBox;
+                var txtPasswordShow = p.FindName("txtPasswordShow") as TextBox;
+                var icoEye = p.FindName("icoEye") as PackIcon;
 
-                var accountLogin = AccountDAL.Instance.Login(txtUsername.Text, txtPassWord.Password);
+                var passwordInput = (icoEye.Kind == PackIconKind.Visibility) ? txtPassword.Password : txtPasswordShow.Text;
+                var accountLogin = AccountDAL.Instance.Login(txtUsername.Text, passwordInput);
 
                 if (accountLogin == null)
                 {
@@ -67,6 +72,33 @@ namespace LibraryManager.EntityFramework.ViewModel
                             break;
                     }
                     p.Close();
+                }
+            });
+
+            ShowPasswordCommand = new RelayCommand<Window>((p) => { return p != null; }, (p) =>
+            {
+                var txtPassword = p.FindName("txtPassword") as PasswordBox;
+                var txtPasswordShow = p.FindName("txtPasswordShow") as TextBox;
+                var icoEye = p.FindName("icoEye") as PackIcon;
+
+                if (icoEye.Kind == PackIconKind.Visibility)
+                {
+                    icoEye.Kind = PackIconKind.VisibilityOff;
+                    txtPassword.Visibility = Visibility.Hidden;
+                    txtPasswordShow.Text = txtPassword.Password;
+                    txtPasswordShow.Visibility = Visibility.Visible;
+
+                    txtPasswordShow.Focus();
+                    txtPasswordShow.SelectionStart = txtPasswordShow.Text.Length;
+                }
+                else
+                {
+                    icoEye.Kind = PackIconKind.Visibility;
+                    txtPassword.Visibility = Visibility.Visible;
+                    txtPassword.Password = txtPasswordShow.Text;
+                    txtPasswordShow.Visibility = Visibility.Hidden;
+
+                    txtPassword.Focus();
                 }
             });
         }

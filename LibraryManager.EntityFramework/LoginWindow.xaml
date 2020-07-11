@@ -56,30 +56,47 @@
                                     <DockPanel LastChildFill="True" Margin="0 0 0 20">
                                         <materialDesign:PackIcon Grid.Column="0" Kind="Person"/>
 
-                                        <TextBox Grid.Column="1" x:Name="txtUsername" Margin="20 0 0 0"
-                                                 Foreground="#001e51" MaxLength="20" FontSize="20"
+                                        <TextBox Grid.Column="1" x:Name="txtUsername" Margin="20 0 0 0" Foreground="#001e51" FontSize="20"
                                                  materialDesign:HintAssist.Foreground="#007acc" materialDesign:TextFieldAssist.UnderlineBrush="#007acc"
                                                  Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                                             <materialDesign:HintAssist.Hint>
-                                                <TextBlock Text="Tên đăng nhập hoặc email" Margin="0 -8 0 0" FontSize="20"/>
+                                                <TextBlock Text="Tên đăng nhập" Margin="0 -8 0 0" FontSize="20"/>
                                             </materialDesign:HintAssist.Hint>
                                         </TextBox>
                                     </DockPanel>
 
                                     <!--Password input field-->
-                                    <DockPanel LastChildFill="True" Margin="0 20 0 20">
-                                        <materialDesign:PackIcon Grid.Column="0"  Kind="Key"/>
+                                    <Grid Margin="0 20 0 20">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <materialDesign:PackIcon Kind="Key" Grid.Column="0"/>
 
                                         <!--Password mật khẩu-->
-                                        <PasswordBox Grid.Column="1" x:Name="txtPassWord" Margin="20 0 0 0"
-                                                     Foreground="#001e51" MaxLength="20" FontSize="20"
+                                        <PasswordBox Grid.Column="1" MaxLength="32" x:Name="txtPassword" Margin="20 0 0 0" Foreground="#001e51" FontSize="20"
                                                      materialDesign:HintAssist.Foreground="#007acc" materialDesign:TextFieldAssist.UnderlineBrush="#007acc"
-                                                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" >
+                                                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}">
                                             <materialDesign:HintAssist.Hint>
                                                 <TextBlock Text="Mật khẩu" Margin="0 -8 0 0" FontSize="20"/>
                                             </materialDesign:HintAssist.Hint>
                                         </PasswordBox>
-                                    </DockPanel>
+
+                                        <!--Password mật khẩu-->
+                                        <TextBox Grid.Column="1" MaxLength="32" x:Name="txtPasswordShow" Margin="20 0 0 0" Foreground="#001e51" FontSize="20" Visibility="Collapsed"
+                                                     materialDesign:HintAssist.Foreground="#007acc" materialDesign:TextFieldAssist.UnderlineBrush="#007acc"
+                                                     Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                                            <materialDesign:HintAssist.Hint>
+                                                <TextBlock Text="Mật khẩu" Margin="0 -8 0 0" FontSize="20"/>
+                                            </materialDesign:HintAssist.Hint>
+                                        </TextBox>
+
+                                        <Button Grid.Column="2" Width="35" Height="35" HorizontalAlignment="Right" Style="{StaticResource MaterialDesignIconButton}"
+                                                Command="{Binding ShowPasswordCommand}" CommandParameter="{Binding ElementName=loginWindow}">
+                                            <materialDesign:PackIcon x:Name="icoEye" Kind="Visibility" Foreground="#001e51"/>
+                                        </Button>
+                                    </Grid>
 
                                     <!---->
                                     <TextBlock x:Name="tblLoginFail" Visibility="Collapsed" Text="Sai tên đăng nhập hoặc mật khẩu !" Foreground="#FE5969" FontSize="16" Margin="50 10 0 0"/>
