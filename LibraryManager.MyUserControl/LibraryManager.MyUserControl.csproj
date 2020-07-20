@@ -97,6 +97,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="ResourceXAML\BitmapImages\psd\library-ico.psd" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LibraryManager.Utility\LibraryManager.Utility.csproj">
