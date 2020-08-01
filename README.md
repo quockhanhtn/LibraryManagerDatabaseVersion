@@ -10,7 +10,6 @@ A final project of Windows Programming course at HCMUTE                         
                                                                                                       <br>
 VIDEO DEMO : https://youtu.be/7ptR2GLeKI0                                                             <br>
                                                                                                       <br>
-                                                                                                      <br>
 Version 1.0 (XML File) : https://github.com/quockhanhtn/LibraryManager                                <br>
                                                                                                       <br>
 CONTACT ME:                                                                                           <br>
