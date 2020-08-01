@@ -17,7 +17,10 @@
 
     <Border Style="{StaticResource WindowBoder}">
         <uc:DragMoveGrid>
-            <!--Background-->
+            <!--
+            Background is edited from Designed by macrovector / Freepik 
+            https://www.freepik.com/free-vector/online-library-isometric-background-with-human-characters-electronic-gadgets-pile-books-with-editable-text_7380029.htm
+            -->
             <Image Stretch="Fill" StretchDirection="Both" Source="/LibraryManager.MyUserControl;component/ResourceXAML/Images/LoginWindowBackground.jpg"/>
             
             <!--Title bar-->

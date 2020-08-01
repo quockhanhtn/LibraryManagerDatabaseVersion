@@ -14,7 +14,7 @@
         
         mc:Ignorable="d" x:Name="mainWindow" DataContext="{StaticResource MainWindowVM}"
         Style="{StaticResource ResizeWindowNoBoder}" WindowStartupLocation="CenterScreen" 
-        Height="768" Width="1366" MinHeight="500" MinWidth="1004" >
+        Height="768" Width="1366" MinHeight="500" MinWidth="500">
     
     <Window.Resources>
         <Storyboard x:Key="OpenMenu">
@@ -208,7 +208,7 @@
                                 </StackPanel>
                             </ListViewItem>
 
-                            <ListViewItem x:Name="AboutSoftware" Height="60" ToolTip="Quản lý tác giả">
+                            <ListViewItem x:Name="AboutSoftware" Height="60" ToolTip="Thông tin phân mềmm">
                                 <StackPanel Orientation="Horizontal">
                                     <materialDesign:PackIcon Kind="AboutCircle"/>
                                     <TextBlock Text="Thông tin"/>

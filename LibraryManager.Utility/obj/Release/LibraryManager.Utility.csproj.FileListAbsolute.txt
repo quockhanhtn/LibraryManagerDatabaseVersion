@@ -1,0 +1,9 @@
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.Utility\bin\Release\LibraryManager.Utility.dll
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.Utility\bin\Release\LibraryManager.Utility.pdb
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.Utility\bin\Release\EPPlus.dll
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.Utility\bin\Release\EPPlus.xml
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.Utility\obj\Release\LibraryManager.Utility.csproj.ResolveComReference.cache
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.Utility\obj\Release\LibraryManager.Utility.csproj.CoreCompileInputs.cache
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.Utility\obj\Release\LibraryManager.Utility.csproj.CopyComplete
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.Utility\obj\Release\LibraryManager.Utility.dll
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.Utility\obj\Release\LibraryManager.Utility.pdb

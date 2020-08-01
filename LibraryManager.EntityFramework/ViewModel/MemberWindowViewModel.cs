@@ -67,7 +67,7 @@ namespace LibraryManager.EntityFramework.ViewModel
             LoadedWindow = new RelayCommand<Window>((p) => { return (p != null); }, (p) =>
             {
                 var titleBar = p.FindName("titleBar") as TitleBar;
-                titleBar.Tag = "Library Manager - " + MemberLogin.LastName + " " + MemberLogin.FirstName;
+                titleBar.Tag = "Library Manager - Member:" + MemberLogin.LastName + " " + MemberLogin.FirstName;
 
                 if (MemberLogin.Status != true)
                 {

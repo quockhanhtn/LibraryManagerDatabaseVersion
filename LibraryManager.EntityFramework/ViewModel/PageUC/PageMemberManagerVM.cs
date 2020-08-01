@@ -47,7 +47,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 if (p.Text == "" || p.Text == " ")
                 {
                     p.Text = "";
-                    ListMember = MemberDAL.Instance.GetList();
+                    ReloadList();
                     return;
                 }
 

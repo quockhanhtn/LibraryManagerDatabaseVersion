@@ -17,7 +17,7 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
         private BookDAL() { }
         public ObservableCollection<BookDTO> GetList(StatusFillter fillter = StatusFillter.AllStatus)
         {
-            var listRaw = new List<Book>();
+            var listRaw = DataProvider.Instance.Database.Books.ToList();
             var listBookDTO = new ObservableCollection<BookDTO>();
 
             switch (fillter)
@@ -39,7 +39,7 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
 
         public ObservableCollection<BookDTO> GetList(int bookCategoryId, int publisherId)
         {
-            var listRaw = DataProvider.Instance.Database.Books.ToList();
+            var listRaw = DataProvider.Instance.Database.Books.Where(x => x.Status == true).ToList();
             var listBookDTO = new ObservableCollection<BookDTO>();
 
             foreach (var book in listRaw)
@@ -118,6 +118,15 @@ namespace LibraryManager.EntityFramework.Model.DataAccessLayer
         public Book GetBookById(string bookId)
         {
             return DataProvider.Instance.Database.Books.Where(x => x.Id == bookId).SingleOrDefault();
+        }
+
+        public void Remove(string bookId, int number)
+        {
+            var bookUpdate = GetBookById(bookId);
+            bookUpdate.BookItem.Count -= number;
+            bookUpdate.BookItem.Number -= number;
+
+            DataProvider.Instance.SaveEntity(bookUpdate, EntityState.Modified, true);
         }
 
         public void Delete(string objectId) { throw new System.NotImplementedException(); }

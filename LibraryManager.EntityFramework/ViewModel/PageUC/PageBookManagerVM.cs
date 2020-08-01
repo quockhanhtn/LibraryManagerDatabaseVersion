@@ -160,7 +160,31 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
                 ReloadList();
             });
 
-            RemoveCommand = new RelayCommand<object>((p) => { return BookSelected != null; }, (p) => { });
+            RemoveCommand = new RelayCommand<object>((p) => { return BookSelected != null && BookSelected.BookItem.Count > 0; }, (p) =>
+            {
+                int numberBookItemExport;
+                int countOfBook = (int)BookSelected.BookItem.Count;
+                string input = InputBox.Show(countOfBook.ToString(), "NHẬP SỐ LƯỢNG XUẤT", "OK", "Cancel");
+
+                if (input == "") { return; }
+
+                if (!int.TryParse(input, out numberBookItemExport) || numberBookItemExport > countOfBook || numberBookItemExport < 1)
+                {
+                    MyMessageBox.Show("Vui lòng nhập số nguyên dương bé hơn " + countOfBook.ToString(), "Thông báo", "OK", "", MessageBoxImage.Error);
+                    return;
+                }
+
+                if (BookSelected.BookItem.Number == numberBookItemExport)
+                {
+                    BookDAL.Instance.ChangeStatus(BookSelected.Id);
+                }
+                else
+                {
+                    BookDAL.Instance.Remove(BookSelected.Id, numberBookItemExport);
+                }
+
+                ReloadList();
+            });
 
             StatisticCommand = new RelayCommand<UserControl>((p) => { return p != null && BookSelected != null && BookSelected.BookItem != null && BookSelected.BookItem.Number > BookSelected.BookItem.Count; }, (p) =>
               {
@@ -304,7 +328,7 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
         {
             if (BookCategorySelected == null && PublisherSelected == null)
             {
-                ListBook = BookDAL.Instance.GetList();
+                ListBook = BookDAL.Instance.GetList(StatusFillter.Active);
             }
             else if (BookCategorySelected == null)
             {

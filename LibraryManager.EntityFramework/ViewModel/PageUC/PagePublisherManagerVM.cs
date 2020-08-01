@@ -55,8 +55,16 @@ namespace LibraryManager.EntityFramework.ViewModel.PageUC
 
                 var searchKeyWord = StringHelper.StringConvertToUnSign(p.Text).ToLower();
 
-                ListPublisher = new ObservableCollection<PublisherDTO>(PublisherDAL.Instance.GetList().Where(
-                    x => StringHelper.StringConvertToUnSign(x.Name).ToLower().Contains(searchKeyWord)));
+                if (p.Text[0] >= '0' && p.Text[0] <= '9')
+                {
+                    ListPublisher = new ObservableCollection<PublisherDTO>(PublisherDAL.Instance.GetList().Where(
+                        x => x.PhoneNumber.ToLower().Contains(searchKeyWord)));
+                }
+                else
+                {
+                    ListPublisher = new ObservableCollection<PublisherDTO>(PublisherDAL.Instance.GetList().Where(
+                        x => StringHelper.StringConvertToUnSign(x.Name).ToLower().Contains(searchKeyWord)));
+                }
             });
 
             ObjectSelectedChangedCommand = new RelayCommand<UserControl>((p) => { return p != null && PublisherSelected != null; }, (p) =>
