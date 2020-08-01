@@ -1,5 +1,6 @@
 # LIBRARY MANAGER version 2.0
 A final project of Windows Programming course at HCMUTE                                               <br>
+    • Programming language : C#                                                                       <br>
     • UI framework : Windows Presentation Foundation (WPF)                                            <br>
     • Design language : Material Design (Use Material Design In XAML package by James Willock)        <br>
     • Database : SQL Server                                                                           <br>
@@ -10,7 +11,7 @@ A final project of Windows Programming course at HCMUTE                         
 VIDEO DEMO : https://youtu.be/7ptR2GLeKI0                                                             <br>
                                                                                                       <br>
                                                                                                       <br>
-Version 1 (XML File) : https://github.com/quockhanhtn/LibraryManager                                  <br>
+Version 1.0 (XML File) : https://github.com/quockhanhtn/LibraryManager                                <br>
                                                                                                       <br>
 CONTACT ME:                                                                                           <br>
     • Website : https://quockhanh.dev (under construction)                                            <br>
