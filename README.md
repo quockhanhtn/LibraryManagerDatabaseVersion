@@ -3,9 +3,10 @@ A final project of Windows Programming course at HCMUTE                         
     • Programming language : C#                                                                       <br>
     • UI framework : Windows Presentation Foundation (WPF)                                            <br>
     • Design language : Material Design (Use Material Design In XAML package by James Willock)        <br>
-    • Database : SQL Server                                                                           <br>
+    • Relational database management system : SQL Server                                              <br>
     • Object-relational mapping : Entity Framework                                                    <br>
     • Design pattern : Model - View - ViewModel                                                       <br>
+    • Integrated development environment (IDE) : Visual Studio                                        <br>
     • Author : Khanh Lam Quoc, Hoang Ho Huy                                                           <br>
                                                                                                       <br>
 VIDEO DEMO : https://youtu.be/7ptR2GLeKI0                                                             <br>
