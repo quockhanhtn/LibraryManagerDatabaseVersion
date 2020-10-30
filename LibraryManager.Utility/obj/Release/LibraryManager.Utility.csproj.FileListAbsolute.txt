@@ -7,3 +7,4 @@ D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManag
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.Utility\obj\Release\LibraryManager.Utility.csproj.CopyComplete
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.Utility\obj\Release\LibraryManager.Utility.dll
 D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.Utility\obj\Release\LibraryManager.Utility.pdb
+D:\Documents\HCMUTE\HK2_2019_2020\Windows Programming\Final Project\LibraryManagerDatabaseVersion\LibraryManager.Utility\obj\Release\LibraryManager.Utility.csprojAssemblyReference.cache

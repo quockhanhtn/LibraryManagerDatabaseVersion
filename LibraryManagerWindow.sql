@@ -1,14 +1,11 @@
-﻿CREATE DATABASE LibraryManager
+﻿--Thông tin về các cá nhân được tạo ra một cách ngẫu nhiên và không có thật
+
+--Use for LibraryManager.EntityFramework
+CREATE DATABASE LibraryManager
 GO
 
 USE LibraryManager
 GO
-
-
-
---------------
---Tạo các bảng
---------------
 
 
 -- Tạo bảng Librarian
@@ -28,6 +25,10 @@ CREATE TABLE dbo.Librarian
 	Salary DECIMAL(19, 0) NULL,
 	Status BIT DEFAULT 1 NULL
 )
+GO
+
+--Account for Admin
+INSERT INTO dbo.Librarian (Id, LastName,PhoneNumber, Status) VALUES ('LIB000', N'Quản trị viên','', 1)
 GO
 
 -- Tạo bảng Member
@@ -120,6 +121,7 @@ CREATE TABLE dbo.BookItem
 )
 GO 
 
+
 -- Tạo bảng BookAuthor
 CREATE TABLE dbo.BookAuthor
 (
@@ -172,21 +174,6 @@ CREATE TABLE dbo.PayFineInfo
 )
 GO 
 
---Account for Admin
-INSERT INTO dbo.Librarian (Id, LastName,PhoneNumber, Status) VALUES ('LIB000', N'Quản trị viên','', 1)
-GO
-
---Create admin account
---	username: admin
---	password: admin
-INSERT INTO dbo.Account (PersonId, Username, Password, AccountType )
-VALUES ('LIB000', 'admin', 'db69fc039dcbd2962cb4d28f5891aae1', 0)
-GO
-
-
--------------------------
---Định nghĩa các Function
--------------------------
 
 -- Tạo hàm để tự tăng ID
 CREATE FUNCTION Func_NextLibrarianId(@lastLibrarianId VARCHAR(6), @preFix VARCHAR(3), @size INT)
@@ -246,13 +233,6 @@ AS
 	END
 GO
 
-
-
------------------
---Tạo các trigger
------------------
-
-
 CREATE TRIGGER Trig_InsertLibrarian ON [dbo].[Librarian] FOR INSERT
 AS 
 	BEGIN
@@ -292,13 +272,16 @@ AS
 	END
 GO
 
---Trigger cập nhật counter của BookItem theo Number
-CREATE TRIGGER Trig_InsertBookItem ON [dbo].[BookItem] AFTER INSERT
+--Trigger 
+CREATE TRIGGER Trig_InsertBookItem ON [dbo].[BookItem] FOR INSERT
 AS
 	BEGIN
-		UPDATE dbo.BookItem SET Count = Number WHERE BookId = (SELECT TOP (1) Inserted.BookId FROM Inserted)
+		DECLARE @BookId VARCHAR(10)
+		SET @BookId = (SELECT TOP (1) BookId FROM dbo.BookItem ORDER BY BookId DESC)
+		UPDATE dbo.BookItem SET Count = Number WHERE BookId = @BookId
 	END
 GO
+
 
 --Trigger cập nhật số lượng sách khi mượn
 CREATE TRIGGER Trig_InsertBorrow ON [dbo].[Borrow] AFTER INSERT
@@ -320,9 +303,11 @@ AS
 GO
 
 
----------------------------------------------------------------------------
---Thông tin về các cá nhân được tạo ra một cách ngẫu nhiên và không có thật
----------------------------------------------------------------------------
+--Create admin account
+--	username: admin
+--	password: admin
+INSERT INTO dbo.Account (PersonId, Username, Password, AccountType )
+VALUES ('LIB000', 'admin', 'db69fc039dcbd2962cb4d28f5891aae1', 0)
 
 --inser librarian data
 INSERT INTO dbo.Librarian (Id, FirstName, LastName, Birthday, Sex, SSN, Address, PhoneNumber, Email, StartDate, Salary)
@@ -341,47 +326,41 @@ VALUES ('', N'Minh', N'Lê Hoàng', '1997-7-2', N'Nam', '525256352', N'182 Võ V
 
 --inser member data
 INSERT INTO dbo.Member (Id, FirstName, LastName, Birthday, Sex, SSN, Address, PhoneNumber, Email, RegisterDate, Status)
-VALUES ('', N'Lâm', N'Hoàng Minh', '1998-3-12', N'Nam', '123456789', N'', '0887895483', 'eriklam98@gmail.com', '2019-10-20', 1)
+VALUES ('', N'Lâm', N'Hoàng Minh', '1998-3-12', N'Nam', '123456789', N'', '0887895483', 'eriklam98@gmail.com', GETDATE(), 1)
 INSERT INTO dbo.Member (Id, FirstName, LastName, Birthday, Sex, SSN, Address, PhoneNumber, Email, RegisterDate, Status)
-VALUES ('', N'Hân', N'Phan Gia', '2002-5-2', N'Nữ', '282556689', N'', '0987853245', 'giahan0502@yahoo.com', '2019-10-20', 1)
+VALUES ('', N'Hân', N'Phan Gia', '2002-5-2', N'Nữ', '282556689', N'', '0987853245', 'giahan0502@yahoo.com', GETDATE(), 1)
 INSERT INTO dbo.Member (Id, FirstName, LastName, Birthday, Sex, SSN, Address, PhoneNumber, Email, RegisterDate, Status)
-VALUES ('', N'Như', N'Trần Bảo', '1999-7-8', N'Nữ', '822633521', N'', '0955215831', 'chimsedinang@gmail.com', '2019-11-3', 0)
+VALUES ('', N'Như', N'Trần Bảo', '1999-7-8', N'Nữ', '822633521', N'', '0955215831', 'chimsedinang@gmail.com', GETDATE(), 0)
 INSERT INTO dbo.Member (Id, FirstName, LastName, Birthday, Sex, SSN, Address, PhoneNumber, Email, RegisterDate, Status)
-VALUES ('', N'Yến', N'Vũ Hoàng', '1997-6-23', N'Nữ', '555542242456', N'', '0736565554', '@vuhoangyen1997gmail.com', '2019-11-25', 1)
+VALUES ('', N'Yến', N'Vũ Hoàng', '1997-6-23', N'Nữ', '555542242456', N'', '0736565554', '@vuhoangyen1997gmail.com', GETDATE(), 1)
 INSERT INTO dbo.Member (Id, FirstName, LastName, Birthday, Sex, SSN, Address, PhoneNumber, Email, RegisterDate, Status)
-VALUES ('', N'Đức', N'Lê Tấn', '2000-12-31', N'Nam', '435215356245', N'', '0358956516', 'ducle.hoabinh@outlook.com', '2019-12-2', 0)
+VALUES ('', N'Đức', N'Lê Tấn', '2000-12-31', N'Nam', '435215356245', N'', '0358956516', 'ducle.hoabinh@outlook.com', GETDATE(), 0)
 INSERT INTO dbo.Member (Id, FirstName, LastName, Birthday, Sex, SSN, Address, PhoneNumber, Email, RegisterDate, Status)
-VALUES ('', N'Phúc', N'Võ Hoàng', '1996-2-8', N'Nam', '563256325335', N'', '0386626265', 'phucphotoshop@gmail.com', '2020-1-2', 0)
+VALUES ('', N'Phúc', N'Võ Hoàng', '1996-2-8', N'Nam', '563256325335', N'', '0386626265', 'phucphotoshop@gmail.com', GETDATE(), 0)
 INSERT INTO dbo.Member (Id, FirstName, LastName, Birthday, Sex, SSN, Address, PhoneNumber, Email, RegisterDate, Status)
-VALUES ('', N'Hưng', N'Lê Khắc', '2000-1-3', N'Nam', '354555445673', N'', '0376262656', 'lehung0103000@outlook.com', '2020-1-5', 1)
+VALUES ('', N'Hưng', N'Lê Khắc', '2000-1-3', N'Nam', '354555445673', N'', '0376262656', 'lehung0103000@outlook.com', GETDATE(), 1)
 INSERT INTO dbo.Member (Id, FirstName, LastName, Birthday, Sex, SSN, Address, PhoneNumber, Email, RegisterDate, Status)
-VALUES ('', N'Ngọc', N'Hồ Thị Minh', '2001-1-20', N'Nữ', '2665263653', N'', '0915656626', 'hothiminhngoc@gmail.com', '2020-1-5', 1)
+VALUES ('', N'Ngọc', N'Hồ Thị Minh', '2001-1-20', N'Nữ', '2665263653', N'', '0915656626', 'hothiminhngoc@gmail.com', GETDATE(), 1)
 INSERT INTO dbo.Member (Id, FirstName, LastName, Birthday, Sex, SSN, Address, PhoneNumber, Email, RegisterDate, Status)
-VALUES ('', N'Minh', N'Trương Hoàng', '2002-12-25', N'Nam', '732152149', N'', '0821232625', 'johnytruong@gmail.com', '2020-2-1', 0)
+VALUES ('', N'Minh', N'Trương Hoàng', '2002-12-25', N'Nam', '732152149', N'', '0821232625', 'johnytruong@gmail.com', GETDATE(), 0)
 INSERT INTO dbo.Member (Id, FirstName, LastName, Birthday, Sex, SSN, Address, PhoneNumber, Email, RegisterDate, Status)
-VALUES ('', N'Quyên', N'Huỳnh Thanh', '2000-5-17', N'Nữ', '998522325', N'', '0867482632', 'min.huynh@outlook.com', '2020-3-6', 1)
+VALUES ('', N'Quyên', N'Huỳnh Thanh', '2000-5-17', N'Nữ', '998522325', N'', '0867482632', 'min.huynh@outlook.com', GETDATE(), 1)
 INSERT INTO dbo.Member (Id, FirstName, LastName, Birthday, Sex, SSN, Address, PhoneNumber, Email, RegisterDate, Status)
-VALUES ('', N'Thùy', N'Trần Minh', '2001-8-14', N'Nữ', '562235111586', N'', '0965965645', 'tranminhthuy2k1@gmail.com', '2020-4-15', 1)
+VALUES ('', N'Thùy', N'Trần Minh', '2001-8-14', N'Nữ', '562235111586', N'', '0965965645', 'tranminhthuy2k1@gmail.com', GETDATE(), 1)
 INSERT INTO dbo.Member (Id, FirstName, LastName, Birthday, Sex, SSN, Address, PhoneNumber, Email, RegisterDate, Status)
-VALUES ('', N'Anh', N'Nguyễn Tuấn', '2002-6-21', N'Nam', '532145689', N'', '0722321645', 'tuananhnguye2020@gmail.com', '2020-4-17', 1)
+VALUES ('', N'Anh', N'Nguyễn Tuấn', '2002-6-21', N'Nam', '532145689', N'', '0722321645', 'tuananhnguye2020@gmail.com', GETDATE(), 1)
 INSERT INTO dbo.Member (Id, FirstName, LastName, Birthday, Sex, SSN, Address, PhoneNumber, Email, RegisterDate, Status)
-VALUES ('', N'Hồng', N'Đinh Ánh', '1995-3-26', N'Nữ', '531525325', N'', '0979565666', 'jeciccasdinh@gmail.com', '2020-5-6', 1)
+VALUES ('', N'Hồng', N'Đinh Ánh', '1995-3-26', N'Nữ', '531525325', N'', '0979565666', 'jeciccasdinh@gmail.com', GETDATE(), 1)
 INSERT INTO dbo.Member (Id, FirstName, LastName, Birthday, Sex, SSN, Address, PhoneNumber, Email, RegisterDate, Status)
-VALUES ('', N'Ánh', N'Kiều Hồng', '1993-2-15', N'Nữ', '563214565', N'', '0387865555', 'kieuanhhong93@gmail.com', '2020-5-19', 1)
+VALUES ('', N'Ánh', N'Kiều Hồng', '1993-2-15', N'Nữ', '563214565', N'', '0387865555', 'kieuanhhong93@gmail.com', GETDATE(), 1)
 INSERT INTO dbo.Member (Id, FirstName, LastName, Birthday, Sex, SSN, Address, PhoneNumber, Email, RegisterDate, Status)
-VALUES ('', N'Anh', N'Nguyễn Kiều', '1997-2-1', N'Nữ', '563253586', N'', '0967565121', 'herakieuanh@gmail.com', '2020-6-30', 1)
+VALUES ('', N'Anh', N'Nguyễn Kiều', '1997-2-1', N'Nữ', '563253586', N'', '0967565121', 'herakieuanh@gmail.com', GETDATE(), 1)
 INSERT INTO dbo.Member (Id, FirstName, LastName, Birthday, Sex, SSN, Address, PhoneNumber, Email, RegisterDate, Status)
-VALUES ('', N'Thảo', N'Trần Thu', '2000-7-18', N'Nữ', '782165663', N'', '0357484451', 'thaott@yahoo.com', '2020-6-30', 1)
+VALUES ('', N'Thảo', N'Trần Thu', '2000-7-18', N'Nữ', '782165663', N'', '0357484451', 'thaott@yahoo.com', GETDATE(), 1)
 INSERT INTO dbo.Member (Id, FirstName, LastName, Birthday, Sex, SSN, Address, PhoneNumber, Email, RegisterDate, Status)
-VALUES ('', N'Thành', N'Lâm Minh', '1998-7-6', N'Nam', '456879132', N'', '0887323661', 'thanhlam72@gmail.com', '2020-7-25', 1)
+VALUES ('', N'Thành', N'Lâm Minh', '1998-7-6', N'Nam', '456879132', N'', '0887323661', 'thanhlam72@gmail.com', GETDATE(), 1)
 INSERT INTO dbo.Member (Id, FirstName, LastName, Birthday, Sex, SSN, Address, PhoneNumber, Email, RegisterDate, Status)	
-VALUES ('', N'Vy', N'Hồ Thị Tường', '1999-3-2', N'Nữ', '789456115632', N'', '0917456556', 'tuongvycanhmong@yahoo.com', '2020-7-26', 1)
-
-
-
----------------------------------------------------------------------------------
---Thông tin về sách và NXB được lấy trên internet, dữ liệu có thể không chính xác
----------------------------------------------------------------------------------
+VALUES ('', N'Vy', N'Hồ Thị Tường', '1999-3-2', N'Nữ', '789456115632', N'', '0917456556', 'tuongvycanhmong@yahoo.com', GETDATE(), 1)
 
 INSERT INTO dbo.Publisher (Name, PhoneNumber, Address, Email, Website) VALUES (N'Phụ Nữ Việt Nam', '02439710717', N'39 Hàng Chuối, Hà Nội', 'truyenthongvaprnxbpn@gmail.com', 'http://nxbphunu.com.vn/')
 INSERT INTO dbo.Publisher (Name, PhoneNumber, Address, Email, Website) VALUES (N'Trẻ', '02839316289', N'161B Lý Chính Thắng, Phường 7, Quận 3, Hồ Chí Minh', 'info@ybook.vn', 'https://www.nxbtre.com.vn/')
@@ -551,4 +530,21 @@ INSERT INTO dbo.Book (Id, Title, PublisherId, YearPublish, BookCategoryId, PageN
 VALUES ('', N'Đá Cuội Hay Kim Cương - Cùng Dale Carnegie Tiến Tới Thành Công', 8, 2018, 2, 248, '14.5 x 20.5', 73500)
 INSERT INTO dbo.BookItem (BookId, Number) VALUES ('B000000025', 15)
 INSERT INTO dbo.BookAuthor (BookId, AuthorId) VALUES ('B000000025', 20)
+GO
+
+
+
+INSERT INTO dbo.Borrow (BookId, MemberId, LibrarianId, BorrowDate)
+VALUES ('B000000021', 'MEM0000011', 'LIB001', '2019-12-20')
+INSERT INTO dbo.Borrow (BookId, MemberId, LibrarianId, BorrowDate)
+VALUES ('B000000022', 'MEM0000011', 'LIB001', '2019-12-20')
+INSERT INTO dbo.Borrow (BookId, MemberId, LibrarianId, BorrowDate)
+VALUES ('B000000023', 'MEM0000011', 'LIB001', '2019-12-20')
+INSERT INTO dbo.Borrow (BookId, MemberId, LibrarianId, BorrowDate)
+VALUES ('B000000015', 'MEM0000011', 'LIB000', '2019-12-20')
+INSERT INTO dbo.Borrow (BookId, MemberId, LibrarianId, BorrowDate)
+VALUES ('B000000011', 'MEM0000011', 'LIB001', '2020-1-20')
+
+INSERT INTO dbo.Borrow (BookId, MemberId, LibrarianId, BorrowDate)
+VALUES ('B000000001', 'MEM0000012', 'LIB001', '2019-12-20')
 GO
